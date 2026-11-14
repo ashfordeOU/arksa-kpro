@@ -1,0 +1,6 @@
+target/
+*.crate
+.env
+*.pem
+*.key
+secrets/
