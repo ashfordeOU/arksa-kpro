@@ -1,0 +1,48 @@
+[workspace]
+members = ["."]
+resolver = "2"
+
+[package]
+name = "arksa-kpro"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.88"
+description = "Arksa-exclusive Kshana Pro kinds and commands (private; Arksa servers only)"
+authors = ["Chakshu Baweja <contact@ashforde.org>"]
+license = "LicenseRef-Proprietary"
+# PRIVATE. Never published to any registry and never built into a customer-installed
+# binary (README, rule 1).
+publish = false
+
+[lib]
+
+[[bin]]
+name = "arksa-kpro"
+path = "src/main.rs"
+
+[dependencies]
+# Kshana Pro (private repository ashfordeOU/kshana-pro), pinned to an exact commit. The
+# dependency runs one way only: kshana-pro never names this crate (its CI fails if it does).
+# Local development against a sibling checkout: see README, "Building".
+kshana-pro = { git = "https://github.com/ashfordeOU/kshana-pro", rev = "f191606a2ee6befcb9abc2cb4cd20fe62749ae6d" }
+# The open engine, the exact version Kshana Pro is built on (one resolved copy).
+kshana = "=0.41.0"
+
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+sha2 = "0.10"
+hex = "0.4"
+rand = "0.8"
+rand_chacha = "0.3"
+printpdf = { version = "0.9.1", default-features = false }
+
+# The open engine is compiled optimised in development and test builds too, as in Kshana
+# Pro (its tests run real engine scenarios; the published numbers come from release builds).
+[profile.dev.package.kshana]
+opt-level = 3
+
+# Release builds carry no symbol table and no debug information.
+[profile.release]
+strip = "symbols"
+debug = false

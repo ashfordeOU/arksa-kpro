@@ -4,3 +4,6 @@ target/
 *.pem
 *.key
 secrets/
+# Local development override that points the kshana-pro dependency at a sibling checkout
+# (README, "Building"). Never committed: CI builds the pinned commit.
+.cargo/config.toml

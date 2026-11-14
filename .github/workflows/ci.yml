@@ -1,0 +1,55 @@
+name: CI
+on:
+  push:
+    branches: [main, "ws/**"]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  check:
+    # The same self-hosted runner as kshana-pro (GitHub-hosted minutes on this account are
+    # billing-blocked; see kshana-pro .github/workflows/ci.yml). One-line revert to
+    # ubuntu-latest when that is restored.
+    runs-on: [self-hosted, macos, arm64, kshana-pro]
+    timeout-minutes: 60
+    env:
+      # kshana-pro is a private git dependency (Cargo.toml, pinned rev). Cargo fetches it with
+      # the git command line, which uses the credential set up in the next step.
+      CARGO_NET_GIT_FETCH_WITH_CLI: "true"
+    steps:
+      - uses: actions/checkout@v4
+      # Read access to the private ashfordeOU/kshana-pro repository. KSHANA_PRO_READ_TOKEN is a
+      # fine-grained personal access token (or GitHub App token) with Contents: read on
+      # kshana-pro ONLY; the owner adds it as a repository secret (README, "CI"). It is
+      # written into a credential store for github.com/ashfordeOU/kshana-pro only and is
+      # never printed.
+      - name: Access to kshana-pro
+        env:
+          KSHANA_PRO_READ_TOKEN: ${{ secrets.KSHANA_PRO_READ_TOKEN }}
+        run: |
+          if [ -z "${KSHANA_PRO_READ_TOKEN}" ]; then
+            echo "::error::secret KSHANA_PRO_READ_TOKEN is not set; cargo cannot fetch the private kshana-pro dependency (README, CI)"
+            exit 1
+          fi
+          git config --global url."https://x-access-token:${KSHANA_PRO_READ_TOKEN}@github.com/ashfordeOU/kshana-pro".insteadOf "https://github.com/ashfordeOU/kshana-pro"
+      - uses: dtolnay/rust-toolchain@1.93.0
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+      - name: Format
+        run: cargo fmt --all -- --check
+      - name: Clippy
+        run: cargo clippy --all-targets --locked -- -D warnings
+      # --locked: Cargo.lock pins kshana-pro's exact commit and every crate version.
+      - name: Test
+        run: cargo test --all --locked
+      # The runner is persistent (self-hosted): do not leave the token in its git config.
+      - name: Remove the credential
+        if: always()
+        env:
+          KSHANA_PRO_READ_TOKEN: ${{ secrets.KSHANA_PRO_READ_TOKEN }}
+        run: git config --global --remove-section "url.https://x-access-token:${KSHANA_PRO_READ_TOKEN}@github.com/ashfordeOU/kshana-pro" || true
