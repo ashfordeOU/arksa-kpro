@@ -72,16 +72,14 @@ commas). Without it a debug build trusts the placeholder test key (`PLACEHOLDER_
 private half only in `tests/arksa_entitlement.rs`) and a release build trusts none, so it refuses every
 Arksa token. The tier manifest key is Kshana Pro's (its docs/LICENSING-KEYS.md, section 6).
 
-### F4 and M9: registered once Kshana Pro's manifest lists them
+### F4 and M9: registered through the manifest
 
 The F4 and M9 kinds (`PENDING_MANIFEST_KINDS`) and the F4 command feature register through the same
-hook and need the same `arksa` claim, but `register()` adds each only when the pinned Kshana Pro's
-signed tier manifest already lists it at `arksa` (`manifest_lists`); adding an unlisted id would make
-Kshana Pro's start-up check refuse every kind. At the current pin (f191606a) they are not listed, so
-they are built and tested as packs and are not reachable through the dispatcher. Once a Kshana Pro
-main commit adds their three hashes to `tiers::ARKSA_ENTRIES` (2 kinds, 1 feature) with the
-manifest re-signed and their names in `protect/private-terms.txt` `[arksa]`, move `rev` to it; the
-`pending_kinds_register_only_when_the_manifest_lists_them` test then checks that an Arksa token runs
+hook and need the same `arksa` claim. `register()` adds each only when the pinned Kshana Pro's signed
+tier manifest lists it at `arksa` (`manifest_lists`); an unlisted id would make Kshana Pro's start-up
+check refuse every kind. Kshana Pro main 4142fc4e (15 November 2026) lists their three hashes
+(2 kinds, 1 feature), and this crate is pinned to it, so both are reachable through the dispatcher.
+The `pending_kinds_register_only_when_the_manifest_lists_them` test checks that an Arksa token runs
 them and a standalone Pro token is refused neutrally.
 
 ## Building
