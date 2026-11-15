@@ -1,0 +1,7 @@
+kind = "pro-spaceborne-rx-exposure"
+title = "Exposure of four LEO GNSS receivers to the located Sep 2025 northern Baltic emitter-region sessions"
+tle_file = "leo-celestrak-2026-11-15.tle"
+start_utc = "2026-11-15T00:00Z"
+duration_h = 24.0
+step_s = 30.0
+emitter_region_files = ["emitter-adsb-adsb-lol-2025-09-14_2025-09-19-summary.json"]

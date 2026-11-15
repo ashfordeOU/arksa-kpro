@@ -1,0 +1,367 @@
+{
+  "cheapest_meeting_target": "8x4",
+  "designs": [
+    {
+      "capture": {
+        "closed_form_no_turn": [
+          0.7286160456040436,
+          0.950004398881516,
+          0.9971056962378889
+        ],
+        "closed_form_sd": [
+          0.005879816009377599,
+          0.0029867917817327978,
+          0.0008016020315540609
+        ],
+        "rate": [
+          0.5865,
+          0.79475,
+          0.87825
+        ],
+        "samples": 4000,
+        "unanswered_drawn": 0
+      },
+      "cost": 36.0,
+      "cues": 10745,
+      "cues_unanswered": 0,
+      "per_plane": 1,
+      "planes": 4,
+      "reaction_mean_s": 4452.299442038795,
+      "reaction_median_s": 2540.0,
+      "reaction_p95_s": 11620.0,
+      "refresh_mean_s": 3132.3680555555557,
+      "revisit_mean_s": 3715.001267715687,
+      "revisit_median_s": 4000.0,
+      "satellites_per_layer": 4
+    },
+    {
+      "capture": {
+        "closed_form_no_turn": [
+          0.6874426411507715,
+          0.9179383061596447,
+          0.9962905732410136
+        ],
+        "closed_form_sd": [
+          0.00576833539010009,
+          0.0037965467034373596,
+          0.0009288515118473764
+        ],
+        "rate": [
+          0.5735,
+          0.796,
+          0.9005
+        ],
+        "samples": 4000,
+        "unanswered_drawn": 0
+      },
+      "cost": 60.0,
+      "cues": 21623,
+      "cues_unanswered": 0,
+      "per_plane": 2,
+      "planes": 4,
+      "reaction_mean_s": 2770.581341854823,
+      "reaction_median_s": 1760.0,
+      "reaction_p95_s": 8700.0,
+      "refresh_mean_s": 1534.736111111111,
+      "revisit_mean_s": 1703.4201967018453,
+      "revisit_median_s": 1880.0,
+      "satellites_per_layer": 8
+    },
+    {
+      "capture": {
+        "closed_form_no_turn": [
+          0.631587115985152,
+          0.8650093850370925,
+          0.9861958082617527
+        ],
+        "closed_form_sd": [
+          0.005653924585466919,
+          0.004461313908634225,
+          0.001741381070380314
+        ],
+        "rate": [
+          0.539,
+          0.77975,
+          0.903
+        ],
+        "samples": 4000,
+        "unanswered_drawn": 0
+      },
+      "cost": 108.0,
+      "cues": 30482,
+      "cues_unanswered": 0,
+      "per_plane": 4,
+      "planes": 4,
+      "reaction_mean_s": 2499.852312417414,
+      "reaction_median_s": 1640.0,
+      "reaction_p95_s": 7320.0,
+      "refresh_mean_s": 745.9930555555555,
+      "revisit_mean_s": 964.6263950837006,
+      "revisit_median_s": 960.0,
+      "satellites_per_layer": 16
+    },
+    {
+      "capture": {
+        "closed_form_no_turn": [
+          0.6783898378432955,
+          0.8444338794616256,
+          0.9499017169030298
+        ],
+        "closed_form_sd": [
+          0.00493285535909966,
+          0.0038370983569487064,
+          0.002756234900522278
+        ],
+        "rate": [
+          0.57175,
+          0.75425,
+          0.87975
+        ],
+        "samples": 4000,
+        "unanswered_drawn": 0
+      },
+      "cost": 72.0,
+      "cues": 21507,
+      "cues_unanswered": 0,
+      "per_plane": 1,
+      "planes": 8,
+      "reaction_mean_s": 4517.006471393563,
+      "reaction_median_s": 840.0,
+      "reaction_p95_s": 20120.0,
+      "refresh_mean_s": 1890.3055555555557,
+      "revisit_mean_s": 1713.2758516555236,
+      "revisit_median_s": 400.0,
+      "satellites_per_layer": 8
+    },
+    {
+      "capture": {
+        "closed_form_no_turn": [
+          0.8308895571272277,
+          0.979389750038472,
+          0.9994419522484339
+        ],
+        "closed_form_sd": [
+          0.005114422129245666,
+          0.001986442559147485,
+          0.00036771585295546056
+        ],
+        "rate": [
+          0.691,
+          0.87325,
+          0.95
+        ],
+        "samples": 4000,
+        "unanswered_drawn": 0
+      },
+      "cost": 120.0,
+      "cues": 20543,
+      "cues_unanswered": 0,
+      "per_plane": 2,
+      "planes": 8,
+      "reaction_mean_s": 1358.1992208636532,
+      "reaction_median_s": 500.0,
+      "reaction_p95_s": 5840.0,
+      "refresh_mean_s": 890.1944444444445,
+      "revisit_mean_s": 1484.2866609941302,
+      "revisit_median_s": 1860.0,
+      "satellites_per_layer": 16
+    },
+    {
+      "capture": {
+        "closed_form_no_turn": [
+          0.86062315902304,
+          0.9691797671178626,
+          0.9968565750081799
+        ],
+        "closed_form_sd": [
+          0.004432402857758218,
+          0.0021040216107980694,
+          0.0008503438045755758
+        ],
+        "rate": [
+          0.75875,
+          0.9325,
+          0.97675
+        ],
+        "samples": 4000,
+        "unanswered_drawn": 0
+      },
+      "cost": 216.0,
+      "cues": 31569,
+      "cues_unanswered": 0,
+      "per_plane": 4,
+      "planes": 8,
+      "reaction_mean_s": 864.6233295315837,
+      "reaction_median_s": 300.0,
+      "reaction_p95_s": 5240.0,
+      "refresh_mean_s": 378.75,
+      "revisit_mean_s": 825.9632217570548,
+      "revisit_median_s": 860.0,
+      "satellites_per_layer": 32
+    },
+    {
+      "capture": {
+        "closed_form_no_turn": [
+          0.8543098596170213,
+          0.9902766921687475,
+          0.9998821930294515
+        ],
+        "closed_form_sd": [
+          0.0049974705583304,
+          0.0014708749275475991,
+          0.0001663208177130465
+        ],
+        "rate": [
+          0.69475,
+          0.8535,
+          0.93925
+        ],
+        "samples": 4000,
+        "unanswered_drawn": 0
+      },
+      "cost": 144.0,
+      "cues": 15821,
+      "cues_unanswered": 0,
+      "per_plane": 1,
+      "planes": 16,
+      "reaction_mean_s": 1550.5021682045458,
+      "reaction_median_s": 760.0,
+      "reaction_p95_s": 4720.0,
+      "refresh_mean_s": 1612.6944444444443,
+      "revisit_mean_s": 1961.1415971365764,
+      "revisit_median_s": 1740.0,
+      "satellites_per_layer": 16
+    },
+    {
+      "capture": {
+        "closed_form_no_turn": [
+          0.9037108430204239,
+          0.9929277539385446,
+          0.9999161705734859
+        ],
+        "closed_form_sd": [
+          0.004189739366292312,
+          0.001210868187873808,
+          0.00014334555126630885
+        ],
+        "rate": [
+          0.75325,
+          0.91525,
+          0.97875
+        ],
+        "samples": 4000,
+        "unanswered_drawn": 0
+      },
+      "cost": 240.0,
+      "cues": 20393,
+      "cues_unanswered": 0,
+      "per_plane": 2,
+      "planes": 16,
+      "reaction_mean_s": 785.6257148347574,
+      "reaction_median_s": 420.0,
+      "reaction_p95_s": 3580.0,
+      "refresh_mean_s": 777.8611111111111,
+      "revisit_mean_s": 1382.5554541529857,
+      "revisit_median_s": 1760.0,
+      "satellites_per_layer": 32
+    },
+    {
+      "capture": {
+        "closed_form_no_turn": [
+          0.9084206110665748,
+          0.9876301359793053,
+          0.9997113504180932
+        ],
+        "closed_form_sd": [
+          0.0038960419103880443,
+          0.0015266670753902051,
+          0.0002659314939504079
+        ],
+        "rate": [
+          0.81725,
+          0.96225,
+          0.984
+        ],
+        "samples": 4000,
+        "unanswered_drawn": 0
+      },
+      "cost": 432.0,
+      "cues": 32509,
+      "cues_unanswered": 0,
+      "per_plane": 4,
+      "planes": 16,
+      "reaction_mean_s": 477.9809943947053,
+      "reaction_median_s": 240.0,
+      "reaction_p95_s": 2580.0,
+      "refresh_mean_s": 341.3125,
+      "revisit_mean_s": 763.7526446029498,
+      "revisit_median_s": 820.0,
+      "satellites_per_layer": 64
+    }
+  ],
+  "evidence_class": "MODELLED",
+  "front": [
+    "4x1",
+    "4x2",
+    "4x4",
+    "8x2",
+    "8x4",
+    "16x2",
+    "16x4"
+  ],
+  "kind": "pro-space-tip-cue-study",
+  "label": "MODELLED constellation trade for maritime tip-and-cue: revisit, refresh and RF-to-optical reaction from the open M2 planner (geometry and timing only, J2 secular, spherical-Earth access), a seeded Monte Carlo capture rate under an assumed vessel motion and fix-noise model (M3 assumptions; M3 itself not run), and illustrative costs. No measured revisit, reaction, track or cost data is used. Not VALIDATED.",
+  "points": 247,
+  "preregistration": "docs/evidence/m9-space-tip-cue/PREREGISTRATION-2026-11-15.md",
+  "result_sha256": "db79af2b8932b1bcbad6dab8c669572ac650a18e7b32924405f755bb43b3e951",
+  "scenario": {
+    "cost": {
+      "currency": "M (illustrative)",
+      "opex_per_satellite_year": 0.1,
+      "optical_satellite": 3.0,
+      "per_plane_launch": 1.5,
+      "rf_satellite": 2.0,
+      "years": 5.0
+    },
+    "kind": "pro-space-tip-cue-study",
+    "mc_cues": 4000,
+    "optical_off_nadir_deg": 45.0,
+    "p_turn": 0.25,
+    "per_plane": [
+      1,
+      2,
+      4
+    ],
+    "planes": [
+      4,
+      8,
+      16
+    ],
+    "radii_km": [
+      2.5,
+      5.0,
+      10.0
+    ],
+    "rf_mask_deg": 10.0,
+    "seed": 9009,
+    "sigma_fix_m": 1000.0,
+    "span_days": 3,
+    "speed_kn": [
+      16.0,
+      22.0
+    ],
+    "step_s": 20,
+    "target": {
+      "capture_5km_min": 0.9,
+      "reaction_max_min": 15.0
+    },
+    "thin": 2,
+    "title": null,
+    "turn_deg": [
+      20.0,
+      90.0
+    ]
+  },
+  "schema": "arksa-space-tip-cue-study/1",
+  "title": "Space tip-and-cue constellation trade"
+}

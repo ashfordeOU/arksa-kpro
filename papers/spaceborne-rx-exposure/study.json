@@ -1,0 +1,1264 @@
+{
+  "affected_areas": 4,
+  "assumptions": {
+    "assumed_eirp_dbw": [
+      0.0,
+      20.0,
+      40.0
+    ],
+    "emitter_height_m": 10.0,
+    "emitter_point": "the centre of each affected area, at emitter_height_m; the maps do not locate an emitter",
+    "min_elevation_deg": 0.0,
+    "nominal_cn0_dbhz": 45.475187194228084,
+    "orbit": "SGP4 from the element sets (open engine), TEME to ITRS; accuracy falls with element-set age",
+    "propagation": "free space at L1, no atmospheric or body losses, no terrain",
+    "receiver": {
+      "degraded_margin_db": 6.0,
+      "gain_toward_gnss_dbi": 0.0,
+      "gain_toward_ground_dbi": -15.0,
+      "q": 2.0,
+      "signal_power_dbw": -158.5,
+      "system_noise_temp_k": 290.0,
+      "tracking_threshold_dbhz": 25.0
+    }
+  },
+  "craft": [
+    {
+      "below_threshold_s": [
+        0.0,
+        0.0,
+        90.0
+      ],
+      "exposure_s": 6360.0,
+      "exposure_share": 0.07358556056924678,
+      "min_margin_db": [
+        20.407670922618962,
+        16.381323262572707,
+        -1.502487148604338
+      ],
+      "name": "SWARM A",
+      "norad_line1": "1 39452U 13067B   26319.26613728  .00011213  00000+0  18632-3 0  9996",
+      "over_area_s": 360.0,
+      "passes": [
+        {
+          "areas_seen": [
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 210.0,
+          "end_utc": "2026-11-15T00:36:30Z",
+          "max_elevation_deg": 1.0777398447855238,
+          "min_margin_db": [
+            20.47442572752213,
+            20.399693816628705,
+            16.07634331753721
+          ],
+          "min_range_km": 2246.8221077484354,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T00:33:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 360.0,
+          "end_utc": "2026-11-15T02:13:00Z",
+          "max_elevation_deg": 3.422394117175912,
+          "min_margin_db": [
+            20.474237473064463,
+            20.381228451703137,
+            15.441294447021008
+          ],
+          "min_range_km": 2011.8304800313954,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T02:07:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-9",
+            "adsb-session-4",
+            "adsb-session-6"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 510.0,
+          "end_utc": "2026-11-15T03:49:00Z",
+          "max_elevation_deg": 11.516330633383827,
+          "min_margin_db": [
+            20.470293910658945,
+            20.01126769149539,
+            9.585484638520533
+          ],
+          "min_range_km": 1407.4364563246695,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T03:41:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-4"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            240.0
+          ],
+          "duration_s": 720.0,
+          "end_utc": "2026-11-15T05:25:30Z",
+          "max_elevation_deg": 40.42031171426198,
+          "min_margin_db": [
+            20.45485318117234,
+            18.80406538430266,
+            3.669060717367852
+          ],
+          "min_range_km": 624.2213641776193,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T05:14:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-9",
+            "adsb-session-4",
+            "adsb-session-6"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            300.0
+          ],
+          "duration_s": 720.0,
+          "end_utc": "2026-11-15T06:58:30Z",
+          "max_elevation_deg": 41.35583885988547,
+          "min_margin_db": [
+            20.44095338490373,
+            17.94331589979926,
+            1.4368154263343555
+          ],
+          "min_range_km": 612.5506650010037,
+          "over_area_s": 120.0,
+          "start_utc": "2026-11-15T06:47:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-9",
+            "adsb-session-4",
+            "adsb-session-6"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 570.0,
+          "end_utc": "2026-11-15T08:29:30Z",
+          "max_elevation_deg": 9.286056374708568,
+          "min_margin_db": [
+            20.469868804883035,
+            19.97318652966826,
+            9.251866504345102
+          ],
+          "min_range_km": 1544.0564309040833,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T08:20:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 180.0,
+          "end_utc": "2026-11-15T09:57:00Z",
+          "max_elevation_deg": 0.6458629359186502,
+          "min_margin_db": [
+            20.474455022032757,
+            20.40257423521514,
+            16.184077147107615
+          ],
+          "min_range_km": 2291.3332871829616,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T09:54:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-9"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 390.0,
+          "end_utc": "2026-11-15T16:02:00Z",
+          "max_elevation_deg": 5.455145782617019,
+          "min_margin_db": [
+            20.4733233094977,
+            20.292649155949633,
+            13.238435514634247
+          ],
+          "min_range_km": 1829.5480447889863,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T15:56:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 660.0,
+          "end_utc": "2026-11-15T17:35:30Z",
+          "max_elevation_deg": 21.72274945365025,
+          "min_margin_db": [
+            20.46478816366735,
+            19.54190407225841,
+            6.500420379382884
+          ],
+          "min_range_km": 974.7991412424607,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T17:25:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            90.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            330.0
+          ],
+          "duration_s": 720.0,
+          "end_utc": "2026-11-15T19:08:30Z",
+          "max_elevation_deg": 82.97987133567712,
+          "min_margin_db": [
+            20.407670922618962,
+            16.381323262572707,
+            -1.502487148604338
+          ],
+          "min_range_km": 422.9247359994024,
+          "over_area_s": 240.0,
+          "start_utc": "2026-11-15T18:57:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 660.0,
+          "end_utc": "2026-11-15T20:42:00Z",
+          "max_elevation_deg": 17.042730302209076,
+          "min_margin_db": [
+            20.466397716824865,
+            19.674010830104073,
+            7.199756147501205
+          ],
+          "min_range_km": 1139.61180991088,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T20:31:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-9",
+            "adsb-session-4",
+            "adsb-session-6"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 420.0,
+          "end_utc": "2026-11-15T22:15:00Z",
+          "max_elevation_deg": 5.3976760471179555,
+          "min_margin_db": [
+            20.471932823292853,
+            20.161253070461967,
+            11.182901940893508
+          ],
+          "min_range_km": 1835.64099946149,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T22:08:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 240.0,
+          "end_utc": "2026-11-15T23:48:30Z",
+          "max_elevation_deg": 1.3955844088854137,
+          "min_margin_db": [
+            20.474402362304325,
+            20.397397757844317,
+            15.992290295689614
+          ],
+          "min_range_km": 2213.121380921584,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T23:45:00Z"
+        }
+      ],
+      "tle_age_days_at_mid_span": 0.2338627200006158,
+      "tle_epoch_utc": "2026-11-15T06:23:14Z",
+      "verdict": [
+        "kept",
+        "kept",
+        "loss-of-tracking-modelled"
+      ]
+    },
+    {
+      "below_threshold_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "exposure_s": 10140.0,
+      "exposure_share": 0.11732037486983686,
+      "min_margin_db": [
+        20.467468333785234,
+        19.764134798464355,
+        7.736118881934509
+      ],
+      "name": "SENTINEL-6A",
+      "norad_line1": "1 46984U 20086A   26318.85010962 -.00000056  00000+0  23921-4 0  9990",
+      "over_area_s": 660.0,
+      "passes": [
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 1050.0,
+          "end_utc": "2026-11-15T06:14:30Z",
+          "max_elevation_deg": 11.486303382064643,
+          "min_margin_db": [
+            20.473847353495636,
+            20.343208291310404,
+            14.362657193825804
+          ],
+          "min_range_km": 3280.4893739419476,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T05:57:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 1350.0,
+          "end_utc": "2026-11-15T08:10:00Z",
+          "max_elevation_deg": 34.689305107307845,
+          "min_margin_db": [
+            20.471774744984792,
+            20.146561189311583,
+            11.000584041035076
+          ],
+          "min_range_km": 2047.906226584989,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T07:48:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 1410.0,
+          "end_utc": "2026-11-15T10:05:30Z",
+          "max_elevation_deg": 79.08453750893489,
+          "min_margin_db": [
+            20.467771875203525,
+            19.790026666134466,
+            7.901044461832797
+          ],
+          "min_range_km": 1373.2187038449815,
+          "over_area_s": 180.0,
+          "start_utc": "2026-11-15T09:42:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 1380.0,
+          "end_utc": "2026-11-15T12:01:30Z",
+          "max_elevation_deg": 77.17096993196553,
+          "min_margin_db": [
+            20.46756452132498,
+            19.77232302785721,
+            7.787707744407101
+          ],
+          "min_range_km": 1382.593950491504,
+          "over_area_s": 150.0,
+          "start_utc": "2026-11-15T11:39:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 1350.0,
+          "end_utc": "2026-11-15T13:57:30Z",
+          "max_elevation_deg": 75.97560350423666,
+          "min_margin_db": [
+            20.467468333785234,
+            19.764134798464355,
+            7.736118881934509
+          ],
+          "min_range_km": 1388.0255488565294,
+          "over_area_s": 150.0,
+          "start_utc": "2026-11-15T13:35:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 1380.0,
+          "end_utc": "2026-11-15T15:53:30Z",
+          "max_elevation_deg": 74.78117909637676,
+          "min_margin_db": [
+            20.46813158540894,
+            19.820908524805674,
+            8.10494442337587
+          ],
+          "min_range_km": 1392.5517788399718,
+          "over_area_s": 180.0,
+          "start_utc": "2026-11-15T15:31:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-4"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 1290.0,
+          "end_utc": "2026-11-15T17:47:30Z",
+          "max_elevation_deg": 31.67553994486055,
+          "min_margin_db": [
+            20.47219767890789,
+            20.18597963087265,
+            11.506628739845596
+          ],
+          "min_range_km": 2153.4756890882472,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T17:26:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-4"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 930.0,
+          "end_utc": "2026-11-15T19:37:30Z",
+          "max_elevation_deg": 8.264003553088328,
+          "min_margin_db": [
+            20.473994766564168,
+            20.35753613731201,
+            14.73945945875387
+          ],
+          "min_range_km": 3545.713961097889,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T19:22:30Z"
+        }
+      ],
+      "tle_age_days_at_mid_span": 0.6498903799983964,
+      "tle_epoch_utc": "2026-11-14T20:24:09Z",
+      "verdict": [
+        "kept",
+        "kept",
+        "kept"
+      ]
+    },
+    {
+      "below_threshold_s": [
+        0.0,
+        0.0,
+        30.0
+      ],
+      "exposure_s": 6660.0,
+      "exposure_share": 0.07705657757723013,
+      "min_margin_db": [
+        20.426804050531885,
+        17.211230762140495,
+        -0.056718752042360876
+      ],
+      "name": "GRACE-FO 1",
+      "norad_line1": "1 43476U 18047A   26319.25275398  .00004112  00000+0  10108-3 0  9996",
+      "over_area_s": 240.0,
+      "passes": [
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-9"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 420.0,
+          "end_utc": "2026-11-15T03:19:30Z",
+          "max_elevation_deg": 5.346686850770497,
+          "min_margin_db": [
+            20.473555373864457,
+            20.314966619642973,
+            13.700841285076038
+          ],
+          "min_range_km": 1943.807921391298,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T03:13:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 630.0,
+          "end_utc": "2026-11-15T04:53:00Z",
+          "max_elevation_deg": 19.041264338458973,
+          "min_margin_db": [
+            20.46769740826057,
+            19.783660552546493,
+            7.860001307230377
+          ],
+          "min_range_km": 1144.8882376925083,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T04:43:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            30.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            330.0
+          ],
+          "duration_s": 780.0,
+          "end_utc": "2026-11-15T06:27:00Z",
+          "max_elevation_deg": 79.07014937705382,
+          "min_margin_db": [
+            20.426804050531885,
+            17.211230762140495,
+            -0.056718752042360876
+          ],
+          "min_range_km": 467.075576681682,
+          "over_area_s": 240.0,
+          "start_utc": "2026-11-15T06:14:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 720.0,
+          "end_utc": "2026-11-15T08:00:30Z",
+          "max_elevation_deg": 22.373836427320068,
+          "min_margin_db": [
+            20.463617311519755,
+            19.448238392229328,
+            6.0541293118885875
+          ],
+          "min_range_km": 1031.6787287910527,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T07:49:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 480.0,
+          "end_utc": "2026-11-15T09:34:00Z",
+          "max_elevation_deg": 6.956293038080223,
+          "min_margin_db": [
+            20.47168259660272,
+            20.138019499193874,
+            10.89773022458401
+          ],
+          "min_range_km": 1813.0811408059806,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T09:26:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 240.0,
+          "end_utc": "2026-11-15T11:08:00Z",
+          "max_elevation_deg": 1.3303853381851556,
+          "min_margin_db": [
+            20.47447675924444,
+            20.404712795970006,
+            16.26578123006334
+          ],
+          "min_range_km": 2326.126100592397,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T11:04:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 120.0,
+          "end_utc": "2026-11-15T12:43:00Z",
+          "max_elevation_deg": 0.35624676915211384,
+          "min_margin_db": [
+            20.474536315812124,
+            20.41057746471931,
+            16.497845718454293
+          ],
+          "min_range_km": 2430.2277626027208,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T12:41:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 360.0,
+          "end_utc": "2026-11-15T14:21:00Z",
+          "max_elevation_deg": 3.6258664039327964,
+          "min_margin_db": [
+            20.474311836652426,
+            20.388513289839203,
+            15.681178461694401
+          ],
+          "min_range_km": 2095.5525371194535,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T14:15:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-4"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 570.0,
+          "end_utc": "2026-11-15T15:58:00Z",
+          "max_elevation_deg": 13.016776701578554,
+          "min_margin_db": [
+            20.47018776060112,
+            20.00172774725865,
+            9.499751073092945
+          ],
+          "min_range_km": 1413.2688385310198,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T15:49:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-9",
+            "adsb-session-4",
+            "adsb-session-6"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            240.0
+          ],
+          "duration_s": 750.0,
+          "end_utc": "2026-11-15T17:34:30Z",
+          "max_elevation_deg": 46.142400769574294,
+          "min_margin_db": [
+            20.45258171626412,
+            18.65141912625154,
+            3.217153685759115
+          ],
+          "min_range_km": 615.723882524851,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T17:22:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-9",
+            "adsb-session-4",
+            "adsb-session-6"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            270.0
+          ],
+          "duration_s": 750.0,
+          "end_utc": "2026-11-15T19:08:00Z",
+          "max_elevation_deg": 35.29230564694321,
+          "min_margin_db": [
+            20.451361632921667,
+            18.571558065847718,
+            2.992443001639412
+          ],
+          "min_range_km": 742.6396585180224,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T18:56:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-4"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 570.0,
+          "end_utc": "2026-11-15T20:39:00Z",
+          "max_elevation_deg": 9.990219257863783,
+          "min_margin_db": [
+            20.470430614756964,
+            20.02358420413033,
+            9.698445915412549
+          ],
+          "min_range_km": 1592.5367722276328,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T20:30:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 270.0,
+          "end_utc": "2026-11-15T22:08:00Z",
+          "max_elevation_deg": 1.785273981384805,
+          "min_margin_db": [
+            20.47444469053795,
+            20.401558162486914,
+            16.145776206797635
+          ],
+          "min_range_km": 2275.334825257332,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T22:04:00Z"
+        }
+      ],
+      "tle_age_days_at_mid_span": 0.24724602000060258,
+      "tle_epoch_utc": "2026-11-15T06:03:58Z",
+      "verdict": [
+        "kept",
+        "kept",
+        "loss-of-tracking-modelled"
+      ]
+    },
+    {
+      "below_threshold_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "exposure_s": 2130.0,
+      "exposure_share": 0.02464422075668171,
+      "min_margin_db": [
+        20.467039999837205,
+        19.72785579520359,
+        7.5135357345135745
+      ],
+      "name": "ISS (ZARYA)",
+      "norad_line1": "1 25544U 98067A   26319.20611933  .00010382  00000+0  19362-3 0  9993",
+      "over_area_s": 0.0,
+      "passes": [
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 450.0,
+          "end_utc": "2026-11-15T16:09:00Z",
+          "max_elevation_deg": 6.937807162843817,
+          "min_margin_db": [
+            20.470762162619934,
+            20.053599658566398,
+            9.985254876377994
+          ],
+          "min_range_km": 1705.6036377190603,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T16:02:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 540.0,
+          "end_utc": "2026-11-15T17:45:30Z",
+          "max_elevation_deg": 14.524777372319473,
+          "min_margin_db": [
+            20.467498467015098,
+            19.766698331949975,
+            7.7522147267541754
+          ],
+          "min_range_km": 1248.475162220788,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T17:37:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 570.0,
+          "end_utc": "2026-11-15T19:21:30Z",
+          "max_elevation_deg": 15.534475754169607,
+          "min_margin_db": [
+            20.467039999837205,
+            19.72785579520359,
+            7.5135357345135745
+          ],
+          "min_range_km": 1204.5708243231788,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T19:12:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 480.0,
+          "end_utc": "2026-11-15T20:56:30Z",
+          "max_elevation_deg": 8.72228012620543,
+          "min_margin_db": [
+            20.470237638981658,
+            20.006207848567534,
+            9.539825596580805
+          ],
+          "min_range_km": 1583.7721015294721,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T20:49:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 90.0,
+          "end_utc": "2026-11-15T22:28:30Z",
+          "max_elevation_deg": 0.1517715094620919,
+          "min_margin_db": [
+            20.47448779504485,
+            20.405798924432318,
+            16.307857365172637
+          ],
+          "min_range_km": 2344.407701635155,
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T22:27:30Z"
+        }
+      ],
+      "tle_age_days_at_mid_span": 0.29388067000036244,
+      "tle_epoch_utc": "2026-11-15T04:56:49Z",
+      "verdict": [
+        "kept",
+        "kept",
+        "kept"
+      ]
+    }
+  ],
+  "evidence_class": "MODELLED",
+  "inputs": {
+    "emitter_regions": [
+      {
+        "attribution": "Contains aircraft position data from adsb.lol, made available under the Open Database License (ODbL 1.0), https://opendatacommons.org/licenses/odbl/1-0/",
+        "first_day": "2025-09-14",
+        "last_day": "2025-09-19",
+        "licence": "ODbL-1.0",
+        "sessions_located": 4,
+        "sessions_not_located": 10,
+        "sha256": "d5996b99961614d4153fc1193d6e9a695278d4f4f9ce2045504e3ce07ce1919a",
+        "source_kind": "adsb"
+      }
+    ],
+    "map_cells_degraded": 0,
+    "map_cells_other": 0,
+    "maps": [],
+    "sessions_located": 4,
+    "sessions_not_located": 10,
+    "stated_areas": 0
+  },
+  "kind": "pro-spaceborne-rx-exposure",
+  "label": "MODELLED spaceborne GNSS receiver interference exposure. MEASURED: nothing on board; the inputs are published orbital elements (TLEs, propagated with SGP4) and interference maps built from aircraft or ship navigation-accuracy reports, which say where reports were degraded, not where an emitter was or how strong it was. MODELLED: the interferer EIRP (assumed, several values), the receive-antenna gains, free-space propagation, the anti-jam equation and, when the map period differs from the orbit period, the use of the map as a climatology. Not a statement about any receiver's measured performance.",
+  "result_sha256": "af2d379b968460af6c1835cc34b5436f6586cd2731827dc7cc8560e23eee6819",
+  "schema": "arksa-spaceborne-rx-exposure/1",
+  "span": {
+    "end_utc": "2026-11-16T00:00:00Z",
+    "start_utc": "2026-11-15T00:00:00Z",
+    "step_s": 30.0,
+    "time_mode": "climatology",
+    "time_mode_note": "climatology: the areas' time windows do not overlap the span, so every area counts all the time; the result says what the orbit would see if the mapped areas were active, not what happened"
+  },
+  "title": "Exposure of four LEO GNSS receivers to the located Sep 2025 northern Baltic emitter-region sessions"
+}

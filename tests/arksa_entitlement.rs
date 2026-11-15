@@ -14,7 +14,9 @@
 //!
 //! The two seeds are TEST keys; they sign nothing that ships.
 
-use arksa_kpro::{ARKSA_FEATURES, ARKSA_KINDS, PLACEHOLDER_ARKSA_ISSUER_PUBKEY};
+use arksa_kpro::{
+    ARKSA_FEATURES, ARKSA_KINDS, PENDING_MANIFEST_KINDS, PLACEHOLDER_ARKSA_ISSUER_PUBKEY,
+};
 use kshana_pro::license::tiers::{self, NOT_IN_THIS_EDITION};
 use kshana_pro::license::{
     self, issue_arksa, issue_v2, verify_with, Entitlement, Keyring, LicenseClaims, Tier,
@@ -126,6 +128,12 @@ inclination_deg = 53.0
         "pro-surface-beacon-dop-study" => {
             "kind = \"pro-surface-beacon-dop-study\"\nn_min = 3\nn_max = 4\nmap_n_relays = 3\nmap_n_lat = 2\nmap_n_lon = 2\nn_epochs = 1\n"
         }
+        "pro-spaceborne-rx-exposure" => {
+            "kind = \"pro-spaceborne-rx-exposure\"\nduration_h = 2.0\nstep_s = 60.0\ntle = \"\"\"\nISS (ZARYA)\n1 25544U 98067A   26319.20611933  .00010382  00000+0  19362-3 0  9993\n2 25544  51.6322 272.7605 0007377  27.6155 332.5225 15.49388394595162\n\"\"\"\n[[area]]\nlabel = \"a\"\nlat_deg = 0.0\nlon_deg = 0.0\nradius_km = 100.0\n"
+        }
+        "pro-space-tip-cue-study" => {
+            "kind = \"pro-space-tip-cue-study\"\nplanes = [4]\nper_plane = [1]\nspan_days = 2\nstep_s = 60\nthin = 4\nmc_cues = 50\n"
+        }
         other => panic!("no source for {other}"),
     }
 }
@@ -203,7 +211,7 @@ fn the_hook_adds_exactly_the_arksa_exclusive_ids_and_the_manifest_lists_them() {
     let m = tiers::manifest().unwrap();
     assert_eq!(
         m.count_in(tiers::Edition::Arksa),
-        ARKSA_KINDS.len() + ARKSA_FEATURES.len()
+        arksa_kpro::active_kinds().len() + arksa_kpro::active_features().len()
     );
     tiers::startup_check().expect("the combined build agrees with the signed manifest");
     // `kinds --json` reports each at the arksa edition.
@@ -370,4 +378,63 @@ fn the_server_binary_registers_the_hook() {
         assert!(usage.contains(&format!("arksa-kpro {c}")), "{c}");
     }
     let _ = std::fs::remove_dir_all(&dir);
+}
+
+/// The F4 and M9 kinds (15 November 2026) register through the same hook and claim, but only
+/// once the pinned Kshana Pro's signed manifest lists them. Either way a standalone Pro token
+/// cannot run them; when listed, an Arksa token runs each.
+#[test]
+fn pending_kinds_register_only_when_the_manifest_lists_them() {
+    arksa_kpro::ensure_registered();
+    let pro = verify_with(
+        &ring(),
+        &issue_v2(&PRO_TEST_SEED, &claims("enterprise")).unwrap(),
+        &at(1),
+    )
+    .unwrap()
+    .entitlement;
+    let ark = verify_with(
+        &ring(),
+        &issue_arksa(&ARKSA_TEST_SEED, &claims("pro")).unwrap(),
+        &at(1),
+    )
+    .unwrap()
+    .entitlement;
+    for k in PENDING_MANIFEST_KINDS {
+        let listed = arksa_kpro::manifest_lists(k, "kind");
+        assert_eq!(kshana_pro::registry::is_pro_kind(k), listed, "{k}");
+        assert_eq!(arksa_kpro::active_kinds().contains(k), listed, "{k}");
+        assert!(!pro.allows(k, 1), "{k}");
+        assert!(
+            kshana_pro::registry::run_gated(src(k), &pro, 1).is_err(),
+            "{k}"
+        );
+        // The pack itself runs on the source used here (whatever the manifest says).
+        use kshana::api::Scenario;
+        let direct = match *k {
+            "pro-spaceborne-rx-exposure" => toml::from_str::<
+                arksa_kpro::packs::spaceborne_rx_exposure_pack::SpaceborneRxExposureScenario,
+            >(src(k))
+            .unwrap()
+            .run(),
+            _ => toml::from_str::<
+                arksa_kpro::packs::space_tip_cue_study_pack::SpaceTipCueStudyScenario,
+            >(src(k))
+            .unwrap()
+            .run(),
+        };
+        assert!(direct.is_ok(), "{k}: {:?}", direct.err());
+        let ran = kshana_pro::registry::run_gated(src(k), &ark, 1);
+        if listed {
+            assert_refused_neutrally(&pro, k);
+            let out = ran.unwrap_or_else(|e| panic!("{k}: {e}"));
+            let v: serde_json::Value = serde_json::from_str(&out.json).unwrap();
+            assert!(v["label"].as_str().unwrap().starts_with("MODELLED"), "{k}");
+        } else {
+            assert!(
+                ran.is_err(),
+                "{k} is not reachable until the manifest lists it"
+            );
+        }
+    }
 }
