@@ -1101,9 +1101,9 @@ mod tests {
 
     #[test]
     fn rounding_hides_last_bit_differences() {
-        let x = 1234.567_890_123_456_f64;
+        let x = 1_234.567_890_123_456_f64;
         assert_eq!(round_sig(x), round_sig(f64::from_bits(x.to_bits() + 1)));
-        assert_eq!(round_sig(x), 1234.567_89);
+        assert_eq!(round_sig(x), 1_234.567_89);
         assert_eq!(round_sig(0.0), 0.0);
         let mut v = json!({"a": [f64::NAN, 2.0, 3], "b": -0.000_123_456_789_01});
         sanitise(&mut v);
