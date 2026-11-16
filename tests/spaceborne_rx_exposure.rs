@@ -115,7 +115,7 @@ radius_km = 50.0
             let eff =
                 -10.0 * (10f64.powf(-cn0 / 10.0) + 10f64.powf(js / 10.0) / (2.0 * 1.023e6)).log10();
             let m = p["min_margin_db"][0].as_f64().unwrap();
-            assert!((m - (eff - 25.0)).abs() < 1e-9, "{m} vs {}", eff - 25.0);
+            assert!((m - (eff - 25.0)).abs() < 1e-6, "{m} vs {}", eff - 25.0);
         }
     }
 }

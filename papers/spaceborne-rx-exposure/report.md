@@ -19,7 +19,7 @@ Assumed interferer EIRP per area: 0, 20, 40 dBW. Receiver: {"degraded_margin_db"
 | GRACE-FO 1 | 2026-11-15T06:03:58Z | 0.2 | 13 | 111.0 | 4.0 | 0.077 | 20.4 / 17.2 / -0.1 | kept / kept / loss-of-tracking-modelled |
 | ISS (ZARYA) | 2026-11-15T04:56:49Z | 0.3 | 5 | 35.5 | 0.0 | 0.025 | 20.5 / 19.7 / 7.5 | kept / kept / kept |
 
-Per-pass detail: `passes.csv`. Full result: `study.json` (result SHA-256 af2d379b968460af6c1835cc34b5436f6586cd2731827dc7cc8560e23eee6819).
+Per-pass detail: `passes.csv`. Full result: `study.json` (result SHA-256 3ed4722782ebbf7971c062449e9793b48cb9895ee10d1ecf77f0b06edfff6b5c).
 
 ## What this does and does not say
 

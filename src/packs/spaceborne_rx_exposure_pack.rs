@@ -854,13 +854,29 @@ pub fn run_study(s: &SpaceborneRxExposureScenario) -> Result<Value, KshanaError>
     Ok(doc)
 }
 
+/// NaN and infinities become null; every other non-integer number is rounded to
+/// [`SIG_DIGITS`] significant digits, so the document and its hash are the same on every
+/// platform (SGP4 and the trigonometry differ in the last bits between maths libraries).
 fn sanitise(v: &mut Value) {
     match v {
         Value::Array(a) => a.iter_mut().for_each(sanitise),
         Value::Object(o) => o.values_mut().for_each(sanitise),
-        Value::Number(n) if n.as_f64().is_some_and(|x| !x.is_finite()) => *v = Value::Null,
+        Value::Number(n) if n.is_f64() => match n.as_f64() {
+            Some(x) if x.is_finite() => *v = json!(round_sig(x)),
+            _ => *v = Value::Null,
+        },
         _ => {}
     }
+}
+
+/// Significant digits kept in the published study.
+const SIG_DIGITS: usize = 9;
+
+fn round_sig(x: f64) -> f64 {
+    if x == 0.0 {
+        return 0.0;
+    }
+    format!("{:.*e}", SIG_DIGITS - 1, x).parse().unwrap_or(x)
 }
 
 /// One line per spacecraft.
@@ -1082,6 +1098,17 @@ pub fn write_study(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn rounding_hides_last_bit_differences() {
+        let x = 1234.567_890_123_456_f64;
+        assert_eq!(round_sig(x), round_sig(f64::from_bits(x.to_bits() + 1)));
+        assert_eq!(round_sig(x), 1234.567_89);
+        assert_eq!(round_sig(0.0), 0.0);
+        let mut v = json!({"a": [f64::NAN, 2.0, 3], "b": -0.000_123_456_789_01});
+        sanitise(&mut v);
+        assert_eq!(v, json!({"a": [null, 2.0, 3], "b": -0.000_123_456_789}));
+    }
 
     #[test]
     fn time_round_trip() {
