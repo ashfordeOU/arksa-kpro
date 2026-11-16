@@ -46,6 +46,8 @@ use packs::lunar_time_budget_study_pack::LunarTimeBudgetStudyScenario;
 use packs::mbse_pack::MbseScenario;
 use packs::optical_rf_hybrid_study_pack::OpticalRfHybridStudyScenario;
 use packs::realtime_frame_eop_study_pack::RealtimeFrameEopStudyScenario;
+use packs::space_tip_cue_study_pack::SpaceTipCueStudyScenario;
+use packs::spaceborne_rx_exposure_pack::SpaceborneRxExposureScenario;
 use packs::spectrum_coexistence_pack::SpectrumCoexistenceScenario;
 
 /// The Arksa-exclusive scenario kinds (roadmap 0.42 section 1a, and the owner's decision of
@@ -75,6 +77,58 @@ pub const ARKSA_FEATURES: &[&str] = &[
     "pro-spacestream",
     "pro-mrd",
 ];
+
+/// Arksa-exclusive kinds added on 15 November 2026 (roadmap 0.42 F4 and M9). They register
+/// through the same hook and the same `arksa` claim as [`ARKSA_KINDS`], but only once the
+/// pinned Kshana Pro's signed tier manifest lists them at the `arksa` tier (by hash):
+/// registering an id the manifest does not list would fail Kshana Pro's start-up check for
+/// every kind. Until the pin moves to a Kshana Pro commit whose manifest lists them, they are
+/// built and tested here as packs but are not reachable through the dispatcher (and so are
+/// refused like any unknown kind).
+pub const PENDING_MANIFEST_KINDS: &[&str] = &[
+    SpaceborneRxExposureScenario::KIND,
+    SpaceTipCueStudyScenario::KIND,
+];
+
+/// The command feature of [`commands::rx_exposure_command`] (F4), shared with its kind id;
+/// pending the manifest like [`PENDING_MANIFEST_KINDS`].
+pub const PENDING_MANIFEST_FEATURES: &[&str] = &[SpaceborneRxExposureScenario::KIND];
+
+/// Whether the pinned Kshana Pro's signed tier manifest lists `id` at the `arksa` tier with
+/// entry type `ty` (`kind` or `feature`).
+pub fn manifest_lists(id: &str, ty: &str) -> bool {
+    let h = kshana_pro::license::tiers::name_hash(id);
+    kshana_pro::license::tiers::ARKSA_ENTRIES
+        .iter()
+        .any(|(eh, et)| *eh == h && *et == ty)
+}
+
+/// The Arksa-exclusive kinds this build registers: [`ARKSA_KINDS`] and the pending kinds the
+/// manifest already lists.
+pub fn active_kinds() -> Vec<&'static str> {
+    ARKSA_KINDS
+        .iter()
+        .chain(
+            PENDING_MANIFEST_KINDS
+                .iter()
+                .filter(|k| manifest_lists(k, "kind")),
+        )
+        .copied()
+        .collect()
+}
+
+/// The Arksa-exclusive command features this build registers.
+pub fn active_features() -> Vec<&'static str> {
+    ARKSA_FEATURES
+        .iter()
+        .chain(
+            PENDING_MANIFEST_FEATURES
+                .iter()
+                .filter(|f| manifest_lists(f, "feature")),
+        )
+        .copied()
+        .collect()
+}
 
 /// Public half of the placeholder Arksa issuer key: a TEST key whose private half exists
 /// only in this crate's tests. A debug build with no `KSHANA_PRO_ARKSA_ISSUER_PUBKEY` set
@@ -115,7 +169,7 @@ macro_rules! kind {
 /// Everything this crate adds to Kshana Pro: the kinds, the command features, the commands
 /// ([`commands::all`]) and the issuer keys.
 pub fn extension() -> Result<Extension, KshanaError> {
-    let kinds = vec![
+    let mut kinds = vec![
         kind!(MbseScenario, Tier::Enterprise),
         kind!(DesignOptimiseScenario, Tier::Enterprise),
         kind!(SpectrumCoexistenceScenario, Tier::Enterprise),
@@ -128,8 +182,14 @@ pub fn extension() -> Result<Extension, KshanaError> {
         kind!(BeaconDopScenario, Tier::Pro),
         kind!(SurfaceBeaconDopStudyScenario, Tier::Pro),
     ];
+    if manifest_lists(SpaceborneRxExposureScenario::KIND, "kind") {
+        kinds.push(kind!(SpaceborneRxExposureScenario, Tier::Pro));
+    }
+    if manifest_lists(SpaceTipCueStudyScenario::KIND, "kind") {
+        kinds.push(kind!(SpaceTipCueStudyScenario, Tier::Pro));
+    }
     let feature = |id: &'static str, min_tier| ExtensionFeature { id, min_tier };
-    let features = vec![
+    let mut features = vec![
         feature(MbseScenario::KIND, Tier::Enterprise),
         feature(DesignOptimiseScenario::KIND, Tier::Enterprise),
         feature(SpectrumCoexistenceScenario::KIND, Tier::Enterprise),
@@ -138,11 +198,16 @@ pub fn extension() -> Result<Extension, KshanaError> {
         feature("pro-spacestream", Tier::Pro),
         feature("pro-mrd", Tier::Pro),
     ];
+    let mut commands = commands::all();
+    if manifest_lists(SpaceborneRxExposureScenario::KIND, "feature") {
+        features.push(feature(SpaceborneRxExposureScenario::KIND, Tier::Pro));
+        commands.push(commands::rx_exposure_command());
+    }
     Ok(Extension {
         name: "arksa-kpro",
         kinds,
         features,
-        commands: commands::all(),
+        commands,
         issuer_keys: issuer_keys()?,
     })
 }

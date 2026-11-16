@@ -40,6 +40,7 @@ What moved here from kshana-pro (14 November 2026):
 | `src/twin/navdt.rs`, `src/suite/gsn.rs`, `src/suite/vcd.rs` | the NAV-DT twin bundle and the GSN argument and VCD (Kshana Pro's report, trade study and study dossier no longer use them) |
 | `src/commands.rs` | the commands `mbse`, `design`, `coexist`, `mission`, `navdt`, `spacestream`, `mrd` |
 | `tests/` | their tests, plus `arksa_entitlement.rs` (refusal and acceptance through the hook) |
+| `src/packs/spaceborne_rx_exposure_pack.rs`, `src/packs/space_tip_cue_study_pack.rs` (added 15 November 2026) | roadmap 0.42 F4 `pro-spaceborne-rx-exposure` (and the command `rx-exposure`, signed study report; `docs/SPACEBORNE-RX-EXPOSURE.md`) and M9 `pro-space-tip-cue-study` (pre-registered; `docs/evidence/m9-space-tip-cue/`) |
 | `tests/fixtures/mbse/`, `scenarios/`, `papers/`, `docs/` | fixtures, worked scenarios, the committed study CSVs the pack tests compare against, and the docs (MBSE, mission dossier, design optimiser, spectrum coexistence, the D1.4 MRD mapping, the SpaceStream ICD) |
 
 Module paths inside the crate are the ones the code had in Kshana Pro: `src/lib.rs` re-exports the
@@ -70,6 +71,16 @@ Issuer key: `KSHANA_PRO_ARKSA_ISSUER_PUBKEY` at build time (64 hex characters, o
 commas). Without it a debug build trusts the placeholder test key (`PLACEHOLDER_ARKSA_ISSUER_PUBKEY`,
 private half only in `tests/arksa_entitlement.rs`) and a release build trusts none, so it refuses every
 Arksa token. The tier manifest key is Kshana Pro's (its docs/LICENSING-KEYS.md, section 6).
+
+### F4 and M9: registered through the manifest
+
+The F4 and M9 kinds (`PENDING_MANIFEST_KINDS`) and the F4 command feature register through the same
+hook and need the same `arksa` claim. `register()` adds each only when the pinned Kshana Pro's signed
+tier manifest lists it at `arksa` (`manifest_lists`); an unlisted id would make Kshana Pro's start-up
+check refuse every kind. Kshana Pro main 4142fc4e (15 November 2026) lists their three hashes
+(2 kinds, 1 feature), and this crate is pinned to it, so both are reachable through the dispatcher.
+The `pending_kinds_register_only_when_the_manifest_lists_them` test checks that an Arksa token runs
+them and a standalone Pro token is refused neutrally.
 
 ## Building
 
