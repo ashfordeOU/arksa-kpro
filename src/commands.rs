@@ -64,6 +64,7 @@ pub fn all() -> Vec<ExtensionCommand> {
             usage: "arksa-kpro simcal <plugins|residuals|recalibrate|verify> ... [--license <token>] [--dev]   Mission performance simulator against telemetry, recalibrated by the hosted self-calibration verdict, with signed lineage (`arksa-kpro simcal` for details)",
             run: simcal_cmd,
         },
+        crate::landing::cli::command(),
     ]
 }
 

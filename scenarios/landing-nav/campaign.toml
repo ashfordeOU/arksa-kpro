@@ -1,0 +1,142 @@
+# Synthetic, illustrative campaign for `arksa-kpro landing-nav` (docs/LANDING-NAV-VERIFICATION.md).
+# The descent, the sensors and the faults are invented for testing the harness; they model no
+# real lander or sensor. Every verdict over it is MODELLED.
+schema = "arksa-landing-nav-campaign/1"
+title = "Example descent-sensor fault campaign"
+seed = 20261120
+
+[system_under_test]
+name = "Example lander navigation filter"
+version = "0.0-example"
+test_setup = "SIL"
+
+[descent]
+start_alt_m = 2000.0
+start_vz_mps = -60.0
+terminal_alt_m = 30.0
+terminal_vz_mps = -1.5
+step_s = 0.1
+
+[[sensor]]
+id = "alt"
+kind = "radar_altimeter"
+noise_sigma_m = 0.5
+noise_fraction = 0.005
+range_min_m = 1.0
+range_max_m = 3000.0
+rate_hz = 10.0
+
+[[sensor]]
+id = "lrf"
+kind = "laser_rangefinder"
+noise_sigma_m = 0.1
+noise_fraction = 0.001
+range_min_m = 0.5
+range_max_m = 1500.0
+rate_hz = 10.0
+
+# Fixed before any log is seen (pre-registered with `landing-nav scenarios`).
+[bars]
+detect_latency_s = 2.0
+recovery_s = 3.0
+false_reject_max_s = 1.0
+min_detectable_error_m = 20.0
+sigma_k = 3.0
+consistency_min_fraction = 0.95
+low_alt_m = 100.0
+low_alt_error_max_m = 5.0
+low_alt_vz_error_max_mps = 0.5
+max_gap_s = 0.5
+
+[[scenario]]
+id = "S01-nominal"
+title = "Nominal descent, both sensors healthy"
+
+[[scenario]]
+id = "S02-terrain-step"
+title = "Truthful sensors over a 400 m terrain depression (crater)"
+incident = "ispace-m1"
+[[scenario.terrain]]
+t_start_s = 20.0
+t_end_s = 35.0
+height_m = -400.0
+
+[[scenario]]
+id = "S03-lrf-never-enabled"
+title = "Laser rangefinder never enabled"
+incident = "im-1"
+[[scenario.fault]]
+sensor = "lrf"
+type = "never_enabled"
+
+[[scenario]]
+id = "S04-alt-dropout"
+title = "Radar altimeter drops out for 10 s, then returns"
+incident = "im-2"
+[[scenario.fault]]
+sensor = "alt"
+type = "dropout"
+t_start_s = 50.0
+t_end_s = 60.0
+
+[[scenario]]
+id = "S05-lrf-bias"
+title = "Laser rangefinder 40 m bias"
+incident = "ispace-m2"
+[[scenario.fault]]
+sensor = "lrf"
+type = "bias"
+t_start_s = 40.0
+value = 40.0
+
+[[scenario]]
+id = "S06-lrf-drift"
+title = "Laser rangefinder drifting at 5 m/s"
+incident = "ispace-m2"
+[[scenario.fault]]
+sensor = "lrf"
+type = "drift"
+t_start_s = 45.0
+value = 5.0
+
+[[scenario]]
+id = "S07-alt-stuck"
+title = "Radar altimeter reading freezes"
+incident = "im-2"
+[[scenario.fault]]
+sensor = "alt"
+type = "stuck"
+t_start_s = 55.0
+
+[[scenario]]
+id = "S08-alt-saturation"
+title = "Radar altimeter saturates at 600 m"
+[[scenario.fault]]
+sensor = "alt"
+type = "saturation"
+value = 600.0
+
+[[scenario]]
+id = "S09-lrf-spikes"
+title = "Laser rangefinder outliers for 10 s"
+[[scenario.fault]]
+sensor = "lrf"
+type = "spikes"
+t_start_s = 60.0
+t_end_s = 70.0
+value = 50.0
+probability = 0.05
+
+[[scenario]]
+id = "S10-dust"
+title = "Dust returns on both sensors in terminal descent"
+[[scenario.fault]]
+sensor = "alt"
+type = "noise_burst"
+t_start_s = 75.0
+value = 2.0
+[[scenario.fault]]
+sensor = "lrf"
+type = "noise_burst"
+t_start_s = 75.0
+value = 2.0

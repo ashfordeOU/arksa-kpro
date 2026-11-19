@@ -28,6 +28,7 @@ pub mod decision;
 pub mod design;
 pub mod disposal;
 pub mod entitlement;
+pub mod landing;
 pub mod lunar_oed;
 pub mod lunar_time_assist;
 pub mod mbse;
