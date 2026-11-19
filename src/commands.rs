@@ -49,6 +49,7 @@ pub fn all() -> Vec<ExtensionCommand> {
             usage: "arksa-kpro mission <build|check> ... [--license <token>] [--dev]   Requirements to runs to verification matrix to a PDF dossier, and its re-check (`arksa-kpro mission` for details)",
             run: mission_cmd,
         },
+        crate::landing::cli::command(),
     ]
 }
 
