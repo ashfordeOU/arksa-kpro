@@ -35,6 +35,7 @@ pub mod mission;
 pub mod mrd;
 pub mod ops;
 pub mod packs;
+pub mod simcal;
 pub mod spectrum_coexistence;
 pub mod suite;
 pub mod twin;
