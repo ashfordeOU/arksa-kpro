@@ -18,6 +18,19 @@ pub const USAGE: &str = "arksa-kpro mission — one programme of requirements an
   arksa-kpro mission check <dir> [--rerun]\n\
       Re-hash every file of a delivered dossier; with --rerun, run every scenario again and compare\n\
 \n\
+Space safety (collision-avoidance decisions and disposal compliance; also a [space_safety] dossier section):\n\
+  arksa-kpro mission decision <decision.toml> --out <dir> [--sign-key-file <file>] [--signer <name>]\n\
+      One collision-avoidance decision record: decision.json, decision.md, input.toml (signed with a key)\n\
+  arksa-kpro mission decision-chain <dir-or-decision.json> ...\n\
+      Check that the records, in the order given, hash correctly and each names the one before it\n\
+  arksa-kpro mission thresholds <events.csv> --thresholds 1e-4,1e-5,3e-7 [--period-days <d>] [--default-post-pc <p>] [--out <file.json>]\n\
+      Manoeuvres and accepted risk under each threshold over one set of conjunction events\n\
+  arksa-kpro mission disposal <disposal.toml> --out <dir> [--sign-key-file <file>] [--signer <name>]\n\
+      Disposal, passivation and casualty-risk screening against FCC, ESA and EU rule texts (signed with a key)\n\
+\n\
+A signing key is a file of 64 hex characters (or ARKSA_STUDY_SIGNING_KEY); check a signed directory\n\
+with `arksa-kpro dossier verify <dir> --trust <public key>`. See docs/DECISION-AND-DISPOSAL-EVIDENCE.md.\n\
+\n\
 Every command takes [--license <token>] or, in a debug build, [--dev]. See docs/MISSION-DOSSIER.md.";
 
 fn flag(args: &[String], name: &str) -> Option<String> {
@@ -57,6 +70,9 @@ fn err(msg: impl Into<String>) -> KshanaError {
 /// Run a `mission` command (`args[0]` is the command) under `ent`. Returns the process
 /// exit code: 0 on success, 1 when a check fails, 2 on a usage error.
 pub fn run(args: &[String], ent: &Entitlement, now_unix: i64) -> Result<u8, KshanaError> {
+    if let Some(r) = super::space_safety::run(args, now_unix) {
+        return r;
+    }
     match args.first().map(String::as_str) {
         Some("build") => {
             let programme = positional(args)
