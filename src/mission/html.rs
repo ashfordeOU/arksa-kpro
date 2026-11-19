@@ -424,6 +424,9 @@ ul.items{{padding-left:20px;font:13.5px/1.5 system-ui,sans-serif}}ul.items li{{m
         if b.trade.is_some() {
             h += "<a href=\"#trade\">Trade study</a>";
         }
+        if b.space_safety.is_some() {
+            h += "<a href=\"#space-safety\">Space safety</a>";
+        }
         h += "<a href=\"#open\">Open items</a><a href=\"#repro\">Reproducibility</a><a href=\"#signoff\">Sign-off</a></p></nav>";
 
         h += "<h2 id=\"summary\">Verdict summary</h2><div class=\"tiles\">";
@@ -537,6 +540,10 @@ ul.items{{padding-left:20px;font:13.5px/1.5 system-ui,sans-serif}}ul.items li{{m
                 );
             }
             h += "<p class=\"small\">The trade study is a Kshana Pro kind. Each variant is an open-engine scenario run unchanged; the trade itself is not reproduced by the free engine.</p>";
+        }
+
+        if let Some(ss) = &b.space_safety {
+            h += &ss.to_html();
         }
 
         h += &format!(

@@ -22,7 +22,9 @@ pub use kshana_pro::{
 
 pub mod commands;
 pub mod connectors;
+pub mod decision;
 pub mod design;
+pub mod disposal;
 pub mod entitlement;
 pub mod lunar_oed;
 pub mod mbse;

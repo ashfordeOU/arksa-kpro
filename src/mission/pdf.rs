@@ -818,6 +818,43 @@ fn sheet(l: &mut Layout, s: &RunSheet) {
     }
 }
 
+/// The space-safety section, laid out from its blocks.
+fn space_safety(l: &mut Layout, ss: &super::space_safety::SpaceSafetySection) {
+    use super::space_safety::Block;
+    for blk in ss.blocks() {
+        match blk {
+            Block::Heading(t) => {
+                l.new_page();
+                l.heading(&ascii(&t));
+            }
+            Block::SubHeading(t) => sub_heading(l, &t),
+            Block::Para(t) => {
+                para(l, &t, 9.0);
+                l.advance(1.0);
+            }
+            Block::Small(t) => {
+                small(l, &t);
+                l.advance(0.8);
+            }
+            Block::Table { cols, rows } => {
+                let cols: Vec<Col> = cols
+                    .iter()
+                    .map(|(title, w, mono)| Col {
+                        title,
+                        w: *w,
+                        mono: *mono,
+                    })
+                    .collect();
+                let rows: Vec<Vec<Cell>> = rows
+                    .into_iter()
+                    .map(|r| r.into_iter().map(cell).collect())
+                    .collect();
+                table(l, &cols, &rows, 8.0);
+            }
+        }
+    }
+}
+
 fn closing(l: &mut Layout, d: &Dossier) {
     let b = &d.body;
     if let Some(t) = &b.trade {
@@ -889,6 +926,10 @@ fn closing(l: &mut Layout, d: &Dossier) {
             l,
             "The trade study is a Kshana Pro kind. Each variant is an open-engine scenario run unchanged; the trade itself is not reproduced by the free engine.",
         );
+    }
+
+    if let Some(ss) = &b.space_safety {
+        space_safety(l, ss);
     }
 
     l.new_page();

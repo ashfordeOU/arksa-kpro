@@ -30,6 +30,10 @@
 //! [[sign_off]]
 //! role = "Prepared by"
 //! name = ""
+//!
+//! [space_safety]                          # optional: see super::space_safety
+//! disposal = ["disposal.toml"]
+//! decision = ["decisions/ev-001.toml"]
 //! ```
 //!
 //! Paths are relative to the programme file. Every file is read once, as bytes, and
@@ -83,6 +87,8 @@ struct ProgrammeFile {
     trade: Option<TradeSpec>,
     #[serde(default)]
     sign_off: Vec<SignOff>,
+    #[serde(default)]
+    space_safety: Option<super::space_safety::SpaceSafetySpec>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -171,6 +177,8 @@ pub struct Programme {
     pub scenarios: Vec<Scenario>,
     pub links: Vec<LinkSpec>,
     pub sign_off: Vec<SignOff>,
+    /// The `[space_safety]` inputs, loaded and checked.
+    pub space_safety: Option<super::space_safety::SpaceSafetyInputs>,
     /// SHA-256 over the programme hash, the requirements hash and every scenario hash:
     /// one value that changes when any input changes.
     pub request_sha256: String,
@@ -428,6 +436,18 @@ impl Programme {
         for s in &scenarios {
             canon.push_str(&format!("scenario {} {}\n", s.id, s.sha256));
         }
+        let space_safety = match pf.space_safety {
+            Some(spec) => Some(super::space_safety::SpaceSafetyInputs::load(&base, spec)?),
+            None => None,
+        };
+        if let Some(ss) = &space_safety {
+            for (kind, f) in ss.files() {
+                canon.push_str(&format!(
+                    "space_safety {kind} {} {}\n",
+                    f.file_name, f.sha256
+                ));
+            }
+        }
         Ok(Programme {
             title: pf.title,
             reference: pf.reference.unwrap_or_default(),
@@ -443,6 +463,7 @@ impl Programme {
             scenarios,
             links: pf.links,
             sign_off: pf.sign_off,
+            space_safety,
             request_sha256: sha256_hex(canon.as_bytes()),
         })
     }
