@@ -134,6 +134,11 @@ inclination_deg = 53.0
         "pro-space-tip-cue-study" => {
             "kind = \"pro-space-tip-cue-study\"\nplanes = [4]\nper_plane = [1]\nspan_days = 2\nstep_s = 60\nthin = 4\nmc_cues = 50\n"
         }
+        "pro-conjunction-validation" => concat!(
+            "kind = \"pro-conjunction-validation\"\n[[source]]\nname = \"s\"\ntext = ['''",
+            include_str!("fixtures/conjunction/synthetic.cdm"),
+            "''']\n[[check]]\nsource = \"s\"\n"
+        ),
         other => panic!("no source for {other}"),
     }
 }
@@ -414,6 +419,11 @@ fn pending_kinds_register_only_when_the_manifest_lists_them() {
         let direct = match *k {
             "pro-spaceborne-rx-exposure" => toml::from_str::<
                 arksa_kpro::packs::spaceborne_rx_exposure_pack::SpaceborneRxExposureScenario,
+            >(src(k))
+            .unwrap()
+            .run(),
+            "pro-conjunction-validation" => toml::from_str::<
+                arksa_kpro::packs::conjunction_validation_pack::ConjunctionValidationScenario,
             >(src(k))
             .unwrap()
             .run(),

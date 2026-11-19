@@ -21,6 +21,7 @@ pub use kshana_pro::{
 };
 
 pub mod commands;
+pub mod conjunction;
 pub mod connectors;
 pub mod decision;
 pub mod design;
@@ -28,6 +29,7 @@ pub mod disposal;
 pub mod entitlement;
 pub mod landing;
 pub mod lunar_oed;
+pub mod lunar_time_assist;
 pub mod mbse;
 pub mod mission;
 pub mod mrd;
@@ -43,6 +45,7 @@ use kshana_pro::license::{Tier, KEY_LEN};
 use packs::beacon_dop_pack::{BeaconDopScenario, SurfaceBeaconDopStudyScenario};
 use packs::beacon_placement_pack::BeaconPlacementScenario;
 use packs::cislunar_observability_study_pack::CislunarObservabilityStudyScenario;
+use packs::conjunction_validation_pack::ConjunctionValidationScenario;
 use packs::design_optimise_pack::DesignOptimiseScenario;
 use packs::lunar_signal_security_pack::LunarSignalSecurityScenario;
 use packs::lunar_time_budget_study_pack::LunarTimeBudgetStudyScenario;
@@ -88,14 +91,22 @@ pub const ARKSA_FEATURES: &[&str] = &[
 /// every kind. Until the pin moves to a Kshana Pro commit whose manifest lists them, they are
 /// built and tested here as packs but are not reachable through the dispatcher (and so are
 /// refused like any unknown kind).
+///
+/// `pro-conjunction-validation` (conjunction-assessment validation, research 06 G1/G2) was
+/// added on 20 November 2026 and waits for the same manifest step.
 pub const PENDING_MANIFEST_KINDS: &[&str] = &[
     SpaceborneRxExposureScenario::KIND,
     SpaceTipCueStudyScenario::KIND,
+    ConjunctionValidationScenario::KIND,
 ];
 
-/// The command feature of [`commands::rx_exposure_command`] (F4), shared with its kind id;
-/// pending the manifest like [`PENDING_MANIFEST_KINDS`].
-pub const PENDING_MANIFEST_FEATURES: &[&str] = &[SpaceborneRxExposureScenario::KIND];
+/// The command features of [`commands::rx_exposure_command`] (F4) and
+/// [`commands::conjunction_command`], each shared with its kind id; pending the manifest like
+/// [`PENDING_MANIFEST_KINDS`].
+pub const PENDING_MANIFEST_FEATURES: &[&str] = &[
+    SpaceborneRxExposureScenario::KIND,
+    ConjunctionValidationScenario::KIND,
+];
 
 /// Whether the pinned Kshana Pro's signed tier manifest lists `id` at the `arksa` tier with
 /// entry type `ty` (`kind` or `feature`).
@@ -191,6 +202,9 @@ pub fn extension() -> Result<Extension, KshanaError> {
     if manifest_lists(SpaceTipCueStudyScenario::KIND, "kind") {
         kinds.push(kind!(SpaceTipCueStudyScenario, Tier::Pro));
     }
+    if manifest_lists(ConjunctionValidationScenario::KIND, "kind") {
+        kinds.push(kind!(ConjunctionValidationScenario, Tier::Pro));
+    }
     let feature = |id: &'static str, min_tier| ExtensionFeature { id, min_tier };
     let mut features = vec![
         feature(MbseScenario::KIND, Tier::Enterprise),
@@ -205,6 +219,10 @@ pub fn extension() -> Result<Extension, KshanaError> {
     if manifest_lists(SpaceborneRxExposureScenario::KIND, "feature") {
         features.push(feature(SpaceborneRxExposureScenario::KIND, Tier::Pro));
         commands.push(commands::rx_exposure_command());
+    }
+    if manifest_lists(ConjunctionValidationScenario::KIND, "feature") {
+        features.push(feature(ConjunctionValidationScenario::KIND, Tier::Pro));
+        commands.push(commands::conjunction_command());
     }
     Ok(Extension {
         name: "arksa-kpro",
