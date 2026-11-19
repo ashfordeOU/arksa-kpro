@@ -49,6 +49,11 @@ pub fn all() -> Vec<ExtensionCommand> {
             usage: "arksa-kpro mission <build|check> ... [--license <token>] [--dev]   Requirements to runs to verification matrix to a PDF dossier, and its re-check (`arksa-kpro mission` for details)",
             run: mission_cmd,
         },
+        ExtensionCommand {
+            name: "ops",
+            usage: "arksa-kpro ops <report|ad-score|tracking-gap|verify> ... [--license <token>] [--dev]   Signed ops test reports from run logs, anomaly-detector scorecards, tracking-gap impact (`arksa-kpro ops` for details)",
+            run: ops_cmd,
+        },
     ]
 }
 
@@ -204,6 +209,26 @@ fn mission_cmd(args: &[String]) -> ExitCode {
         return ExitCode::FAILURE;
     }
     finish(crate::mission::cli::run(args, &ent, now))
+}
+
+/// `ops <report|ad-score|tracking-gap|verify>`: operations assurance, under the mission
+/// dossier's feature (`pro-mission-dossier`, Arksa tier).
+fn ops_cmd(args: &[String]) -> ExitCode {
+    let args = &args[1..];
+    if wants_help(args) {
+        println!("{}", crate::ops::cli::USAGE);
+        return ExitCode::SUCCESS;
+    }
+    let now = now_unix();
+    let ent = match resolve_entitlement(args, now) {
+        Ok(e) => e,
+        Err(code) => return code,
+    };
+    if let Err(e) = crate::mission::ensure_entitled(&ent, now) {
+        eprintln!("error: {e}");
+        return ExitCode::FAILURE;
+    }
+    finish(crate::ops::cli::run(args, now))
 }
 
 /// The `rx-exposure` command (roadmap 0.42 F4). Registered only when the signed tier

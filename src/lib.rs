@@ -30,6 +30,7 @@ pub mod lunar_oed;
 pub mod mbse;
 pub mod mission;
 pub mod mrd;
+pub mod ops;
 pub mod packs;
 pub mod spectrum_coexistence;
 pub mod suite;

@@ -1,0 +1,25 @@
+# Synthetic, illustrative run log with deviations.
+time_utc,event,step,name,value,detail
+2026-11-18T13:00:00Z,run_start,,RUN-0002,synthetic,
+2026-11-18T13:00:05Z,tm,,BUS_V,28.0,
+2026-11-18T13:00:05Z,tm,,HTR_A_STATUS,OFF,
+2026-11-18T13:01:00Z,step_start,S1,,,
+2026-11-18T13:01:01Z,tc,S1,HTR_A_ON,,
+2026-11-18T13:01:01.200Z,tc_ack,,HTR_A_ON,acceptance,success
+2026-11-18T13:01:02.500Z,tc_ack,,HTR_A_ON,completion,success
+2026-11-18T13:01:04Z,tm,,HTR_A_STATUS,ON,
+2026-11-18T13:01:12Z,tm,,HTR_A_I,0.50,
+2026-11-18T13:01:30Z,step_end,S1,,,
+2026-11-18T13:01:31Z,step_start,S2,,,
+2026-11-18T13:02:00Z,tm,,HTR_A_I,0.51,
+2026-11-18T13:04:00Z,tc,,HTR_B_ON,,
+2026-11-18T13:05:00Z,tm,,HTR_A_I,0.58,
+2026-11-18T13:06:00Z,tm,,PANEL_T,18.9,
+2026-11-18T13:11:31Z,step_end,S2,,,
+2026-11-18T13:11:32Z,step_start,S3,,,
+2026-11-18T13:11:33Z,tc,S3,HTR_A_OFF,,
+2026-11-18T13:11:33.300Z,tc_ack,,HTR_A_OFF,acceptance,success
+2026-11-18T13:11:36Z,tm,,HTR_A_STATUS,OFF,
+2026-11-18T13:11:40Z,tm,,HTR_A_I,0.004,
+2026-11-18T13:12:00Z,step_end,S3,,,
+2026-11-18T13:13:30Z,run_end,,,,

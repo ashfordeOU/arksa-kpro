@@ -1,0 +1,16 @@
+# Synthetic data in the ESA Anomalies Dataset layout (not ESA data).
+[benchmark]
+format = "esa-ad"
+name = "Synthetic ESA-AD-layout set"
+data_origin = "synthetic"
+labels = "labels.csv"
+anomaly_types = "anomaly_types.csv"
+window_start_utc = "2026-01-01T00:00:00Z"
+window_end_utc = "2026-01-11T00:00:00Z"
+
+[detector]
+name = "Illustrative detector"
+version = "0.1"
+outputs = "alarms.csv"
+bars = "bars.toml"
+bars_sha256 = "19347b1c95ca83cc3adaf803c2869663e304d905ef08e2241c787ab8d7c75f08"

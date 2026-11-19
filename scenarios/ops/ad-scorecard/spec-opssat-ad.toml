@@ -1,0 +1,12 @@
+# Synthetic data in the OPSSAT-AD layout (not OPS-SAT data).
+[benchmark]
+format = "opssat-ad"
+name = "Synthetic OPSSAT-AD-layout set"
+data_origin = "synthetic"
+dataset = "dataset.csv"
+
+[detector]
+name = "Illustrative classifier"
+version = "0.1"
+outputs = "predictions.csv"
+bars = "bars.toml"

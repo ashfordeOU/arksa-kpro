@@ -1,0 +1,32 @@
+# Synthetic, illustrative run log.
+time_utc,event,step,name,value,detail
+2026-11-18T09:00:00Z,run_start,,RUN-0001,synthetic,
+2026-11-18T09:00:01Z,operator,,test conductor A,,
+2026-11-18T09:00:05Z,tm,,BUS_V,28.1,
+2026-11-18T09:00:05Z,tm,,HTR_A_STATUS,OFF,
+2026-11-18T09:01:00Z,step_start,S1,,,
+2026-11-18T09:01:01Z,tc,S1,HTR_A_ON,,
+2026-11-18T09:01:01.200Z,tc_ack,,HTR_A_ON,acceptance,success
+2026-11-18T09:01:02.500Z,tc_ack,,HTR_A_ON,completion,success
+2026-11-18T09:01:04Z,tm,,HTR_A_STATUS,ON,
+2026-11-18T09:01:06Z,tm,,HTR_A_I,0.31,
+2026-11-18T09:01:12Z,tm,,HTR_A_I,0.50,
+2026-11-18T09:01:30Z,step_end,S1,,,
+2026-11-18T09:01:31Z,step_start,S2,,,
+2026-11-18T09:02:00Z,tm,,HTR_A_I,0.51,
+2026-11-18T09:03:00Z,tm,,PANEL_T,16.2,
+2026-11-18T09:05:00Z,tm,,HTR_A_I,0.50,
+2026-11-18T09:06:00Z,tm,,PANEL_T,18.4,
+2026-11-18T09:08:00Z,tm,,HTR_A_I,0.49,
+2026-11-18T09:10:00Z,note,,,,panel reached setpoint
+2026-11-18T09:11:31Z,step_end,S2,,,
+2026-11-18T09:11:32Z,step_start,S3,,,
+2026-11-18T09:11:33Z,tc,S3,HTR_A_OFF,,
+2026-11-18T09:11:33.300Z,tc_ack,,HTR_A_OFF,acceptance,success
+2026-11-18T09:11:34Z,tc_ack,,HTR_A_OFF,completion,success
+2026-11-18T09:11:36Z,tm,,HTR_A_STATUS,OFF,
+2026-11-18T09:11:40Z,tm,,HTR_A_I,0.004,
+2026-11-18T09:12:00Z,step_end,S3,,,
+2026-11-18T09:12:20Z,tm,,BUS_V,28.2,
+2026-11-18T09:12:50Z,tm,,BUS_V,28.2,
+2026-11-18T09:13:30Z,run_end,,,,
