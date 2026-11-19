@@ -1,0 +1,63 @@
+# PRIVATE — Arksa-exclusive (arksa-kpro). Worked example of the `[ssa]` section of
+# pro-cislunar-observability-study: a synthetic angles-only campaign (two Estonian/Spanish
+# stations, three objects), catalogue build-up, family taxonomy and a debris-risk estimate
+# along the NRHO. Evidence class MODELLED; the synthetic scores are internal consistency only.
+kind = "pro-cislunar-observability-study"
+
+[ssa]
+epoch_utc = "2026-12-01T00:00:00"
+
+[[ssa.observers]]
+name = "TORAVERE"
+kind = "station"
+lat_deg = 58.2649
+lon_deg = 26.4661
+alt_m = 70.0
+
+[[ssa.observers]]
+name = "TEIDE"
+kind = "station"
+lat_deg = 28.3009
+lon_deg = -16.5097
+alt_m = 2390.0
+
+[ssa.synthetic]
+epoch_utc = "2026-12-01T00:00:00"
+sigma_arcsec = 1.0
+seed = 7
+objects = [
+  { id = "NRHO-A", preset = "nrho", phase_frac = 0.0 },
+  { id = "DRO-B", preset = "dro", phase_frac = 0.3 },
+  { id = "HALO-C", preset = "halo-l1", phase_frac = 0.5 },
+]
+tracks = [
+  { observer = "TORAVERE", start_utc = "2026-12-01T00:00:00", hours = 24.0, cadence_min = 15.0, objects = ["NRHO-A", "DRO-B"] },
+  { observer = "TEIDE", start_utc = "2026-12-01T00:00:00", hours = 24.0, cadence_min = 15.0, objects = ["NRHO-A", "DRO-B"] },
+  { observer = "TORAVERE", start_utc = "2026-12-02T00:00:00", hours = 24.0, cadence_min = 15.0, objects = ["NRHO-A", "DRO-B"] },
+  { observer = "TEIDE", start_utc = "2026-12-02T00:00:00", hours = 24.0, cadence_min = 15.0 },
+]
+
+[ssa.debris]
+trajectory = { object = "C-001" }
+span_days = 7.0
+step_minutes = 10.0
+hard_body_radius_m = 10.0
+
+[[ssa.debris.breakups]]
+name = "nrho-breakup"
+preset = "nrho"
+phase_frac = 0.995
+days_before_start = 0.5
+fragments_sampled = 100
+fragments_represented = 1000.0
+dv_sigma_mps = 3.0
+kernel_sigma_km = 50.0
+seed = 4
+
+[[ssa.debris.background]]
+name = "near-moon-shell"
+centre = "moon"
+r_min_km = 1737.4
+r_max_km = 100000.0
+density_per_km3 = 1e-13
+v_rel_kms = 1.0
