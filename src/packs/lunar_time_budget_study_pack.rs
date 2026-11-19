@@ -155,6 +155,117 @@ pub struct LunarTimeBudgetStudyScenario {
     /// Measurement-noise time error at τ = 1 s (s); averages down as τ^{-1/2}.
     #[serde(default = "d_measurement_1s")]
     pub measurement_1s_s: f64,
+    /// Optional `[time_scale]` section: report the lunar time-scale definitions of the
+    /// built-in PROVISIONAL registry ([`crate::lunar_time_assist::registry`]) at chosen UTC
+    /// epochs — each candidate's `lunar − UTC` and rate with uncertainty, and the spread across
+    /// candidates. Absent: the study output is unchanged.
+    #[serde(default)]
+    pub time_scale: Option<TimeScaleSection>,
+}
+
+/// The optional `[time_scale]` section of a lunar time budget study.
+#[derive(Debug, Clone, Deserialize)]
+pub struct TimeScaleSection {
+    /// UTC epochs (`YYYY-MM-DDTHH:MM:SS`).
+    #[serde(default = "d_ts_epochs")]
+    pub epochs_utc: Vec<String>,
+    /// Definition ids to report (empty: every live definition). There is no default
+    /// definition: the section reports candidates side by side.
+    #[serde(default)]
+    pub definitions: Vec<String>,
+}
+
+fn d_ts_epochs() -> Vec<String> {
+    vec!["2027-01-01T00:00:00".to_string()]
+}
+
+/// The `[time_scale]` block: registry provenance, per-definition offsets and rates, spread.
+fn time_scale_block(ts: &TimeScaleSection) -> Result<(Value, String), KshanaError> {
+    use crate::lunar_time_assist::registry::{Family, RefScale, Registry};
+    let reg = Registry::builtin();
+    let ids: Vec<String> = if ts.definitions.is_empty() {
+        reg.definitions
+            .iter()
+            .filter(|d| d.status != crate::lunar_time_assist::registry::DefStatus::Withdrawn)
+            .map(|d| d.id.clone())
+            .collect()
+    } else {
+        ts.definitions.clone()
+    };
+    if ts.epochs_utc.is_empty() {
+        return Err(KshanaError::InvalidInput(
+            "time_scale.epochs_utc is empty".into(),
+        ));
+    }
+    let mut ev = reg.evaluator();
+    let mut defs = Vec::new();
+    let mut spreads = Vec::new();
+    for e in &ts.epochs_utc {
+        let mut vals = Vec::new();
+        for id in &ids {
+            let o = ev
+                .lunar_offset(id, RefScale::Utc, e)
+                .map_err(KshanaError::InvalidInput)?;
+            if o.family != Family::Ltc {
+                vals.push(o.offset_s);
+            }
+        }
+        let spread = if vals.len() > 1 {
+            vals.iter().copied().fold(f64::NEG_INFINITY, f64::max)
+                - vals.iter().copied().fold(f64::INFINITY, f64::min)
+        } else {
+            0.0
+        };
+        spreads.push(json!({ "epoch_utc": e, "candidate_spread_s": spread }));
+    }
+    for id in &ids {
+        let d = reg.get(id).map_err(KshanaError::InvalidInput)?;
+        let r = ev.rate(id).map_err(KshanaError::InvalidInput)?;
+        let mut offs = Vec::new();
+        for e in &ts.epochs_utc {
+            let o = ev
+                .lunar_offset(id, RefScale::Utc, e)
+                .map_err(KshanaError::InvalidInput)?;
+            offs.push(json!({
+                "epoch_utc": e,
+                "lunar_minus_utc_s": o.offset_s,
+                "u_c_s": o.u_c_s,
+                "expanded_k2_s": o.expanded_k2_s,
+            }));
+        }
+        defs.push(json!({
+            "id": d.id,
+            "family": d.family,
+            "status": d.status,
+            "name": d.name,
+            "rate_vs_tt_us_per_day": r.us_per_day,
+            "u_rate_ns_per_day": r.u_ns_per_day,
+            "offsets": offs,
+            "provenance": "Modelled",
+        }));
+    }
+    let first_spread = spreads
+        .first()
+        .and_then(|v| v["candidate_spread_s"].as_f64())
+        .unwrap_or(0.0);
+    let summary = format!(
+        "lunar time registry {} v{} PROVISIONAL (no adopted definition): candidate spread {:.3} us at {}",
+        reg.registry_id,
+        reg.version,
+        first_spread * 1e6,
+        ts.epochs_utc[0]
+    );
+    Ok((
+        json!({
+            "registry": reg.reference("*"),
+            "notice": reg.notice,
+            "no_default_definition": true,
+            "definitions": defs,
+            "spread": spreads,
+            "provenance": "Modelled",
+        }),
+        summary,
+    ))
 }
 
 impl Default for LunarTimeBudgetStudyScenario {
@@ -171,6 +282,7 @@ impl Default for LunarTimeBudgetStudyScenario {
             relativistic_residual_s: d_relativistic_residual(),
             ephemeris_s: d_ephemeris(),
             measurement_1s_s: d_measurement_1s(),
+            time_scale: None,
         }
     }
 }
@@ -198,6 +310,8 @@ struct StudyModel {
     crossover_closed_form_residual: f64,
     regime: &'static str,
     scenario_hash: String,
+    /// The optional `[time_scale]` block and its summary line.
+    time_scale: Option<(Value, String)>,
 }
 
 /// Parse a clock string to a [`LunarClock`], accepting the canonical names and a few
@@ -275,6 +389,7 @@ impl LunarTimeBudgetStudyScenario {
                 "relativistic_residual_s",
                 "ephemeris_s",
                 "measurement_1s_s",
+                "time_scale",
             ],
         }
     }
@@ -307,6 +422,15 @@ impl LunarTimeBudgetStudyScenario {
             self.ephemeris_s,
             self.measurement_1s_s,
         );
+        let mut canonical = canonical;
+        if let Some(ts) = &self.time_scale {
+            // Only a study with the section hashes it, so existing hashes are unchanged.
+            canonical.push_str(&format!(
+                "|time_scale={}/{}",
+                ts.epochs_utc.join(","),
+                ts.definitions.join(",")
+            ));
+        }
         let mut h = Sha256::new();
         h.update(canonical.as_bytes());
         hex::encode(h.finalize()).chars().take(12).collect()
@@ -368,6 +492,7 @@ impl LunarTimeBudgetStudyScenario {
             (budget.crossover_tau_s - crossover_tau_analytic_s).abs() / crossover_tau_analytic_s;
 
         let scenario_hash = self.compute_hash(clock);
+        let time_scale = self.time_scale.as_ref().map(time_scale_block).transpose()?;
 
         Ok(StudyModel {
             clock_label: clock.name().to_string(),
@@ -381,6 +506,7 @@ impl LunarTimeBudgetStudyScenario {
             crossover_closed_form_residual,
             regime,
             scenario_hash,
+            time_scale,
         })
     }
 
@@ -424,6 +550,14 @@ impl LunarTimeBudgetStudyScenario {
     }
 
     fn json(&self, m: &StudyModel) -> Value {
+        let mut doc = self.json_base(m);
+        if let (Some((block, _)), Some(obj)) = (&m.time_scale, doc.as_object_mut()) {
+            obj.insert("time_scale".into(), block.clone());
+        }
+        doc
+    }
+
+    fn json_base(&self, m: &StudyModel) -> Value {
         // Curve terms, each carrying its provenance and full x_i(τ).
         let terms: Vec<Value> = m
             .budget
@@ -503,6 +637,13 @@ impl LunarTimeBudgetStudyScenario {
     }
 
     fn summary(&self, m: &StudyModel) -> String {
+        match &m.time_scale {
+            Some((_, line)) => format!("{} | {line}", self.summary_base(m)),
+            None => self.summary_base(m),
+        }
+    }
+
+    fn summary_base(&self, m: &StudyModel) -> String {
         let dom = m.sorted_terms.first();
         format!(
             "Kshana Pro LTC time-error budget (L48) | clock {clock} | 7 terms x_i(tau) over {n} tau | \
@@ -601,6 +742,15 @@ impl LunarTimeBudgetStudyScenario {
              the reference the study sizes against.",
             m.x_sigma_at_rep_s * 1e9
         ));
+
+        if let Some((_, line)) = &m.time_scale {
+            pdf.heading("Lunar time-scale definitions (provisional)");
+            pdf.paragraph(&format!(
+                "{line}. No international lunar time definition is adopted (CGPM 2026 Res. 6 left \
+                 TCL versus scaled TL open); the study reports the candidates side by side and \
+                 names none as the standard."
+            ));
+        }
 
         pdf.heading("Caveats (read first)");
         pdf.paragraph(

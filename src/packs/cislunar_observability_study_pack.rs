@@ -163,6 +163,12 @@ pub struct CislunarObservabilityStudyScenario {
     /// — the range-only arc is the canonical P6 rank-transition story.
     #[serde(default = "d_with_range_rate")]
     pub with_range_rate: bool,
+    /// Cislunar space situational awareness (catalogue build-up from angles-only
+    /// observations, orbit-family taxonomy, debris-environment risk). When present the run
+    /// returns the [`crate::cislunar_ssa`] result instead of the observability study; the
+    /// observability fields are then ignored.
+    #[serde(default)]
+    pub ssa: Option<crate::cislunar_ssa::SsaConfig>,
 }
 
 impl Default for CislunarObservabilityStudyScenario {
@@ -176,6 +182,7 @@ impl Default for CislunarObservabilityStudyScenario {
             steps: d_steps(),
             rel_tol: d_rel_tol(),
             with_range_rate: d_with_range_rate(),
+            ssa: None,
         }
     }
 }
@@ -249,6 +256,7 @@ impl CislunarObservabilityStudyScenario {
                 "steps",
                 "rel_tol",
                 "with_range_rate",
+                "ssa",
             ],
         }
     }
@@ -839,6 +847,16 @@ fn num_or_null(x: f64) -> Value {
 
 impl Scenario for CislunarObservabilityStudyScenario {
     fn run(&self) -> Result<RunOutput, KshanaError> {
+        if let Some(ssa) = &self.ssa {
+            let st = crate::cislunar_ssa::run_study(ssa)?;
+            return Ok(RunOutput {
+                json: serde_json::to_string_pretty(&st.doc)
+                    .map_err(|e| KshanaError::InvalidInput(e.to_string()))?,
+                svg: st.svg,
+                summary: crate::cislunar_ssa::summary(&st.doc),
+                csv: Some(st.csv),
+            });
+        }
         let m = self.compute()?;
         let doc = self.json(&m).to_string();
         let svg = fig_svg(&m);
@@ -1249,6 +1267,7 @@ mod tests {
             steps: 2200,
             rel_tol: 1e-6,
             with_range_rate: true,
+            ssa: None,
         }
     }
 

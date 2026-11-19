@@ -54,6 +54,11 @@ pub fn all() -> Vec<ExtensionCommand> {
             usage: "arksa-kpro ops <report|ad-score|tracking-gap|verify> ... [--license <token>] [--dev]   Signed ops test reports from run logs, anomaly-detector scorecards, tracking-gap impact (`arksa-kpro ops` for details)",
             run: ops_cmd,
         },
+        ExtensionCommand {
+            name: "lunar-time",
+            usage: "arksa-kpro lunar-time <registry|convert|spread|impact|assist> ... [--license <token>] [--dev]   Provisional lunar time-scale registry (TCL/TL/LTC, no default), conversions with uncertainty, convention-change impact, lunar GNSS assistance packages (`arksa-kpro lunar-time` for details)",
+            run: lunar_time_cmd,
+        },
     ]
 }
 
@@ -231,6 +236,20 @@ fn ops_cmd(args: &[String]) -> ExitCode {
     finish(crate::ops::cli::run(args, now))
 }
 
+/// `lunar-time <command>`: the provisional lunar time-scale registry and lunar GNSS assistance
+/// packages (AK6). Gated on the existing Arksa-exclusive kind `pro-lunar-time-budget-study`.
+fn lunar_time_cmd(args: &[String]) -> ExitCode {
+    let args = &args[1..];
+    if wants_help(args) {
+        println!("{}", crate::lunar_time_assist::cli::USAGE);
+        return ExitCode::SUCCESS;
+    }
+    if let Err(code) = require_feature(args, crate::lunar_time_assist::FEATURE) {
+        return code;
+    }
+    finish(crate::lunar_time_assist::cli::run(args))
+}
+
 /// The `rx-exposure` command (roadmap 0.42 F4). Registered only when the signed tier
 /// manifest lists its feature ([`crate::PENDING_MANIFEST_FEATURES`]).
 pub fn rx_exposure_command() -> ExtensionCommand {
@@ -288,6 +307,121 @@ fn rx_exposure_cmd(args: &[String]) -> ExitCode {
         )
         .map_err(|e| e.to_string())?;
         println!("{}", rx::summary(&doc));
+        match signed {
+            Some(p) => println!("signed: {}", p.display()),
+            None => println!("not signed: no signing key given"),
+        }
+        Ok(0)
+    };
+    finish(run())
+}
+
+/// The `conjunction` command (conjunction-assessment validation). Registered only when the
+/// signed tier manifest lists its feature ([`crate::PENDING_MANIFEST_FEATURES`]).
+pub fn conjunction_command() -> ExtensionCommand {
+    ExtensionCommand {
+        name: "conjunction",
+        usage: "arksa-kpro conjunction <scenario.toml> --out <dir> [--sign-key-file <hex seed file>] [--signer <name>] [--license <token>] [--dev]   Conjunction-assessment validation (checks, scorecard against a reference set, cross-provider comparison, covariance realism), signed (`arksa-kpro conjunction` for details)",
+        run: conjunction_cmd,
+    }
+}
+
+const CONJUNCTION_USAGE: &str =
+    "arksa-kpro conjunction <scenario.toml> --out <dir> [--sign-key-file <file>] [--signer <name>]
+arksa-kpro conjunction ingest <file>... [--format cdm|results-table] [--covariance-unit km2|m2]
+
+The first form runs a pro-conjunction-validation scenario (files it names are read relative to
+the scenario's directory) and writes study.json, events.csv and report.md to <dir>. With a signing
+key (a file holding 64 hex characters, or ARKSA_STUDY_SIGNING_KEY) the directory is signed as a
+whole (signature.json, Kshana Pro dossier signature; check it with `arksa-kpro dossier verify`).
+Without one the study is written unsigned and the command says so.
+
+`ingest` reads CCSDS CDMs (KVN or XML) or a conjunction results table (the TraCSS verification
+dataset's documented columns) and prints the normalised events as JSON.
+
+Evidence class: MODELLED. A reference set is not ground truth; nothing here validates or certifies
+a provider.";
+
+fn conjunction_cmd(args: &[String]) -> ExitCode {
+    use crate::packs::conjunction_validation_pack as cv;
+    let args = &args[1..];
+    if wants_help(args) {
+        println!("{CONJUNCTION_USAGE}");
+        return ExitCode::SUCCESS;
+    }
+    if let Err(code) = require_feature(args, cv::KIND) {
+        return code;
+    }
+    if args[0] == "ingest" {
+        let run = || -> Result<u8, String> {
+            let unit = match flag(args, "--covariance-unit").as_deref() {
+                None | Some("km2") => crate::conjunction::answer_key::CovUnit::Km2,
+                Some("m2") => crate::conjunction::answer_key::CovUnit::M2,
+                Some(o) => return Err(format!("--covariance-unit {o}: km2 or m2")),
+            };
+            let format = flag(args, "--format");
+            let mut skip = false;
+            let mut out = Vec::new();
+            for a in &args[1..] {
+                if skip {
+                    skip = false;
+                    continue;
+                }
+                if a.starts_with("--") {
+                    skip = matches!(a.as_str(), "--format" | "--covariance-unit" | "--license");
+                    continue;
+                }
+                let text = std::fs::read_to_string(a).map_err(|e| format!("{a}: {e}"))?;
+                let is_table = match format.as_deref() {
+                    Some("results-table") | Some("csv") => true,
+                    Some("cdm") => false,
+                    Some(o) => return Err(format!("--format {o}: cdm or results-table")),
+                    None => crate::conjunction::answer_key::looks_like(&text),
+                };
+                let ev = if is_table {
+                    crate::conjunction::answer_key::read(std::io::Cursor::new(text), unit, None)
+                } else {
+                    crate::conjunction::cdm::events(&text)
+                }
+                .map_err(|e| format!("{a}: {e}"))?;
+                out.push(serde_json::json!({"file": a, "events": ev}));
+            }
+            if out.is_empty() {
+                return Err("`conjunction ingest` needs at least one file".into());
+            }
+            let mut v = serde_json::json!(out);
+            crate::conjunction::sanitise(&mut v);
+            println!("{}", serde_json::to_string_pretty(&v).unwrap_or_default());
+            Ok(0)
+        };
+        return finish(run());
+    }
+    let run = || -> Result<u8, String> {
+        let path = std::path::Path::new(&args[0]);
+        let out = flag(args, "--out").ok_or("--out <dir> is required")?;
+        let text = std::fs::read_to_string(path).map_err(|e| format!("{}: {e}", path.display()))?;
+        let mut s: cv::ConjunctionValidationScenario =
+            toml::from_str(&text).map_err(|e| format!("invalid scenario: {e}"))?;
+        s.resolve_files(path.parent().unwrap_or(std::path::Path::new(".")))
+            .map_err(|e| e.to_string())?;
+        let study = cv::run_study(&s).map_err(|e| e.to_string())?;
+        let key = match flag(args, "--sign-key-file") {
+            Some(f) => Some(std::fs::read_to_string(&f).map_err(|e| format!("{f}: {e}"))?),
+            None => std::env::var("ARKSA_STUDY_SIGNING_KEY").ok(),
+        };
+        let seed = key
+            .filter(|k| !k.trim().is_empty())
+            .map(|k| kshana_pro::license::parse_key_hex(k.trim()).map_err(|e| e.to_string()))
+            .transpose()?;
+        let signer = flag(args, "--signer").unwrap_or_else(|| "Arksa".into());
+        let utc = crate::conjunction::fmt_utc(now_unix() as f64 - 946_684_800.0);
+        let signed = cv::write_study(
+            &study,
+            std::path::Path::new(&out),
+            seed.as_ref().map(|s| (s, signer.as_str(), utc.as_str())),
+        )
+        .map_err(|e| e.to_string())?;
+        println!("{}", cv::summary(&study.doc));
         match signed {
             Some(p) => println!("signed: {}", p.display()),
             None => println!("not signed: no signing key given"),
