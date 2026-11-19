@@ -1,0 +1,72 @@
+# Synthetic, illustrative test procedure (not from any real mission). Structure after
+# ECSS-E-ST-70-32C: preconditions body, main body of steps, confirmation body.
+[procedure]
+id = "TP-THM-007"
+title = "Heater line A functional test"
+version = "1.0"
+system_under_test = "Thermal control, heater line A (illustrative)"
+test_facility = "Illustrative bench"
+requirements = ["REQ-THM-010"]
+
+[[preconditions]]
+parameter = "BUS_V"
+min = 27.0
+max = 29.0
+
+[[preconditions]]
+parameter = "HTR_A_STATUS"
+equals_text = "OFF"
+
+[[steps]]
+id = "S1"
+title = "Switch heater line A on"
+requirements = ["REQ-THM-011"]
+[[steps.telecommands]]
+name = "HTR_A_ON"
+verify = ["acceptance", "completion"]
+[[steps.expect]]
+parameter = "HTR_A_STATUS"
+equals_text = "ON"
+within_s = 10
+[[steps.expect]]
+parameter = "HTR_A_I"
+min = 0.45
+max = 0.55
+within_s = 30
+
+[[steps]]
+id = "S2"
+title = "Hold and monitor the panel temperature"
+requirements = ["REQ-THM-012"]
+[[steps.expect]]
+parameter = "HTR_A_I"
+min = 0.45
+max = 0.55
+mode = "hold"
+[[steps.expect]]
+parameter = "PANEL_T"
+min = 18.0
+within_s = 600
+
+[[steps]]
+id = "S3"
+title = "Switch heater line A off"
+requirements = ["REQ-THM-011"]
+[[steps.telecommands]]
+name = "HTR_A_OFF"
+[[steps.expect]]
+parameter = "HTR_A_STATUS"
+equals_text = "OFF"
+within_s = 10
+[[steps.expect]]
+parameter = "HTR_A_I"
+equals = 0.0
+tolerance = 0.02
+within_s = 30
+
+[[confirmation]]
+parameter = "BUS_V"
+min = 27.0
+max = 29.0
+within_s = 60
+mode = "hold"

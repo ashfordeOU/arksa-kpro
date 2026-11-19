@@ -50,6 +50,11 @@ pub fn all() -> Vec<ExtensionCommand> {
             run: mission_cmd,
         },
         ExtensionCommand {
+            name: "ops",
+            usage: "arksa-kpro ops <report|ad-score|tracking-gap|verify> ... [--license <token>] [--dev]   Signed ops test reports from run logs, anomaly-detector scorecards, tracking-gap impact (`arksa-kpro ops` for details)",
+            run: ops_cmd,
+        },
+        ExtensionCommand {
             name: "lunar-time",
             usage: "arksa-kpro lunar-time <registry|convert|spread|impact|assist> ... [--license <token>] [--dev]   Provisional lunar time-scale registry (TCL/TL/LTC, no default), conversions with uncertainty, convention-change impact, lunar GNSS assistance packages (`arksa-kpro lunar-time` for details)",
             run: lunar_time_cmd,
@@ -209,6 +214,26 @@ fn mission_cmd(args: &[String]) -> ExitCode {
         return ExitCode::FAILURE;
     }
     finish(crate::mission::cli::run(args, &ent, now))
+}
+
+/// `ops <report|ad-score|tracking-gap|verify>`: operations assurance, under the mission
+/// dossier's feature (`pro-mission-dossier`, Arksa tier).
+fn ops_cmd(args: &[String]) -> ExitCode {
+    let args = &args[1..];
+    if wants_help(args) {
+        println!("{}", crate::ops::cli::USAGE);
+        return ExitCode::SUCCESS;
+    }
+    let now = now_unix();
+    let ent = match resolve_entitlement(args, now) {
+        Ok(e) => e,
+        Err(code) => return code,
+    };
+    if let Err(e) = crate::mission::ensure_entitled(&ent, now) {
+        eprintln!("error: {e}");
+        return ExitCode::FAILURE;
+    }
+    finish(crate::ops::cli::run(args, now))
 }
 
 /// `lunar-time <command>`: the provisional lunar time-scale registry and lunar GNSS assistance

@@ -1,0 +1,10 @@
+# Synthetic detector output: rows sharing an alarm_id are one alarm.
+alarm_id,channel,start_utc,end_utc
+a1,channel_1,2026-01-02T00:30:00Z,2026-01-02T02:00:00Z
+a1,channel_4,2026-01-02T00:30:00Z,2026-01-02T02:00:00Z
+a2,channel_3,2026-01-04T11:00:00Z,2026-01-04T12:30:00Z
+a3,channel_3,2026-01-04T12:40:00Z,2026-01-04T12:50:00Z
+a4,channel_1,2026-01-06T01:00:00Z,2026-01-06T01:30:00Z
+a5,channel_2,2026-01-07T03:00:00Z,2026-01-07T03:10:00Z
+a6,channel_2,2026-01-08T00:00:00Z,2026-01-08T02:00:00Z
+a7,channel_1,2026-01-10T00:00:00Z,2026-01-10T00:30:00Z
