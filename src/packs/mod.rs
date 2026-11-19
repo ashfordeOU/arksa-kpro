@@ -10,6 +10,7 @@ pub use kshana_pro::packs::study_pdf;
 pub mod beacon_dop_pack;
 pub mod beacon_placement_pack;
 pub mod cislunar_observability_study_pack;
+pub mod conjunction_validation_pack;
 pub mod design_optimise_pack;
 pub mod lunar_signal_security_pack;
 pub mod lunar_time_budget_study_pack;

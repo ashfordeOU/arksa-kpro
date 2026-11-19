@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Synthetic test message (written for arksa-kpro tests; not a real conjunction) -->
+<cdm id="CCSDS_CDM_VERS" version="1.0">
+  <header>
+    <CREATION_DATE>2026-11-20T08:00:00.000</CREATION_DATE>
+    <ORIGINATOR>SYNTHETIC-TEST</ORIGINATOR>
+    <MESSAGE_ID>SYN_20261120_0002</MESSAGE_ID>
+  </header>
+  <body>
+    <relativeMetadataData>
+      <TCA>2026-11-21T14:30:15.250</TCA>
+      <MISS_DISTANCE units="m">715</MISS_DISTANCE>
+      <RELATIVE_SPEED units="m/s">14762</RELATIVE_SPEED>
+      <COLLISION_PROBABILITY>4.835E-05</COLLISION_PROBABILITY>
+      <COLLISION_PROBABILITY_METHOD>FOSTER-1992</COLLISION_PROBABILITY_METHOD>
+    </relativeMetadataData>
+    <segment>
+      <metadata>
+        <OBJECT>OBJECT1</OBJECT>
+        <OBJECT_DESIGNATOR>99001</OBJECT_DESIGNATOR>
+        <CATALOG_NAME>SATCAT</CATALOG_NAME>
+        <OBJECT_NAME>SYNTHETIC SAT</OBJECT_NAME>
+        <EPHEMERIS_NAME>OPERATOR-EPH-001</EPHEMERIS_NAME>
+        <REF_FRAME>EME2000</REF_FRAME>
+      </metadata>
+      <data>
+        <stateVector>
+          <X units="km">2570.097065</X><Y units="km">2244.654904</Y><Z units="km">6281.497978</Z>
+          <X_DOT units="km/s">4.418769571</X_DOT><Y_DOT units="km/s">4.833547743</Y_DOT><Z_DOT units="km/s">-3.526774282</Z_DOT>
+        </stateVector>
+        <covarianceMatrix>
+          <CR_R>4.142E+01</CR_R><CT_R>-8.579E+00</CT_R><CT_T>2.533E+03</CT_T>
+          <CN_R>-2.313E+01</CN_R><CN_T>1.336E+01</CN_T><CN_N>7.098E+01</CN_N>
+        </covarianceMatrix>
+      </data>
+    </segment>
+    <segment>
+      <metadata>
+        <OBJECT>OBJECT2</OBJECT>
+        <OBJECT_DESIGNATOR>101390</OBJECT_DESIGNATOR>
+        <CATALOG_NAME>SATCAT</CATALOG_NAME>
+        <OBJECT_NAME>SYNTHETIC DEBRIS</OBJECT_NAME>
+        <EPHEMERIS_NAME>NONE</EPHEMERIS_NAME>
+        <REF_FRAME>EME2000</REF_FRAME>
+      </metadata>
+      <data>
+        <stateVector>
+          <X units="km">2569.540800</X><Y units="km">2245.093614</Y><Z units="km">6281.599946</Z>
+          <X_DOT units="km/s">-2.888612500</X_DOT><Y_DOT units="km/s">-6.007247516</Y_DOT><Z_DOT units="km/s">3.328770172</Z_DOT>
+        </stateVector>
+      </data>
+    </segment>
+  </body>
+</cdm>

@@ -41,6 +41,7 @@ What moved here from kshana-pro (14 November 2026):
 | `src/commands.rs` | the commands `mbse`, `design`, `coexist`, `mission`, `navdt`, `spacestream`, `mrd` |
 | `tests/` | their tests, plus `arksa_entitlement.rs` (refusal and acceptance through the hook) |
 | `src/packs/spaceborne_rx_exposure_pack.rs`, `src/packs/space_tip_cue_study_pack.rs` (added 15 November 2026) | roadmap 0.42 F4 `pro-spaceborne-rx-exposure` (and the command `rx-exposure`, signed study report; `docs/SPACEBORNE-RX-EXPOSURE.md`) and M9 `pro-space-tip-cue-study` (pre-registered; `docs/evidence/m9-space-tip-cue/`) |
+| `src/conjunction/`, `src/packs/conjunction_validation_pack.rs` (added 20 November 2026) | `pro-conjunction-validation` and the command `conjunction`: CDM/OEM/OMM ingest, consistency checks, a scorecard against a reference set (such as the public TraCSS verification answer key), covariance realism, cross-provider comparison with explained divergence, signed (`docs/CONJUNCTION-VALIDATION.md`); pending the tier manifest like F4/M9 |
 | `tests/fixtures/mbse/`, `scenarios/`, `papers/`, `docs/` | fixtures, worked scenarios, the committed study CSVs the pack tests compare against, and the docs (MBSE, mission dossier, design optimiser, spectrum coexistence, the D1.4 MRD mapping, the SpaceStream ICD) |
 
 Module paths inside the crate are the ones the code had in Kshana Pro: `src/lib.rs` re-exports the
