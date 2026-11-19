@@ -20,6 +20,7 @@ pub use kshana_pro::{
     report_brand, report_pdf, study_ledger, units, util, version,
 };
 
+pub mod cislunar_ssa;
 pub mod commands;
 pub mod conjunction;
 pub mod connectors;
