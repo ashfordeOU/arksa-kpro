@@ -49,6 +49,11 @@ pub fn all() -> Vec<ExtensionCommand> {
             usage: "arksa-kpro mission <build|check> ... [--license <token>] [--dev]   Requirements to runs to verification matrix to a PDF dossier, and its re-check (`arksa-kpro mission` for details)",
             run: mission_cmd,
         },
+        ExtensionCommand {
+            name: "lunar-time",
+            usage: "arksa-kpro lunar-time <registry|convert|spread|impact|assist> ... [--license <token>] [--dev]   Provisional lunar time-scale registry (TCL/TL/LTC, no default), conversions with uncertainty, convention-change impact, lunar GNSS assistance packages (`arksa-kpro lunar-time` for details)",
+            run: lunar_time_cmd,
+        },
     ]
 }
 
@@ -204,6 +209,20 @@ fn mission_cmd(args: &[String]) -> ExitCode {
         return ExitCode::FAILURE;
     }
     finish(crate::mission::cli::run(args, &ent, now))
+}
+
+/// `lunar-time <command>`: the provisional lunar time-scale registry and lunar GNSS assistance
+/// packages (AK6). Gated on the existing Arksa-exclusive kind `pro-lunar-time-budget-study`.
+fn lunar_time_cmd(args: &[String]) -> ExitCode {
+    let args = &args[1..];
+    if wants_help(args) {
+        println!("{}", crate::lunar_time_assist::cli::USAGE);
+        return ExitCode::SUCCESS;
+    }
+    if let Err(code) = require_feature(args, crate::lunar_time_assist::FEATURE) {
+        return code;
+    }
+    finish(crate::lunar_time_assist::cli::run(args))
 }
 
 /// The `rx-exposure` command (roadmap 0.42 F4). Registered only when the signed tier

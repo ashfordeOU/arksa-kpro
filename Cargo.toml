@@ -24,7 +24,7 @@ path = "src/main.rs"
 # Kshana Pro (private repository ashfordeOU/kshana-pro), pinned to an exact commit. The
 # dependency runs one way only: kshana-pro never names this crate (its CI fails if it does).
 # Local development against a sibling checkout: see README, "Building".
-kshana-pro = { git = "https://github.com/ashfordeOU/kshana-pro", rev = "4142fc4ef4b6c361884c58de9b0192b09c1e4171" }
+kshana-pro = { git = "https://github.com/ashfordeOU/kshana-pro", rev = "c711ebee23d927b9a6a1baa3472f77ad58fe94e4" }
 # The open engine, the exact version Kshana Pro is built on (one resolved copy).
 kshana = "=0.41.0"
 
@@ -33,6 +33,8 @@ serde_json = "1"
 toml = "0.8"
 sha2 = "0.10"
 hex = "0.4"
+# Signing and verifying lunar assistance packages (the same version Kshana Pro uses).
+ed25519-dalek = { version = "2", default-features = false, features = ["std", "zeroize"] }
 rand = "0.8"
 rand_chacha = "0.3"
 printpdf = { version = "0.9.1", default-features = false }
