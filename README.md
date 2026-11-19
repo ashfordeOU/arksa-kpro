@@ -43,6 +43,7 @@ What moved here from kshana-pro (14 November 2026):
 | `src/packs/spaceborne_rx_exposure_pack.rs`, `src/packs/space_tip_cue_study_pack.rs` (added 15 November 2026) | roadmap 0.42 F4 `pro-spaceborne-rx-exposure` (and the command `rx-exposure`, signed study report; `docs/SPACEBORNE-RX-EXPOSURE.md`) and M9 `pro-space-tip-cue-study` (pre-registered; `docs/evidence/m9-space-tip-cue/`) |
 | `src/decision/`, `src/disposal/`, `src/mission/space_safety.rs` (added 19 November 2026) | collision-avoidance decision records (signed, chainable), the threshold-policy comparator, and disposal-compliance screening against quoted FCC, ESA and EU (proposal) rule texts; commands `mission decision`, `decision-chain`, `thresholds`, `disposal` and the dossier's optional `[space_safety]` section, under the existing `pro-mission-dossier` feature (`docs/DECISION-AND-DISPOSAL-EVIDENCE.md`) |
 | `src/conjunction/`, `src/packs/conjunction_validation_pack.rs` (added 20 November 2026) | `pro-conjunction-validation` and the command `conjunction`: CDM/OEM/OMM ingest, consistency checks, a scorecard against a reference set (such as the public TraCSS verification answer key), covariance realism, cross-provider comparison with explained divergence, signed (`docs/CONJUNCTION-VALIDATION.md`); pending the tier manifest like F4/M9 |
+| `src/lunar_time_assist/` (added 20 November 2026) | AK6: a versioned, PROVISIONAL lunar time-scale registry (TCL, TL on several `W0_L` candidates, LTC as an envelope; no default definition), conversions with GUM uncertainty through Kshana Pro's lunar time model, the change impact between registry versions, and the `ks-lunar-gnss-assist/1` package (long-validity ephemeris/clock with an integrity bound: pack, sign, check, score) plus the client for the hosted generator; command `lunar-time` under the existing `pro-lunar-time-budget-study` kind, and the study's optional `[time_scale]` section (`docs/LUNAR-TIME-ASSIST.md`) |
 | `tests/fixtures/mbse/`, `scenarios/`, `papers/`, `docs/` | fixtures, worked scenarios, the committed study CSVs the pack tests compare against, and the docs (MBSE, mission dossier, design optimiser, spectrum coexistence, the D1.4 MRD mapping, the SpaceStream ICD) |
 
 Module paths inside the crate are the ones the code had in Kshana Pro: `src/lib.rs` re-exports the
@@ -66,7 +67,7 @@ The binary registers and then runs Kshana Pro's command line:
 ```bash
 arksa-kpro serve --addr 127.0.0.1:8088 --license <arksa token> [--data-dir <dir>] ...  # the Pro service plus the Arksa kinds
 arksa-kpro run <scenario.toml> --license <arksa token>                                # open, Pro and Arksa kinds
-arksa-kpro mbse|design|coexist|mission|navdt|spacestream|mrd ...                      # the Arksa commands
+arksa-kpro mbse|design|coexist|mission|navdt|spacestream|mrd|lunar-time ...           # the Arksa commands
 ```
 
 Issuer key: `KSHANA_PRO_ARKSA_ISSUER_PUBKEY` at build time (64 hex characters, or several separated by
