@@ -50,9 +50,19 @@ pub fn all() -> Vec<ExtensionCommand> {
             run: mission_cmd,
         },
         ExtensionCommand {
+            name: "ops",
+            usage: "arksa-kpro ops <report|ad-score|tracking-gap|verify> ... [--license <token>] [--dev]   Signed ops test reports from run logs, anomaly-detector scorecards, tracking-gap impact (`arksa-kpro ops` for details)",
+            run: ops_cmd,
+        },
+        ExtensionCommand {
             name: "lunar-time",
             usage: "arksa-kpro lunar-time <registry|convert|spread|impact|assist> ... [--license <token>] [--dev]   Provisional lunar time-scale registry (TCL/TL/LTC, no default), conversions with uncertainty, convention-change impact, lunar GNSS assistance packages (`arksa-kpro lunar-time` for details)",
             run: lunar_time_cmd,
+        },
+        ExtensionCommand {
+            name: "simcal",
+            usage: "arksa-kpro simcal <plugins|residuals|recalibrate|verify> ... [--license <token>] [--dev]   Mission performance simulator against telemetry, recalibrated by the hosted self-calibration verdict, with signed lineage (`arksa-kpro simcal` for details)",
+            run: simcal_cmd,
         },
         crate::landing::cli::command(),
     ]
@@ -212,6 +222,26 @@ fn mission_cmd(args: &[String]) -> ExitCode {
     finish(crate::mission::cli::run(args, &ent, now))
 }
 
+/// `ops <report|ad-score|tracking-gap|verify>`: operations assurance, under the mission
+/// dossier's feature (`pro-mission-dossier`, Arksa tier).
+fn ops_cmd(args: &[String]) -> ExitCode {
+    let args = &args[1..];
+    if wants_help(args) {
+        println!("{}", crate::ops::cli::USAGE);
+        return ExitCode::SUCCESS;
+    }
+    let now = now_unix();
+    let ent = match resolve_entitlement(args, now) {
+        Ok(e) => e,
+        Err(code) => return code,
+    };
+    if let Err(e) = crate::mission::ensure_entitled(&ent, now) {
+        eprintln!("error: {e}");
+        return ExitCode::FAILURE;
+    }
+    finish(crate::ops::cli::run(args, now))
+}
+
 /// `lunar-time <command>`: the provisional lunar time-scale registry and lunar GNSS assistance
 /// packages (AK6). Gated on the existing Arksa-exclusive kind `pro-lunar-time-budget-study`.
 fn lunar_time_cmd(args: &[String]) -> ExitCode {
@@ -224,6 +254,26 @@ fn lunar_time_cmd(args: &[String]) -> ExitCode {
         return code;
     }
     finish(crate::lunar_time_assist::cli::run(args))
+}
+
+/// `simcal <command>`: simulator plugins against telemetry, hosted recalibration and the
+/// signed calibration lineage (the mission feature, Arksa entitlement).
+fn simcal_cmd(args: &[String]) -> ExitCode {
+    let args = &args[1..];
+    if wants_help(args) {
+        println!("{}", crate::simcal::cli::USAGE);
+        return ExitCode::SUCCESS;
+    }
+    let now = now_unix();
+    let ent = match resolve_entitlement(args, now) {
+        Ok(e) => e,
+        Err(code) => return code,
+    };
+    if let Err(e) = crate::simcal::ensure_entitled(&ent, now) {
+        eprintln!("error: {e}");
+        return ExitCode::FAILURE;
+    }
+    finish(crate::simcal::cli::run(args, &ent, now))
 }
 
 /// The `rx-exposure` command (roadmap 0.42 F4). Registered only when the signed tier

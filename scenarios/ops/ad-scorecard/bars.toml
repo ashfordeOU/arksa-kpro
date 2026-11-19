@@ -1,0 +1,24 @@
+# Pre-registered bars (synthetic example). Publish this file's SHA-256 before scoring.
+registered_utc = "2025-12-20T00:00:00Z"
+registered_by = "Illustrative operator"
+statement = "Bars fixed before the detector's outputs were produced."
+
+[[bar]]
+metric = "event_recall"
+min = 0.6
+why = "find most anomalies"
+
+[[bar]]
+metric = "event_precision_corrected"
+min = 0.6
+why = "alarms should mostly be real"
+
+[[bar]]
+metric = "false_alarms_per_day"
+max = 0.5
+why = "operator false-alarm budget"
+
+[[bar]]
+metric = "f1"
+min = 0.5
+why = "segment benchmarks only"

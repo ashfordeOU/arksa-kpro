@@ -1,0 +1,89 @@
+# Toy mission TOY-1: three simulator plugins against one telemetry file (synthetic data).
+format = "ks-simcal-mission/1"
+mission = "TOY-1"
+title = "Toy LEO mission, end-to-end performance simulator"
+telemetry = "telemetry.csv"
+
+# Power subsystem: the output of an external simulator, as a CSV.
+[[plugin]]
+id = "eps"
+kind = "table"
+description = "Electrical power subsystem (external simulator output)"
+predictions = "eps-sim.csv"
+
+[[plugin.observable]]
+name = "bus_power_w"
+unit = "W"
+tolerance = 4.0
+
+[[plugin.observable]]
+name = "battery_temp_c"
+unit = "degC"
+tolerance = 1.0
+
+# On-board clock in GNSS holdover: an open-engine scenario, run on the embedded engine.
+[[plugin]]
+id = "clock"
+kind = "engine"
+description = "On-board clock holdover (open engine)"
+scenario = "clock-holdover.toml"
+
+[[plugin.observable]]
+name = "time_error_ns"
+unit = "ns"
+tolerance = 5.0
+series = "classical.series"
+x = "t"
+y = "error_ns"
+
+# Ground-segment timing reference: the model runs in the hosted service, which recalibrates it.
+[[plugin]]
+id = "timing"
+kind = "hosted"
+description = "Ground-segment timing reference (hosted model)"
+method = "selfcal"
+scenario = "timing-scenario.toml"
+
+[plugin.calibration]
+subject_id = "toy-1-timing"
+operator = "Arksa"
+date = "2026-11-19"
+max_iter = 5
+
+[[plugin.calibration.sections]]
+name = "all"
+vertices = [[53.0, 0.0], [57.0, 0.0], [57.0, 7.0], [53.0, 7.0]]
+prior_sigma_s_m = 0.002
+prior_log10_std = 0.3
+
+[[plugin.site]]
+id = "s1"
+position = { lat_deg = 55.0, lon_deg = 3.0 }
+
+[[plugin.site]]
+id = "s2"
+position = { lat_deg = 54.5, lon_deg = 2.0 }
+
+[[plugin.observable]]
+name = "toa_s1_m"
+unit = "ns"
+tolerance = 20.0
+key = { site = "s1", chain = "c", station = "M", kind = "ground_toa" }
+
+[[plugin.observable]]
+name = "toa_s1_x"
+unit = "ns"
+tolerance = 20.0
+key = { site = "s1", chain = "c", station = "X", kind = "ground_toa" }
+
+[[plugin.observable]]
+name = "toa_s2_m"
+unit = "ns"
+tolerance = 20.0
+key = { site = "s2", chain = "c", station = "M", kind = "ground_toa" }
+
+[[plugin.observable]]
+name = "toa_s2_x"
+unit = "ns"
+tolerance = 20.0
+key = { site = "s2", chain = "c", station = "X", kind = "ground_toa" }
