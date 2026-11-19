@@ -1,0 +1,29 @@
+# Ground-segment timing reference of the toy mission TOY-1: the simulator scenario the hosted
+# model runs (Kshana Pro scenario format). Synthetic; passed to the hosted service verbatim.
+[scene]
+start_utc = "2026-11-19T00:00:00Z"
+duration_s = 0.05
+fs_hz = 1000000
+
+[receiver]
+type = "static"
+lat_deg = 55.0
+lon_deg = 3.0
+
+[[outputs]]
+type = "e_field"
+
+[[chains]]
+name = "c"
+gri_us = 99300
+
+[[chains.stations]]
+id = "M"
+role = "master"
+position = { lat_deg = 56.0, lon_deg = 1.0 }
+
+[[chains.stations]]
+id = "X"
+role = "secondary"
+position = { lat_deg = 54.0, lon_deg = 5.0 }
+emission_delay_us = 13000.0
