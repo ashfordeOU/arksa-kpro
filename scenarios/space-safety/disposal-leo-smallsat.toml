@@ -1,0 +1,46 @@
+# Synthetic, illustrative input: no real spacecraft. A 150 kg smallsat left at 520 km to
+# decay naturally, with propulsion, batteries and a pressure vessel.
+title = "Illustrative smallsat end-of-life plan"
+frameworks = ["FCC", "ESA", "EU"]
+
+[spacecraft]
+name = "DEMO-SAT-1"
+mass_kg = 150.0
+drag_area_m2 = 1.1
+drag_coefficient = 2.2
+manoeuvrable = true
+large_constellation = false
+has_propulsion = true
+has_batteries = true
+has_pressure_vessels = true
+
+[disposal]
+strategy = "natural_decay"
+perigee_km = 515.0
+apogee_km = 525.0
+end_of_mission_utc = "2031-06-30T00:00:00Z"
+passivation_complete_days_after_eom = 30.0
+probability_successful_disposal = 0.93
+cumulative_collision_probability = 4.0e-4
+
+[passivation]
+probability_successful = 0.92
+
+[[passivation.source]]
+kind = "propellant"
+measure = "vent remaining propellant to depletion"
+planned = true
+
+[[passivation.source]]
+kind = "battery"
+measure = "disconnect charge regulators and discharge"
+planned = true
+
+[[passivation.source]]
+kind = "pressure_vessel"
+measure = "relieve pressurant through the latch valve"
+planned = true
+
+[casualty]
+expected_casualties = 2.0e-5
+tool = "operator demise analysis (illustrative figure)"

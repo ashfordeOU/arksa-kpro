@@ -258,6 +258,10 @@ pub struct DossierBody {
     pub matrix: Vec<MatrixRow>,
     pub sheets: Vec<RunSheet>,
     pub trade: Option<TradeSection>,
+    /// Collision-avoidance decisions, threshold comparison and disposal compliance
+    /// (`[space_safety]` in the programme); absent from the JSON when the programme has none.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub space_safety: Option<super::space_safety::SpaceSafetySection>,
     pub open_items: Vec<OpenItem>,
     pub reproducibility: Vec<ReproRecord>,
     /// What holds for every run of the record: platform, build and how to re-check.
@@ -564,6 +568,7 @@ pub fn compose(
     runs: &[RunArtefacts],
     trace: &Trace,
     pack: &Pack,
+    space_safety: Option<super::space_safety::SpaceSafetySection>,
     issued_utc: Option<String>,
 ) -> Result<Dossier, KshanaError> {
     let v = &pack.body.vcrm;
@@ -647,6 +652,14 @@ pub fn compose(
             sha256: s.sha256.clone(),
         });
     }
+    if let Some(ss) = &programme.space_safety {
+        for (_, f) in ss.files() {
+            inputs.push(SourceFile {
+                path: f.path_display.clone(),
+                sha256: f.sha256.clone(),
+            });
+        }
+    }
     let mut files = vec![
         trace.trace_file.clone(),
         programme.requirements_file.clone(),
@@ -657,6 +670,20 @@ pub fn compose(
         files.push(r.chart.clone());
         files.extend(r.report_json.clone());
         files.extend(r.report_html.clone());
+    }
+    if let Some(ss) = &space_safety {
+        for d in &ss.disposal {
+            files.push(d.input.clone());
+            files.push(d.result.clone());
+        }
+        for d in &ss.decisions {
+            files.push(d.input.clone());
+            files.push(d.result.clone());
+        }
+        if let Some(t) = &ss.thresholds {
+            files.push(t.input.clone());
+            files.push(t.result.clone());
+        }
     }
 
     let sign_off = if programme.sign_off.is_empty() {
@@ -694,6 +721,7 @@ pub fn compose(
         matrix,
         sheets,
         trade,
+        space_safety,
         open_items: v.open_items.clone(),
         reproducibility: runs.iter().map(|r| repro_of(r, pack)).collect(),
         reproducibility_note: reproducibility_note(),

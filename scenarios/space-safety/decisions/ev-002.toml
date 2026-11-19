@@ -1,0 +1,48 @@
+# Synthetic, illustrative decision: no real event, operator or provider.
+# prev_record_sha256 is the record_sha256 of ev-001 (see the test that keeps it current).
+prev_record_sha256 = "5990107eb7c241ec8c8579365db1983be7b48a0c24c2267ae788862aa5606063"
+
+[event]
+event_id = "EV-002"
+primary = "DEMO-SAT-1"
+secondary = "SAT-OF-OTHER-OPERATOR (illustrative)"
+tca_utc = "2026-05-19T11:02:00Z"
+pc = 4.4e-5
+miss_distance_m = 610.0
+data_sources = ["CA provider A (illustrative)", "Other operator's ephemeris (illustrative)"]
+cdm_ids = ["CDM-ILLUSTRATIVE-0002"]
+
+[policy]
+name = "Operations manual rev. C (illustrative)"
+manoeuvre_pc = 1.0e-4
+monitor_pc = 1.0e-5
+source = "operator operations manual"
+
+[[option]]
+id = "W1"
+kind = "monitor"
+description = "Monitor; re-decide on each update"
+
+[[option]]
+id = "C1"
+kind = "coordinate"
+description = "Agree with the other operator which side manoeuvres if Pc rises"
+
+[[option]]
+id = "M1"
+kind = "manoeuvre"
+description = "Radial burn 1 orbit before TCA"
+delta_v_mps = 0.05
+post_pc = 1.0e-7
+
+[decision]
+chosen_option = "C1"
+rationale = "Pc is in the monitoring band; the other operator's ephemeris reduces the uncertainty, and both sides agreed that the other spacecraft manoeuvres if Pc exceeds 1e-4."
+decided_by = "Flight dynamics lead (illustrative)"
+role = "Flight dynamics"
+decided_utc = "2026-05-17T09:00:00Z"
+
+[coordination]
+other_operator_contacted = true
+ca_provider_informed = true
+notes = "Agreement recorded in the coordination log (illustrative)."

@@ -32,6 +32,7 @@ pub mod pdf;
 pub mod pdf_chart;
 pub mod programme;
 pub mod runner;
+pub mod space_safety;
 
 use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
@@ -207,7 +208,29 @@ pub fn build(
     write(&out_dir.join("evidence-pack.html"), pack_html.as_bytes())?;
     write(&out_dir.join("evidence-pack.json"), pack_json.as_bytes())?;
 
-    let dossier = compose::compose(&programme, &runs, &trace, &pack, opts.issued_utc.clone())?;
+    // The space-safety section, when the programme has one: its inputs and result
+    // documents go under space-safety/ and are listed (and hashed) with the other files.
+    let space_safety = match &programme.space_safety {
+        Some(inputs) => {
+            let a = space_safety::assess(inputs)?;
+            let dir = out_dir.join(space_safety::DIR);
+            std::fs::create_dir_all(&dir)
+                .map_err(|e| err(format!("could not create {}: {e}", dir.display())))?;
+            for (path, bytes) in &a.files {
+                write(&out_dir.join(path), bytes)?;
+            }
+            Some(a.section)
+        }
+        None => None,
+    };
+    let dossier = compose::compose(
+        &programme,
+        &runs,
+        &trace,
+        &pack,
+        space_safety,
+        opts.issued_utc.clone(),
+    )?;
     let json = dossier.to_json() + "\n";
     let charts: BTreeMap<String, String> = runs
         .iter()

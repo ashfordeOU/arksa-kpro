@@ -1,0 +1,46 @@
+# Synthetic, illustrative decision: no real event, operator or provider.
+[event]
+event_id = "EV-001"
+primary = "DEMO-SAT-1"
+secondary = "DEBRIS-OBJECT-A"
+tca_utc = "2026-05-02T03:14:00Z"
+pc = 3.1e-4
+miss_distance_m = 142.0
+radial_miss_m = 38.0
+pc_method = "2D Pc, provider's method"
+data_sources = ["CA provider A (illustrative)"]
+cdm_ids = ["CDM-ILLUSTRATIVE-0001"]
+assessed_utc = "2026-04-30T18:00:00Z"
+
+[policy]
+name = "Operations manual rev. C (illustrative)"
+manoeuvre_pc = 1.0e-4
+monitor_pc = 1.0e-5
+source = "operator operations manual"
+
+[[option]]
+id = "M1"
+kind = "manoeuvre"
+description = "Along-track burn 1.5 orbits before TCA"
+delta_v_mps = 0.08
+post_pc = 2.0e-7
+post_miss_m = 1850.0
+secondary_effects = "No new conjunction above 1e-6 in the 7-day screening after the burn"
+
+[[option]]
+id = "W1"
+kind = "monitor"
+description = "Wait for the next update and decide 12 h before TCA"
+
+[decision]
+chosen_option = "M1"
+rationale = "Pc is three times the manoeuvre threshold and the covariance has been stable over three updates; waiting would leave less than one orbit of margin."
+decided_by = "Flight dynamics lead (illustrative)"
+role = "Flight dynamics"
+decided_utc = "2026-04-30T20:30:00Z"
+executed_utc = "2026-05-01T04:10:00Z"
+
+[coordination]
+other_operator_contacted = false
+ca_provider_informed = true
+notes = "Secondary is debris: no operator to contact."

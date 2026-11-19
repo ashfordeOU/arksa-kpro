@@ -1,0 +1,22 @@
+# Synthetic, illustrative input: no real spacecraft. A 400 kg spacecraft left at 750 km,
+# which the screening model shows cannot meet a five-year lifetime without lowering.
+title = "Illustrative high-LEO end-of-life plan without lowering"
+
+[spacecraft]
+name = "DEMO-SAT-2"
+mass_kg = 400.0
+drag_area_m2 = 2.0
+manoeuvrable = true
+has_propulsion = true
+has_batteries = true
+
+[disposal]
+strategy = "natural_decay"
+perigee_km = 745.0
+apogee_km = 755.0
+probability_successful_disposal = 0.88
+
+[[passivation.source]]
+kind = "battery"
+measure = "discharge"
+planned = true
