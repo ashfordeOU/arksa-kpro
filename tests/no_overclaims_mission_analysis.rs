@@ -205,3 +205,63 @@ fn no_row_credits_a_pass_through_as_a_computation() {
         }
     }
 }
+
+/// INVARIANT: the spaceborne exposure forecast (AK4) and the receiver test scenarios it
+/// exports stay MODELLED. The forecast, the link budget and every exported scenario carry the
+/// MODELLED label, and no exported scenario calls anything validated, measured, certified or
+/// compliant: they are tests to run, not results of a run.
+#[test]
+fn spaceborne_exposure_forecast_and_exported_scenarios_stay_modelled() {
+    use arksa_kpro::packs::spaceborne_rx_exposure_pack::{
+        run_study_with_scenarios, SpaceborneRxExposureScenario,
+    };
+    let src = r#"
+tle = """
+ISS (ZARYA)
+1 25544U 98067A   26319.20611933  .00010382  00000+0  19362-3 0  9993
+2 25544  51.6322 272.7605 0007377  27.6155 332.5225 15.49388394595162
+"""
+start_utc = "2026-11-15T00:00Z"
+duration_h = 12.0
+step_s = 30.0
+assumed_eirp_dbw = [60.0]
+[forecast]
+[export]
+include = "all"
+max_scenarios = 3
+[[area]]
+label = "a"
+lat_deg = 45.0
+lon_deg = -30.0
+radius_km = 200.0
+activity = 0.5
+"#;
+    let s: SpaceborneRxExposureScenario = toml::from_str(src).unwrap();
+    let ent = kshana_pro::license::Entitlement {
+        licensee: "t".into(),
+        tier: kshana_pro::license::Tier::Enterprise,
+        expires_unix: 0,
+        features: vec![],
+        arksa: true,
+    };
+    let (doc, scenarios) = run_study_with_scenarios(&s, &ent, 1).unwrap();
+    assert_eq!(doc["evidence_class"], "MODELLED");
+    for key in [&doc["forecast"]["label"], &doc["test_scenarios"]["label"]] {
+        assert!(key.as_str().unwrap().starts_with("MODELLED"), "{key}");
+    }
+    assert!(!scenarios.is_empty());
+    for x in &scenarios {
+        let spec = kshana_pro::testkit::spec::Spec::parse(&x.toml).unwrap();
+        assert_eq!(spec.evidence, "MODELLED", "{}", x.id);
+        let low = x.toml.to_ascii_lowercase();
+        for w in [
+            "validated",
+            "measured",
+            "certified",
+            "compliant",
+            "conformant",
+        ] {
+            assert!(!low.contains(w), "{} says '{w}'", x.id);
+        }
+    }
+}

@@ -24,7 +24,7 @@ path = "src/main.rs"
 # Kshana Pro (private repository ashfordeOU/kshana-pro), pinned to an exact commit. The
 # dependency runs one way only: kshana-pro never names this crate (its CI fails if it does).
 # Local development against a sibling checkout: see README, "Building".
-kshana-pro = { git = "https://github.com/ashfordeOU/kshana-pro", rev = "c711ebee23d927b9a6a1baa3472f77ad58fe94e4" }
+kshana-pro = { git = "https://github.com/ashfordeOU/kshana-pro", rev = "91ab09a77361136a823d2e796898878ccccaa912" }
 # The open engine, the exact version Kshana Pro is built on (one resolved copy).
 kshana = "=0.41.0"
 
