@@ -65,6 +65,7 @@ pub fn all() -> Vec<ExtensionCommand> {
             run: simcal_cmd,
         },
         crate::landing::cli::command(),
+        crate::rideshare::cli::command(),
     ]
 }
 

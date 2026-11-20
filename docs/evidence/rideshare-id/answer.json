@@ -1,0 +1,61 @@
+{
+  "catalogue_numbers": [
+    101388,
+    101389,
+    101390,
+    101391,
+    101392,
+    101393,
+    101394,
+    101395,
+    101396,
+    101397,
+    101398,
+    101399
+  ],
+  "omm_only": [],
+  "spec": {
+    "along_track_km": null,
+    "arg_perigee_deg": 90.0,
+    "bstar": 0.0001,
+    "carrier_hz": 437500000.0,
+    "catalogue_numbers": null,
+    "drift_km_per_rev": 0.5,
+    "duration_h": 14.0,
+    "eccentricity": 0.0012,
+    "epoch_utc": "2026-11-15T06:00:00Z",
+    "first_catalogue_number": 101388,
+    "inclination_deg": 97.45,
+    "launch": "2026-900",
+    "max_passes": 3,
+    "mean_anomaly_deg": 10.0,
+    "mean_motion_rev_day": 15.2,
+    "min_elevation_deg": 10.0,
+    "objects": 12,
+    "oscillator_offset_hz": 1250.0,
+    "raan_deg": 40.0,
+    "seed": 1,
+    "sigma_angle_deg": 0.1,
+    "sigma_doppler_hz": 20.0,
+    "sigma_range_m": 50.0,
+    "sigma_range_rate_m_s": 1.0,
+    "spacing_km": 8.0,
+    "start_h": 1.0,
+    "stations": [
+      {
+        "alt_m": 40.0,
+        "lat_deg": 59.4,
+        "lon_deg": 24.7,
+        "name": "GS-NORTH"
+      }
+    ],
+    "step_s": 10.0,
+    "target": 5,
+    "truth_offset_km": 0.3,
+    "types": [
+      "doppler_hz"
+    ]
+  },
+  "synthetic": true,
+  "target_catalogue_number": 101393
+}
