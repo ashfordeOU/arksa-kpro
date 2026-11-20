@@ -18,9 +18,9 @@ calibration.
 ```
 arksa-kpro simcal plugins
 arksa-kpro simcal residuals <mission.toml> [--out <dir>]
-arksa-kpro simcal recalibrate <mission.toml> --lineage <dir> --service <https://...> \
-    --trusted-key <service public key> [--verdict-license <token>] \
-    [--sign-key-file <file>] [--signer <name>] [--utc <iso>]
+arksa-kpro simcal recalibrate <mission.toml> --lineage <dir> [--service <https://...>] \
+    [--trusted-key <service public key>] [--verdict-license <token>] [--tenant <tag>] \
+    [--verdict-ca <file>] [--sign-key-file <file>] [--signer <name>] [--utc <iso>]
 arksa-kpro simcal verify <lineage-dir> [--trusted-key <hex>] [--trust <signer public key>]
 ```
 
@@ -73,6 +73,12 @@ token on stdin to curl). The answer is accepted only if all of these hold:
 1. it is a signed verdict for `selfcal`;
 2. its Ed25519 signature verifies against a trusted service key;
 3. its outcome has `converged`, `posterior` (`{name, value, std_err}`) and `lineage.head`.
+
+Where the service runs (Arksa's internal instance in the cloud, a contracted instance beside a
+Sovereign install), the service credential, the trusted key and the tenant/mission tag sent on
+every call are configured as described in `docs/VERDICT-SERVICE.md` (environment
+`ARKSA_VERDICT_URL`, `ARKSA_VERDICT_CREDENTIAL_FILE`, `ARKSA_VERDICT_KEY`, `ARKSA_TENANT`; the
+mission file's optional `tenant`, else its `mission` id).
 
 The calibration method is not in this crate. Nothing here links the service or the gated method
 code; this crate holds only the request contract and the checks on the answer.

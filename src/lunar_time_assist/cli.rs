@@ -17,7 +17,7 @@ arksa-kpro lunar-time impact --new <file> [--old <file>] --at <t1>[,<t2>...] [--
 arksa-kpro lunar-time assist pack --sp3 <predicted.sp3> --options <pack.toml> --out <package.json> [--registry <file>] [--sign-key-file <file>] [--signer <name>]
 arksa-kpro lunar-time assist check <package.json> [--requirements <req.toml>] [--trusted-key <hex>[,<hex>...]]
 arksa-kpro lunar-time assist score <package.json> --reference <reference.sp3> --out <dir> [--options <score.toml>] [--sign-key-file <file>] [--signer <name>]
-arksa-kpro lunar-time assist request --service <https://...> --request <request.json> --trusted-key <hex>[,<hex>...] --out <package.json> --license <token>
+arksa-kpro lunar-time assist request [--service <https://...>] --request <request.json> [--trusted-key <hex>[,<hex>...]] --out <package.json> [--verdict-license <token>] [--tenant <tag>] [--verdict-ca <file>]
 
 Lunar time definitions are undecided internationally: CGPM 2026 Resolution 6 left TCL versus a
 scaled TL open, and no conventional W0_L exists. The registry (built in: version 1) is
@@ -32,6 +32,12 @@ GNSS ephemeris and clocks with a per-satellite integrity bound. `pack` packs a p
 satellites, GPS + Galileo, signed); `score` scores it against a reference product and signs the
 result directory (Kshana Pro dossier signature) when a key is given; `request` asks the hosted
 generator (the prediction method is not in this build).
+
+`request` calls Arksa's internal verdict service (or the contracted instance of a Sovereign install):
+--service or ARKSA_VERDICT_URL; its key --trusted-key, ARKSA_VERDICT_KEY or the key built into the
+release; the service credential --verdict-license, ARKSA_VERDICT_CREDENTIAL_FILE, ARKSA_VERDICT_CREDENTIAL
+(or the older --license); the tenant/mission tag --tenant or ARKSA_TENANT (required); an internal CA
+certificate --verdict-ca or ARKSA_VERDICT_CA.
 
 A signing key is a file holding 64 hex characters (or ARKSA_STUDY_SIGNING_KEY).
 Evidence class: MODELLED.";
@@ -275,17 +281,20 @@ fn assist_cmd(args: &[String]) -> Result<u8, String> {
             Ok(0)
         }
         Some("request") => {
-            let url = flag(args, "--service").ok_or("--service <https://...> is required")?;
             let reqp = flag(args, "--request").ok_or("--request <request.json> is required")?;
-            let keys = flag(args, "--trusted-key")
-                .or_else(|| kshana_pro::remote_verdict::builtin_trusted_keys().map(str::to_string))
-                .ok_or("--trusted-key <hex> is required (the service's public key)")?;
             let out = flag(args, "--out").ok_or("--out <package.json> is required")?;
-            let bearer = flag(args, "--license").unwrap_or_default();
+            let svc = crate::verdict_service::resolve(
+                args,
+                &|k| std::env::var(k).ok(),
+                &crate::verdict_service::Defaults {
+                    legacy_credential_flag: Some("--license"),
+                    ..Default::default()
+                },
+            )?;
             let req: AssistRequest =
                 serde_json::from_str(&read(&reqp)?).map_err(|e| format!("{reqp}: {e}"))?;
-            let t = kshana_pro::remote_verdict::CurlVerdictTransport { base_url: url };
-            let (v, pkg) = service::request_package(&t, &bearer, &req, &keys)?;
+            let t = svc.transport();
+            let (v, pkg) = service::request_package(&t, &svc.credential, &req, &svc.trusted_keys)?;
             std::fs::write(
                 &out,
                 serde_json::to_string(&pkg).map_err(|e| e.to_string())? + "\n",
