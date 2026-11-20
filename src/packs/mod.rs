@@ -17,6 +17,7 @@ pub mod lunar_time_budget_study_pack;
 pub mod mbse_pack;
 pub mod optical_rf_hybrid_study_pack;
 pub mod realtime_frame_eop_study_pack;
+pub mod rideshare_id_pack;
 pub mod space_tip_cue_study_pack;
 pub mod spaceborne_rx_exposure_pack;
 pub mod spectrum_coexistence_pack;

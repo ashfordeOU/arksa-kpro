@@ -139,6 +139,13 @@ inclination_deg = 53.0
             include_str!("fixtures/conjunction/synthetic.cdm"),
             "''']\n[[check]]\nsource = \"s\"\n"
         ),
+        "pro-rideshare-id" => concat!(
+            "kind = \"pro-rideshare-id\"\nobservations_text = '''",
+            include_str!("fixtures/rideshare/small_observations.csv"),
+            "'''\ncandidate_text = ['''",
+            include_str!("fixtures/rideshare/small.tle"),
+            "''']\n"
+        ),
         other => panic!("no source for {other}"),
     }
 }
@@ -427,6 +434,11 @@ fn pending_kinds_register_only_when_the_manifest_lists_them() {
             >(src(k))
             .unwrap()
             .run(),
+            "pro-rideshare-id" => {
+                toml::from_str::<arksa_kpro::packs::rideshare_id_pack::RideshareIdScenario>(src(k))
+                    .unwrap()
+                    .run()
+            }
             _ => toml::from_str::<
                 arksa_kpro::packs::space_tip_cue_study_pack::SpaceTipCueStudyScenario,
             >(src(k))

@@ -1,0 +1,4 @@
+kind = "pro-rideshare-id"
+title = "Synthetic deployment of 12 objects"
+observations_file = "observations.csv"
+candidate_files = ["candidates.tle", "candidates.omm"]

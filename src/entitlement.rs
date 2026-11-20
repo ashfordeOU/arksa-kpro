@@ -23,3 +23,12 @@ pub fn ensure_rx_exposure_entitled(ent: &Entitlement, now_unix: i64) -> Result<(
         now_unix,
     )
 }
+
+/// Gate rideshare object identification (`arksa-kpro rideshare-id`). It runs under the
+/// mission feature (`pro-mission-dossier`, Arksa tier) like the other operations commands, so
+/// it needs a token with the `arksa` claim and works with the signed tier manifest as it
+/// stands; the scenario kind `pro-rideshare-id` waits for the manifest
+/// ([`crate::PENDING_MANIFEST_KINDS`]).
+pub fn ensure_rideshare_id_entitled(ent: &Entitlement, now_unix: i64) -> Result<(), KshanaError> {
+    crate::rideshare::ensure_entitled(ent, now_unix)
+}

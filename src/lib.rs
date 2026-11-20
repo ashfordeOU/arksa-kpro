@@ -36,6 +36,7 @@ pub mod mission;
 pub mod mrd;
 pub mod ops;
 pub mod packs;
+pub mod rideshare;
 pub mod simcal;
 pub mod spectrum_coexistence;
 pub mod suite;
@@ -55,6 +56,7 @@ use packs::lunar_time_budget_study_pack::LunarTimeBudgetStudyScenario;
 use packs::mbse_pack::MbseScenario;
 use packs::optical_rf_hybrid_study_pack::OpticalRfHybridStudyScenario;
 use packs::realtime_frame_eop_study_pack::RealtimeFrameEopStudyScenario;
+use packs::rideshare_id_pack::RideshareIdScenario;
 use packs::space_tip_cue_study_pack::SpaceTipCueStudyScenario;
 use packs::spaceborne_rx_exposure_pack::SpaceborneRxExposureScenario;
 use packs::spectrum_coexistence_pack::SpectrumCoexistenceScenario;
@@ -96,11 +98,14 @@ pub const ARKSA_FEATURES: &[&str] = &[
 /// refused like any unknown kind).
 ///
 /// `pro-conjunction-validation` (conjunction-assessment validation, research 06 G1/G2) was
-/// added on 20 November 2026 and waits for the same manifest step.
+/// added on 20 November 2026 and waits for the same manifest step, as does
+/// `pro-rideshare-id` (rideshare object identification, research 06 G3; its command
+/// `rideshare-id` runs now under the mission feature, see [`rideshare::FEATURE`]).
 pub const PENDING_MANIFEST_KINDS: &[&str] = &[
     SpaceborneRxExposureScenario::KIND,
     SpaceTipCueStudyScenario::KIND,
     ConjunctionValidationScenario::KIND,
+    RideshareIdScenario::KIND,
 ];
 
 /// The command features of [`commands::rx_exposure_command`] (F4) and
@@ -207,6 +212,9 @@ pub fn extension() -> Result<Extension, KshanaError> {
     }
     if manifest_lists(ConjunctionValidationScenario::KIND, "kind") {
         kinds.push(kind!(ConjunctionValidationScenario, Tier::Pro));
+    }
+    if manifest_lists(RideshareIdScenario::KIND, "kind") {
+        kinds.push(kind!(RideshareIdScenario, Tier::Pro));
     }
     let feature = |id: &'static str, min_tier| ExtensionFeature { id, min_tier };
     let mut features = vec![

@@ -1,0 +1,906 @@
+{
+  "candidates": [
+    {
+      "below_horizon": 0,
+      "biases": [
+        {
+          "n": 38,
+          "pass": "GS-NORTH/p1",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1246.59408
+        },
+        {
+          "n": 42,
+          "pass": "GS-NORTH/p2",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1249.01892
+        },
+        {
+          "n": 5,
+          "pass": "GS-NORTH/p3",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1236.31823
+        }
+      ],
+      "candidate": {
+        "alpha5": true,
+        "catalogue_number": 101393,
+        "checksum_ok": true,
+        "eccentricity": 0.0012,
+        "epoch_utc": "2026-11-15T06:00:00.000Z",
+        "inclination_deg": 97.45,
+        "mean_motion_rev_day": 15.1999122,
+        "name": "RIDESHARE OBJ F",
+        "object_id": "2026-900F",
+        "origin": "candidates.tle",
+        "source": "tle",
+        "tle_field": "A1393"
+      },
+      "chi2": 70.39628,
+      "consistent": true,
+      "delta_chi2": 0.0,
+      "dof": 82,
+      "element_age_days": [
+        0.133333333,
+        0.265625
+      ],
+      "max_abs_normalised_residual": 2.51957745,
+      "n": 85,
+      "n_bias_parameters": 3,
+      "per_type": [
+        {
+          "mean": 8.07845294e-13,
+          "n": 85,
+          "rms": 18.2010058,
+          "rms_normalised": 0.910050289,
+          "type": "doppler_hz",
+          "unit": "Hz"
+        }
+      ],
+      "probability": 1.0,
+      "rank": 1,
+      "reduced_chi2": 0.858491219,
+      "status": "fitted"
+    },
+    {
+      "below_horizon": 0,
+      "biases": [
+        {
+          "n": 38,
+          "pass": "GS-NORTH/p1",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1300.16874
+        },
+        {
+          "n": 42,
+          "pass": "GS-NORTH/p2",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1306.68949
+        },
+        {
+          "n": 5,
+          "pass": "GS-NORTH/p3",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1296.09415
+        }
+      ],
+      "candidate": {
+        "alpha5": true,
+        "catalogue_number": 101394,
+        "checksum_ok": true,
+        "eccentricity": 0.0012,
+        "epoch_utc": "2026-11-15T06:00:00.000Z",
+        "inclination_deg": 97.45,
+        "mean_motion_rev_day": 15.2000878,
+        "name": "RIDESHARE OBJ G",
+        "object_id": "2026-900G",
+        "origin": "candidates.tle",
+        "source": "tle",
+        "tle_field": "A1394"
+      },
+      "chi2": 290.134851,
+      "consistent": true,
+      "delta_chi2": 219.738571,
+      "dof": 82,
+      "element_age_days": [
+        0.133333333,
+        0.265625
+      ],
+      "max_abs_normalised_residual": 4.87765845,
+      "n": 85,
+      "n_bias_parameters": 3,
+      "per_type": [
+        {
+          "mean": 5.40346852e-13,
+          "n": 85,
+          "rms": 36.9505138,
+          "rms_normalised": 1.84752569,
+          "type": "doppler_hz",
+          "unit": "Hz"
+        }
+      ],
+      "probability": 1.9247559e-48,
+      "rank": 2,
+      "reduced_chi2": 3.53822989,
+      "status": "fitted"
+    },
+    {
+      "below_horizon": 0,
+      "biases": [
+        {
+          "n": 38,
+          "pass": "GS-NORTH/p1",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1193.01023
+        },
+        {
+          "n": 42,
+          "pass": "GS-NORTH/p2",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1191.35565
+        },
+        {
+          "n": 5,
+          "pass": "GS-NORTH/p3",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1176.5582
+        }
+      ],
+      "candidate": {
+        "alpha5": true,
+        "catalogue_number": 101392,
+        "checksum_ok": true,
+        "eccentricity": 0.0012,
+        "epoch_utc": "2026-11-15T06:00:00.000Z",
+        "inclination_deg": 97.45,
+        "mean_motion_rev_day": 15.1997364,
+        "name": "RIDESHARE OBJ E",
+        "object_id": "2026-900E",
+        "origin": "candidates.tle",
+        "source": "tle",
+        "tle_field": "A1392"
+      },
+      "chi2": 374.241875,
+      "consistent": false,
+      "delta_chi2": 303.845595,
+      "dof": 82,
+      "element_age_days": [
+        0.133333333,
+        0.265625
+      ],
+      "max_abs_normalised_residual": 6.48801322,
+      "n": 85,
+      "n_bias_parameters": 3,
+      "per_type": [
+        {
+          "mean": 7.19570808e-13,
+          "n": 85,
+          "rms": 41.9659175,
+          "rms_normalised": 2.09829588,
+          "type": "doppler_hz",
+          "unit": "Hz"
+        }
+      ],
+      "probability": 1.04898059e-66,
+      "rank": 3,
+      "reduced_chi2": 4.5639253,
+      "status": "fitted"
+    },
+    {
+      "below_horizon": 0,
+      "biases": [
+        {
+          "n": 38,
+          "pass": "GS-NORTH/p1",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1353.73346
+        },
+        {
+          "n": 42,
+          "pass": "GS-NORTH/p2",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1364.36752
+        },
+        {
+          "n": 5,
+          "pass": "GS-NORTH/p3",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1355.88177
+        }
+      ],
+      "candidate": {
+        "alpha5": true,
+        "catalogue_number": 101395,
+        "checksum_ok": true,
+        "eccentricity": 0.0012,
+        "epoch_utc": "2026-11-15T06:00:00.000Z",
+        "inclination_deg": 97.45,
+        "mean_motion_rev_day": 15.2002636,
+        "name": "RIDESHARE OBJ H",
+        "object_id": "2026-900H",
+        "origin": "candidates.tle",
+        "source": "tle",
+        "tle_field": "A1395"
+      },
+      "chi2": 1033.64087,
+      "consistent": false,
+      "delta_chi2": 963.244593,
+      "dof": 82,
+      "element_age_days": [
+        0.133333333,
+        0.265625
+      ],
+      "max_abs_normalised_residual": 8.9700573,
+      "n": 85,
+      "n_bias_parameters": 3,
+      "per_type": [
+        {
+          "mean": 5.77796634e-13,
+          "n": 85,
+          "rms": 69.743762,
+          "rms_normalised": 3.4871881,
+          "type": "doppler_hz",
+          "unit": "Hz"
+        }
+      ],
+      "probability": 6.82486762e-210,
+      "rank": 4,
+      "reduced_chi2": 12.6053765,
+      "status": "fitted"
+    },
+    {
+      "below_horizon": 0,
+      "biases": [
+        {
+          "n": 38,
+          "pass": "GS-NORTH/p1",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1139.49029
+        },
+        {
+          "n": 42,
+          "pass": "GS-NORTH/p2",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1133.7738
+        },
+        {
+          "n": 5,
+          "pass": "GS-NORTH/p3",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1116.89196
+        }
+      ],
+      "candidate": {
+        "alpha5": true,
+        "catalogue_number": 101391,
+        "checksum_ok": true,
+        "eccentricity": 0.0012,
+        "epoch_utc": "2026-11-15T06:00:00.000Z",
+        "inclination_deg": 97.45,
+        "mean_motion_rev_day": 15.1995607,
+        "name": "RIDESHARE OBJ D",
+        "object_id": "2026-900D",
+        "origin": "candidates.tle",
+        "source": "tle",
+        "tle_field": "A1391"
+      },
+      "chi2": 1199.95816,
+      "consistent": false,
+      "delta_chi2": 1129.56188,
+      "dof": 82,
+      "element_age_days": [
+        0.133333333,
+        0.265625
+      ],
+      "max_abs_normalised_residual": 10.5569505,
+      "n": 85,
+      "n_bias_parameters": 3,
+      "per_type": [
+        {
+          "mean": 3.25010607e-13,
+          "n": 85,
+          "rms": 75.145605,
+          "rms_normalised": 3.75728025,
+          "type": "doppler_hz",
+          "unit": "Hz"
+        }
+      ],
+      "probability": 5.23303119e-246,
+      "rank": 5,
+      "reduced_chi2": 14.6336362,
+      "status": "fitted"
+    },
+    {
+      "below_horizon": 0,
+      "biases": [
+        {
+          "n": 38,
+          "pass": "GS-NORTH/p1",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1407.28644
+        },
+        {
+          "n": 42,
+          "pass": "GS-NORTH/p2",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1422.05162
+        },
+        {
+          "n": 5,
+          "pass": "GS-NORTH/p3",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1415.67483
+        }
+      ],
+      "candidate": {
+        "alpha5": true,
+        "catalogue_number": 101396,
+        "checksum_ok": true,
+        "eccentricity": 0.0012,
+        "epoch_utc": "2026-11-15T06:00:00.000Z",
+        "inclination_deg": 97.45,
+        "mean_motion_rev_day": 15.2004393,
+        "name": "RIDESHARE OBJ J",
+        "object_id": "2026-900J",
+        "origin": "candidates.tle",
+        "source": "tle",
+        "tle_field": "A1396"
+      },
+      "chi2": 2300.94415,
+      "consistent": false,
+      "delta_chi2": 2230.54787,
+      "dof": 82,
+      "element_age_days": [
+        0.133333333,
+        0.265625
+      ],
+      "max_abs_normalised_residual": 13.1390326,
+      "n": 85,
+      "n_bias_parameters": 3,
+      "per_type": [
+        {
+          "mean": 8.21220216e-13,
+          "n": 85,
+          "rms": 104.057544,
+          "rms_normalised": 5.2028772,
+          "type": "doppler_hz",
+          "unit": "Hz"
+        }
+      ],
+      "probability": 0.0,
+      "rank": 6,
+      "reduced_chi2": 28.0602945,
+      "status": "fitted"
+    },
+    {
+      "below_horizon": 0,
+      "biases": [
+        {
+          "n": 38,
+          "pass": "GS-NORTH/p1",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1085.89312
+        },
+        {
+          "n": 42,
+          "pass": "GS-NORTH/p2",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1076.12881
+        },
+        {
+          "n": 5,
+          "pass": "GS-NORTH/p3",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1057.18171
+        }
+      ],
+      "candidate": {
+        "alpha5": true,
+        "catalogue_number": 101390,
+        "checksum_ok": true,
+        "eccentricity": 0.0012,
+        "epoch_utc": "2026-11-15T06:00:00.000Z",
+        "inclination_deg": 97.45,
+        "mean_motion_rev_day": 15.199385,
+        "name": "RIDESHARE OBJ C",
+        "object_id": "2026-900C",
+        "origin": "candidates.tle",
+        "source": "tle",
+        "tle_field": "A1390"
+      },
+      "chi2": 2549.17527,
+      "consistent": false,
+      "delta_chi2": 2478.77899,
+      "dof": 82,
+      "element_age_days": [
+        0.133333333,
+        0.265625
+      ],
+      "max_abs_normalised_residual": 14.6561806,
+      "n": 85,
+      "n_bias_parameters": 3,
+      "per_type": [
+        {
+          "mean": 4.65447289e-13,
+          "n": 85,
+          "rms": 109.526795,
+          "rms_normalised": 5.47633977,
+          "type": "doppler_hz",
+          "unit": "Hz"
+        }
+      ],
+      "probability": 0.0,
+      "rank": 7,
+      "reduced_chi2": 31.0875033,
+      "status": "fitted"
+    },
+    {
+      "below_horizon": 0,
+      "biases": [
+        {
+          "n": 38,
+          "pass": "GS-NORTH/p1",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1460.82623
+        },
+        {
+          "n": 42,
+          "pass": "GS-NORTH/p2",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1479.7409
+        },
+        {
+          "n": 5,
+          "pass": "GS-NORTH/p3",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1475.46778
+        }
+      ],
+      "candidate": {
+        "alpha5": true,
+        "catalogue_number": 101397,
+        "checksum_ok": true,
+        "eccentricity": 0.0012,
+        "epoch_utc": "2026-11-15T06:00:00.000Z",
+        "inclination_deg": 97.45,
+        "mean_motion_rev_day": 15.200615,
+        "name": "RIDESHARE OBJ K",
+        "object_id": "2026-900K",
+        "origin": "candidates.tle",
+        "source": "tle",
+        "tle_field": "A1397"
+      },
+      "chi2": 4091.92361,
+      "consistent": false,
+      "delta_chi2": 4021.52733,
+      "dof": 82,
+      "element_age_days": [
+        0.133333333,
+        0.265625
+      ],
+      "max_abs_normalised_residual": 17.3230642,
+      "n": 85,
+      "n_bias_parameters": 3,
+      "per_type": [
+        {
+          "mean": 7.11545855e-13,
+          "n": 85,
+          "rms": 138.76639,
+          "rms_normalised": 6.93831952,
+          "type": "doppler_hz",
+          "unit": "Hz"
+        }
+      ],
+      "probability": 0.0,
+      "rank": 8,
+      "reduced_chi2": 49.9015075,
+      "status": "fitted"
+    },
+    {
+      "below_horizon": 0,
+      "biases": [
+        {
+          "n": 38,
+          "pass": "GS-NORTH/p1",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1032.29144
+        },
+        {
+          "n": 42,
+          "pass": "GS-NORTH/p2",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1018.4943
+        },
+        {
+          "n": 5,
+          "pass": "GS-NORTH/p3",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 997.504652
+        }
+      ],
+      "candidate": {
+        "alpha5": true,
+        "catalogue_number": 101389,
+        "checksum_ok": true,
+        "eccentricity": 0.0012,
+        "epoch_utc": "2026-11-15T06:00:00.000Z",
+        "inclination_deg": 97.45,
+        "mean_motion_rev_day": 15.1992093,
+        "name": "RIDESHARE OBJ B",
+        "object_id": "2026-900B",
+        "origin": "candidates.tle",
+        "source": "tle",
+        "tle_field": "A1389"
+      },
+      "chi2": 4420.54566,
+      "consistent": false,
+      "delta_chi2": 4350.14938,
+      "dof": 82,
+      "element_age_days": [
+        0.133333333,
+        0.265625
+      ],
+      "max_abs_normalised_residual": 18.7771947,
+      "n": 85,
+      "n_bias_parameters": 3,
+      "per_type": [
+        {
+          "mean": 5.32321899e-13,
+          "n": 85,
+          "rms": 144.230953,
+          "rms_normalised": 7.21154765,
+          "type": "doppler_hz",
+          "unit": "Hz"
+        }
+      ],
+      "probability": 0.0,
+      "rank": 9,
+      "reduced_chi2": 53.9090934,
+      "status": "fitted"
+    },
+    {
+      "below_horizon": 0,
+      "biases": [
+        {
+          "n": 38,
+          "pass": "GS-NORTH/p1",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1514.28017
+        },
+        {
+          "n": 42,
+          "pass": "GS-NORTH/p2",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1537.36171
+        },
+        {
+          "n": 5,
+          "pass": "GS-NORTH/p3",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1535.1833
+        }
+      ],
+      "candidate": {
+        "alpha5": true,
+        "catalogue_number": 101398,
+        "checksum_ok": true,
+        "eccentricity": 0.0012,
+        "epoch_utc": "2026-11-15T06:00:00.000Z",
+        "inclination_deg": 97.45,
+        "mean_motion_rev_day": 15.2007907,
+        "name": "RIDESHARE OBJ L",
+        "object_id": "2026-900L",
+        "origin": "candidates.tle",
+        "source": "tle",
+        "tle_field": "A1398"
+      },
+      "chi2": 6403.01844,
+      "consistent": false,
+      "delta_chi2": 6332.62216,
+      "dof": 82,
+      "element_age_days": [
+        0.133333333,
+        0.265625
+      ],
+      "max_abs_normalised_residual": 21.5133011,
+      "n": 85,
+      "n_bias_parameters": 3,
+      "per_type": [
+        {
+          "mean": 1.04324392e-12,
+          "n": 85,
+          "rms": 173.585286,
+          "rms_normalised": 8.6792643,
+          "type": "doppler_hz",
+          "unit": "Hz"
+        }
+      ],
+      "probability": 0.0,
+      "rank": 10,
+      "reduced_chi2": 78.0855908,
+      "status": "fitted"
+    },
+    {
+      "below_horizon": 0,
+      "biases": [
+        {
+          "n": 38,
+          "pass": "GS-NORTH/p1",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 978.686717
+        },
+        {
+          "n": 42,
+          "pass": "GS-NORTH/p2",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 960.871149
+        },
+        {
+          "n": 5,
+          "pass": "GS-NORTH/p3",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 937.866304
+        }
+      ],
+      "candidate": {
+        "alpha5": true,
+        "catalogue_number": 101388,
+        "checksum_ok": true,
+        "eccentricity": 0.0012,
+        "epoch_utc": "2026-11-15T06:00:00.000Z",
+        "inclination_deg": 97.45,
+        "mean_motion_rev_day": 15.1990336,
+        "name": "RIDESHARE OBJ A",
+        "object_id": "2026-900A",
+        "origin": "candidates.tle",
+        "source": "tle",
+        "tle_field": "A1388"
+      },
+      "chi2": 6813.2943,
+      "consistent": false,
+      "delta_chi2": 6742.89802,
+      "dof": 82,
+      "element_age_days": [
+        0.133333333,
+        0.265625
+      ],
+      "max_abs_normalised_residual": 22.9165488,
+      "n": 85,
+      "n_bias_parameters": 3,
+      "per_type": [
+        {
+          "mean": 3.07623208e-13,
+          "n": 85,
+          "rms": 179.060217,
+          "rms_normalised": 8.95301086,
+          "type": "doppler_hz",
+          "unit": "Hz"
+        }
+      ],
+      "probability": 0.0,
+      "rank": 11,
+      "reduced_chi2": 83.0889549,
+      "status": "fitted"
+    },
+    {
+      "below_horizon": 0,
+      "biases": [
+        {
+          "n": 38,
+          "pass": "GS-NORTH/p1",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1567.78925
+        },
+        {
+          "n": 42,
+          "pass": "GS-NORTH/p2",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1595.05873
+        },
+        {
+          "n": 5,
+          "pass": "GS-NORTH/p3",
+          "type": "doppler_hz",
+          "unit": "Hz",
+          "value": 1594.95929
+        }
+      ],
+      "candidate": {
+        "alpha5": true,
+        "catalogue_number": 101399,
+        "checksum_ok": true,
+        "eccentricity": 0.0012,
+        "epoch_utc": "2026-11-15T06:00:00.000Z",
+        "inclination_deg": 97.45,
+        "mean_motion_rev_day": 15.2009664,
+        "name": "RIDESHARE OBJ M",
+        "object_id": "2026-900M",
+        "origin": "candidates.tle",
+        "source": "tle",
+        "tle_field": "A1399"
+      },
+      "chi2": 9239.71786,
+      "consistent": false,
+      "delta_chi2": 9169.32158,
+      "dof": 82,
+      "element_age_days": [
+        0.133333333,
+        0.265625
+      ],
+      "max_abs_normalised_residual": 25.7167495,
+      "n": 85,
+      "n_bias_parameters": 3,
+      "per_type": [
+        {
+          "mean": 9.09494702e-13,
+          "n": 85,
+          "rms": 208.521043,
+          "rms_normalised": 10.4260521,
+          "type": "doppler_hz",
+          "unit": "Hz"
+        }
+      ],
+      "probability": 0.0,
+      "rank": 12,
+      "reduced_chi2": 112.679486,
+      "status": "fitted"
+    }
+  ],
+  "catalogue": {
+    "above_99999": 12,
+    "candidates": 12,
+    "catalogue_number_helper": "local Alpha-5 helper (arksa-kpro rideshare::norad), same rules as the open engine's norad module; to be replaced by kshana::norad once a kshana release contains it",
+    "omm_only_above_339999": 0
+  },
+  "config": {
+    "decision_delta_chi2": 25.0,
+    "doppler_bias_per_pass": true,
+    "horizon_deg": 0.0,
+    "max_reduced_chi2": 4.0,
+    "min_observations": 10,
+    "min_probability": 0.99,
+    "range_bias_per_pass": false
+  },
+  "endorsement": "No catalogue authority, launch provider or agency endorses this result.",
+  "evidence_class": "MODELLED",
+  "identified": {
+    "alpha5": true,
+    "catalogue_number": 101393,
+    "name": "RIDESHARE OBJ F",
+    "object_id": "2026-900F",
+    "probability": 1.0,
+    "tle_field": "A1393"
+  },
+  "inputs": [
+    {
+      "bytes": 7429,
+      "name": "observations.csv",
+      "role": "observations",
+      "sha256": "52ab0ca15da123fc32daedf57eb90ff7c7c319816c610363b100dfc6ef0c01d3"
+    },
+    {
+      "bytes": 1872,
+      "element_sets": 12,
+      "name": "candidates.tle",
+      "role": "candidates",
+      "sha256": "25ea9437b669f1048c900e6a09546edd80b46109e88d4f6eaf8c45b085dc18f4"
+    },
+    {
+      "bytes": 6864,
+      "element_sets": 12,
+      "name": "candidates.omm",
+      "role": "candidates",
+      "sha256": "de69977df52c48ee307b7b480742e1fbbe32c107da276a677b73f09ca596e8c3"
+    }
+  ],
+  "kind": "pro-rideshare-id",
+  "label": "MODELLED rideshare object identification: the candidate orbits are propagated with SGP4 from the element sets given; the observations are the operator's own; the probabilities assume Gaussian measurement errors (scaled by the best fit's variance factor) and that the operator's object is one of the candidates. Not an identification by any catalogue authority. MEASURED: only the observations supplied.",
+  "method": "SGP4 (open engine 0.41.0) per candidate, TEME to ITRS, station geometry on WGS-84; residual = observed - predicted; per-pass constant biases by weighted least squares where configured; chi-square ranking; scaled delta chi-square and posterior probability under a uniform prior",
+  "not_excluded": [
+    101393
+  ],
+  "not_modelled": [
+    "light time",
+    "tropospheric and ionospheric refraction",
+    "transmitter frequency drift within a pass",
+    "element-set covariance"
+  ],
+  "observations": {
+    "first_utc": "2026-11-15T09:12:00.000Z",
+    "last_utc": "2026-11-15T12:22:30.000Z",
+    "measurements": 85,
+    "passes": [
+      "GS-NORTH/p1",
+      "GS-NORTH/p2",
+      "GS-NORTH/p3"
+    ],
+    "per_type": {
+      "doppler_hz": 85
+    },
+    "span_h": 3.175,
+    "stations": [
+      {
+        "alt_m": 40.0,
+        "lat_deg": 59.4,
+        "lon_deg": 24.7,
+        "name": "GS-NORTH"
+      }
+    ]
+  },
+  "reasons": [
+    "best: 101393 (TLE A1393) with reduced chi-square 0.858 over 85 measurements; probability 1.000000 under a uniform prior over 12 candidates",
+    "runner-up: 101394 (TLE A1394) worse by delta chi-square 219.739 (scaled by the variance factor 1.000), likelihood ratio 10^47.7",
+    "the two leading candidates' predictions differ by 16.2 sigma over these measurements; their positions are 9.032 to 10.038 km apart",
+    "margin 219.739 >= 25 and probability 1.000000 >= 0.99: identified"
+  ],
+  "references": [
+    "CCSDS 502.0-B-3, Orbit Data Messages (OMM: NORAD_CAT_ID is an integer of up to nine digits)",
+    "Space-Track.org documentation: Alpha-5 catalogue numbers in TLE/3LE (letters A-Z without I and O for the leading two digits, 100000 to 339999) as a stop-gap; OMM recommended beyond",
+    "Hoots and Roehrich, Spacetrack Report No. 3 (1980); Vallado et al., Revisiting Spacetrack Report #3, AIAA 2006-6753 (SGP4 as implemented in the open engine)"
+  ],
+  "result_sha256": "8589a93e61dbd99dd9a0c8bd4b57b4d59af4eee3564cc54b35e8dd1b70324879",
+  "schema": "arksa-rideshare-id/1",
+  "separation": {
+    "best": 101393,
+    "delta_chi2": 219.738571,
+    "distance_km_max": 10.0375241,
+    "distance_km_median": 9.52997195,
+    "distance_km_min": 9.03185301,
+    "log10_likelihood_ratio": 47.7156243,
+    "predicted_difference_sigma": 16.1782494,
+    "second": 101394
+  },
+  "time_scale": "UTC",
+  "title": "Synthetic deployment of 12 objects",
+  "variance_factor": 1.0,
+  "verdict": "IDENTIFIED",
+  "warnings": [
+    "object 101388 given more than once (candidates.tle and candidates.omm); the element set with the newer epoch (candidates.tle) is used",
+    "object 101389 given more than once (candidates.tle and candidates.omm); the element set with the newer epoch (candidates.tle) is used",
+    "object 101390 given more than once (candidates.tle and candidates.omm); the element set with the newer epoch (candidates.tle) is used",
+    "object 101391 given more than once (candidates.tle and candidates.omm); the element set with the newer epoch (candidates.tle) is used",
+    "object 101392 given more than once (candidates.tle and candidates.omm); the element set with the newer epoch (candidates.tle) is used",
+    "object 101393 given more than once (candidates.tle and candidates.omm); the element set with the newer epoch (candidates.tle) is used",
+    "object 101394 given more than once (candidates.tle and candidates.omm); the element set with the newer epoch (candidates.tle) is used",
+    "object 101395 given more than once (candidates.tle and candidates.omm); the element set with the newer epoch (candidates.tle) is used",
+    "object 101396 given more than once (candidates.tle and candidates.omm); the element set with the newer epoch (candidates.tle) is used",
+    "object 101397 given more than once (candidates.tle and candidates.omm); the element set with the newer epoch (candidates.tle) is used",
+    "object 101398 given more than once (candidates.tle and candidates.omm); the element set with the newer epoch (candidates.tle) is used",
+    "object 101399 given more than once (candidates.tle and candidates.omm); the element set with the newer epoch (candidates.tle) is used"
+  ]
+}
