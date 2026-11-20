@@ -1,0 +1,8 @@
+# Run 5 of the power simulator (synthetic): capacity_wh = 120, eff = 0.85.
+t_s,observable,value
+0,soc_pct,100
+600,soc_pct,93.4640523
+1200,soc_pct,86.9281046
+1800,soc_pct,80.3921569
+2400,soc_pct,73.8562092
+3000,soc_pct,67.3202614

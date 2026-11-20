@@ -24,9 +24,11 @@ pub const USAGE: &str = "arksa-kpro simcal — mission performance simulator, co
   arksa-kpro simcal recalibrate <mission.toml> --lineage <dir> [--service <https://...>]\n\
                     [--trusted-key <hex>[,<hex>]] [--verdict-license <token>]\n\
                     [--sign-key-file <file>] [--signer <name>] [--utc <iso>]\n\
-      Send each hosted plugin's scenario and telemetry to the hosted self-calibration verdict,\n\
-      accept only a verdict signed by a trusted service key, and append a hash-chained entry to\n\
-      the calibration lineage in <dir> (signed with a key)\n\
+      Send each hosted plugin's model and telemetry to its hosted calibration method (selfcal:\n\
+      the plugin's scenario; calibrate: named parameters with an expression per observable or\n\
+      design runs of the plugin's own simulator), accept only a verdict signed by a trusted\n\
+      service key for that method, and append a hash-chained entry to the calibration lineage\n\
+      in <dir> (signed with a key)\n\
   arksa-kpro simcal verify <lineage-dir> [--trusted-key <hex>[,<hex>]] [--trust <signer public key>]\n\
       Re-check the lineage: chain, hashes, every verdict's signature and outcome, the directory signature\n\
 \n\
@@ -167,6 +169,18 @@ pub fn run(args: &[String], ent: &Entitlement, now_unix: i64) -> Result<u8, Stri
             )?;
             for r in &e.plugins {
                 println!("{} ({}): {}", r.plugin, r.kind, r.status.as_str());
+                if let Some(h) = &r.hosted {
+                    for q in &h.outcome.parameters {
+                        println!(
+                            "  {} = {} (standard uncertainty {}, {})",
+                            q.name, q.value, q.std_err, h.evidence_class
+                        );
+                    }
+                    let flags = lineage::flags_note(&h.outcome);
+                    if !flags.is_empty() {
+                        println!("  {}", flags.trim());
+                    }
+                }
             }
             println!(
                 "lineage entry {} ({}) appended to {dir}",

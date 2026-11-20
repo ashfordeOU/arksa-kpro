@@ -1,0 +1,83 @@
+# Toy mission CALIB-1: two simulators recalibrated by the hosted general parametric calibration
+# (method `calibrate`), one with a closed-form model, one with design runs (synthetic data).
+format = "ks-simcal-mission/1"
+mission = "CALIB-1"
+title = "Toy mission, parametric recalibration"
+telemetry = "telemetry.csv"
+
+# Battery thermal model: a closed-form expression in t and the parameters.
+[[plugin]]
+id = "thermal"
+kind = "hosted"
+description = "Battery thermal model (closed form)"
+method = "calibrate"
+
+[[plugin.parameter]]
+name = "t0_c"
+prior = 20.0
+prior_sigma = 5.0
+
+[[plugin.parameter]]
+name = "rate_c_per_s"
+initial = 0.0
+lower = -0.01
+upper = 0.01
+
+[[plugin.observable]]
+name = "battery_temp_c"
+unit = "degC"
+tolerance = 0.5
+expression = "t0_c + rate_c_per_s * t"
+
+# Power: runs of the mission's own power simulator over a design of parameter sets.
+[[plugin]]
+id = "power"
+kind = "hosted"
+description = "Battery state of charge (design runs of the power simulator)"
+method = "calibrate"
+
+[plugin.calibration]
+subject = "CALIB-1 power"
+max_iter = 30
+
+[[plugin.parameter]]
+name = "capacity_wh"
+initial = 100.0
+lower = 80.0
+upper = 120.0
+
+[[plugin.parameter]]
+name = "eff"
+prior = 0.9
+prior_sigma = 0.01
+lower = 0.85
+upper = 0.95
+
+[[plugin.observable]]
+name = "soc_pct"
+unit = "%"
+tolerance = 1.0
+
+[[plugin.run]]
+params = { capacity_wh = 80.0, eff = 0.85 }
+predictions = "power-run-1.csv"
+
+[[plugin.run]]
+params = { capacity_wh = 80.0, eff = 0.95 }
+predictions = "power-run-2.csv"
+
+[[plugin.run]]
+params = { capacity_wh = 100.0, eff = 0.85 }
+predictions = "power-run-3.csv"
+
+[[plugin.run]]
+params = { capacity_wh = 100.0, eff = 0.95 }
+predictions = "power-run-4.csv"
+
+[[plugin.run]]
+params = { capacity_wh = 120.0, eff = 0.85 }
+predictions = "power-run-5.csv"
+
+[[plugin.run]]
+params = { capacity_wh = 120.0, eff = 0.95 }
+predictions = "power-run-6.csv"

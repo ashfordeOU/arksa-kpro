@@ -202,8 +202,16 @@ fn check_hosted(
             p.push(format!("{at}: verdict: {e}"));
         }
     }
-    if v.method != hosted::SELFCAL || h.method != hosted::SELFCAL {
-        p.push(format!("{at}: not a {} verdict", hosted::SELFCAL));
+    if !hosted::METHODS.contains(&h.method.as_str()) {
+        p.push(format!(
+            "{at}: method '{}' is not a hosted calibration method",
+            h.method
+        ));
+    } else if v.method != h.method {
+        p.push(format!(
+            "{at}: not a {} verdict (the verdict is for '{}')",
+            h.method, v.method
+        ));
     }
     if v.verdict_sha256 != h.verdict_sha256 {
         p.push(format!("{at}: the verdict hash differs from the entry"));
@@ -346,7 +354,7 @@ pub fn recalibrate_mission(
     for p in plugins {
         let (res, _) = plugin_residuals(m, p.as_ref());
         let sources = p.sources();
-        let (status, hosted, note) = if p.hosted().is_some() {
+        let (status, hosted, note) = if let Some(binding) = p.hosted() {
             let r =
                 hosted::recalibrate(o.transport, o.bearer, m, p.as_ref(), o.trusted_verdict_keys)?;
             let req_file = format!("requests/{seq:04}-{}.json", p.id());
@@ -357,17 +365,17 @@ pub fn recalibrate_mission(
             } else {
                 Status::NotConverged
             };
-            let note = if r.outcome.converged {
+            let mut note = if r.outcome.converged {
                 format!(
                     "Recalibrated by the hosted {} method; the calibrated parameters are {}.",
-                    hosted::SELFCAL,
-                    r.verdict.evidence_class
+                    binding.method, r.verdict.evidence_class
                 )
             } else {
                 "The hosted calibration did not converge; nothing is taken as calibrated.".into()
             };
+            note.push_str(&flags_note(&r.outcome));
             let rec = HostedRecord {
-                method: hosted::SELFCAL.into(),
+                method: binding.method.clone(),
                 request_file: req_file.clone(),
                 request_sha256: r.request_sha256.clone(),
                 verdict_file: ver_file.clone(),
@@ -445,6 +453,21 @@ pub fn recalibrate_mission(
     Ok(entry)
 }
 
+/// The `calibrate` flags of an outcome as a sentence (empty when there are none).
+pub fn flags_note(o: &Outcome) -> String {
+    let mut s = String::new();
+    if let Some(b) = o.at_bound.as_ref().filter(|b| !b.is_empty()) {
+        s.push_str(&format!(" At a bound: {}.", b.join(", ")));
+    }
+    if let Some(n) = o.not_constrained.as_ref().filter(|n| !n.is_empty()) {
+        s.push_str(&format!(
+            " Not constrained by the telemetry (posterior not narrower than 90 % of the prior): {}.",
+            n.join(", ")
+        ));
+    }
+    s
+}
+
 /// A short Markdown summary of an entry.
 pub fn summary_md(e: &Entry) -> String {
     let mut s = format!(
@@ -474,6 +497,33 @@ pub fn summary_md(e: &Entry) -> String {
             ));
             if let (Some(a), Some(b)) = (h.outcome.fidelity_before, h.outcome.fidelity_after) {
                 s.push_str(&format!(", fidelity {a} → {b}"));
+            }
+            if let (Some(a), Some(b)) = (h.outcome.chi2_reduced_first, h.outcome.chi2_reduced_last)
+            {
+                s.push_str(&format!(", reduced chi-square {a} → {b}"));
+            }
+            if let Some(n) = h.outcome.n_obs {
+                s.push_str(&format!(", {n} observations"));
+            }
+            if let Some(b) = &h.outcome.at_bound {
+                s.push_str(&format!(
+                    "\n\nAt a bound: {}",
+                    if b.is_empty() {
+                        "none".into()
+                    } else {
+                        b.join(", ")
+                    }
+                ));
+            }
+            if let Some(n) = &h.outcome.not_constrained {
+                s.push_str(&format!(
+                    "\n\nNot constrained by the telemetry: {}",
+                    if n.is_empty() {
+                        "none".into()
+                    } else {
+                        n.join(", ")
+                    }
+                ));
             }
             s.push_str("\n\n| parameter | value | standard uncertainty |\n|---|---|---|\n");
             for p in &h.outcome.parameters {
