@@ -125,7 +125,7 @@ other_losses_db = 0.0
 ### `[export]`: matching receiver test scenarios (`kshana-testkit-scenario/1`)
 
 Kshana Pro's neutral test-as-code format (kshana-pro #50, runner #51; this crate is pinned to kshana-pro
-91ab09a7, which has both). One scenario per selected pass, worst margin first:
+79293979, which has both). One scenario per selected pass, worst margin first:
 
 ```toml
 [export]
