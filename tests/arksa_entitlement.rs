@@ -392,7 +392,38 @@ fn the_server_binary_registers_the_hook() {
     let _ = std::fs::remove_dir_all(&dir);
 }
 
-/// The F4 and M9 kinds (15 November 2026) register through the same hook and claim, but only
+/// At the current pin (Kshana Pro 79293979, PR #57) the signed manifest lists every pending
+/// id: the F4 and M9 kinds, `pro-conjunction-validation` (kind and feature) and
+/// `pro-rideshare-id` (kind). All of them are registered and reachable, with their commands.
+#[test]
+fn the_pinned_manifest_lists_every_pending_id() {
+    arksa_kpro::ensure_registered();
+    for k in PENDING_MANIFEST_KINDS {
+        assert!(arksa_kpro::manifest_lists(k, "kind"), "{k}");
+        assert!(kshana_pro::registry::is_pro_kind(k), "{k}");
+        assert!(arksa_kpro::active_kinds().contains(k), "{k}");
+        assert_eq!(tiers::edition_of(k), Some(tiers::Edition::Arksa), "{k}");
+    }
+    for f in arksa_kpro::PENDING_MANIFEST_FEATURES {
+        assert!(arksa_kpro::manifest_lists(f, "feature"), "{f}");
+        assert!(arksa_kpro::active_features().contains(f), "{f}");
+        assert!(license::pro_command_features().contains(f), "{f}");
+    }
+    for k in ["pro-conjunction-validation", "pro-rideshare-id"] {
+        assert!(PENDING_MANIFEST_KINDS.contains(&k), "{k}");
+    }
+    assert!(arksa_kpro::PENDING_MANIFEST_FEATURES.contains(&"pro-conjunction-validation"));
+    // `pro-rideshare-id` is listed as a kind only; its command runs under the mission feature.
+    assert!(!arksa_kpro::manifest_lists("pro-rideshare-id", "feature"));
+    let ext = kshana_pro::extension::get().unwrap();
+    let names: Vec<&str> = ext.commands.iter().map(|c| c.name).collect();
+    for c in ["conjunction", "rx-exposure", "rideshare-id"] {
+        assert!(names.contains(&c), "{c}: {names:?}");
+    }
+}
+
+/// The F4 and M9 kinds (15 November 2026), `pro-conjunction-validation` and
+/// `pro-rideshare-id` (20 November 2026) register through the same hook and claim, but only
 /// once the pinned Kshana Pro's signed manifest lists them. Either way a standalone Pro token
 /// cannot run them; when listed, an Arksa token runs each.
 #[test]

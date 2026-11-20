@@ -44,6 +44,27 @@
 //! tolerance = 20.0
 //! [plugin.observable.key]         # what identifies this observable to the method
 //! # ...
+//!
+//! [[plugin]]
+//! id = "thermal"
+//! kind = "hosted"
+//! method = "calibrate"            # general parametric calibration (no scenario, no sites)
+//! [plugin.calibration]            # optional: `subject` (echoed) and `max_iter`
+//! max_iter = 50
+//! [[plugin.parameter]]            # the parameters to calibrate (at most 32)
+//! name = "tau_s"
+//! prior = 1800.0                  # optional: prior, prior_sigma, lower, upper, initial
+//! prior_sigma = 600.0
+//! lower = 100.0
+//! [[plugin.observable]]
+//! name = "battery_temp_c"
+//! tolerance = 1.0
+//! expression = "t0 + dT * exp(-t / tau_s)"   # a closed-form model in t, pi and the parameters
+//! # or, instead of an expression per observable, a design: runs of the plugin's own
+//! # simulator at chosen parameter sets, each a predictions CSV (t_s,observable,value)
+//! # [[plugin.run]]
+//! # params = { tau_s = 1500.0, t0 = 18.0, dT = 6.0 }
+//! # predictions = "runs/run-01.csv"
 //! ```
 //!
 //! Telemetry (`t_s,observable,value,sigma`; `#` starts a comment; `sigma`, the standard
@@ -105,6 +126,39 @@ pub struct PluginSpec {
     pub sites: Vec<toml::Value>,
     #[serde(rename = "observable", default)]
     pub observables: Vec<ObservableSpec>,
+    /// `hosted` with method `calibrate`: the parameters to calibrate.
+    #[serde(rename = "parameter", default)]
+    pub parameters: Vec<ParameterSpec>,
+    /// `hosted` with method `calibrate`, design model: runs of the plugin's own simulator.
+    #[serde(rename = "run", default)]
+    pub runs: Vec<RunSpec>,
+}
+
+/// A parameter of a `calibrate` plugin, sent to the method as written. Without
+/// `prior_sigma` the prior is flat.
+#[derive(Debug, Clone, Deserialize, Serialize, PartialEq)]
+#[serde(deny_unknown_fields)]
+pub struct ParameterSpec {
+    pub name: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub prior: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub prior_sigma: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub lower: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub upper: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub initial: Option<f64>,
+}
+
+/// One run of a `calibrate` plugin's design: the parameter values it was run at and its
+/// predictions (a CSV `t_s,observable,value`, observable = the observable's name).
+#[derive(Debug, Clone, Deserialize, PartialEq)]
+#[serde(deny_unknown_fields)]
+pub struct RunSpec {
+    pub params: std::collections::BTreeMap<String, f64>,
+    pub predictions: String,
 }
 
 /// One observable a plugin predicts.
@@ -129,6 +183,10 @@ pub struct ObservableSpec {
     /// `hosted`: the fields that identify this observable to the hosted method.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub key: Option<toml::Value>,
+    /// `hosted` with method `calibrate`, expression model: the observable as a closed-form
+    /// expression in `t` (s), `pi` and the parameters.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub expression: Option<String>,
 }
 
 /// One telemetry sample.

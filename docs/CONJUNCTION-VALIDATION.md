@@ -35,9 +35,10 @@ the appendix text.
 ## Gate
 
 Kind and command feature `pro-conjunction-validation`, `arksa` tier, registered through the hook like F4/M9
-(`PENDING_MANIFEST_KINDS`, `PENDING_MANIFEST_FEATURES`). Until Kshana Pro's signed tier manifest lists its two
-hashes (kind and feature: SHA-256 of `pro-conjunction-validation`), it is built and tested as a library and
-pack but is not reachable through the dispatcher or the command line, and is refused like any unknown kind.
+(`PENDING_MANIFEST_KINDS`, `PENDING_MANIFEST_FEATURES`). Kshana Pro's signed tier manifest lists its two
+hashes (kind and feature: SHA-256 of `pro-conjunction-validation`) since Kshana Pro 79293979 (PR #57), the
+commit this crate is pinned to, so the kind is reachable through the dispatcher and the command `conjunction`
+through the command line, under an Arksa-signed `arksa` entitlement only.
 
 ## The public dataset
 

@@ -11,10 +11,12 @@
 //!    observable the bias with its standard uncertainty (GUM type A), RMS, largest residual,
 //!    reduced chi-square where the telemetry carries a standard uncertainty, and a verdict
 //!    against the observable's stated tolerance (`consistent` or `drifted`);
-//! 2. **recalibrates** ([`hosted`]): a plugin whose model family has a hosted calibration
-//!    method sends its simulator scenario and its telemetry to that method over the network
-//!    (Kshana Pro's verdict client, [`kshana_pro::remote_verdict`], method `selfcal`) and
-//!    accepts the answer only as a signed verdict that verifies against a trusted service
+//! 2. **recalibrates** ([`hosted`]): a hosted plugin sends its model and its telemetry to
+//!    a hosted calibration method over the network (Kshana Pro's verdict client,
+//!    [`kshana_pro::remote_verdict`]): `selfcal` for radio timing reference simulators (the
+//!    plugin's scenario), `calibrate` for any simulator with named parameters (an expression
+//!    per observable, or design runs of the plugin's own simulator). The answer is accepted
+//!    only as a signed verdict for that method that verifies against a trusted service
 //!    key. No calibration method runs here: the hosted method's internals stay server-side
 //!    (X3), and this crate holds only the request contract and the checks on the answer;
 //! 3. **records the calibration lineage** ([`lineage`]): one hash-chained entry per

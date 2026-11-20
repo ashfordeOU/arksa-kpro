@@ -819,7 +819,7 @@ dependencies = [
 [[package]]
 name = "kshana-eloran"
 version = "0.1.0"
-source = "git+https://github.com/ashfordeOU/kshana-pro?rev=91ab09a77361136a823d2e796898878ccccaa912#91ab09a77361136a823d2e796898878ccccaa912"
+source = "git+https://github.com/ashfordeOU/kshana-pro?rev=7929397925f6221b7446b0c1f1b7356ec9fb0a66#7929397925f6221b7446b0c1f1b7356ec9fb0a66"
 dependencies = [
  "hex",
  "rand 0.8.6",
@@ -833,7 +833,7 @@ dependencies = [
 [[package]]
 name = "kshana-pro"
 version = "0.2.0"
-source = "git+https://github.com/ashfordeOU/kshana-pro?rev=91ab09a77361136a823d2e796898878ccccaa912#91ab09a77361136a823d2e796898878ccccaa912"
+source = "git+https://github.com/ashfordeOU/kshana-pro?rev=7929397925f6221b7446b0c1f1b7356ec9fb0a66#7929397925f6221b7446b0c1f1b7356ec9fb0a66"
 dependencies = [
  "crypto-bigint",
  "ed25519-dalek",

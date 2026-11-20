@@ -354,7 +354,8 @@ fn rx_exposure_cmd(args: &[String]) -> ExitCode {
 }
 
 /// The `conjunction` command (conjunction-assessment validation). Registered only when the
-/// signed tier manifest lists its feature ([`crate::PENDING_MANIFEST_FEATURES`]).
+/// signed tier manifest lists its feature ([`crate::PENDING_MANIFEST_FEATURES`]); listed since
+/// Kshana Pro 79293979.
 pub fn conjunction_command() -> ExtensionCommand {
     ExtensionCommand {
         name: "conjunction",
