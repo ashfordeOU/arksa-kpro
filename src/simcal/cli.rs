@@ -22,8 +22,8 @@ pub const USAGE: &str = "arksa-kpro simcal — mission performance simulator, co
       Simulator-versus-telemetry residuals per observable (bias with its uncertainty, RMS,\n\
       reduced chi-square, verdict against tolerance); with --out, residuals.json and residuals.csv\n\
   arksa-kpro simcal recalibrate <mission.toml> --lineage <dir> [--service <https://...>]\n\
-                    [--trusted-key <hex>[,<hex>]] [--verdict-license <token>]\n\
-                    [--sign-key-file <file>] [--signer <name>] [--utc <iso>]\n\
+                    [--trusted-key <hex>[,<hex>]] [--verdict-license <token>] [--tenant <tag>]\n\
+                    [--verdict-ca <file>] [--sign-key-file <file>] [--signer <name>] [--utc <iso>]\n\
       Send each hosted plugin's model and telemetry to its hosted calibration method (selfcal:\n\
       the plugin's scenario; calibrate: named parameters with an expression per observable or\n\
       design runs of the plugin's own simulator), accept only a verdict signed by a trusted\n\
@@ -32,8 +32,12 @@ pub const USAGE: &str = "arksa-kpro simcal — mission performance simulator, co
   arksa-kpro simcal verify <lineage-dir> [--trusted-key <hex>[,<hex>]] [--trust <signer public key>]\n\
       Re-check the lineage: chain, hashes, every verdict's signature and outcome, the directory signature\n\
 \n\
-The service is --service or KSHANA_VERDICT_URL; its key --trusted-key, KSHANA_VERDICT_KEY or the key\n\
-built into the release. The verdict licence token is --verdict-license or KSHANA_VERDICT_LICENSE.\n\
+The service (Arksa's internal verdict service, or the contracted instance of a Sovereign install) is\n\
+--service or ARKSA_VERDICT_URL (KSHANA_VERDICT_URL also read); its key --trusted-key, ARKSA_VERDICT_KEY,\n\
+KSHANA_VERDICT_KEY or the key built into the release. The service credential is --verdict-license,\n\
+ARKSA_VERDICT_CREDENTIAL_FILE, ARKSA_VERDICT_CREDENTIAL or KSHANA_VERDICT_LICENSE. Every call (selfcal\n\
+and calibrate alike) carries a tenant/mission tag: --tenant, ARKSA_TENANT, the mission file's `tenant`,\n\
+else its `mission` id. An internal CA certificate: --verdict-ca or ARKSA_VERDICT_CA.\n\
 A signing key is a file of 64 hex characters (or ARKSA_STUDY_SIGNING_KEY).\n\
 \n\
 Every command takes [--license <token>] or, in a debug build, [--dev]. See docs/SIM-RECALIBRATION.md.";
@@ -45,7 +49,9 @@ fn opt_or_env(args: &[String], name: &str, env: &str) -> Option<String> {
 }
 
 fn trusted_keys(args: &[String]) -> Option<String> {
-    opt_or_env(args, "--trusted-key", "KSHANA_VERDICT_KEY")
+    opt_or_env(args, "--trusted-key", "ARKSA_VERDICT_KEY")
+        .or_else(|| std::env::var("KSHANA_VERDICT_KEY").ok())
+        .filter(|s| !s.trim().is_empty())
         .or_else(|| kshana_pro::remote_verdict::builtin_trusted_keys().map(str::to_string))
 }
 
@@ -136,13 +142,6 @@ pub fn run(args: &[String], ent: &Entitlement, now_unix: i64) -> Result<u8, Stri
         Some("recalibrate") => {
             let path = positional(args, "<mission.toml>")?;
             let dir = flag(args, "--lineage").ok_or("--lineage <dir> is required")?;
-            let url = opt_or_env(args, "--service", "KSHANA_VERDICT_URL")
-                .ok_or("--service <https://...> (or KSHANA_VERDICT_URL) is required")?;
-            let keys = trusted_keys(args).ok_or(
-                "--trusted-key <hex> (or KSHANA_VERDICT_KEY) is required: the service's public key",
-            )?;
-            let bearer =
-                opt_or_env(args, "--verdict-license", "KSHANA_VERDICT_LICENSE").unwrap_or_default();
             let key = match flag(args, "--sign-key-file") {
                 Some(f) => Some(std::fs::read_to_string(&f).map_err(|e| format!("{f}: {e}"))?),
                 None => std::env::var("ARKSA_STUDY_SIGNING_KEY").ok(),
@@ -154,15 +153,32 @@ pub fn run(args: &[String], ent: &Entitlement, now_unix: i64) -> Result<u8, Stri
             let signer = flag(args, "--signer").unwrap_or_else(|| "Arksa".into());
             let utc = flag(args, "--utc").unwrap_or_else(|| utc_now(now_unix));
             let (m, plugins) = load(Path::new(&path), ent, now_unix)?;
-            let t = kshana_pro::remote_verdict::CurlVerdictTransport { base_url: url };
+            // One resolved configuration and one tagged transport for every hosted plugin,
+            // whichever method (selfcal or calibrate) it uses.
+            let svc = crate::verdict_service::resolve(
+                args,
+                &|k| std::env::var(k).ok(),
+                &crate::verdict_service::Defaults {
+                    legacy_env: true,
+                    tenants: m
+                        .file
+                        .tenant
+                        .iter()
+                        .chain([&m.file.mission])
+                        .cloned()
+                        .collect(),
+                    ..Default::default()
+                },
+            )?;
+            let t = svc.transport();
             let e = lineage::recalibrate_mission(
                 &m,
                 &plugins,
                 Path::new(&dir),
                 &RecalOptions {
                     transport: &t,
-                    bearer: &bearer,
-                    trusted_verdict_keys: &keys,
+                    bearer: &svc.credential,
+                    trusted_verdict_keys: &svc.trusted_keys,
                     utc: &utc,
                     signer: seed.as_ref().map(|s| (s, signer.as_str())),
                 },

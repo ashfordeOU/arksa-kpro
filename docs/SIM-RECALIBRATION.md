@@ -19,9 +19,9 @@ every calibration.
 ```
 arksa-kpro simcal plugins
 arksa-kpro simcal residuals <mission.toml> [--out <dir>]
-arksa-kpro simcal recalibrate <mission.toml> --lineage <dir> --service <https://...> \
-    --trusted-key <service public key> [--verdict-license <token>] \
-    [--sign-key-file <file>] [--signer <name>] [--utc <iso>]
+arksa-kpro simcal recalibrate <mission.toml> --lineage <dir> [--service <https://...>] \
+    [--trusted-key <service public key>] [--verdict-license <token>] [--tenant <tag>] \
+    [--verdict-ca <file>] [--sign-key-file <file>] [--signer <name>] [--utc <iso>]
 arksa-kpro simcal verify <lineage-dir> [--trusted-key <hex>] [--trust <signer public key>]
 ```
 
@@ -144,6 +144,12 @@ states it). `at_bound` (parameters that ended on a bound) and `not_constrained` 
 posterior is not narrower than 90 % of the prior) are kept in the lineage entry, named in the
 plugin's note, printed by `simcal recalibrate` and listed in the entry's summary. A flagged
 parameter is still recorded as calibrated: the flag says how far the telemetry supports it.
+
+Where the service runs (Arksa's internal instance in the cloud, a contracted instance beside a
+Sovereign install), the service credential, the trusted key and the tenant/mission tag sent on
+every call are configured as described in `docs/VERDICT-SERVICE.md` (environment
+`ARKSA_VERDICT_URL`, `ARKSA_VERDICT_CREDENTIAL_FILE`, `ARKSA_VERDICT_KEY`, `ARKSA_TENANT`; the
+mission file's optional `tenant`, else its `mission` id).
 
 The calibration method is not in this crate. Nothing here links the service or the gated method
 code; this crate holds only the request contract and the checks on the answer.

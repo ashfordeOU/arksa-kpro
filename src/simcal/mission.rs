@@ -96,6 +96,10 @@ pub struct MissionFile {
     pub mission: String,
     #[serde(default)]
     pub title: Option<String>,
+    /// The tenant/mission tag sent to the hosted verdict service for cost tracking
+    /// ([`crate::verdict_service`]); default: `mission`.
+    #[serde(default)]
+    pub tenant: Option<String>,
     pub telemetry: String,
     #[serde(rename = "plugin", default)]
     pub plugins: Vec<PluginSpec>,

@@ -41,6 +41,7 @@ pub mod simcal;
 pub mod spectrum_coexistence;
 pub mod suite;
 pub mod twin;
+pub mod verdict_service;
 
 use kshana::api::KshanaError;
 use kshana_pro::extension::{parse_pack, Extension, ExtensionFeature, ExtensionKind};

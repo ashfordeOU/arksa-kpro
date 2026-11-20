@@ -114,10 +114,15 @@ Under the X3 rule it belongs in the hosted verdict service and is reached over t
 step, largest integrity risk, the registry definition wanted) to `/verdict/lunar-assist`,
 verifies the signed verdict envelope against the trusted service keys (Kshana Pro's
 `remote_verdict::verify`), and accepts the package only if it answers the request.
-`arksa-kpro lunar-time assist request --service <url> --request <json> --trusted-key <hex>`.
+`arksa-kpro lunar-time assist request --request <json> --out <package.json> --tenant <tag>`, with
+the service address, credential and trusted key from `ARKSA_VERDICT_URL`,
+`ARKSA_VERDICT_CREDENTIAL_FILE` and `ARKSA_VERDICT_KEY` (or `--service`, `--verdict-license`,
+`--trusted-key`); where the service runs and what to configure: `docs/VERDICT-SERVICE.md`.
 
-**Status: the service method does not exist yet.** The client is tested against a local stand-in
-that signs with a test key. Building the method in the hosted service is a follow-up.
+**Status:** the hosted service (meru) serves `lunar-assist` since 20 November 2026 (its own
+end-to-end test builds a package from a synthetic SP3 product; evidence class MODELLED). This
+crate's client is tested against a local stand-in that signs with a test key; no request has been
+made to a deployed instance yet.
 
 ## 4. The study's `[time_scale]` section
 

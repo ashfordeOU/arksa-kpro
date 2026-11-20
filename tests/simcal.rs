@@ -255,6 +255,8 @@ struct Seen {
     paths: Vec<String>,
     bearers: Vec<String>,
     bodies: Vec<Value>,
+    /// The `X-Meru-Tenant` header of each request (empty when absent).
+    tenants: Vec<String>,
 }
 
 /// A loopback stand-in for the hosted verdict service: answers `POST /verdict/selfcal` and
@@ -273,6 +275,7 @@ fn stand_in(seed: [u8; 32], converged: bool, answers: usize) -> (String, Arc<Mut
             r.read_line(&mut line).unwrap();
             let path = line.split_whitespace().nth(1).unwrap_or("").to_string();
             let (mut len, mut bearer, mut expect) = (0usize, String::new(), false);
+            let mut tenant = String::new();
             loop {
                 let mut h = String::new();
                 r.read_line(&mut h).unwrap();
@@ -285,6 +288,7 @@ fn stand_in(seed: [u8; 32], converged: bool, answers: usize) -> (String, Arc<Mut
                     "content-length" => len = v.trim().parse().unwrap(),
                     "authorization" => bearer = v.trim().trim_start_matches("Bearer ").into(),
                     "expect" => expect = true,
+                    "x-meru-tenant" => tenant = v.trim().into(),
                     _ => {}
                 }
             }
@@ -299,6 +303,7 @@ fn stand_in(seed: [u8; 32], converged: bool, answers: usize) -> (String, Arc<Mut
                 s.paths.push(path.clone());
                 s.bearers.push(bearer.clone());
                 s.bodies.push(req.clone());
+                s.tenants.push(tenant.clone());
             }
             let (code, text) = if path != "/verdict/selfcal" && path != "/verdict/calibrate" {
                 ("404 Not Found", r#"{"error":"no such method"}"#.to_string())
@@ -882,6 +887,13 @@ fn bin(args: &[&str], home: &Path) -> std::process::Output {
         .env("KSHANA_PRO_HOME", home)
         .env_remove("KSHANA_VERDICT_URL")
         .env_remove("KSHANA_VERDICT_KEY")
+        .env_remove("KSHANA_VERDICT_LICENSE")
+        .env_remove("ARKSA_VERDICT_URL")
+        .env_remove("ARKSA_VERDICT_KEY")
+        .env_remove("ARKSA_VERDICT_CREDENTIAL")
+        .env_remove("ARKSA_VERDICT_CREDENTIAL_FILE")
+        .env_remove("ARKSA_VERDICT_CA")
+        .env_remove("ARKSA_TENANT")
         .env_remove("ARKSA_STUDY_SIGNING_KEY")
         .output()
         .expect("the binary runs")
@@ -933,7 +945,7 @@ fn the_command_is_gated_and_runs_end_to_end() {
     assert!(res.join("residuals.csv").exists());
 
     // Recalibrate against the stand-in, signed; then verify with both keys pinned.
-    let (url, _) = stand_in(SERVICE_SEED, true, 1);
+    let (url, seen_cli) = stand_in(SERVICE_SEED, true, 1);
     let keyf = work.join("arksa.key");
     std::fs::write(&keyf, hex::encode(ARKSA_SEED)).unwrap();
     let lin = work.join("lineage");
@@ -968,6 +980,8 @@ fn the_command_is_gated_and_runs_end_to_end() {
     assert!(so.contains("timing (hosted): calibrated"), "{so}");
     assert!(so.contains("eps (table): recalibration-needed"), "{so}");
     assert!(so.contains("lineage entry 1"), "{so}");
+    // With no tenant configured, the mission id is the tag.
+    assert_eq!(seen_cli.lock().unwrap().tenants, vec!["TOY-1"]);
 
     let arksa = hex::encode(arksa_pk());
     let out = bin(
@@ -1403,7 +1417,7 @@ fn the_command_recalibrates_a_calibrate_mission() {
     let work = tmp("calib-cli");
     let home = work.join("home");
     let mission = calib().join("mission.toml");
-    let (url, _) = stand_in(SERVICE_SEED, true, 2);
+    let (url, seen) = stand_in(SERVICE_SEED, true, 2);
     let lin = work.join("lineage");
     let pk = service_pk();
     let out = bin(
@@ -1436,6 +1450,13 @@ fn the_command_recalibrates_a_calibrate_mission() {
     assert!(so.contains("eff = 0.95"), "{so}");
     assert!(so.contains("At a bound: eff."), "{so}");
     assert!(so.contains("not signed"), "{so}");
+    // Both calibrate calls carried the credential and the tenant tag (the mission id here).
+    {
+        let s = seen.lock().unwrap();
+        assert_eq!(s.paths, vec!["/verdict/calibrate", "/verdict/calibrate"]);
+        assert_eq!(s.bearers, vec!["tok", "tok"]);
+        assert_eq!(s.tenants, vec!["CALIB-1", "CALIB-1"]);
+    }
     let out = bin(
         &[
             "simcal",
@@ -1452,6 +1473,117 @@ fn the_command_recalibrates_a_calibrate_mission() {
         "{}",
         String::from_utf8_lossy(&out.stdout)
     );
+}
+
+/// Arksa's configuration of the internal verdict service (roadmap 0.42 §1i): the address, the
+/// service credential (from a file, as a secret store mounts it), the trusted key and the
+/// tenant tag come from the environment, and the tag is sent on every call.
+#[test]
+fn the_service_configuration_and_tenant_tag_reach_the_service() {
+    use arksa_kpro::verdict_service::{resolve, Defaults};
+    let work = tmp("svc-config");
+    let home = work.join("home");
+    let mission = fixture().join("mission.toml");
+    let (url, seen) = stand_in(SERVICE_SEED, true, 3);
+    let cred = work.join("credential");
+    std::fs::write(&cred, "svc-credential-token\n").unwrap();
+    let pk = service_pk();
+
+    // 1. Library: resolve from an environment lookup, then recalibrate through the transport.
+    let env = {
+        let (url, cred, pk) = (url.clone(), cred.to_str().unwrap().to_string(), pk.clone());
+        move |k: &str| match k {
+            "ARKSA_VERDICT_URL" => Some(url.clone()),
+            "ARKSA_VERDICT_CREDENTIAL_FILE" => Some(cred.clone()),
+            "ARKSA_VERDICT_KEY" => Some(pk.clone()),
+            "ARKSA_TENANT" => Some("tenant-42.mission-7".into()),
+            _ => None,
+        }
+    };
+    let (m, plugins) = load(&fixture());
+    let svc = resolve(
+        &[],
+        &env,
+        &Defaults {
+            tenants: vec![m.file.mission.clone()],
+            ..Default::default()
+        },
+    )
+    .unwrap();
+    assert_eq!(svc.credential, "svc-credential-token");
+    let t = svc.transport();
+    let dir = tmp("svc-lineage");
+    let e = lineage::recalibrate_mission(
+        &m,
+        &plugins,
+        &dir,
+        &RecalOptions {
+            transport: &t,
+            bearer: &svc.credential,
+            trusted_verdict_keys: &svc.trusted_keys,
+            utc: UTC,
+            signer: None,
+        },
+    )
+    .unwrap();
+    assert_eq!(e.seq, 1);
+    {
+        let s = seen.lock().unwrap();
+        assert_eq!(s.bearers, vec!["svc-credential-token"]);
+        assert_eq!(s.tenants, vec!["tenant-42.mission-7"]);
+    }
+
+    // 2. The command line, configured by the environment only (no --service, --trusted-key or
+    //    --verdict-license), with --tenant overriding ARKSA_TENANT.
+    let lin = work.join("lineage");
+    let run = |extra: &[&str]| {
+        let mut args = vec![
+            "simcal",
+            "recalibrate",
+            mission.to_str().unwrap(),
+            "--lineage",
+            lin.to_str().unwrap(),
+            "--utc",
+            UTC,
+            "--dev",
+        ];
+        args.extend_from_slice(extra);
+        Command::new(env!("CARGO_BIN_EXE_arksa-kpro"))
+            .args(&args)
+            .env("KSHANA_PRO_HOME", &home)
+            .env_remove("KSHANA_VERDICT_URL")
+            .env_remove("KSHANA_VERDICT_KEY")
+            .env_remove("KSHANA_VERDICT_LICENSE")
+            .env_remove("ARKSA_STUDY_SIGNING_KEY")
+            .env_remove("ARKSA_VERDICT_CREDENTIAL")
+            .env_remove("ARKSA_VERDICT_CA")
+            .env("ARKSA_VERDICT_URL", &url)
+            .env("ARKSA_VERDICT_KEY", &pk)
+            .env("ARKSA_VERDICT_CREDENTIAL_FILE", &cred)
+            .env("ARKSA_TENANT", "from-env")
+            .output()
+            .unwrap()
+    };
+    let out = run(&["--tenant", "cli-tenant"]);
+    assert!(
+        out.status.success(),
+        "{}",
+        String::from_utf8_lossy(&out.stderr)
+    );
+    // A malformed tag is refused before any call.
+    let out = run(&["--tenant", "bad tag"]);
+    assert!(!out.status.success());
+    assert!(String::from_utf8_lossy(&out.stderr).contains("may hold only"));
+    // 3. The same transport carries the tag for the lunar assistance request path.
+    let r = t.post("/verdict/lunar-assist", &svc.credential, "{}");
+    assert!(r.unwrap_err().contains("404"));
+    let s = seen.lock().unwrap();
+    assert_eq!(
+        s.tenants,
+        vec!["tenant-42.mission-7", "cli-tenant", "tenant-42.mission-7"]
+    );
+    assert_eq!(s.paths[2], "/verdict/lunar-assist");
+    assert!(s.bearers.iter().all(|b| b == "svc-credential-token"));
 }
 
 // ------------------------------------------------------------------ honesty and X3
