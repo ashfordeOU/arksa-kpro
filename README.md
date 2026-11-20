@@ -118,15 +118,8 @@ Disk: the open engine is large. Set `CARGO_TARGET_DIR` to a shared directory and
 
 ## CI
 
-`.github/workflows/ci.yml` runs format, clippy (`-D warnings`) and the full tests on the self-hosted
-runner. Cargo fetches the private kshana-pro dependency with the git command line
-(`CARGO_NET_GIT_FETCH_WITH_CLI=true`), authenticated by one secret:
+`.github/workflows/ci.yml` runs format, clippy (`-D warnings`) and the full tests on a GitHub-hosted
+runner. kshana-pro is public (since 20 November 2026), so Cargo fetches it without a token; the
+former `KSHANA_PRO_READ_TOKEN` secret can be deleted.
 
-* **`KSHANA_PRO_READ_TOKEN`** (owner step): a fine-grained personal access token, or a GitHub App
-  installation token, with **Contents: read-only** on `ashfordeOU/kshana-pro` and no other repository
-  or permission. Add it under this repository's Settings, Secrets and variables, Actions. The
-  workflow writes it into the runner's git configuration only for
-  `https://github.com/ashfordeOU/kshana-pro`, and removes it again at the end of the job. Without it
-  the job stops at its first step with a message naming the secret.
-
-No other secret is used, and none is in the repository.
+No secret is used, and none is in the repository.
