@@ -7,7 +7,7 @@ never in this crate:
 
 | command | method | path |
 |---|---|---|
-| `arksa-kpro simcal recalibrate` (AK8) | `selfcal` | `POST /verdict/selfcal` |
+| `arksa-kpro simcal recalibrate` (AK8) | `selfcal` or `calibrate`, per hosted plugin | `POST /verdict/selfcal`, `POST /verdict/calibrate` |
 | `arksa-kpro lunar-time assist request` (AK6) | `lunar-assist` | `POST /verdict/lunar-assist` |
 
 The answer is a signed verdict; arksa-kpro accepts it only after its Ed25519 signature verifies
@@ -76,7 +76,10 @@ arksa-kpro simcal recalibrate mission.toml --lineage lineage/
 
 meru's internal profiles also serve `POST /verdict/batch` (several `calibrate`/`selfcal` requests in
 one call, each answered with its own signed verdict). arksa-kpro does not use it yet: `simcal
-recalibrate` sends one request per hosted plugin, which is one call for today's missions.
+recalibrate` sends one request per hosted plugin, one after another, over the same configuration
+and transport (selfcal and calibrate alike). Using the batch route is a possible follow-up for
+missions with many hosted plugins; it would change the lineage writer, which records one verdict
+per request today.
 
 ## Tests
 
@@ -84,5 +87,6 @@ recalibrate` sends one request per hosted plugin, which is one call for today's 
 defaults, URL and key checks) and `tests/simcal.rs`
 (`the_service_configuration_and_tenant_tag_reach_the_service`: configuration from the environment,
 the credential and the tag received by a loopback stand-in service, from the library, the command
-line and the lunar request path). Tests use generated keys and a stand-in; no call was made to a
+line and the lunar request path; `the_command_recalibrates_a_calibrate_mission`: both `calibrate`
+calls of the CALIB-1 mission carry the credential and the mission id as the tag). Tests use generated keys and a stand-in; no call was made to a
 deployed instance.

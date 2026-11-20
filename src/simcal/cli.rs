@@ -24,18 +24,20 @@ pub const USAGE: &str = "arksa-kpro simcal — mission performance simulator, co
   arksa-kpro simcal recalibrate <mission.toml> --lineage <dir> [--service <https://...>]\n\
                     [--trusted-key <hex>[,<hex>]] [--verdict-license <token>] [--tenant <tag>]\n\
                     [--verdict-ca <file>] [--sign-key-file <file>] [--signer <name>] [--utc <iso>]\n\
-      Send each hosted plugin's scenario and telemetry to the hosted self-calibration verdict,\n\
-      accept only a verdict signed by a trusted service key, and append a hash-chained entry to\n\
-      the calibration lineage in <dir> (signed with a key)\n\
+      Send each hosted plugin's model and telemetry to its hosted calibration method (selfcal:\n\
+      the plugin's scenario; calibrate: named parameters with an expression per observable or\n\
+      design runs of the plugin's own simulator), accept only a verdict signed by a trusted\n\
+      service key for that method, and append a hash-chained entry to the calibration lineage\n\
+      in <dir> (signed with a key)\n\
   arksa-kpro simcal verify <lineage-dir> [--trusted-key <hex>[,<hex>]] [--trust <signer public key>]\n\
       Re-check the lineage: chain, hashes, every verdict's signature and outcome, the directory signature\n\
 \n\
 The service (Arksa's internal verdict service, or the contracted instance of a Sovereign install) is\n\
 --service or ARKSA_VERDICT_URL (KSHANA_VERDICT_URL also read); its key --trusted-key, ARKSA_VERDICT_KEY,\n\
 KSHANA_VERDICT_KEY or the key built into the release. The service credential is --verdict-license,\n\
-ARKSA_VERDICT_CREDENTIAL_FILE, ARKSA_VERDICT_CREDENTIAL or KSHANA_VERDICT_LICENSE. Every call carries a\n\
-tenant/mission tag: --tenant, ARKSA_TENANT, the mission file's `tenant`, else its `mission` id.\n\
-An internal CA certificate: --verdict-ca or ARKSA_VERDICT_CA.\n\
+ARKSA_VERDICT_CREDENTIAL_FILE, ARKSA_VERDICT_CREDENTIAL or KSHANA_VERDICT_LICENSE. Every call (selfcal\n\
+and calibrate alike) carries a tenant/mission tag: --tenant, ARKSA_TENANT, the mission file's `tenant`,\n\
+else its `mission` id. An internal CA certificate: --verdict-ca or ARKSA_VERDICT_CA.\n\
 A signing key is a file of 64 hex characters (or ARKSA_STUDY_SIGNING_KEY).\n\
 \n\
 Every command takes [--license <token>] or, in a debug build, [--dev]. See docs/SIM-RECALIBRATION.md.";
@@ -151,6 +153,8 @@ pub fn run(args: &[String], ent: &Entitlement, now_unix: i64) -> Result<u8, Stri
             let signer = flag(args, "--signer").unwrap_or_else(|| "Arksa".into());
             let utc = flag(args, "--utc").unwrap_or_else(|| utc_now(now_unix));
             let (m, plugins) = load(Path::new(&path), ent, now_unix)?;
+            // One resolved configuration and one tagged transport for every hosted plugin,
+            // whichever method (selfcal or calibrate) it uses.
             let svc = crate::verdict_service::resolve(
                 args,
                 &|k| std::env::var(k).ok(),
@@ -181,6 +185,18 @@ pub fn run(args: &[String], ent: &Entitlement, now_unix: i64) -> Result<u8, Stri
             )?;
             for r in &e.plugins {
                 println!("{} ({}): {}", r.plugin, r.kind, r.status.as_str());
+                if let Some(h) = &r.hosted {
+                    for q in &h.outcome.parameters {
+                        println!(
+                            "  {} = {} (standard uncertainty {}, {})",
+                            q.name, q.value, q.std_err, h.evidence_class
+                        );
+                    }
+                    let flags = lineage::flags_note(&h.outcome);
+                    if !flags.is_empty() {
+                        println!("  {}", flags.trim());
+                    }
+                }
             }
             println!(
                 "lineage entry {} ({}) appended to {dir}",

@@ -90,18 +90,20 @@ pub const ARKSA_FEATURES: &[&str] = &[
     "pro-mrd",
 ];
 
-/// Arksa-exclusive kinds added on 15 November 2026 (roadmap 0.42 F4 and M9). They register
-/// through the same hook and the same `arksa` claim as [`ARKSA_KINDS`], but only once the
-/// pinned Kshana Pro's signed tier manifest lists them at the `arksa` tier (by hash):
-/// registering an id the manifest does not list would fail Kshana Pro's start-up check for
-/// every kind. Until the pin moves to a Kshana Pro commit whose manifest lists them, they are
-/// built and tested here as packs but are not reachable through the dispatcher (and so are
-/// refused like any unknown kind).
+/// Arksa-exclusive kinds registered through the manifest. They register through the same
+/// hook and the same `arksa` claim as [`ARKSA_KINDS`], but only once the pinned Kshana Pro's
+/// signed tier manifest lists them at the `arksa` tier (by hash): registering an id the
+/// manifest does not list would fail Kshana Pro's start-up check for every kind. An id the
+/// pinned manifest does not list is built and tested here as a pack but is not reachable
+/// through the dispatcher (and so is refused like any unknown kind).
 ///
-/// `pro-conjunction-validation` (conjunction-assessment validation, research 06 G1/G2) was
-/// added on 20 November 2026 and waits for the same manifest step, as does
-/// `pro-rideshare-id` (rideshare object identification, research 06 G3; its command
-/// `rideshare-id` runs now under the mission feature, see [`rideshare::FEATURE`]).
+/// - the F4 and M9 kinds (15 November 2026), listed since Kshana Pro 4142fc4e;
+/// - `pro-conjunction-validation` (conjunction-assessment validation, research 06 G1/G2,
+///   20 November 2026) and `pro-rideshare-id` (rideshare object identification, research 06
+///   G3; its command `rideshare-id` runs under the mission feature, see
+///   [`rideshare::FEATURE`]), listed since Kshana Pro 79293979 (PR #57), the current pin.
+///
+/// So at the current pin every kind here is registered and reachable.
 pub const PENDING_MANIFEST_KINDS: &[&str] = &[
     SpaceborneRxExposureScenario::KIND,
     SpaceTipCueStudyScenario::KIND,
@@ -110,8 +112,8 @@ pub const PENDING_MANIFEST_KINDS: &[&str] = &[
 ];
 
 /// The command features of [`commands::rx_exposure_command`] (F4) and
-/// [`commands::conjunction_command`], each shared with its kind id; pending the manifest like
-/// [`PENDING_MANIFEST_KINDS`].
+/// [`commands::conjunction_command`], each shared with its kind id; registered when the
+/// manifest lists them, like [`PENDING_MANIFEST_KINDS`] (both are listed at the current pin).
 pub const PENDING_MANIFEST_FEATURES: &[&str] = &[
     SpaceborneRxExposureScenario::KIND,
     ConjunctionValidationScenario::KIND,

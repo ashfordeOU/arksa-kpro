@@ -1,0 +1,20 @@
+# Synthetic telemetry of the toy mission CALIB-1 (not flight data). thermal: 18.5 + 0.0012 t;
+# power: the state of charge of a 100 Wh battery at 95 % efficiency under a 40 W load.
+t_s,observable,value,sigma
+0,thermal.battery_temp_c,18.5,0.1
+300,thermal.battery_temp_c,18.86,0.1
+600,thermal.battery_temp_c,19.22,0.1
+900,thermal.battery_temp_c,19.58,0.1
+1200,thermal.battery_temp_c,19.94,0.1
+1500,thermal.battery_temp_c,20.3,0.1
+1800,thermal.battery_temp_c,20.66,0.1
+2100,thermal.battery_temp_c,21.02,0.1
+2400,thermal.battery_temp_c,21.38,0.1
+2700,thermal.battery_temp_c,21.74,0.1
+3000,thermal.battery_temp_c,22.1,0.1
+0,power.soc_pct,100,0.2
+600,power.soc_pct,92.9824561,0.2
+1200,power.soc_pct,85.9649123,0.2
+1800,power.soc_pct,78.9473684,0.2
+2400,power.soc_pct,71.9298246,0.2
+3000,power.soc_pct,64.9122807,0.2

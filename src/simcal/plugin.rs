@@ -11,7 +11,7 @@
 //! |---|---|---|
 //! | `table` | any external simulator (its output CSV) | linear interpolation inside the simulated span |
 //! | `engine` | a scenario of any open kind, run on the embedded engine | a series (array of objects) or a number at a dot path |
-//! | `hosted` | a model that runs in the hosted service | formed by the service |
+//! | `hosted` | a model that runs in the hosted service (`selfcal`: a scenario it runs; `calibrate`: named parameters with an expression per observable or a design of the plugin's own simulator runs) | formed by the service |
 //!
 //! Adding a model family: implement [`SimPlugin`] and add one entry to [`KINDS`].
 
@@ -20,7 +20,7 @@ use std::path::Path;
 
 use serde_json::Value;
 
-use super::mission::{read_source, ObservableSpec, PluginSpec, SourceRef};
+use super::mission::{read_source, ObservableSpec, ParameterSpec, PluginSpec, SourceRef};
 use crate::license::Entitlement;
 
 /// What a plugin is built with.
@@ -35,17 +35,60 @@ pub struct Context<'a> {
 /// What a hosted model family needs from the plugin, besides its telemetry.
 #[derive(Debug, Clone)]
 pub struct HostedBinding {
-    /// The hosted method (one of Kshana Pro's verdict-client methods).
+    /// The hosted method (one of Kshana Pro's verdict-client methods:
+    /// [`super::hosted::SELFCAL`] or [`super::hosted::CALIBRATE`]).
     pub method: String,
-    /// The simulator scenario, verbatim.
-    pub scenario_text: String,
-    /// The method's configuration.
-    pub config: Value,
-    /// The method's reference sites.
-    pub sites: Vec<Value>,
-    /// Per observable name, the fields that identify it to the method.
-    pub keys: BTreeMap<String, Value>,
+    /// What the method needs.
+    pub model: HostedModel,
 }
+
+/// The method-specific part of a hosted binding.
+#[derive(Debug, Clone)]
+pub enum HostedModel {
+    /// `selfcal`: a simulator scenario the service runs.
+    Selfcal {
+        /// The simulator scenario, verbatim.
+        scenario_text: String,
+        /// The method's configuration.
+        config: Value,
+        /// The method's reference sites.
+        sites: Vec<Value>,
+        /// Per observable name, the fields that identify it to the method.
+        keys: BTreeMap<String, Value>,
+    },
+    /// `calibrate`: named parameters and a model of the observables.
+    Calibrate(CalibrateBinding),
+}
+
+/// A `calibrate` binding: the parameters, the model and the request options.
+#[derive(Debug, Clone)]
+pub struct CalibrateBinding {
+    /// Echoed by the service (default `<mission>/<plugin>`).
+    pub subject: Option<String>,
+    pub max_iter: Option<u64>,
+    pub parameters: Vec<ParameterSpec>,
+    pub model: CalibrateModel,
+}
+
+/// The model of a `calibrate` binding.
+#[derive(Debug, Clone, PartialEq)]
+pub enum CalibrateModel {
+    /// A closed-form expression per observable name.
+    Expression(BTreeMap<String, String>),
+    /// Runs of the plugin's own simulator at chosen parameter sets.
+    Design(Vec<DesignRun>),
+}
+
+/// One design run: the parameter values and, per observable name, the predictions
+/// `(t_s, value)` ascending in time.
+#[derive(Debug, Clone, PartialEq)]
+pub struct DesignRun {
+    pub params: BTreeMap<String, f64>,
+    pub predictions: BTreeMap<String, Vec<(f64, f64)>>,
+}
+
+/// At most this many parameters in one `calibrate` request (the method's limit).
+pub const MAX_CALIBRATE_PARAMETERS: usize = 32;
 
 /// One model family of a mission performance simulator.
 pub trait SimPlugin {
@@ -105,6 +148,25 @@ fn require<'a>(spec: &'a PluginSpec, v: &'a Option<String>, name: &str) -> Resul
         .ok_or_else(|| format!("plugin '{}' ({}) needs `{name}`", spec.id, spec.kind))
 }
 
+/// A local plugin's observables carry no hosted fields.
+fn local_observables_only(spec: &PluginSpec) -> Result<(), String> {
+    for o in &spec.observables {
+        if o.key.is_some() || o.expression.is_some() {
+            return Err(format!(
+                "plugin '{}': {}: `key` and `expression` apply to kind 'hosted' only",
+                spec.id, o.name
+            ));
+        }
+        if o.path.is_some() || o.series.is_some() || o.x.is_some() || o.y.is_some() {
+            return Err(format!(
+                "plugin '{}': {}: `path`/`series` apply to kind 'engine' only",
+                spec.id, o.name
+            ));
+        }
+    }
+    Ok(())
+}
+
 /// Linear interpolation in a series sorted by time; `None` outside its span.
 pub fn interpolate(series: &[(f64, f64)], t: f64) -> Option<f64> {
     let first = series.first()?;
@@ -152,8 +214,11 @@ impl TablePlugin {
                 ("method", spec.method.is_some()),
                 ("calibration", spec.calibration.is_some()),
                 ("site", !spec.sites.is_empty()),
+                ("parameter", !spec.parameters.is_empty()),
+                ("run", !spec.runs.is_empty()),
             ],
         )?;
+        local_observables_only(spec)?;
         let path = require(spec, &spec.predictions, "predictions")?;
         let (text, source) = read_source(ctx.dir, path)?;
         let rows = super::mission::parse_predictions(&text)
@@ -231,6 +296,8 @@ impl EnginePlugin {
                 ("method", spec.method.is_some()),
                 ("calibration", spec.calibration.is_some()),
                 ("site", !spec.sites.is_empty()),
+                ("parameter", !spec.parameters.is_empty()),
+                ("run", !spec.runs.is_empty()),
             ],
         )?;
         let path = require(spec, &spec.scenario, "scenario")?;
@@ -269,8 +336,10 @@ impl EnginePlugin {
                     ))
                 }
             };
-            if o.key.is_some() {
-                return Err(format!("{what}: `key` applies to kind 'hosted' only"));
+            if o.key.is_some() || o.expression.is_some() {
+                return Err(format!(
+                    "{what}: `key` and `expression` apply to kind 'hosted' only"
+                ));
             }
             predictions.insert(o.name.clone(), p);
         }
@@ -332,13 +401,46 @@ impl HostedPlugin {
                 spec.id
             ));
         }
-        if method != super::hosted::SELFCAL {
-            return Err(format!(
-                "plugin '{}': method '{method}' is not a calibration method (use '{}')",
-                spec.id,
-                super::hosted::SELFCAL
-            ));
+        for o in &spec.observables {
+            if o.path.is_some() || o.series.is_some() || o.x.is_some() || o.y.is_some() {
+                return Err(format!(
+                    "plugin '{}': {}: `path`/`series` apply to kind 'engine' only",
+                    spec.id, o.name
+                ));
+            }
         }
+        let (model, sources) = match method {
+            super::hosted::SELFCAL => Self::selfcal(spec, ctx)?,
+            super::hosted::CALIBRATE => Self::calibrate(spec, ctx)?,
+            _ => {
+                return Err(format!(
+                    "plugin '{}': method '{method}' is not a calibration method (use '{}' or '{}')",
+                    spec.id,
+                    super::hosted::SELFCAL,
+                    super::hosted::CALIBRATE
+                ))
+            }
+        };
+        Ok(Box::new(HostedPlugin {
+            id: spec.id.clone(),
+            observables: spec.observables.clone(),
+            binding: HostedBinding {
+                method: method.to_string(),
+                model,
+            },
+            sources,
+        }))
+    }
+
+    /// `selfcal`: the scenario, `[plugin.calibration]`, the sites and a key per observable.
+    fn selfcal(spec: &PluginSpec, ctx: &Context) -> Result<(HostedModel, Vec<SourceRef>), String> {
+        refuse_fields(
+            spec,
+            &[
+                ("parameter", !spec.parameters.is_empty()),
+                ("run", !spec.runs.is_empty()),
+            ],
+        )?;
         let path = require(spec, &spec.scenario, "scenario")?;
         let (scenario_text, source) = read_source(ctx.dir, path)?;
         let config = to_json(
@@ -360,9 +462,9 @@ impl HostedPlugin {
             .collect::<Result<Vec<_>, _>>()?;
         let mut keys = BTreeMap::new();
         for o in &spec.observables {
-            if o.path.is_some() || o.series.is_some() || o.x.is_some() || o.y.is_some() {
+            if o.expression.is_some() {
                 return Err(format!(
-                    "plugin '{}': {}: `path`/`series` apply to kind 'engine' only",
+                    "plugin '{}': {}: `expression` applies to method 'calibrate' only",
                     spec.id, o.name
                 ));
             }
@@ -379,19 +481,237 @@ impl HostedPlugin {
             }
             keys.insert(o.name.clone(), key);
         }
-        Ok(Box::new(HostedPlugin {
-            id: spec.id.clone(),
-            observables: spec.observables.clone(),
-            binding: HostedBinding {
-                method: method.to_string(),
+        Ok((
+            HostedModel::Selfcal {
                 scenario_text,
                 config,
                 sites,
                 keys,
             },
-            sources: vec![source],
-        }))
+            vec![source],
+        ))
     }
+
+    /// `calibrate`: `[[plugin.parameter]]`, then either an `expression` on every observable
+    /// or `[[plugin.run]]` design runs; `[plugin.calibration]` may set `subject` and
+    /// `max_iter`.
+    fn calibrate(
+        spec: &PluginSpec,
+        ctx: &Context,
+    ) -> Result<(HostedModel, Vec<SourceRef>), String> {
+        let id = &spec.id;
+        refuse_fields(
+            spec,
+            &[
+                ("scenario", spec.scenario.is_some()),
+                ("site", !spec.sites.is_empty()),
+            ],
+        )?;
+        for o in &spec.observables {
+            if o.key.is_some() {
+                return Err(format!(
+                    "plugin '{id}': {}: `key` applies to method 'selfcal' only",
+                    o.name
+                ));
+            }
+        }
+        // Options.
+        let (mut subject, mut max_iter) = (None, None);
+        if let Some(c) = &spec.calibration {
+            let t = c
+                .as_table()
+                .ok_or_else(|| format!("plugin '{id}': [plugin.calibration] must be a table"))?;
+            for (k, v) in t {
+                match k.as_str() {
+                    "subject" => {
+                        subject = Some(
+                            v.as_str()
+                                .ok_or_else(|| {
+                                    format!("plugin '{id}': calibration.subject must be text")
+                                })?
+                                .to_string(),
+                        )
+                    }
+                    "max_iter" => {
+                        max_iter = Some(
+                            v.as_integer()
+                                .filter(|n| (1..=100).contains(n))
+                                .ok_or_else(|| {
+                                    format!(
+                                        "plugin '{id}': calibration.max_iter must be an integer in 1..=100"
+                                    )
+                                })? as u64,
+                        )
+                    }
+                    other => {
+                        return Err(format!(
+                            "plugin '{id}': calibration.{other} does not apply to method 'calibrate' (subject, max_iter)"
+                        ))
+                    }
+                }
+            }
+        }
+        // Parameters.
+        if spec.parameters.is_empty() {
+            return Err(format!(
+                "plugin '{id}' (calibrate) needs at least one [[plugin.parameter]]"
+            ));
+        }
+        if spec.parameters.len() > MAX_CALIBRATE_PARAMETERS {
+            return Err(format!(
+                "plugin '{id}': at most {MAX_CALIBRATE_PARAMETERS} parameters"
+            ));
+        }
+        let mut names = std::collections::BTreeSet::new();
+        for q in &spec.parameters {
+            if !parameter_name(&q.name) {
+                return Err(format!(
+                    "plugin '{id}': parameter name '{}' must be letters, digits and '_', not starting with a digit, and not t or pi",
+                    q.name
+                ));
+            }
+            if !names.insert(q.name.as_str()) {
+                return Err(format!(
+                    "plugin '{id}': parameter '{}' is declared twice",
+                    q.name
+                ));
+            }
+            let finite = [q.prior, q.prior_sigma, q.lower, q.upper, q.initial]
+                .iter()
+                .all(|v| v.is_none_or(f64::is_finite));
+            if !finite {
+                return Err(format!(
+                    "plugin '{id}': parameter '{}': a value is not finite",
+                    q.name
+                ));
+            }
+            if q.prior_sigma.is_some_and(|s| s <= 0.0) {
+                return Err(format!(
+                    "plugin '{id}': parameter '{}': prior_sigma must be positive",
+                    q.name
+                ));
+            }
+            if q.prior_sigma.is_some() && q.prior.is_none() {
+                return Err(format!(
+                    "plugin '{id}': parameter '{}': prior_sigma needs a prior",
+                    q.name
+                ));
+            }
+            if let (Some(l), Some(h)) = (q.lower, q.upper) {
+                if l >= h {
+                    return Err(format!(
+                        "plugin '{id}': parameter '{}': lower must be below upper",
+                        q.name
+                    ));
+                }
+            }
+            if q.prior.is_none() && q.initial.is_none() && (q.lower.is_none() || q.upper.is_none())
+            {
+                return Err(format!(
+                    "plugin '{id}': parameter '{}': give a prior, an initial value or both bounds",
+                    q.name
+                ));
+            }
+        }
+        // Model: an expression on every observable, or design runs.
+        let with_expr = spec
+            .observables
+            .iter()
+            .filter(|o| o.expression.is_some())
+            .count();
+        let mut sources = Vec::new();
+        let model = match (with_expr, spec.runs.is_empty()) {
+            (n, true) if n == spec.observables.len() => {
+                let mut m = BTreeMap::new();
+                for o in &spec.observables {
+                    let e = o.expression.as_deref().unwrap_or_default();
+                    if e.trim().is_empty() {
+                        return Err(format!("plugin '{id}': {}: empty expression", o.name));
+                    }
+                    m.insert(o.name.clone(), e.to_string());
+                }
+                CalibrateModel::Expression(m)
+            }
+            (0, false) => {
+                let mut runs = Vec::new();
+                for (k, r) in spec.runs.iter().enumerate() {
+                    let what = format!("plugin '{id}': run {}", k + 1);
+                    let have: std::collections::BTreeSet<&str> =
+                        r.params.keys().map(String::as_str).collect();
+                    if have != names {
+                        return Err(format!(
+                            "{what}: `params` must give every parameter ({}) and nothing else",
+                            names.iter().copied().collect::<Vec<_>>().join(", ")
+                        ));
+                    }
+                    if r.params.values().any(|v| !v.is_finite()) {
+                        return Err(format!("{what}: a parameter value is not finite"));
+                    }
+                    let (text, source) = read_source(ctx.dir, &r.predictions)?;
+                    let rows = super::mission::parse_predictions(&text)
+                        .map_err(|e| format!("{what}: {e}"))?;
+                    if let Some((_, n, _)) = rows
+                        .iter()
+                        .find(|(_, n, _)| !spec.observables.iter().any(|o| o.name == *n))
+                    {
+                        return Err(format!(
+                            "{what}: predicts '{n}', which the plugin does not declare"
+                        ));
+                    }
+                    let mut predictions = BTreeMap::new();
+                    for o in &spec.observables {
+                        let s: Vec<(f64, f64)> = rows
+                            .iter()
+                            .filter(|(_, n, _)| *n == o.name)
+                            .map(|(t, _, v)| (*t, *v))
+                            .collect();
+                        let s = sorted(s, &format!("{what}: predictions of {}", o.name))?;
+                        predictions.insert(o.name.clone(), s);
+                    }
+                    sources.push(source);
+                    runs.push(DesignRun {
+                        params: r.params.clone(),
+                        predictions,
+                    });
+                }
+                CalibrateModel::Design(runs)
+            }
+            (0, true) => {
+                return Err(format!(
+                    "plugin '{id}' (calibrate) needs an `expression` on every observable, or [[plugin.run]] design runs"
+                ))
+            }
+            (_, false) => {
+                return Err(format!(
+                    "plugin '{id}' (calibrate): give either expressions or design runs, not both"
+                ))
+            }
+            (_, true) => {
+                return Err(format!(
+                    "plugin '{id}' (calibrate): every observable needs an `expression` (or use design runs)"
+                ))
+            }
+        };
+        Ok((
+            HostedModel::Calibrate(CalibrateBinding {
+                subject,
+                max_iter,
+                parameters: spec.parameters.clone(),
+                model,
+            }),
+            sources,
+        ))
+    }
+}
+
+/// A `calibrate` parameter name: a plain identifier that is not `t` or `pi`.
+fn parameter_name(s: &str) -> bool {
+    s.chars()
+        .next()
+        .is_some_and(|c| c.is_ascii_alphabetic() || c == '_')
+        && s.chars().all(|c| c.is_ascii_alphanumeric() || c == '_')
+        && s != "t"
+        && s != "pi"
 }
 
 impl SimPlugin for HostedPlugin {

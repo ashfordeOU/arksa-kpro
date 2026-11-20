@@ -142,9 +142,10 @@ a kshana release with Alpha-5 support is pinned: then delete the local module an
 
 The command runs under the mission feature `pro-mission-dossier` (Arksa tier), like `ops`, `simcal` and
 `landing-nav`: it needs a token with the `arksa` claim (`ensure_rideshare_id_entitled` in
-`src/entitlement.rs`). The scenario kind `pro-rideshare-id` is registered through the hook only once Kshana Pro's
-signed tier manifest lists it (`PENDING_MANIFEST_KINDS`, like F4/M9 and `pro-conjunction-validation`); until then
-it is built and tested as a pack and refused by the dispatcher like any unknown kind.
+`src/entitlement.rs`). The scenario kind `pro-rideshare-id` registers through the hook once Kshana Pro's
+signed tier manifest lists it (`PENDING_MANIFEST_KINDS`, like F4/M9 and `pro-conjunction-validation`); the
+manifest lists it (kind only) since Kshana Pro 79293979 (PR #57), the current pin, so the kind is reachable
+through the dispatcher under an Arksa-signed `arksa` entitlement.
 
 ## Worked example (synthetic)
 

@@ -1,8 +1,9 @@
 // PRIVATE — Arksa-exclusive (arksa-kpro).
 //
-//! AK8: simulator plugins against telemetry, recalibration through the hosted
-//! self-calibration verdict (a local stand-in service that signs its answers with a test
-//! key), and the signed calibration lineage. Toy mission TOY-1 (synthetic data).
+//! AK8: simulator plugins against telemetry, recalibration through the hosted calibration
+//! verdicts `selfcal` and `calibrate` (a local stand-in service that signs its answers with a
+//! test key), and the signed calibration lineage. Toy missions TOY-1 and CALIB-1 (synthetic
+//! data).
 
 use std::io::{BufRead, BufReader, Read, Write};
 use std::net::TcpListener;
@@ -11,7 +12,7 @@ use std::process::Command;
 use std::sync::{Arc, Mutex};
 
 use arksa_kpro::license::{Entitlement, Tier};
-use arksa_kpro::simcal::hosted::{self, SELFCAL};
+use arksa_kpro::simcal::hosted::{self, CALIBRATE, SELFCAL};
 use arksa_kpro::simcal::lineage::{self, RecalOptions, Status, GENESIS};
 use arksa_kpro::simcal::mission::{parse_telemetry, Mission};
 use arksa_kpro::simcal::plugin::{self, Context, SimPlugin};
@@ -132,6 +133,122 @@ fn outcome_for(req: &Value, converged: bool) -> Value {
     })
 }
 
+/// The stand-in's `calibrate` answer, worked out from the request alone. Expression model
+/// `a + b * t` (the CALIB-1 thermal model): the straight line through the observations
+/// (ordinary least squares, equal sigmas). Design model: the parameters of the run whose
+/// predictions lie closest to the observations. `at_bound`: values on a declared bound;
+/// `not_constrained`: a prior sigma no wider than 1/0.9 of the stated standard error.
+fn calibrate_outcome_for(req: &Value) -> Value {
+    let obs = req["observations"].as_array().unwrap();
+    let params = req["parameters"].as_array().unwrap();
+    let names: Vec<&str> = params.iter().map(|q| q["name"].as_str().unwrap()).collect();
+    let mut est: Vec<(f64, f64)> = Vec::new();
+    let surface = match req["model"]["kind"].as_str().unwrap() {
+        "expression" => {
+            let e = req["model"]["observables"]["battery_temp_c"]
+                .as_str()
+                .unwrap();
+            assert_eq!(e, "t0_c + rate_c_per_s * t");
+            let n = obs.len() as f64;
+            let (st, sv) = obs.iter().fold((0.0, 0.0), |(a, b), o| {
+                (
+                    a + o["t_s"].as_f64().unwrap(),
+                    b + o["value"].as_f64().unwrap(),
+                )
+            });
+            let (mt, mv) = (st / n, sv / n);
+            let (sxy, sxx) = obs.iter().fold((0.0, 0.0), |(a, b), o| {
+                let dt = o["t_s"].as_f64().unwrap() - mt;
+                (a + dt * (o["value"].as_f64().unwrap() - mv), b + dt * dt)
+            });
+            let slope = sxy / sxx;
+            est.push((mv - slope * mt, 0.03));
+            est.push((slope, 2e-5));
+            None
+        }
+        "design" => {
+            let runs = req["model"]["runs"].as_array().unwrap();
+            let miss = |r: &Value| -> f64 {
+                obs.iter()
+                    .map(|o| {
+                        let s = r["predictions"][o["observable"].as_str().unwrap()]
+                            .as_array()
+                            .unwrap();
+                        let p = s
+                            .iter()
+                            .find(|p| p[0].as_f64() == o["t_s"].as_f64())
+                            .unwrap()[1]
+                            .as_f64()
+                            .unwrap();
+                        ((o["value"].as_f64().unwrap() - p) / o["sigma"].as_f64().unwrap()).powi(2)
+                    })
+                    .sum()
+            };
+            let best = runs
+                .iter()
+                .min_by(|a, b| miss(a).total_cmp(&miss(b)))
+                .unwrap();
+            for q in &names {
+                let v = best["params"][q].as_f64().unwrap();
+                let mut vals: Vec<f64> = runs
+                    .iter()
+                    .map(|r| r["params"][q].as_f64().unwrap())
+                    .collect();
+                vals.sort_by(f64::total_cmp);
+                est.push((v, (vals[vals.len() - 1] - vals[0]) / 4.0));
+            }
+            Some(json!({"kind": "linear", "runs": runs.len(), "loo_error_over_sigma_rms": 0.0}))
+        }
+        k => panic!("model kind {k}"),
+    };
+    let at_bound: Vec<&str> = params
+        .iter()
+        .zip(&est)
+        .filter(|(q, (v, _))| q["lower"].as_f64() == Some(*v) || q["upper"].as_f64() == Some(*v))
+        .map(|(q, _)| q["name"].as_str().unwrap())
+        .collect();
+    let not_constrained: Vec<&str> = params
+        .iter()
+        .zip(&est)
+        .filter(|(q, (_, se))| q["prior_sigma"].as_f64().is_some_and(|s| *se > 0.9 * s))
+        .map(|(q, _)| q["name"].as_str().unwrap())
+        .collect();
+    let head = hex::encode(Sha256::digest(serde_json::to_vec(req).unwrap()));
+    let mut v = json!({
+        "converged": true,
+        "stop_reason": "converged",
+        "passes": 6,
+        "fidelity_first": 0.0,
+        "fidelity_last": 100.0,
+        "chi2_reduced_first": 412.5,
+        "chi2_reduced_last": 0.0,
+        "n_obs": obs.len(),
+        "posterior": names.iter().zip(&est).map(|(n, (v, se))| json!({"name": n, "value": v, "std_err": se})).collect::<Vec<_>>(),
+        "correlation": (0..names.len()).map(|i| (0..names.len()).map(|j| if i == j { 1.0 } else { -0.5 }).collect::<Vec<f64>>()).collect::<Vec<_>>(),
+        "at_bound": at_bound,
+        "not_constrained": not_constrained,
+        "lineage": {"head": head, "entries": 2, "recording_digest": "ef56", "model_digest": "0a78", "key_id": "lin-1", "tag": "9b"},
+        "notice": "MODELLED (stand-in).",
+    });
+    if let Some(s) = req["subject"].as_str() {
+        v["subject"] = json!(s);
+    }
+    if let Some(s) = surface {
+        v["surface"] = s;
+    }
+    v
+}
+
+/// The request fields the `calibrate` method accepts (it refuses any other).
+const CALIBRATE_FIELDS: &[&str] = &[
+    "subject",
+    "parameters",
+    "model",
+    "observations",
+    "tolerances",
+    "options",
+];
+
 /// What the stand-in received.
 #[derive(Default, Clone)]
 struct Seen {
@@ -142,8 +259,9 @@ struct Seen {
     tenants: Vec<String>,
 }
 
-/// A loopback stand-in for the hosted verdict service: answers `POST /verdict/selfcal` with
-/// a verdict signed by `seed`. Returns its base URL and what it saw.
+/// A loopback stand-in for the hosted verdict service: answers `POST /verdict/selfcal` and
+/// `POST /verdict/calibrate` with a verdict signed by `seed`. Returns its base URL and what it
+/// saw.
 fn stand_in(seed: [u8; 32], converged: bool, answers: usize) -> (String, Arc<Mutex<Seen>>) {
     let l = TcpListener::bind("127.0.0.1:0").unwrap();
     let url = format!("http://127.0.0.1:{}", l.local_addr().unwrap().port());
@@ -187,13 +305,29 @@ fn stand_in(seed: [u8; 32], converged: bool, answers: usize) -> (String, Arc<Mut
                 s.bodies.push(req.clone());
                 s.tenants.push(tenant.clone());
             }
-            let (code, text) = if path != "/verdict/selfcal" {
+            let (code, text) = if path != "/verdict/selfcal" && path != "/verdict/calibrate" {
                 ("404 Not Found", r#"{"error":"no such method"}"#.to_string())
             } else if bearer.is_empty() {
                 (
                     "401 Unauthorized",
                     r#"{"error":"licence required"}"#.to_string(),
                 )
+            } else if path == "/verdict/calibrate" {
+                match req
+                    .as_object()
+                    .and_then(|o| o.keys().find(|k| !CALIBRATE_FIELDS.contains(&k.as_str())))
+                {
+                    Some(k) => (
+                        "400 Bad Request",
+                        format!(r#"{{"error":"unknown field {k}"}}"#),
+                    ),
+                    None => {
+                        let mut o = calibrate_outcome_for(&req);
+                        o["converged"] = json!(converged);
+                        let v = sign(CALIBRATE, o, &seed);
+                        ("200 OK", serde_json::to_string(&v).unwrap())
+                    }
+                }
             } else {
                 let v = sign(SELFCAL, outcome_for(&req, converged), &seed);
                 ("200 OK", serde_json::to_string(&v).unwrap())
@@ -898,6 +1032,447 @@ fn the_command_is_gated_and_runs_end_to_end() {
     );
     assert!(!out.status.success());
     assert!(String::from_utf8_lossy(&out.stderr).contains("--service"));
+}
+
+// ------------------------------------------------------------------ calibrate (CALIB-1)
+
+fn calib() -> PathBuf {
+    Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/simcal/calib-1")
+}
+
+/// A copy of CALIB-1 with `edit` applied to its mission file.
+fn calib_with(tag: &str, edit: impl Fn(String) -> String) -> PathBuf {
+    let d = tmp(tag);
+    for e in std::fs::read_dir(calib()).unwrap() {
+        let p = e.unwrap().path();
+        std::fs::copy(&p, d.join(p.file_name().unwrap())).unwrap();
+    }
+    let m = std::fs::read_to_string(d.join("mission.toml")).unwrap();
+    std::fs::write(d.join("mission.toml"), edit(m)).unwrap();
+    d
+}
+
+fn build_err(dir: &Path) -> String {
+    let ent = enterprise();
+    let m = Mission::load(&dir.join("mission.toml")).unwrap();
+    let ctx = Context {
+        dir: &m.dir,
+        entitlement: &ent,
+        now_unix: 1_790_000_000,
+    };
+    m.file
+        .plugins
+        .iter()
+        .map(|s| plugin::build(s, &ctx))
+        .find_map(Result::err)
+        .expect("a plugin is refused")
+}
+
+#[test]
+fn the_calibrate_request_carries_parameters_model_and_telemetry_only() {
+    let (m, plugins) = load(&calib());
+    assert_eq!(plugins.len(), 2);
+    for p in &plugins {
+        assert_eq!(p.hosted().unwrap().method, CALIBRATE);
+    }
+    // Expression model.
+    let body: Value =
+        serde_json::from_str(&hosted::request_body(&m, plugins[0].as_ref()).unwrap()).unwrap();
+    let mut keys: Vec<_> = body.as_object().unwrap().keys().cloned().collect();
+    keys.sort();
+    assert_eq!(
+        keys,
+        [
+            "model",
+            "observations",
+            "parameters",
+            "subject",
+            "tolerances"
+        ]
+    );
+    assert_eq!(body["subject"], "CALIB-1/thermal");
+    assert_eq!(
+        body["parameters"],
+        json!([
+            {"name": "t0_c", "prior": 20.0, "prior_sigma": 5.0},
+            {"name": "rate_c_per_s", "lower": -0.01, "upper": 0.01, "initial": 0.0},
+        ])
+    );
+    assert_eq!(
+        body["model"],
+        json!({"kind": "expression", "observables": {"battery_temp_c": "t0_c + rate_c_per_s * t"}})
+    );
+    let obs = body["observations"].as_array().unwrap();
+    assert_eq!(obs.len(), 11);
+    assert_eq!(
+        obs[1],
+        json!({"observable": "battery_temp_c", "t_s": 300.0, "value": 18.86, "sigma": 0.1})
+    );
+    assert_eq!(body["tolerances"], json!({"battery_temp_c": 0.5}));
+    assert!(!body.to_string().contains("soc_pct"));
+    // Design model, with the plugin's options.
+    let body: Value =
+        serde_json::from_str(&hosted::request_body(&m, plugins[1].as_ref()).unwrap()).unwrap();
+    assert_eq!(body["subject"], "CALIB-1 power");
+    assert_eq!(body["options"], json!({"max_iter": 30}));
+    assert_eq!(body["model"]["kind"], "design");
+    let runs = body["model"]["runs"].as_array().unwrap();
+    assert_eq!(runs.len(), 6);
+    assert_eq!(
+        runs[3]["params"],
+        json!({"capacity_wh": 100.0, "eff": 0.95})
+    );
+    let p = runs[3]["predictions"]["soc_pct"].as_array().unwrap();
+    assert_eq!(p.len(), 6);
+    assert_eq!(p[1], json!([600.0, 92.9824561]));
+    assert_eq!(body["observations"].as_array().unwrap().len(), 6);
+    // The run files are the plugin's sources, by hash.
+    let src = plugins[1].sources();
+    assert_eq!(src.len(), 6);
+    assert_eq!(src[0].path, "power-run-1.csv");
+    assert!(plugins[0].sources().is_empty());
+}
+
+#[test]
+fn calibrate_recovers_the_parameters_and_records_flags_in_the_lineage() {
+    let (m, plugins) = load(&calib());
+    let (url, seen) = stand_in(SERVICE_SEED, true, 2);
+    let t = kshana_pro::remote_verdict::CurlVerdictTransport { base_url: url };
+    let dir = tmp("calib-lineage");
+    let pk = service_pk();
+    let e = lineage::recalibrate_mission(&m, &plugins, &dir, &opts(&t, &pk)).unwrap();
+    {
+        let s = seen.lock().unwrap();
+        assert_eq!(s.paths, vec!["/verdict/calibrate", "/verdict/calibrate"]);
+        assert_eq!(s.bearers, vec!["licence-token", "licence-token"]);
+    }
+    let st = |id: &str| e.plugins.iter().find(|p| p.plugin == id).unwrap();
+
+    // Expression model: the stand-in's fit recovers the synthetic truth (18.5, 0.0012).
+    let th = st("thermal");
+    assert_eq!(th.status, Status::Calibrated);
+    let h = th.hosted.as_ref().unwrap();
+    assert_eq!(h.method, "calibrate");
+    assert_eq!(h.evidence_class, "MODELLED");
+    let q = &h.outcome.parameters;
+    assert_eq!(q[0].name, "t0_c");
+    assert!((q[0].value - 18.5).abs() < 1e-9, "{}", q[0].value);
+    assert_eq!(q[1].name, "rate_c_per_s");
+    assert!((q[1].value - 0.0012).abs() < 1e-12, "{}", q[1].value);
+    assert_eq!(h.outcome.n_obs, Some(11));
+    assert_eq!(h.outcome.chi2_reduced_first, Some(412.5));
+    assert_eq!(h.outcome.chi2_reduced_last, Some(0.0));
+    assert_eq!(h.outcome.at_bound, Some(vec![]));
+    assert_eq!(h.outcome.not_constrained, Some(vec![]));
+    assert_eq!(h.outcome.correlation.as_ref().unwrap().len(), 2);
+    assert!(h.outcome.surface.is_none());
+    assert!(th.note.contains("hosted calibrate method"), "{}", th.note);
+
+    // Design model: the run that matches the telemetry (100 Wh, 0.95); eff sits on its upper
+    // bound and the design cannot narrow its prior: both are recorded and reported.
+    let pw = st("power");
+    assert_eq!(pw.status, Status::Calibrated);
+    let h = pw.hosted.as_ref().unwrap();
+    let q = &h.outcome.parameters;
+    assert_eq!((q[0].name.as_str(), q[0].value), ("capacity_wh", 100.0));
+    assert_eq!((q[1].name.as_str(), q[1].value), ("eff", 0.95));
+    assert_eq!(h.outcome.at_bound, Some(vec!["eff".to_string()]));
+    assert_eq!(h.outcome.not_constrained, Some(vec!["eff".to_string()]));
+    assert_eq!(h.outcome.surface.as_ref().unwrap()["runs"], 6);
+    assert!(pw.note.contains("At a bound: eff."), "{}", pw.note);
+    assert!(
+        pw.note.contains("Not constrained by the telemetry"),
+        "{}",
+        pw.note
+    );
+    let md = lineage::summary_md(&e);
+    assert!(md.contains("## power — hosted calibrate"), "{md}");
+    assert!(md.contains("At a bound: eff"), "{md}");
+    assert!(md.contains("Not constrained by the telemetry: eff"), "{md}");
+    assert!(md.contains("reduced chi-square 412.5 → 0"), "{md}");
+
+    // The entry, the request and verdict files and the signature all check.
+    let c = lineage::verify_dir(&dir, &pk, &[arksa_pk()]).unwrap();
+    assert!(c.passed(), "{:?}", c.problems);
+    let v: Value =
+        serde_json::from_slice(&std::fs::read(dir.join(&h.verdict_file)).unwrap()).unwrap();
+    assert_eq!(v["method"], "calibrate");
+
+    // Recording a calibrate verdict under another method is detected.
+    let text = std::fs::read_to_string(dir.join("entries.jsonl")).unwrap();
+    let mut entry: lineage::Entry = serde_json::from_str(text.trim()).unwrap();
+    entry.plugins[1].hosted.as_mut().unwrap().method = "selfcal".into();
+    entry.entry_sha256 = entry.body_sha256();
+    std::fs::write(
+        dir.join("entries.jsonl"),
+        serde_json::to_string(&entry).unwrap() + "\n",
+    )
+    .unwrap();
+    let c = lineage::verify_dir(&dir, &pk, &[]).unwrap();
+    assert!(
+        c.problems
+            .iter()
+            .any(|p| p.contains("not a selfcal verdict")),
+        "{:?}",
+        c.problems
+    );
+}
+
+#[test]
+fn a_calibrate_verdict_for_the_wrong_method_or_tampered_is_refused() {
+    let (m, plugins) = load(&calib());
+    let pk = service_pk();
+    let thermal = plugins[0].as_ref();
+    let req: Value = serde_json::from_str(&hosted::request_body(&m, thermal).unwrap()).unwrap();
+    let good = calibrate_outcome_for(&req);
+    // A selfcal verdict (even one with every calibrate field) is not a calibrate verdict.
+    let other = serde_json::to_string(&sign(SELFCAL, good.clone(), &SERVICE_SEED)).unwrap();
+    let e = hosted::recalibrate(&Fixed(Ok(other)), "tok", &m, thermal, &pk).unwrap_err();
+    assert!(e.contains("not 'calibrate'"), "{e}");
+    // Tampered after signing: the signature fails.
+    let mut v = sign(CALIBRATE, good.clone(), &SERVICE_SEED);
+    v.verdict["posterior"][0]["value"] = json!(25.0);
+    let e = hosted::recalibrate(
+        &Fixed(Ok(serde_json::to_string(&v).unwrap())),
+        "tok",
+        &m,
+        thermal,
+        &pk,
+    )
+    .unwrap_err();
+    assert!(e.contains("verdict refused"), "{e}");
+    let mut v = sign(CALIBRATE, good.clone(), &SERVICE_SEED);
+    v.verdict["at_bound"] = json!(["t0_c"]);
+    let e = hosted::recalibrate(
+        &Fixed(Ok(serde_json::to_string(&v).unwrap())),
+        "tok",
+        &m,
+        thermal,
+        &pk,
+    )
+    .unwrap_err();
+    assert!(e.contains("verdict refused"), "{e}");
+    // Signed by a key that is not trusted.
+    let v = serde_json::to_string(&sign(CALIBRATE, good.clone(), &[3; 32])).unwrap();
+    let e = hosted::recalibrate(&Fixed(Ok(v)), "tok", &m, thermal, &pk).unwrap_err();
+    assert!(e.contains("verdict refused"), "{e}");
+    // Signed and trusted, but missing a calibrate field, flagging an unknown parameter, or
+    // naming other parameters than were asked for.
+    for (edit, want) in [
+        ("at_bound", "at_bound"),
+        ("not_constrained", "not_constrained"),
+        ("flag", "not in its `posterior`"),
+        ("posterior", "the request asked for"),
+        ("correlation", "correlation"),
+    ] {
+        let mut o = good.clone();
+        match edit {
+            "flag" => o["not_constrained"] = json!(["k_other"]),
+            "posterior" => o["posterior"][1]["name"] = json!("rate"),
+            "correlation" => o["correlation"] = json!([[1.0]]),
+            k => {
+                o.as_object_mut().unwrap().remove(k);
+            }
+        }
+        let v = serde_json::to_string(&sign(CALIBRATE, o, &SERVICE_SEED)).unwrap();
+        let e = hosted::recalibrate(&Fixed(Ok(v)), "tok", &m, thermal, &pk).unwrap_err();
+        assert!(e.contains(want), "{edit}: {e}");
+    }
+    // The good verdict is accepted.
+    let v = serde_json::to_string(&sign(CALIBRATE, good, &SERVICE_SEED)).unwrap();
+    let r = hosted::recalibrate(&Fixed(Ok(v)), "tok", &m, thermal, &pk).unwrap();
+    assert!(r.outcome.converged);
+    // Nothing is written when a calibrate verdict is refused.
+    let (url, _) = stand_in([3; 32], true, 1);
+    let t = kshana_pro::remote_verdict::CurlVerdictTransport { base_url: url };
+    let dir = tmp("calib-foreign");
+    let e = lineage::recalibrate_mission(&m, &plugins, &dir, &opts(&t, &pk)).unwrap_err();
+    assert!(e.contains("verdict refused"), "{e}");
+    assert!(lineage::read_entries(&dir).unwrap().is_empty());
+}
+
+#[test]
+fn bad_calibrate_plugins_are_refused_with_reasons() {
+    type Edit = Box<dyn Fn(String) -> String>;
+    let cases: Vec<(&str, Edit, &str)> = vec![
+        (
+            "no-params",
+            Box::new(|m: String| {
+                m.replace(
+                    "[[plugin.parameter]]\nname = \"t0_c\"\nprior = 20.0\nprior_sigma = 5.0\n\n[[plugin.parameter]]\nname = \"rate_c_per_s\"\ninitial = 0.0\nlower = -0.01\nupper = 0.01\n",
+                    "",
+                )
+            }),
+            "at least one [[plugin.parameter]]",
+        ),
+        (
+            "dup",
+            Box::new(|m: String| m.replace("name = \"rate_c_per_s\"", "name = \"t0_c\"")),
+            "declared twice",
+        ),
+        (
+            "t",
+            Box::new(|m: String| m.replace("name = \"t0_c\"", "name = \"t\"")),
+            "not t or pi",
+        ),
+        (
+            "sigma-no-prior",
+            Box::new(|m: String| m.replace("prior = 20.0\n", "")),
+            "prior_sigma needs a prior",
+        ),
+        (
+            "bounds",
+            Box::new(|m: String| m.replace("lower = -0.01", "lower = 0.02")),
+            "lower must be below upper",
+        ),
+        (
+            "no-model",
+            Box::new(|m: String| m.replace("expression = \"t0_c + rate_c_per_s * t\"\n", "")),
+            "needs an `expression` on every observable",
+        ),
+        (
+            "both",
+            Box::new(|m: String| {
+                m.replace(
+                    "tolerance = 1.0\n",
+                    "tolerance = 1.0\nexpression = \"capacity_wh * eff\"\n",
+                )
+            }),
+            "not both",
+        ),
+        (
+            "run-params",
+            Box::new(|m: String| {
+                m.replacen(
+                    "params = { capacity_wh = 80.0, eff = 0.85 }",
+                    "params = { capacity_wh = 80.0 }",
+                    1,
+                )
+            }),
+            "must give every parameter",
+        ),
+        (
+            "option",
+            Box::new(|m: String| m.replace("max_iter = 30", "max_iter = 30\nsections = 1")),
+            "calibration.sections does not apply",
+        ),
+        (
+            "max-iter",
+            Box::new(|m: String| m.replace("max_iter = 30", "max_iter = 0")),
+            "max_iter must be an integer",
+        ),
+        (
+            "scenario",
+            Box::new(|m: String| {
+                m.replace(
+                    "method = \"calibrate\"\n\n[[plugin.parameter]]\nname = \"t0_c\"",
+                    "method = \"calibrate\"\nscenario = \"telemetry.csv\"\n\n[[plugin.parameter]]\nname = \"t0_c\"",
+                )
+            }),
+            "`scenario` does not apply",
+        ),
+        (
+            "key",
+            Box::new(|m: String| {
+                m.replace(
+                    "expression = \"t0_c + rate_c_per_s * t\"",
+                    "expression = \"t0_c + rate_c_per_s * t\"\nkey = { site = \"s1\" }",
+                )
+            }),
+            "`key` applies to method 'selfcal' only",
+        ),
+        (
+            "unknown-method",
+            Box::new(|m: String| m.replacen("method = \"calibrate\"", "method = \"survey\"", 1)),
+            "not a calibration method",
+        ),
+    ];
+    for (tag, edit, want) in cases {
+        let d = calib_with(tag, edit);
+        let e = build_err(&d);
+        assert!(e.contains(want), "{tag}: {e}");
+    }
+    // `parameter`, `run` and `expression` do not apply to the local kinds or to selfcal.
+    let d = toy_copy("calib-fields");
+    let m = std::fs::read_to_string(d.join("mission.toml")).unwrap();
+    std::fs::write(
+        d.join("mission.toml"),
+        m.replace("tolerance = 4.0\n", "tolerance = 4.0\nexpression = \"1\"\n"),
+    )
+    .unwrap();
+    assert!(build_err(&d).contains("`expression` apply to kind 'hosted' only"));
+    std::fs::write(
+        d.join("mission.toml"),
+        m.replace(
+            "key = { site = \"s2\", chain = \"c\", station = \"X\", kind = \"ground_toa\" }",
+            "key = { site = \"s2\", chain = \"c\", station = \"X\", kind = \"ground_toa\" }\nexpression = \"1\"",
+        ),
+    )
+    .unwrap();
+    assert!(build_err(&d).contains("applies to method 'calibrate' only"));
+}
+
+#[test]
+fn the_command_recalibrates_a_calibrate_mission() {
+    let work = tmp("calib-cli");
+    let home = work.join("home");
+    let mission = calib().join("mission.toml");
+    let (url, seen) = stand_in(SERVICE_SEED, true, 2);
+    let lin = work.join("lineage");
+    let pk = service_pk();
+    let out = bin(
+        &[
+            "simcal",
+            "recalibrate",
+            mission.to_str().unwrap(),
+            "--lineage",
+            lin.to_str().unwrap(),
+            "--service",
+            &url,
+            "--trusted-key",
+            &pk,
+            "--verdict-license",
+            "tok",
+            "--utc",
+            UTC,
+            "--dev",
+        ],
+        &home,
+    );
+    let so = String::from_utf8_lossy(&out.stdout);
+    assert!(
+        out.status.success(),
+        "{so}{}",
+        String::from_utf8_lossy(&out.stderr)
+    );
+    assert!(so.contains("thermal (hosted): calibrated"), "{so}");
+    assert!(so.contains("power (hosted): calibrated"), "{so}");
+    assert!(so.contains("eff = 0.95"), "{so}");
+    assert!(so.contains("At a bound: eff."), "{so}");
+    assert!(so.contains("not signed"), "{so}");
+    // Both calibrate calls carried the credential and the tenant tag (the mission id here).
+    {
+        let s = seen.lock().unwrap();
+        assert_eq!(s.paths, vec!["/verdict/calibrate", "/verdict/calibrate"]);
+        assert_eq!(s.bearers, vec!["tok", "tok"]);
+        assert_eq!(s.tenants, vec!["CALIB-1", "CALIB-1"]);
+    }
+    let out = bin(
+        &[
+            "simcal",
+            "verify",
+            lin.to_str().unwrap(),
+            "--trusted-key",
+            &pk,
+            "--dev",
+        ],
+        &home,
+    );
+    assert!(
+        out.status.success(),
+        "{}",
+        String::from_utf8_lossy(&out.stdout)
+    );
 }
 
 /// Arksa's configuration of the internal verdict service (roadmap 0.42 §1i): the address, the
