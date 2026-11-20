@@ -290,10 +290,15 @@ const RX_EXPOSURE_USAGE: &str =
     "arksa-kpro rx-exposure <scenario.toml> --out <dir> [--sign-key-file <file>] [--signer <name>]
 
 Runs a pro-spaceborne-rx-exposure scenario (files it names are read relative to the scenario's
-directory) and writes study.json, passes.csv and report.md to <dir>. With a signing key (a file
-holding 64 hex characters, or ARKSA_STUDY_SIGNING_KEY) the directory is signed as a whole
-(signature.json, Kshana Pro dossier signature; check it with `arksa-kpro dossier verify`).
-Without one the study is written unsigned and the command says so.";
+directory) and writes study.json, passes.csv and report.md to <dir>. With a [forecast] section it
+adds the per-revolution exposure forecast (receiver link-margin model, predicted outage windows):
+orbits.csv and outages.csv. With an [export] section it writes matching receiver test scenarios
+(kshana-testkit-scenario/1) under scenarios/, ready for `kshana-pro testkit validate|compile|run`.
+With a signing key (a file holding 64 hex characters, or ARKSA_STUDY_SIGNING_KEY) the directory is
+signed as a whole (signature.json, Kshana Pro dossier signature; check it with
+`arksa-kpro dossier verify`). Without one the study is written unsigned and the command says so.
+
+Evidence class: MODELLED. Needs the Arksa entitlement.";
 
 fn rx_exposure_cmd(args: &[String]) -> ExitCode {
     use crate::packs::spaceborne_rx_exposure_pack as rx;
@@ -302,10 +307,13 @@ fn rx_exposure_cmd(args: &[String]) -> ExitCode {
         println!("{RX_EXPOSURE_USAGE}");
         return ExitCode::SUCCESS;
     }
-    if let Err(code) = require_feature(args, rx::KIND) {
-        return code;
-    }
+    let ent = match require_feature(args, rx::KIND) {
+        Ok(e) => e,
+        Err(code) => return code,
+    };
     let run = || -> Result<u8, String> {
+        let now = now_unix();
+        crate::entitlement::ensure_rx_exposure_entitled(&ent, now).map_err(|e| e.to_string())?;
         let path = std::path::Path::new(&args[0]);
         let out = flag(args, "--out").ok_or("--out <dir> is required")?;
         let text = std::fs::read_to_string(path).map_err(|e| format!("{}: {e}", path.display()))?;
@@ -313,7 +321,8 @@ fn rx_exposure_cmd(args: &[String]) -> ExitCode {
             toml::from_str(&text).map_err(|e| format!("invalid scenario: {e}"))?;
         s.resolve_files(path.parent().unwrap_or(std::path::Path::new(".")))
             .map_err(|e| e.to_string())?;
-        let doc = rx::run_study(&s).map_err(|e| e.to_string())?;
+        let (doc, scenarios) =
+            rx::run_study_with_scenarios(&s, &ent, now).map_err(|e| e.to_string())?;
         let key = match flag(args, "--sign-key-file") {
             Some(f) => Some(std::fs::read_to_string(&f).map_err(|e| format!("{f}: {e}"))?),
             None => std::env::var("ARKSA_STUDY_SIGNING_KEY").ok(),
@@ -326,8 +335,9 @@ fn rx_exposure_cmd(args: &[String]) -> ExitCode {
         let utc = rx::fmt_utc(kshana::jd2::Jd2::new(
             2_440_587.5 + now_unix() as f64 / 86_400.0,
         ));
-        let signed = rx::write_study(
+        let signed = rx::write_study_with_scenarios(
             &doc,
+            &scenarios,
             std::path::Path::new(&out),
             seed.as_ref().map(|s| (s, signer.as_str(), utc.as_str())),
         )

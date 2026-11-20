@@ -1,0 +1,5314 @@
+{
+  "affected_areas": 4,
+  "assumptions": {
+    "assumed_eirp_dbw": [
+      20.0,
+      40.0,
+      50.0
+    ],
+    "emitter_height_m": 10.0,
+    "emitter_point": "the centre of each affected area, at emitter_height_m; the maps do not locate an emitter",
+    "link_model": {
+      "antenna_pattern": [
+        [
+          0.0,
+          3.0
+        ],
+        [
+          30.0,
+          2.0
+        ],
+        [
+          60.0,
+          -1.0
+        ],
+        [
+          80.0,
+          -4.0
+        ],
+        [
+          90.0,
+          -7.0
+        ],
+        [
+          100.0,
+          -10.0
+        ],
+        [
+          120.0,
+          -15.0
+        ],
+        [
+          150.0,
+          -20.0
+        ],
+        [
+          180.0,
+          -22.0
+        ]
+      ],
+      "boresight": "the geocentric zenith (a zenith-pointing antenna; no attitude, no body or limb blockage)",
+      "other_losses_db": 0.0,
+      "polarisation_loss_db": 3.0,
+      "reacquisition_s": 20.0,
+      "replaces": "receiver.gain_toward_ground_dbi (not used when the forecast is on)"
+    },
+    "min_elevation_deg": 0.0,
+    "nominal_cn0_dbhz": 45.4751872,
+    "orbit": "SGP4 from the element sets (open engine), TEME to ITRS; accuracy falls with element-set age",
+    "propagation": "free space at L1, no atmospheric or body losses, no terrain",
+    "receiver": {
+      "degraded_margin_db": 6.0,
+      "gain_toward_gnss_dbi": 0.0,
+      "gain_toward_ground_dbi": -15.0,
+      "q": 2.0,
+      "signal_power_dbw": -158.5,
+      "system_noise_temp_k": 290.0,
+      "tracking_threshold_dbhz": 25.0
+    }
+  },
+  "craft": [
+    {
+      "below_threshold_s": [
+        0.0,
+        0.0,
+        1830.0
+      ],
+      "exposure_s": 6360.0,
+      "exposure_share": 0.0735855606,
+      "min_margin_db": [
+        19.4776518,
+        6.19041843,
+        -3.66135009
+      ],
+      "name": "SWARM A",
+      "norad_line1": "1 39452U 13067B   26319.26613728  .00011213  00000+0  18632-3 0  9996",
+      "over_area_s": 360.0,
+      "passes": [
+        {
+          "areas_seen": [
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 210.0,
+          "end_utc": "2026-11-15T00:36:30Z",
+          "link_budget": {
+            "aggregate_coupling_db": -179.000911,
+            "areas_in_view": 1,
+            "dominant_area": "adsb-session-2",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 110.295308,
+            "other_losses_db": 0.0,
+            "path_loss_db": 163.427084,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.4089669,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -159.000911,
+                "js_db": -0.500910962,
+                "margin_db": 20.4089669
+              },
+              {
+                "effective_cn0_dbhz": 41.4329026,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -139.000911,
+                "js_db": 19.499089,
+                "margin_db": 16.4329026
+              },
+              {
+                "effective_cn0_dbhz": 33.3361263,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -129.000911,
+                "js_db": 29.499089,
+                "margin_db": 8.33612635
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 2246.82211,
+            "rx_gain_dbi": -12.5738269,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T00:35:00Z"
+          },
+          "max_elevation_deg": 1.07773984,
+          "min_margin_db": [
+            20.4089669,
+            16.4329026,
+            8.33612635
+          ],
+          "min_range_km": 2246.82211,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T00:33:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 360.0,
+          "end_utc": "2026-11-15T02:13:00Z",
+          "link_budget": {
+            "aggregate_coupling_db": -178.101776,
+            "areas_in_view": 1,
+            "dominant_area": "adsb-session-2",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 110.536954,
+            "other_losses_db": 0.0,
+            "path_loss_db": 162.467538,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.3938765,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -158.101776,
+                "js_db": 0.39822356,
+                "margin_db": 20.3938765
+              },
+              {
+                "effective_cn0_dbhz": 40.8663811,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -138.101776,
+                "js_db": 20.3982236,
+                "margin_db": 15.8663811
+              },
+              {
+                "effective_cn0_dbhz": 32.4869068,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -128.101776,
+                "js_db": 30.3982236,
+                "margin_db": 7.48690677
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 2011.83048,
+            "rx_gain_dbi": -12.6342385,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T02:10:30Z"
+          },
+          "max_elevation_deg": 3.42239412,
+          "min_margin_db": [
+            20.3938765,
+            15.8663811,
+            7.48690677
+          ],
+          "min_range_km": 2011.83048,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T02:07:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-9",
+            "adsb-session-4",
+            "adsb-session-6"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            390.0
+          ],
+          "duration_s": 510.0,
+          "end_utc": "2026-11-15T03:49:00Z",
+          "link_budget": {
+            "aggregate_coupling_db": -171.226209,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-2",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 113.078071,
+            "other_losses_db": 0.0,
+            "path_loss_db": 159.43855,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.0927886,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -151.226209,
+                "js_db": 7.27379087,
+                "margin_db": 20.0927886
+              },
+              {
+                "effective_cn0_dbhz": 35.3873423,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -131.226209,
+                "js_db": 27.2737909,
+                "margin_db": 10.3873423
+              },
+              {
+                "effective_cn0_dbhz": 25.7883362,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -121.226209,
+                "js_db": 37.2737909,
+                "margin_db": 0.788336178
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 1419.52153,
+            "rx_gain_dbi": -13.2695177,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T03:45:30Z"
+          },
+          "max_elevation_deg": 11.5163306,
+          "min_margin_db": [
+            20.0927886,
+            10.3873423,
+            0.788336178
+          ],
+          "min_range_km": 1407.43646,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T03:41:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-4"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            390.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            600.0
+          ],
+          "duration_s": 720.0,
+          "end_utc": "2026-11-15T05:25:30Z",
+          "link_budget": {
+            "aggregate_coupling_db": -167.599013,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-2",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 125.965277,
+            "other_losses_db": 0.0,
+            "path_loss_db": 154.124546,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 44.6395032,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -147.599013,
+                "js_db": 10.9009868,
+                "margin_db": 19.6395032
+              },
+              {
+                "effective_cn0_dbhz": 32.0080676,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -127.599013,
+                "js_db": 30.9009868,
+                "margin_db": 7.00806763
+              },
+              {
+                "effective_cn0_dbhz": 22.1876497,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -117.599013,
+                "js_db": 40.9009868,
+                "margin_db": -2.81235028
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 769.913243,
+            "rx_gain_dbi": -15.9942128,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T05:20:00Z"
+          },
+          "max_elevation_deg": 40.4203117,
+          "min_margin_db": [
+            19.6395032,
+            7.00806763,
+            -2.81235028
+          ],
+          "min_range_km": 624.221364,
+          "outage_windows": [
+            [],
+            [],
+            [
+              {
+                "areas": [
+                  "adsb-session-2",
+                  "adsb-session-4",
+                  "adsb-session-6",
+                  "adsb-session-9"
+                ],
+                "end_utc": "2026-11-15T05:23:50Z",
+                "loss_end_utc": "2026-11-15T05:23:30Z",
+                "loss_s": 390.0,
+                "outage_s": 410.0,
+                "start_utc": "2026-11-15T05:17:00Z",
+                "worst_margin_db": -2.81235028
+              }
+            ]
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T05:14:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-9",
+            "adsb-session-4",
+            "adsb-session-6"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            420.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            630.0
+          ],
+          "duration_s": 720.0,
+          "end_utc": "2026-11-15T06:58:30Z",
+          "link_budget": {
+            "aggregate_coupling_db": -166.880987,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-9",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 132.025163,
+            "other_losses_db": 0.0,
+            "path_loss_db": 152.725317,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 44.5049377,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -146.880987,
+                "js_db": 11.6190131,
+                "margin_db": 19.5049377
+              },
+              {
+                "effective_cn0_dbhz": 31.3199306,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -126.880987,
+                "js_db": 31.6190131,
+                "margin_db": 6.31993061
+              },
+              {
+                "effective_cn0_dbhz": 21.472729,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -116.880987,
+                "js_db": 41.6190131,
+                "margin_db": -3.52727104
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 655.36061,
+            "rx_gain_dbi": -17.0041939,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T06:53:00Z"
+          },
+          "max_elevation_deg": 41.3558389,
+          "min_margin_db": [
+            19.5049377,
+            6.31993061,
+            -3.52727104
+          ],
+          "min_range_km": 612.550665,
+          "outage_windows": [
+            [],
+            [],
+            [
+              {
+                "areas": [
+                  "adsb-session-2",
+                  "adsb-session-4",
+                  "adsb-session-6",
+                  "adsb-session-9"
+                ],
+                "end_utc": "2026-11-15T06:57:20Z",
+                "loss_end_utc": "2026-11-15T06:57:00Z",
+                "loss_s": 420.0,
+                "outage_s": 440.0,
+                "start_utc": "2026-11-15T06:50:00Z",
+                "worst_margin_db": -3.52727104
+              }
+            ]
+          ],
+          "over_area_s": 120.0,
+          "start_utc": "2026-11-15T06:47:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-9",
+            "adsb-session-4",
+            "adsb-session-6"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            450.0
+          ],
+          "duration_s": 570.0,
+          "end_utc": "2026-11-15T08:29:30Z",
+          "link_budget": {
+            "aggregate_coupling_db": -170.835908,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-2",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 111.726806,
+            "other_losses_db": 0.0,
+            "path_loss_db": 160.675609,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.0585041,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -150.835908,
+                "js_db": 7.66409169,
+                "margin_db": 20.0585041
+              },
+              {
+                "effective_cn0_dbhz": 35.0337766,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -130.835908,
+                "js_db": 27.6640917,
+                "margin_db": 10.0337766
+              },
+              {
+                "effective_cn0_dbhz": 25.4020491,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -120.835908,
+                "js_db": 37.6640917,
+                "margin_db": 0.402049076
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 1636.79735,
+            "rx_gain_dbi": -12.9317016,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T08:25:30Z"
+          },
+          "max_elevation_deg": 9.28605637,
+          "min_margin_db": [
+            20.0585041,
+            10.0337766,
+            0.402049076
+          ],
+          "min_range_km": 1544.05643,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T08:20:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 180.0,
+          "end_utc": "2026-11-15T09:57:00Z",
+          "link_budget": {
+            "aggregate_coupling_db": -179.170231,
+            "areas_in_view": 1,
+            "dominant_area": "adsb-session-2",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 110.291023,
+            "other_losses_db": 0.0,
+            "path_loss_db": 163.597476,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.4114805,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -159.170231,
+                "js_db": -0.670231251,
+                "margin_db": 20.4114805
+              },
+              {
+                "effective_cn0_dbhz": 41.534678,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -139.170231,
+                "js_db": 19.3297687,
+                "margin_db": 16.534678
+              },
+              {
+                "effective_cn0_dbhz": 33.4949084,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -129.170231,
+                "js_db": 29.3297687,
+                "margin_db": 8.49490836
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 2291.33329,
+            "rx_gain_dbi": -12.5727557,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T09:55:30Z"
+          },
+          "max_elevation_deg": 0.645862936,
+          "min_margin_db": [
+            20.4114805,
+            16.534678,
+            8.49490836
+          ],
+          "min_range_km": 2291.33329,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T09:54:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-9"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            150.0
+          ],
+          "duration_s": 390.0,
+          "end_utc": "2026-11-15T16:02:00Z",
+          "link_budget": {
+            "aggregate_coupling_db": -175.205529,
+            "areas_in_view": 2,
+            "dominant_area": "adsb-session-2",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 110.933221,
+            "other_losses_db": 0.0,
+            "path_loss_db": 161.694536,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.3181619,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -155.205529,
+                "js_db": 3.29447136,
+                "margin_db": 20.3181619
+              },
+              {
+                "effective_cn0_dbhz": 38.7710584,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -135.205529,
+                "js_db": 23.2944714,
+                "margin_db": 13.7710584
+              },
+              {
+                "effective_cn0_dbhz": 29.6982013,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -125.205529,
+                "js_db": 33.2944714,
+                "margin_db": 4.69820131
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 1840.52319,
+            "rx_gain_dbi": -12.7333054,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T15:58:30Z"
+          },
+          "max_elevation_deg": 5.45514578,
+          "min_margin_db": [
+            20.3181619,
+            13.7710584,
+            4.69820131
+          ],
+          "min_range_km": 1829.54804,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T15:56:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            300.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            570.0
+          ],
+          "duration_s": 660.0,
+          "end_utc": "2026-11-15T17:35:30Z",
+          "link_budget": {
+            "aggregate_coupling_db": -168.905139,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-2",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 117.763628,
+            "other_losses_db": 0.0,
+            "path_loss_db": 156.831232,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 44.8415828,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -148.905139,
+                "js_db": 9.59486057,
+                "margin_db": 19.8415828
+              },
+              {
+                "effective_cn0_dbhz": 33.246147,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -128.905139,
+                "js_db": 29.5948606,
+                "margin_db": 8.24614697
+              },
+              {
+                "effective_cn0_dbhz": 23.486634,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -118.905139,
+                "js_db": 39.5948606,
+                "margin_db": -1.513366
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 1051.41958,
+            "rx_gain_dbi": -14.4409069,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T17:30:00Z"
+          },
+          "max_elevation_deg": 21.7227495,
+          "min_margin_db": [
+            19.8415828,
+            8.24614697,
+            -1.513366
+          ],
+          "min_range_km": 974.799141,
+          "outage_windows": [
+            [],
+            [],
+            [
+              {
+                "areas": [
+                  "adsb-session-2",
+                  "adsb-session-4",
+                  "adsb-session-6",
+                  "adsb-session-9"
+                ],
+                "end_utc": "2026-11-15T17:32:50Z",
+                "loss_end_utc": "2026-11-15T17:32:30Z",
+                "loss_s": 300.0,
+                "outage_s": 320.0,
+                "start_utc": "2026-11-15T17:27:30Z",
+                "worst_margin_db": -1.513366
+              }
+            ]
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T17:25:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            450.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            630.0
+          ],
+          "duration_s": 720.0,
+          "end_utc": "2026-11-15T19:08:30Z",
+          "link_budget": {
+            "aggregate_coupling_db": -166.74638,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-6",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 134.688661,
+            "other_losses_db": 0.0,
+            "path_loss_db": 152.216741,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 44.4776518,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -146.74638,
+                "js_db": 11.7536195,
+                "margin_db": 19.4776518
+              },
+              {
+                "effective_cn0_dbhz": 31.1904184,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -126.74638,
+                "js_db": 31.7536195,
+                "margin_db": 6.19041843
+              },
+              {
+                "effective_cn0_dbhz": 21.3386499,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -116.74638,
+                "js_db": 41.7536195,
+                "margin_db": -3.66135009
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 618.089753,
+            "rx_gain_dbi": -17.4481101,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T19:03:00Z"
+          },
+          "max_elevation_deg": 82.9798713,
+          "min_margin_db": [
+            19.4776518,
+            6.19041843,
+            -3.66135009
+          ],
+          "min_range_km": 422.924736,
+          "outage_windows": [
+            [],
+            [],
+            [
+              {
+                "areas": [
+                  "adsb-session-2",
+                  "adsb-session-4",
+                  "adsb-session-6",
+                  "adsb-session-9"
+                ],
+                "end_utc": "2026-11-15T19:06:50Z",
+                "loss_end_utc": "2026-11-15T19:06:30Z",
+                "loss_s": 450.0,
+                "outage_s": 470.0,
+                "start_utc": "2026-11-15T18:59:00Z",
+                "worst_margin_db": -3.66135009
+              }
+            ]
+          ],
+          "over_area_s": 240.0,
+          "start_utc": "2026-11-15T18:57:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            270.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            540.0
+          ],
+          "duration_s": 660.0,
+          "end_utc": "2026-11-15T20:42:00Z",
+          "link_budget": {
+            "aggregate_coupling_db": -169.283044,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-2",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 114.633815,
+            "other_losses_db": 0.0,
+            "path_loss_db": 158.403453,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 44.8909946,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -149.283044,
+                "js_db": 9.21695621,
+                "margin_db": 19.8909946
+              },
+              {
+                "effective_cn0_dbhz": 33.6004829,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -129.283044,
+                "js_db": 29.2169562,
+                "margin_db": 8.60048287
+              },
+              {
+                "effective_cn0_dbhz": 23.8620413,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -119.283044,
+                "js_db": 39.2169562,
+                "margin_db": -1.13795872
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 1260.04808,
+            "rx_gain_dbi": -13.6584538,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T20:36:00Z"
+          },
+          "max_elevation_deg": 17.0427303,
+          "min_margin_db": [
+            19.8909946,
+            8.60048287,
+            -1.13795872
+          ],
+          "min_range_km": 1139.61181,
+          "outage_windows": [
+            [],
+            [],
+            [
+              {
+                "areas": [
+                  "adsb-session-2",
+                  "adsb-session-4",
+                  "adsb-session-6",
+                  "adsb-session-9"
+                ],
+                "end_utc": "2026-11-15T20:38:50Z",
+                "loss_end_utc": "2026-11-15T20:38:30Z",
+                "loss_s": 270.0,
+                "outage_s": 290.0,
+                "start_utc": "2026-11-15T20:34:00Z",
+                "worst_margin_db": -1.13795872
+              }
+            ]
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T20:31:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-9",
+            "adsb-session-4",
+            "adsb-session-6"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            210.0
+          ],
+          "duration_s": 420.0,
+          "end_utc": "2026-11-15T22:15:00Z",
+          "link_budget": {
+            "aggregate_coupling_db": -172.722046,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-2",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 110.76104,
+            "other_losses_db": 0.0,
+            "path_loss_db": 161.989304,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.2007771,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -152.722046,
+                "js_db": 5.7779536,
+                "margin_db": 20.2007771
+              },
+              {
+                "effective_cn0_dbhz": 36.7116141,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -132.722046,
+                "js_db": 25.7779536,
+                "margin_db": 11.7116141
+              },
+              {
+                "effective_cn0_dbhz": 27.265023,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -122.722046,
+                "js_db": 35.7779536,
+                "margin_db": 2.26502305
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 1904.05592,
+            "rx_gain_dbi": -12.6902601,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T22:10:30Z"
+          },
+          "max_elevation_deg": 5.39767605,
+          "min_margin_db": [
+            20.2007771,
+            11.7116141,
+            2.26502305
+          ],
+          "min_range_km": 1835.641,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T22:08:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 240.0,
+          "end_utc": "2026-11-15T23:48:30Z",
+          "link_budget": {
+            "aggregate_coupling_db": -178.873547,
+            "areas_in_view": 1,
+            "dominant_area": "adsb-session-2",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 110.31093,
+            "other_losses_db": 0.0,
+            "path_loss_db": 163.295815,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.4070115,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -158.873547,
+                "js_db": -0.373547375,
+                "margin_db": 20.4070115
+              },
+              {
+                "effective_cn0_dbhz": 41.355307,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -138.873547,
+                "js_db": 19.6264526,
+                "margin_db": 16.355307
+              },
+              {
+                "effective_cn0_dbhz": 33.2164394,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -128.873547,
+                "js_db": 29.6264526,
+                "margin_db": 8.21643938
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 2213.12138,
+            "rx_gain_dbi": -12.5777324,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T23:47:00Z"
+          },
+          "max_elevation_deg": 1.39558441,
+          "min_margin_db": [
+            20.4070115,
+            16.355307,
+            8.21643938
+          ],
+          "min_range_km": 2213.12138,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T23:45:00Z"
+        }
+      ],
+      "tle_age_days_at_mid_span": 0.23386272,
+      "tle_epoch_utc": "2026-11-15T06:23:14Z",
+      "verdict": [
+        "kept",
+        "kept",
+        "loss-of-tracking-modelled"
+      ]
+    },
+    {
+      "below_threshold_s": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "exposure_s": 10140.0,
+      "exposure_share": 0.117320375,
+      "min_margin_db": [
+        20.3784809,
+        15.3540536,
+        6.76132802
+      ],
+      "name": "SENTINEL-6A",
+      "norad_line1": "1 46984U 20086A   26318.85010962 -.00000056  00000+0  23921-4 0  9990",
+      "over_area_s": 660.0,
+      "passes": [
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 1050.0,
+          "end_utc": "2026-11-15T06:14:30Z",
+          "link_budget": {
+            "aggregate_coupling_db": -179.930917,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-2",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 125.937292,
+            "other_losses_db": 0.0,
+            "path_loss_db": 166.85514,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.4216536,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -159.930917,
+                "js_db": -1.43091677,
+                "margin_db": 20.4216536
+              },
+              {
+                "effective_cn0_dbhz": 41.9721549,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -139.930917,
+                "js_db": 18.5690832,
+                "margin_db": 16.9721549
+              },
+              {
+                "effective_cn0_dbhz": 34.2032163,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -129.930917,
+                "js_db": 28.5690832,
+                "margin_db": 9.20321634
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 3334.0451,
+            "rx_gain_dbi": -15.9895486,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T06:05:30Z"
+          },
+          "max_elevation_deg": 11.4863034,
+          "min_margin_db": [
+            20.4216536,
+            16.9721549,
+            9.20321634
+          ],
+          "min_range_km": 3280.48937,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T05:57:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 1350.0,
+          "end_utc": "2026-11-15T08:10:00Z",
+          "link_budget": {
+            "aggregate_coupling_db": -177.593979,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-4",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 136.986239,
+            "other_losses_db": 0.0,
+            "path_loss_db": 162.703791,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.3838964,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -157.593979,
+                "js_db": 0.906021149,
+                "margin_db": 20.3838964
+              },
+              {
+                "effective_cn0_dbhz": 40.5276643,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -137.593979,
+                "js_db": 20.9060211,
+                "margin_db": 15.5276643
+              },
+              {
+                "effective_cn0_dbhz": 32.0032597,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -127.593979,
+                "js_db": 30.9060211,
+                "margin_db": 7.00325973
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 2067.30253,
+            "rx_gain_dbi": -17.8310398,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T07:59:00Z"
+          },
+          "max_elevation_deg": 34.6893051,
+          "min_margin_db": [
+            20.3838964,
+            15.5276643,
+            7.00325973
+          ],
+          "min_range_km": 2047.90623,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T07:48:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 1410.0,
+          "end_utc": "2026-11-15T10:05:30Z",
+          "link_budget": {
+            "aggregate_coupling_db": -177.365435,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-9",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 160.118982,
+            "other_losses_db": 0.0,
+            "path_loss_db": 159.682951,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.3790179,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -157.365435,
+                "js_db": 1.13456545,
+                "margin_db": 20.3790179
+              },
+              {
+                "effective_cn0_dbhz": 40.3709703,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -137.365435,
+                "js_db": 21.1345655,
+                "margin_db": 15.3709703
+              },
+              {
+                "effective_cn0_dbhz": 31.7847362,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -127.365435,
+                "js_db": 31.1345655,
+                "margin_db": 6.7847362
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 1460.03083,
+            "rx_gain_dbi": -20.6745988,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T09:52:30Z"
+          },
+          "max_elevation_deg": 79.0845375,
+          "min_margin_db": [
+            20.3790179,
+            15.3709703,
+            6.7847362
+          ],
+          "min_range_km": 1373.2187,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 180.0,
+          "start_utc": "2026-11-15T09:42:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 1380.0,
+          "end_utc": "2026-11-15T12:01:30Z",
+          "link_budget": {
+            "aggregate_coupling_db": -177.344007,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-6",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 160.770998,
+            "other_losses_db": 0.0,
+            "path_loss_db": 159.635206,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.3785475,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -157.344007,
+                "js_db": 1.15599296,
+                "margin_db": 20.3785475
+              },
+              {
+                "effective_cn0_dbhz": 40.3561468,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -137.344007,
+                "js_db": 21.155993,
+                "margin_db": 15.3561468
+              },
+              {
+                "effective_cn0_dbhz": 31.7642226,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -127.344007,
+                "js_db": 31.155993,
+                "margin_db": 6.76422261
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 1452.02739,
+            "rx_gain_dbi": -20.7180665,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T11:49:00Z"
+          },
+          "max_elevation_deg": 77.1709699,
+          "min_margin_db": [
+            20.3785475,
+            15.3561468,
+            6.76422261
+          ],
+          "min_range_km": 1382.59395,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 150.0,
+          "start_utc": "2026-11-15T11:39:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 1350.0,
+          "end_utc": "2026-11-15T13:57:30Z",
+          "link_budget": {
+            "aggregate_coupling_db": -177.340984,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-6",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 159.694606,
+            "other_losses_db": 0.0,
+            "path_loss_db": 159.708732,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.3784809,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -157.340984,
+                "js_db": 1.15901613,
+                "margin_db": 20.3784809
+              },
+              {
+                "effective_cn0_dbhz": 40.3540536,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -137.340984,
+                "js_db": 21.1590161,
+                "margin_db": 15.3540536
+              },
+              {
+                "effective_cn0_dbhz": 31.761328,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -127.340984,
+                "js_db": 31.1590161,
+                "margin_db": 6.76132802
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 1464.37085,
+            "rx_gain_dbi": -20.6463071,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T13:47:30Z"
+          },
+          "max_elevation_deg": 75.9756035,
+          "min_margin_db": [
+            20.3784809,
+            15.3540536,
+            6.76132802
+          ],
+          "min_range_km": 1388.02555,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 150.0,
+          "start_utc": "2026-11-15T13:35:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 1380.0,
+          "end_utc": "2026-11-15T15:53:30Z",
+          "link_budget": {
+            "aggregate_coupling_db": -177.358398,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-6",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 162.413097,
+            "other_losses_db": 0.0,
+            "path_loss_db": 159.534072,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.3788636,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -157.358398,
+                "js_db": 1.14160221,
+                "margin_db": 20.3788636
+              },
+              {
+                "effective_cn0_dbhz": 40.3661048,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -137.358398,
+                "js_db": 21.1416022,
+                "margin_db": 15.3661048
+              },
+              {
+                "effective_cn0_dbhz": 31.778,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -127.358398,
+                "js_db": 31.1416022,
+                "margin_db": 6.77800005
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 1435.21868,
+            "rx_gain_dbi": -20.8275398,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T15:43:30Z"
+          },
+          "max_elevation_deg": 74.7811791,
+          "min_margin_db": [
+            20.3788636,
+            15.3661048,
+            6.77800005
+          ],
+          "min_range_km": 1392.55178,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 180.0,
+          "start_utc": "2026-11-15T15:31:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-4"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 1290.0,
+          "end_utc": "2026-11-15T17:47:30Z",
+          "link_budget": {
+            "aggregate_coupling_db": -177.815642,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-4",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 135.18773,
+            "other_losses_db": 0.0,
+            "path_loss_db": 163.128091,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.3883939,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -157.815642,
+                "js_db": 0.684358167,
+                "margin_db": 20.3883939
+              },
+              {
+                "effective_cn0_dbhz": 40.6771406,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -137.815642,
+                "js_db": 20.6843582,
+                "margin_db": 15.6771406
+              },
+              {
+                "effective_cn0_dbhz": 32.2147105,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -127.815642,
+                "js_db": 30.6843582,
+                "margin_db": 7.21471049
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 2170.79609,
+            "rx_gain_dbi": -17.5312884,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T17:37:00Z"
+          },
+          "max_elevation_deg": 31.6755399,
+          "min_margin_db": [
+            20.3883939,
+            15.6771406,
+            7.21471049
+          ],
+          "min_range_km": 2153.47569,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T17:26:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-4"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 930.0,
+          "end_utc": "2026-11-15T19:37:30Z",
+          "link_budget": {
+            "aggregate_coupling_db": -180.350238,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-6",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 125.306879,
+            "other_losses_db": 0.0,
+            "path_loss_db": 167.397152,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.4265532,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -160.350238,
+                "js_db": -1.85023818,
+                "margin_db": 20.4265532
+              },
+              {
+                "effective_cn0_dbhz": 42.1992851,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -140.350238,
+                "js_db": 18.1497618,
+                "margin_db": 17.1992851
+              },
+              {
+                "effective_cn0_dbhz": 34.5898152,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -130.350238,
+                "js_db": 28.1497618,
+                "margin_db": 9.58981518
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 3548.72292,
+            "rx_gain_dbi": -15.8844798,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T19:30:30Z"
+          },
+          "max_elevation_deg": 8.26400355,
+          "min_margin_db": [
+            20.4265532,
+            17.1992851,
+            9.58981518
+          ],
+          "min_range_km": 3545.71396,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T19:22:30Z"
+        }
+      ],
+      "tle_age_days_at_mid_span": 0.64989038,
+      "tle_epoch_utc": "2026-11-14T20:24:09Z",
+      "verdict": [
+        "kept",
+        "kept",
+        "kept"
+      ]
+    },
+    {
+      "below_threshold_s": [
+        0.0,
+        0.0,
+        1530.0
+      ],
+      "exposure_s": 6660.0,
+      "exposure_share": 0.0770565776,
+      "min_margin_db": [
+        19.6365414,
+        6.99193279,
+        -2.82916496
+      ],
+      "name": "GRACE-FO 1",
+      "norad_line1": "1 43476U 18047A   26319.25275398  .00004112  00000+0  10108-3 0  9996",
+      "over_area_s": 240.0,
+      "passes": [
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-9"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            60.0
+          ],
+          "duration_s": 420.0,
+          "end_utc": "2026-11-15T03:19:30Z",
+          "link_budget": {
+            "aggregate_coupling_db": -175.982337,
+            "areas_in_view": 2,
+            "dominant_area": "adsb-session-2",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 111.698372,
+            "other_losses_db": 0.0,
+            "path_loss_db": 162.2657,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.3434943,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -155.982337,
+                "js_db": 2.51766262,
+                "margin_db": 20.3434943
+              },
+              {
+                "effective_cn0_dbhz": 39.3698791,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -135.982337,
+                "js_db": 22.5176626,
+                "margin_db": 14.3698791
+              },
+              {
+                "effective_cn0_dbhz": 30.4525757,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -125.982337,
+                "js_db": 32.5176626,
+                "margin_db": 5.45257574
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 1965.61971,
+            "rx_gain_dbi": -12.924593,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T03:15:30Z"
+          },
+          "max_elevation_deg": 5.34668685,
+          "min_margin_db": [
+            20.3434943,
+            14.3698791,
+            5.45257574
+          ],
+          "min_range_km": 1943.80792,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T03:13:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            120.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            540.0
+          ],
+          "duration_s": 630.0,
+          "end_utc": "2026-11-15T04:53:00Z",
+          "link_budget": {
+            "aggregate_coupling_db": -170.19264,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-2",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 116.834433,
+            "other_losses_db": 0.0,
+            "path_loss_db": 158.186756,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 44.9955312,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -150.19264,
+                "js_db": 8.30735972,
+                "margin_db": 19.9955312
+              },
+              {
+                "effective_cn0_dbhz": 34.4448585,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -130.19264,
+                "js_db": 28.3073597,
+                "margin_db": 9.4448585
+              },
+              {
+                "effective_cn0_dbhz": 24.7646641,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -120.19264,
+                "js_db": 38.3073597,
+                "margin_db": -0.235335868
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 1229.00116,
+            "rx_gain_dbi": -14.2086083,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T04:47:30Z"
+          },
+          "max_elevation_deg": 19.0412643,
+          "min_margin_db": [
+            19.9955312,
+            9.4448585,
+            -0.235335868
+          ],
+          "min_range_km": 1144.88824,
+          "outage_windows": [
+            [],
+            [],
+            [
+              {
+                "areas": [
+                  "adsb-session-2",
+                  "adsb-session-4",
+                  "adsb-session-6",
+                  "adsb-session-9"
+                ],
+                "end_utc": "2026-11-15T04:49:20Z",
+                "loss_end_utc": "2026-11-15T04:49:00Z",
+                "loss_s": 120.0,
+                "outage_s": 140.0,
+                "start_utc": "2026-11-15T04:47:00Z",
+                "worst_margin_db": -0.235335868
+              }
+            ]
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T04:43:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            390.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            660.0
+          ],
+          "duration_s": 780.0,
+          "end_utc": "2026-11-15T06:27:00Z",
+          "link_budget": {
+            "aggregate_coupling_db": -167.582119,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-6",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 134.529395,
+            "other_losses_db": 0.0,
+            "path_loss_db": 153.033231,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 44.6365414,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -147.582119,
+                "js_db": 10.9178806,
+                "margin_db": 19.6365414
+              },
+              {
+                "effective_cn0_dbhz": 31.9919328,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -127.582119,
+                "js_db": 30.9178806,
+                "margin_db": 6.99193279
+              },
+              {
+                "effective_cn0_dbhz": 22.170835,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -117.582119,
+                "js_db": 40.9178806,
+                "margin_db": -2.82916496
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 679.009813,
+            "rx_gain_dbi": -17.4215659,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T06:21:00Z"
+          },
+          "max_elevation_deg": 79.0701494,
+          "min_margin_db": [
+            19.6365414,
+            6.99193279,
+            -2.82916496
+          ],
+          "min_range_km": 467.075577,
+          "outage_windows": [
+            [],
+            [],
+            [
+              {
+                "areas": [
+                  "adsb-session-2",
+                  "adsb-session-4",
+                  "adsb-session-6",
+                  "adsb-session-9"
+                ],
+                "end_utc": "2026-11-15T06:24:20Z",
+                "loss_end_utc": "2026-11-15T06:24:00Z",
+                "loss_s": 390.0,
+                "outage_s": 410.0,
+                "start_utc": "2026-11-15T06:17:30Z",
+                "worst_margin_db": -2.82916496
+              }
+            ]
+          ],
+          "over_area_s": 240.0,
+          "start_utc": "2026-11-15T06:14:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            300.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            600.0
+          ],
+          "duration_s": 720.0,
+          "end_utc": "2026-11-15T08:00:30Z",
+          "link_budget": {
+            "aggregate_coupling_db": -169.096596,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-9",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 118.285684,
+            "other_losses_db": 0.0,
+            "path_loss_db": 157.476615,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 44.8670832,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -149.096596,
+                "js_db": 9.40340354,
+                "margin_db": 19.8670832
+              },
+              {
+                "effective_cn0_dbhz": 33.4259039,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -129.096596,
+                "js_db": 29.4034035,
+                "margin_db": 8.42590388
+              },
+              {
+                "effective_cn0_dbhz": 23.6768529,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -119.096596,
+                "js_db": 39.4034035,
+                "margin_db": -1.32314709
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 1132.51835,
+            "rx_gain_dbi": -14.5714209,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T07:54:30Z"
+          },
+          "max_elevation_deg": 22.3738364,
+          "min_margin_db": [
+            19.8670832,
+            8.42590388,
+            -1.32314709
+          ],
+          "min_range_km": 1031.67873,
+          "outage_windows": [
+            [],
+            [],
+            [
+              {
+                "areas": [
+                  "adsb-session-2",
+                  "adsb-session-4",
+                  "adsb-session-6",
+                  "adsb-session-9"
+                ],
+                "end_utc": "2026-11-15T07:57:20Z",
+                "loss_end_utc": "2026-11-15T07:57:00Z",
+                "loss_s": 300.0,
+                "outage_s": 320.0,
+                "start_utc": "2026-11-15T07:52:00Z",
+                "worst_margin_db": -1.32314709
+              }
+            ]
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T07:49:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            360.0
+          ],
+          "duration_s": 480.0,
+          "end_utc": "2026-11-15T09:34:00Z",
+          "link_budget": {
+            "aggregate_coupling_db": -172.666131,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-2",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 112.007658,
+            "other_losses_db": 0.0,
+            "path_loss_db": 161.792465,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.1973326,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -152.666131,
+                "js_db": 5.83386931,
+                "margin_db": 20.1973326
+              },
+              {
+                "effective_cn0_dbhz": 36.6630903,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -132.666131,
+                "js_db": 25.8338693,
+                "margin_db": 11.6630903
+              },
+              {
+                "effective_cn0_dbhz": 27.2099464,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -122.666131,
+                "js_db": 35.8338693,
+                "margin_db": 2.20994635
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 1861.3916,
+            "rx_gain_dbi": -13.0019146,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T09:29:30Z"
+          },
+          "max_elevation_deg": 6.95629304,
+          "min_margin_db": [
+            20.1973326,
+            11.6630903,
+            2.20994635
+          ],
+          "min_range_km": 1813.08114,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T09:26:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 240.0,
+          "end_utc": "2026-11-15T11:08:00Z",
+          "link_budget": {
+            "aggregate_coupling_db": -179.516055,
+            "areas_in_view": 1,
+            "dominant_area": "adsb-session-2",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 111.150719,
+            "other_losses_db": 0.0,
+            "path_loss_db": 163.728375,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.4163238,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -159.516055,
+                "js_db": -1.01605515,
+                "margin_db": 20.4163238
+              },
+              {
+                "effective_cn0_dbhz": 41.7375976,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -139.516055,
+                "js_db": 18.9839448,
+                "margin_db": 16.7375976
+              },
+              {
+                "effective_cn0_dbhz": 33.8179763,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -129.516055,
+                "js_db": 28.9839448,
+                "margin_db": 8.81797633
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 2326.1261,
+            "rx_gain_dbi": -12.7876798,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T11:06:00Z"
+          },
+          "max_elevation_deg": 1.33038534,
+          "min_margin_db": [
+            20.4163238,
+            16.7375976,
+            8.81797633
+          ],
+          "min_range_km": 2326.1261,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T11:04:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 120.0,
+          "end_utc": "2026-11-15T12:43:00Z",
+          "link_budget": {
+            "aggregate_coupling_db": -179.885613,
+            "areas_in_view": 1,
+            "dominant_area": "adsb-session-2",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 111.107851,
+            "other_losses_db": 0.0,
+            "path_loss_db": 164.10865,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.4210957,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -159.885613,
+                "js_db": -1.38561253,
+                "margin_db": 20.4210957
+              },
+              {
+                "effective_cn0_dbhz": 41.9470148,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -139.885613,
+                "js_db": 18.6143875,
+                "margin_db": 16.9470148
+              },
+              {
+                "effective_cn0_dbhz": 34.161276,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -129.885613,
+                "js_db": 28.6143875,
+                "margin_db": 9.16127603
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 2430.22776,
+            "rx_gain_dbi": -12.7769627,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T12:42:00Z"
+          },
+          "max_elevation_deg": 0.356246769,
+          "min_margin_db": [
+            20.4210957,
+            16.9470148,
+            9.16127603
+          ],
+          "min_range_km": 2430.22776,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T12:41:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 360.0,
+          "end_utc": "2026-11-15T14:21:00Z",
+          "link_budget": {
+            "aggregate_coupling_db": -178.66665,
+            "areas_in_view": 1,
+            "dominant_area": "adsb-session-2",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 111.379874,
+            "other_losses_db": 0.0,
+            "path_loss_db": 162.821681,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.4037123,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -158.66665,
+                "js_db": -0.166649978,
+                "margin_db": 20.4037123
+              },
+              {
+                "effective_cn0_dbhz": 41.2273692,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -138.66665,
+                "js_db": 19.83335,
+                "margin_db": 16.2273692
+              },
+              {
+                "effective_cn0_dbhz": 33.0215696,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -128.66665,
+                "js_db": 29.83335,
+                "margin_db": 8.02156955
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 2095.55254,
+            "rx_gain_dbi": -12.8449686,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T14:18:00Z"
+          },
+          "max_elevation_deg": 3.6258664,
+          "min_margin_db": [
+            20.4037123,
+            16.2273692,
+            8.02156955
+          ],
+          "min_range_km": 2095.55254,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T14:15:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-4"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            450.0
+          ],
+          "duration_s": 570.0,
+          "end_utc": "2026-11-15T15:58:00Z",
+          "link_budget": {
+            "aggregate_coupling_db": -171.424418,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-2",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 114.401308,
+            "other_losses_db": 0.0,
+            "path_loss_db": 159.538234,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.10915,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -151.424418,
+                "js_db": 7.07558194,
+                "margin_db": 20.10915
+              },
+              {
+                "effective_cn0_dbhz": 35.5657225,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -131.424418,
+                "js_db": 27.0755819,
+                "margin_db": 10.5657225
+              },
+              {
+                "effective_cn0_dbhz": 25.984366,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -121.424418,
+                "js_db": 37.0755819,
+                "margin_db": 0.984366012
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 1435.90661,
+            "rx_gain_dbi": -13.600327,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T15:54:00Z"
+          },
+          "max_elevation_deg": 13.0167767,
+          "min_margin_db": [
+            20.10915,
+            10.5657225,
+            0.984366012
+          ],
+          "min_range_km": 1413.26884,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T15:49:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-9",
+            "adsb-session-4",
+            "adsb-session-6"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            360.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            630.0
+          ],
+          "duration_s": 750.0,
+          "end_utc": "2026-11-15T17:34:30Z",
+          "link_budget": {
+            "aggregate_coupling_db": -167.793743,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-9",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 128.008399,
+            "other_losses_db": 0.0,
+            "path_loss_db": 154.349615,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 44.672965,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -147.793743,
+                "js_db": 10.7062567,
+                "margin_db": 19.672965
+              },
+              {
+                "effective_cn0_dbhz": 32.1938431,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -127.793743,
+                "js_db": 30.7062567,
+                "margin_db": 7.19384314
+              },
+              {
+                "effective_cn0_dbhz": 22.3814457,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -117.793743,
+                "js_db": 40.7062567,
+                "margin_db": -2.61855429
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 790.123927,
+            "rx_gain_dbi": -16.3347332,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T17:29:00Z"
+          },
+          "max_elevation_deg": 46.1424008,
+          "min_margin_db": [
+            19.672965,
+            7.19384314,
+            -2.61855429
+          ],
+          "min_range_km": 615.723883,
+          "outage_windows": [
+            [],
+            [],
+            [
+              {
+                "areas": [
+                  "adsb-session-2",
+                  "adsb-session-4",
+                  "adsb-session-6",
+                  "adsb-session-9"
+                ],
+                "end_utc": "2026-11-15T17:32:20Z",
+                "loss_end_utc": "2026-11-15T17:32:00Z",
+                "loss_s": 360.0,
+                "outage_s": 380.0,
+                "start_utc": "2026-11-15T17:26:00Z",
+                "worst_margin_db": -2.61855429
+              }
+            ]
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T17:22:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-9",
+            "adsb-session-4",
+            "adsb-session-6"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            360.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            660.0
+          ],
+          "duration_s": 750.0,
+          "end_utc": "2026-11-15T19:08:00Z",
+          "link_budget": {
+            "aggregate_coupling_db": -167.754061,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-9",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 129.468316,
+            "other_losses_db": 0.0,
+            "path_loss_db": 154.011933,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 44.6662465,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -147.754061,
+                "js_db": 10.7459394,
+                "margin_db": 19.6662465
+              },
+              {
+                "effective_cn0_dbhz": 32.1560164,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -127.754061,
+                "js_db": 30.7459394,
+                "margin_db": 7.1560164
+              },
+              {
+                "effective_cn0_dbhz": 22.3419567,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -117.754061,
+                "js_db": 40.7459394,
+                "margin_db": -2.65804328
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 759.995708,
+            "rx_gain_dbi": -16.5780526,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T19:02:30Z"
+          },
+          "max_elevation_deg": 35.2923056,
+          "min_margin_db": [
+            19.6662465,
+            7.1560164,
+            -2.65804328
+          ],
+          "min_range_km": 742.639659,
+          "outage_windows": [
+            [],
+            [],
+            [
+              {
+                "areas": [
+                  "adsb-session-2",
+                  "adsb-session-4",
+                  "adsb-session-6",
+                  "adsb-session-9"
+                ],
+                "end_utc": "2026-11-15T19:06:20Z",
+                "loss_end_utc": "2026-11-15T19:06:00Z",
+                "loss_s": 360.0,
+                "outage_s": 380.0,
+                "start_utc": "2026-11-15T19:00:00Z",
+                "worst_margin_db": -2.65804328
+              }
+            ]
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T18:56:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-4"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            450.0
+          ],
+          "duration_s": 570.0,
+          "end_utc": "2026-11-15T20:39:00Z",
+          "link_budget": {
+            "aggregate_coupling_db": -171.519645,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-2",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 112.869551,
+            "other_losses_db": 0.0,
+            "path_loss_db": 160.760708,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.11677,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -151.519645,
+                "js_db": 6.9803552,
+                "margin_db": 20.11677
+              },
+              {
+                "effective_cn0_dbhz": 35.6511297,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -131.519645,
+                "js_db": 26.9803552,
+                "margin_db": 10.6511297
+              },
+              {
+                "effective_cn0_dbhz": 26.0785103,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -121.519645,
+                "js_db": 36.9803552,
+                "margin_db": 1.07851034
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 1652.91265,
+            "rx_gain_dbi": -13.2173877,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T20:35:00Z"
+          },
+          "max_elevation_deg": 9.99021926,
+          "min_margin_db": [
+            20.11677,
+            10.6511297,
+            1.07851034
+          ],
+          "min_range_km": 1592.53677,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T20:30:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 270.0,
+          "end_utc": "2026-11-15T22:08:00Z",
+          "link_budget": {
+            "aggregate_coupling_db": -179.327806,
+            "areas_in_view": 1,
+            "dominant_area": "adsb-session-2",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 111.164757,
+            "other_losses_db": 0.0,
+            "path_loss_db": 163.536617,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.4137346,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -159.327806,
+                "js_db": -0.82780575,
+                "margin_db": 20.4137346
+              },
+              {
+                "effective_cn0_dbhz": 41.627966,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -139.327806,
+                "js_db": 19.1721943,
+                "margin_db": 16.627966
+              },
+              {
+                "effective_cn0_dbhz": 33.6423238,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -129.327806,
+                "js_db": 29.1721943,
+                "margin_db": 8.64232382
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 2275.33483,
+            "rx_gain_dbi": -12.7911892,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T22:06:00Z"
+          },
+          "max_elevation_deg": 1.78527398,
+          "min_margin_db": [
+            20.4137346,
+            16.627966,
+            8.64232382
+          ],
+          "min_range_km": 2275.33483,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T22:04:00Z"
+        }
+      ],
+      "tle_age_days_at_mid_span": 0.24724602,
+      "tle_epoch_utc": "2026-11-15T06:03:58Z",
+      "verdict": [
+        "kept",
+        "kept",
+        "loss-of-tracking-modelled"
+      ]
+    },
+    {
+      "below_threshold_s": [
+        0.0,
+        0.0,
+        390.0
+      ],
+      "exposure_s": 2130.0,
+      "exposure_share": 0.0246442208,
+      "min_margin_db": [
+        19.9406722,
+        8.9838869,
+        -0.729600539
+      ],
+      "name": "ISS (ZARYA)",
+      "norad_line1": "1 25544U 98067A   26319.20611933  .00010382  00000+0  19362-3 0  9993",
+      "over_area_s": 0.0,
+      "passes": [
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            450.0
+          ],
+          "duration_s": 450.0,
+          "end_utc": "2026-11-15T16:09:00Z",
+          "link_budget": {
+            "aggregate_coupling_db": -171.578219,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-4",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 111.518893,
+            "other_losses_db": 0.0,
+            "path_loss_db": 161.033273,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.1213813,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -151.578219,
+                "js_db": 6.92178065,
+                "margin_db": 20.1213813
+              },
+              {
+                "effective_cn0_dbhz": 35.7035676,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -131.578219,
+                "js_db": 26.9217807,
+                "margin_db": 10.7035676
+              },
+              {
+                "effective_cn0_dbhz": 26.1364073,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -121.578219,
+                "js_db": 36.9217807,
+                "margin_db": 1.13640734
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 1705.60364,
+            "rx_gain_dbi": -12.8797233,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T16:05:30Z"
+          },
+          "max_elevation_deg": 6.93780716,
+          "min_margin_db": [
+            20.1213813,
+            10.7035676,
+            1.13640734
+          ],
+          "min_range_km": 1705.60364,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T16:02:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            180.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            540.0
+          ],
+          "duration_s": 540.0,
+          "end_utc": "2026-11-15T17:45:30Z",
+          "link_budget": {
+            "aggregate_coupling_db": -169.827462,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-4",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 114.886062,
+            "other_losses_db": 0.0,
+            "path_loss_db": 158.355021,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 44.9558768,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -149.827462,
+                "js_db": 8.6725382,
+                "margin_db": 19.9558768
+              },
+              {
+                "effective_cn0_dbhz": 34.1073958,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -129.827462,
+                "js_db": 28.6725382,
+                "margin_db": 9.10739575
+              },
+              {
+                "effective_cn0_dbhz": 24.4024605,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -119.827462,
+                "js_db": 38.6725382,
+                "margin_db": -0.597539459
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 1253.04175,
+            "rx_gain_dbi": -13.7215155,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T17:41:30Z"
+          },
+          "max_elevation_deg": 14.5247774,
+          "min_margin_db": [
+            19.9558768,
+            9.10739575,
+            -0.597539459
+          ],
+          "min_range_km": 1248.47516,
+          "outage_windows": [
+            [],
+            [],
+            [
+              {
+                "areas": [
+                  "adsb-session-2",
+                  "adsb-session-4",
+                  "adsb-session-6",
+                  "adsb-session-9"
+                ],
+                "end_utc": "2026-11-15T17:43:20Z",
+                "loss_end_utc": "2026-11-15T17:43:00Z",
+                "loss_s": 180.0,
+                "outage_s": 200.0,
+                "start_utc": "2026-11-15T17:40:00Z",
+                "worst_margin_db": -0.597539459
+              }
+            ]
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T17:37:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            210.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            570.0
+          ],
+          "duration_s": 570.0,
+          "end_utc": "2026-11-15T19:21:30Z",
+          "link_budget": {
+            "aggregate_coupling_db": -169.694377,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-4",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 115.532004,
+            "other_losses_db": 0.0,
+            "path_loss_db": 158.012357,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 44.9406722,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -149.694377,
+                "js_db": 8.80562321,
+                "margin_db": 19.9406722
+              },
+              {
+                "effective_cn0_dbhz": 33.9838869,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -129.694377,
+                "js_db": 28.8056232,
+                "margin_db": 8.9838869
+              },
+              {
+                "effective_cn0_dbhz": 24.2703995,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -119.694377,
+                "js_db": 38.8056232,
+                "margin_db": -0.729600539
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 1204.57082,
+            "rx_gain_dbi": -13.8830011,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T19:17:00Z"
+          },
+          "max_elevation_deg": 15.5344758,
+          "min_margin_db": [
+            19.9406722,
+            8.9838869,
+            -0.729600539
+          ],
+          "min_range_km": 1204.57082,
+          "outage_windows": [
+            [],
+            [],
+            [
+              {
+                "areas": [
+                  "adsb-session-2",
+                  "adsb-session-4",
+                  "adsb-session-6",
+                  "adsb-session-9"
+                ],
+                "end_utc": "2026-11-15T19:19:20Z",
+                "loss_end_utc": "2026-11-15T19:19:00Z",
+                "loss_s": 210.0,
+                "outage_s": 230.0,
+                "start_utc": "2026-11-15T19:15:30Z",
+                "worst_margin_db": -0.729600539
+              }
+            ]
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T19:12:30Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4",
+            "adsb-session-6",
+            "adsb-session-9",
+            "adsb-session-2"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            480.0
+          ],
+          "duration_s": 480.0,
+          "end_utc": "2026-11-15T20:56:30Z",
+          "link_budget": {
+            "aggregate_coupling_db": -171.215085,
+            "areas_in_view": 4,
+            "dominant_area": "adsb-session-4",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 112.150796,
+            "other_losses_db": 0.0,
+            "path_loss_db": 160.424738,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.0918499,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -151.215085,
+                "js_db": 7.28491489,
+                "margin_db": 20.0918499
+              },
+              {
+                "effective_cn0_dbhz": 35.3773071,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -131.215085,
+                "js_db": 27.2849149,
+                "margin_db": 10.3773071
+              },
+              {
+                "effective_cn0_dbhz": 25.7773316,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -121.215085,
+                "js_db": 37.2849149,
+                "margin_db": 0.77733157
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 1590.19867,
+            "rx_gain_dbi": -13.0376991,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T20:52:30Z"
+          },
+          "max_elevation_deg": 8.72228013,
+          "min_margin_db": [
+            20.0918499,
+            10.3773071,
+            0.77733157
+          ],
+          "min_range_km": 1583.7721,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T20:49:00Z"
+        },
+        {
+          "areas_seen": [
+            "adsb-session-4"
+          ],
+          "below_threshold_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "degraded_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "duration_s": 90.0,
+          "end_utc": "2026-11-15T22:28:30Z",
+          "link_budget": {
+            "aggregate_coupling_db": -179.410725,
+            "areas_in_view": 1,
+            "dominant_area": "adsb-session-4",
+            "nominal_cn0_dbhz": 45.4751872,
+            "off_boresight_deg": 110.457407,
+            "other_losses_db": 0.0,
+            "path_loss_db": 163.796373,
+            "per_eirp": [
+              {
+                "effective_cn0_dbhz": 45.4148887,
+                "eirp_dbw": 20.0,
+                "interference_dbw": -159.410725,
+                "js_db": -0.910724972,
+                "margin_db": 20.4148887
+              },
+              {
+                "effective_cn0_dbhz": 41.6765006,
+                "eirp_dbw": 40.0,
+                "interference_dbw": -139.410725,
+                "js_db": 19.089275,
+                "margin_db": 16.6765006
+              },
+              {
+                "effective_cn0_dbhz": 33.7197572,
+                "eirp_dbw": 50.0,
+                "interference_dbw": -129.410725,
+                "js_db": 29.089275,
+                "margin_db": 8.71975716
+              }
+            ],
+            "polarisation_loss_db": 3.0,
+            "range_km": 2344.4077,
+            "rx_gain_dbi": -12.6143519,
+            "signal_dbw": -158.5,
+            "tracking_threshold_dbhz": 25.0,
+            "utc": "2026-11-15T22:28:00Z"
+          },
+          "max_elevation_deg": 0.151771509,
+          "min_margin_db": [
+            20.4148887,
+            16.6765006,
+            8.71975716
+          ],
+          "min_range_km": 2344.4077,
+          "outage_windows": [
+            [],
+            [],
+            []
+          ],
+          "over_area_s": 0.0,
+          "start_utc": "2026-11-15T22:27:30Z"
+        }
+      ],
+      "tle_age_days_at_mid_span": 0.29388067,
+      "tle_epoch_utc": "2026-11-15T04:56:49Z",
+      "verdict": [
+        "kept",
+        "kept",
+        "loss-of-tracking-modelled"
+      ]
+    }
+  ],
+  "evidence_class": "MODELLED",
+  "forecast": {
+    "activity": "each area is active for a whole revolution with its activity probability, independently of the others; exact enumeration up to 10 uncertain areas in view per revolution, else a seeded Monte Carlo draw of 1024 samples",
+    "craft": [
+      {
+        "name": "SWARM A",
+        "orbits": [
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T00:11:49Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": true,
+            "rev": 0,
+            "start_utc": "2026-11-15T00:00:00Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T01:44:41Z",
+            "expected_exposure_s": 210.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 210.0,
+            "min_margin_db": [
+              20.4089669,
+              16.4329026,
+              8.33612635
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 1,
+            "start_utc": "2026-11-15T00:11:49Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T03:17:32Z",
+            "expected_exposure_s": 360.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 360.0,
+            "min_margin_db": [
+              20.3938765,
+              15.8663811,
+              7.48690677
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 2,
+            "start_utc": "2026-11-15T01:44:41Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T04:50:23Z",
+            "expected_exposure_s": 510.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 510.0,
+            "min_margin_db": [
+              20.0927886,
+              10.3873423,
+              0.788336178
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 3,
+            "start_utc": "2026-11-15T03:17:32Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T06:23:14Z",
+            "expected_exposure_s": 720.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              410.0
+            ],
+            "exposure_s": 720.0,
+            "min_margin_db": [
+              19.6395032,
+              7.00806763,
+              -2.81235028
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              410.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "partial": false,
+            "rev": 4,
+            "start_utc": "2026-11-15T04:50:23Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T07:56:06Z",
+            "expected_exposure_s": 720.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              440.0
+            ],
+            "exposure_s": 720.0,
+            "min_margin_db": [
+              19.5049377,
+              6.31993061,
+              -3.52727104
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              440.0
+            ],
+            "over_area_s": 120.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "partial": false,
+            "rev": 5,
+            "start_utc": "2026-11-15T06:23:14Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T09:28:57Z",
+            "expected_exposure_s": 570.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 570.0,
+            "min_margin_db": [
+              20.0585041,
+              10.0337766,
+              0.402049076
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 6,
+            "start_utc": "2026-11-15T07:56:06Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T11:01:48Z",
+            "expected_exposure_s": 180.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 180.0,
+            "min_margin_db": [
+              20.4114805,
+              16.534678,
+              8.49490836
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 7,
+            "start_utc": "2026-11-15T09:28:57Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T12:34:39Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 8,
+            "start_utc": "2026-11-15T11:01:48Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T14:07:30Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 9,
+            "start_utc": "2026-11-15T12:34:39Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T15:40:22Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 10,
+            "start_utc": "2026-11-15T14:07:30Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T17:13:13Z",
+            "expected_exposure_s": 390.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 390.0,
+            "min_margin_db": [
+              20.3181619,
+              13.7710584,
+              4.69820131
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 11,
+            "start_utc": "2026-11-15T15:40:22Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T18:46:04Z",
+            "expected_exposure_s": 660.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              320.0
+            ],
+            "exposure_s": 660.0,
+            "min_margin_db": [
+              19.8415828,
+              8.24614697,
+              -1.513366
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              320.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "partial": false,
+            "rev": 12,
+            "start_utc": "2026-11-15T17:13:13Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T20:18:55Z",
+            "expected_exposure_s": 720.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              470.0
+            ],
+            "exposure_s": 720.0,
+            "min_margin_db": [
+              19.4776518,
+              6.19041843,
+              -3.66135009
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              470.0
+            ],
+            "over_area_s": 240.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "partial": false,
+            "rev": 13,
+            "start_utc": "2026-11-15T18:46:04Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T21:51:46Z",
+            "expected_exposure_s": 660.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              290.0
+            ],
+            "exposure_s": 660.0,
+            "min_margin_db": [
+              19.8909946,
+              8.60048287,
+              -1.13795872
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              290.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "partial": false,
+            "rev": 14,
+            "start_utc": "2026-11-15T20:18:55Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T23:24:38Z",
+            "expected_exposure_s": 420.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 420.0,
+            "min_margin_db": [
+              20.2007771,
+              11.7116141,
+              2.26502305
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 15,
+            "start_utc": "2026-11-15T21:51:46Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-16T00:00:30Z",
+            "expected_exposure_s": 240.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 240.0,
+            "min_margin_db": [
+              20.4070115,
+              16.355307,
+              8.21643938
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": true,
+            "rev": 16,
+            "start_utc": "2026-11-15T23:24:38Z",
+            "uncertain_areas": 0
+          }
+        ],
+        "revolutions": 17,
+        "totals": {
+          "expected_exposure_s": 6360.0,
+          "expected_outage_s": [
+            0.0,
+            0.0,
+            1930.0
+          ],
+          "expected_revolutions_with_outage": [
+            0.0,
+            0.0,
+            5.0
+          ],
+          "exposure_s": 6360.0,
+          "outage_s": [
+            0.0,
+            0.0,
+            1930.0
+          ],
+          "revolutions_with_outage": [
+            0,
+            0,
+            5
+          ]
+        }
+      },
+      {
+        "name": "SENTINEL-6A",
+        "orbits": [
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T00:09:01Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": true,
+            "rev": 0,
+            "start_utc": "2026-11-15T00:00:00Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T02:01:27Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 1,
+            "start_utc": "2026-11-15T00:09:01Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T03:53:52Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 2,
+            "start_utc": "2026-11-15T02:01:27Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T05:46:18Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 3,
+            "start_utc": "2026-11-15T03:53:52Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T07:38:44Z",
+            "expected_exposure_s": 1050.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 1050.0,
+            "min_margin_db": [
+              20.4216536,
+              16.9721549,
+              9.20321634
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 4,
+            "start_utc": "2026-11-15T05:46:18Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T09:31:10Z",
+            "expected_exposure_s": 1350.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 1350.0,
+            "min_margin_db": [
+              20.3838964,
+              15.5276643,
+              7.00325973
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 5,
+            "start_utc": "2026-11-15T07:38:44Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T11:23:36Z",
+            "expected_exposure_s": 1410.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 1410.0,
+            "min_margin_db": [
+              20.3790179,
+              15.3709703,
+              6.7847362
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 180.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 6,
+            "start_utc": "2026-11-15T09:31:10Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T13:16:01Z",
+            "expected_exposure_s": 1380.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 1380.0,
+            "min_margin_db": [
+              20.3785475,
+              15.3561468,
+              6.76422261
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 150.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 7,
+            "start_utc": "2026-11-15T11:23:36Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T15:08:27Z",
+            "expected_exposure_s": 1350.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 1350.0,
+            "min_margin_db": [
+              20.3784809,
+              15.3540536,
+              6.76132802
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 150.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 8,
+            "start_utc": "2026-11-15T13:16:01Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T17:00:53Z",
+            "expected_exposure_s": 1380.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 1380.0,
+            "min_margin_db": [
+              20.3788636,
+              15.3661048,
+              6.77800005
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 180.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 9,
+            "start_utc": "2026-11-15T15:08:27Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T18:53:19Z",
+            "expected_exposure_s": 1290.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 1290.0,
+            "min_margin_db": [
+              20.3883939,
+              15.6771406,
+              7.21471049
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 10,
+            "start_utc": "2026-11-15T17:00:53Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T20:45:44Z",
+            "expected_exposure_s": 930.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 930.0,
+            "min_margin_db": [
+              20.4265532,
+              17.1992851,
+              9.58981518
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 11,
+            "start_utc": "2026-11-15T18:53:19Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T22:38:10Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 12,
+            "start_utc": "2026-11-15T20:45:44Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-16T00:00:30Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": true,
+            "rev": 13,
+            "start_utc": "2026-11-15T22:38:10Z",
+            "uncertain_areas": 0
+          }
+        ],
+        "revolutions": 14,
+        "totals": {
+          "expected_exposure_s": 10140.0,
+          "expected_outage_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "expected_revolutions_with_outage": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "exposure_s": 10140.0,
+          "outage_s": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "revolutions_with_outage": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "name": "GRACE-FO 1",
+        "orbits": [
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T01:23:19Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": true,
+            "rev": 0,
+            "start_utc": "2026-11-15T00:00:00Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T02:56:52Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 1,
+            "start_utc": "2026-11-15T01:23:19Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T04:30:25Z",
+            "expected_exposure_s": 420.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 420.0,
+            "min_margin_db": [
+              20.3434943,
+              14.3698791,
+              5.45257574
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 2,
+            "start_utc": "2026-11-15T02:56:52Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T06:03:58Z",
+            "expected_exposure_s": 630.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              140.0
+            ],
+            "exposure_s": 630.0,
+            "min_margin_db": [
+              19.9955312,
+              9.4448585,
+              -0.235335868
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              140.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "partial": false,
+            "rev": 3,
+            "start_utc": "2026-11-15T04:30:25Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T07:37:31Z",
+            "expected_exposure_s": 780.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              410.0
+            ],
+            "exposure_s": 780.0,
+            "min_margin_db": [
+              19.6365414,
+              6.99193279,
+              -2.82916496
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              410.0
+            ],
+            "over_area_s": 240.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "partial": false,
+            "rev": 4,
+            "start_utc": "2026-11-15T06:03:58Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T09:11:04Z",
+            "expected_exposure_s": 720.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              320.0
+            ],
+            "exposure_s": 720.0,
+            "min_margin_db": [
+              19.8670832,
+              8.42590388,
+              -1.32314709
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              320.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "partial": false,
+            "rev": 5,
+            "start_utc": "2026-11-15T07:37:31Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T10:44:37Z",
+            "expected_exposure_s": 480.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 480.0,
+            "min_margin_db": [
+              20.1973326,
+              11.6630903,
+              2.20994635
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 6,
+            "start_utc": "2026-11-15T09:11:04Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T12:18:10Z",
+            "expected_exposure_s": 240.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 240.0,
+            "min_margin_db": [
+              20.4163238,
+              16.7375976,
+              8.81797633
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 7,
+            "start_utc": "2026-11-15T10:44:37Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T13:51:43Z",
+            "expected_exposure_s": 120.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 120.0,
+            "min_margin_db": [
+              20.4210957,
+              16.9470148,
+              9.16127603
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 8,
+            "start_utc": "2026-11-15T12:18:10Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T15:25:16Z",
+            "expected_exposure_s": 360.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 360.0,
+            "min_margin_db": [
+              20.4037123,
+              16.2273692,
+              8.02156955
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 9,
+            "start_utc": "2026-11-15T13:51:43Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T16:58:49Z",
+            "expected_exposure_s": 570.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 570.0,
+            "min_margin_db": [
+              20.10915,
+              10.5657225,
+              0.984366012
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 10,
+            "start_utc": "2026-11-15T15:25:16Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T18:32:22Z",
+            "expected_exposure_s": 750.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              380.0
+            ],
+            "exposure_s": 750.0,
+            "min_margin_db": [
+              19.672965,
+              7.19384314,
+              -2.61855429
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              380.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "partial": false,
+            "rev": 11,
+            "start_utc": "2026-11-15T16:58:49Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T20:05:55Z",
+            "expected_exposure_s": 750.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              380.0
+            ],
+            "exposure_s": 750.0,
+            "min_margin_db": [
+              19.6662465,
+              7.1560164,
+              -2.65804328
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              380.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "partial": false,
+            "rev": 12,
+            "start_utc": "2026-11-15T18:32:22Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T21:39:28Z",
+            "expected_exposure_s": 570.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 570.0,
+            "min_margin_db": [
+              20.11677,
+              10.6511297,
+              1.07851034
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 13,
+            "start_utc": "2026-11-15T20:05:55Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T23:13:01Z",
+            "expected_exposure_s": 270.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 270.0,
+            "min_margin_db": [
+              20.4137346,
+              16.627966,
+              8.64232382
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 14,
+            "start_utc": "2026-11-15T21:39:28Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-16T00:00:30Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": true,
+            "rev": 15,
+            "start_utc": "2026-11-15T23:13:01Z",
+            "uncertain_areas": 0
+          }
+        ],
+        "revolutions": 16,
+        "totals": {
+          "expected_exposure_s": 6660.0,
+          "expected_outage_s": [
+            0.0,
+            0.0,
+            1630.0
+          ],
+          "expected_revolutions_with_outage": [
+            0.0,
+            0.0,
+            5.0
+          ],
+          "exposure_s": 6660.0,
+          "outage_s": [
+            0.0,
+            0.0,
+            1630.0
+          ],
+          "revolutions_with_outage": [
+            0,
+            0,
+            5
+          ]
+        }
+      },
+      {
+        "name": "ISS (ZARYA)",
+        "orbits": [
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T00:18:11Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": true,
+            "rev": 0,
+            "start_utc": "2026-11-15T00:00:00Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T01:51:03Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 1,
+            "start_utc": "2026-11-15T00:18:11Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T03:23:56Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 2,
+            "start_utc": "2026-11-15T01:51:03Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T04:56:49Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 3,
+            "start_utc": "2026-11-15T03:23:56Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T06:29:41Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 4,
+            "start_utc": "2026-11-15T04:56:49Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T08:02:34Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 5,
+            "start_utc": "2026-11-15T06:29:41Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T09:35:27Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 6,
+            "start_utc": "2026-11-15T08:02:34Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T11:08:20Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 7,
+            "start_utc": "2026-11-15T09:35:27Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T12:41:12Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 8,
+            "start_utc": "2026-11-15T11:08:20Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T14:14:05Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 9,
+            "start_utc": "2026-11-15T12:41:12Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T15:46:58Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 10,
+            "start_utc": "2026-11-15T14:14:05Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T17:19:50Z",
+            "expected_exposure_s": 450.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 450.0,
+            "min_margin_db": [
+              20.1213813,
+              10.7035676,
+              1.13640734
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 11,
+            "start_utc": "2026-11-15T15:46:58Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T18:52:43Z",
+            "expected_exposure_s": 540.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              200.0
+            ],
+            "exposure_s": 540.0,
+            "min_margin_db": [
+              19.9558768,
+              9.10739575,
+              -0.597539459
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              200.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "partial": false,
+            "rev": 12,
+            "start_utc": "2026-11-15T17:19:50Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T20:25:36Z",
+            "expected_exposure_s": 570.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              230.0
+            ],
+            "exposure_s": 570.0,
+            "min_margin_db": [
+              19.9406722,
+              8.9838869,
+              -0.729600539
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              230.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "partial": false,
+            "rev": 13,
+            "start_utc": "2026-11-15T18:52:43Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T21:58:28Z",
+            "expected_exposure_s": 480.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 480.0,
+            "min_margin_db": [
+              20.0918499,
+              10.3773071,
+              0.77733157
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 14,
+            "start_utc": "2026-11-15T20:25:36Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-15T23:31:21Z",
+            "expected_exposure_s": 90.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 90.0,
+            "min_margin_db": [
+              20.4148887,
+              16.6765006,
+              8.71975716
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": false,
+            "rev": 15,
+            "start_utc": "2026-11-15T21:58:28Z",
+            "uncertain_areas": 0
+          },
+          {
+            "activity_method": "certain",
+            "end_utc": "2026-11-16T00:00:30Z",
+            "expected_exposure_s": 0.0,
+            "expected_outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "exposure_s": 0.0,
+            "min_margin_db": [
+              null,
+              null,
+              null
+            ],
+            "outage_s": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "over_area_s": 0.0,
+            "p_outage": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "partial": true,
+            "rev": 16,
+            "start_utc": "2026-11-15T23:31:21Z",
+            "uncertain_areas": 0
+          }
+        ],
+        "revolutions": 17,
+        "totals": {
+          "expected_exposure_s": 2130.0,
+          "expected_outage_s": [
+            0.0,
+            0.0,
+            430.0
+          ],
+          "expected_revolutions_with_outage": [
+            0.0,
+            0.0,
+            2.0
+          ],
+          "exposure_s": 2130.0,
+          "outage_s": [
+            0.0,
+            0.0,
+            430.0
+          ],
+          "revolutions_with_outage": [
+            0,
+            0,
+            2
+          ]
+        }
+      }
+    ],
+    "label": "MODELLED per-revolution exposure forecast. The areas come from the maps and regions given (where interference was reported or is expected on the ground; no emitter is located), their activity probabilities are inputs, the interferer EIRP is assumed, and the receiver link margin is the stated model. A forecast of what the model gives for the orbit, not a prediction that any interferer will be on air.",
+    "outage_window": "from the first step with a modelled margin under zero to the last one, plus reacquisition_s; runs closer than that are merged",
+    "revolution": "a revolution starts at each ascending node (ITRS z crossing upward, interpolated between steps); the first and last revolutions of the span are partial"
+  },
+  "inputs": {
+    "emitter_regions": [
+      {
+        "attribution": "Contains aircraft position data from adsb.lol, made available under the Open Database License (ODbL 1.0), https://opendatacommons.org/licenses/odbl/1-0/",
+        "first_day": "2025-09-14",
+        "last_day": "2025-09-19",
+        "licence": "ODbL-1.0",
+        "sessions_located": 4,
+        "sessions_not_located": 10,
+        "sha256": "d5996b99961614d4153fc1193d6e9a695278d4f4f9ce2045504e3ce07ce1919a",
+        "source_kind": "adsb"
+      }
+    ],
+    "map_cells_degraded": 0,
+    "map_cells_other": 0,
+    "maps": [],
+    "sessions_located": 4,
+    "sessions_not_located": 10,
+    "stated_areas": 0
+  },
+  "kind": "pro-spaceborne-rx-exposure",
+  "label": "MODELLED spaceborne GNSS receiver interference exposure. MEASURED: nothing on board; the inputs are published orbital elements (TLEs, propagated with SGP4) and interference maps built from aircraft or ship navigation-accuracy reports, which say where reports were degraded, not where an emitter was or how strong it was. MODELLED: the interferer EIRP (assumed, several values), the receive-antenna gains, free-space propagation, the anti-jam equation and, when the map period differs from the orbit period, the use of the map as a climatology. Not a statement about any receiver's measured performance.",
+  "result_sha256": "247b8765036fb9c4098f512c43e8792d9d3ea6f2207bc3e4e91e6b112091ee35",
+  "schema": "arksa-spaceborne-rx-exposure/1",
+  "span": {
+    "end_utc": "2026-11-16T00:00:00Z",
+    "start_utc": "2026-11-15T00:00:00Z",
+    "step_s": 30.0,
+    "time_mode": "climatology",
+    "time_mode_note": "climatology: the areas' time windows do not overlap the span, so every area counts all the time; the result says what the orbit would see if the mapped areas were active, not what happened"
+  },
+  "test_scenarios": {
+    "eirp_dbw": 50.0,
+    "format": "kshana-testkit-scenario/1",
+    "include": "outage",
+    "label": "MODELLED: receiver test scenarios generated from this study; the J/S profiles follow from the assumed EIRP and the link model; the criteria are stated before any run. Not a result of any receiver test.",
+    "passes_selected": 12,
+    "passes_without_events": 0,
+    "scenarios": [
+      {
+        "craft": "SWARM A",
+        "file": "scenarios/rx-exposure-swarm-a-20261115t185500-eirp50.toml",
+        "id": "rx-exposure-swarm-a-20261115t185500-eirp50",
+        "jamming_events": 7,
+        "max_interpolation_error_m": 10.0,
+        "max_js_db": 42.0,
+        "pass_start_utc": "2026-11-15T18:57:00Z",
+        "predicted": "outage",
+        "sha256": "205fa6fdbfcb7c908099594672d8bba246bc47c389667132e208abbd5e9c300c",
+        "trajectory_samples": 718,
+        "worst_margin_db": -3.66135009
+      },
+      {
+        "craft": "SWARM A",
+        "file": "scenarios/rx-exposure-swarm-a-20261115t064500-eirp50.toml",
+        "id": "rx-exposure-swarm-a-20261115t064500-eirp50",
+        "jamming_events": 8,
+        "max_interpolation_error_m": 10.0,
+        "max_js_db": 42.0,
+        "pass_start_utc": "2026-11-15T06:47:00Z",
+        "predicted": "outage",
+        "sha256": "0c310540b4aa223a8ab81c2cd97e91bc72ed6a87f914784c4e5003ba916e51da",
+        "trajectory_samples": 617,
+        "worst_margin_db": -3.52727104
+      }
+    ]
+  },
+  "title": "Per-revolution exposure forecast of four LEO GNSS receivers to the located Sep 2025 northern Baltic emitter-region sessions, with matching receiver test scenarios"
+}

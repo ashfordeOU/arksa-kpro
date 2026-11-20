@@ -1,0 +1,25 @@
+{
+  "type": "FeatureCollection",
+  "arksa_interference_regions": {
+    "version": 1,
+    "title": "SYNTHETIC test regions",
+    "source": "synthetic, written for the arksa-kpro tests; not an observation of any interference",
+    "licence": "test fixture",
+    "evidence": "SYNTHETIC"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[-35.0, 40.0], [-25.0, 40.0], [-25.0, 46.0], [-35.0, 46.0], [-35.0, 40.0]]]
+      },
+      "properties": { "id": "atlantic-box", "label": "synthetic mid-Atlantic box" }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [150.0, -35.0] },
+      "properties": { "id": "tasman-circle", "radius_km": 300.0, "activity": 0.5 }
+    }
+  ]
+}

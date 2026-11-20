@@ -1,0 +1,4445 @@
+# Kshana test kit: neutral scenario (kshana-testkit-scenario/1). MODELLED: representative parameters; modelled on the themes named, not a test method of them.
+format = "kshana-testkit-scenario/1"
+id = "rx-exposure-swarm-a-20261115t185500-eirp50"
+version = 1
+title = "SWARM A: pass from 2026-11-15T18:57:00Z under modelled ground interference (50 dBW per area)"
+description = "Spaceborne GNSS receiver test generated from a MODELLED exposure study (study kind pro-spaceborne-rx-exposure). The jamming events are the modelled J/S at the receiver for an assumed EIRP of 50 dBW per affected area, quantised to 3 dB steps, runs under 10 dB left out. The trajectory is the SGP4-propagated orbit (sub-satellite point and height) at least every 5 s; samples are added where needed so that linear interpolation between them is within 10 m horizontally and 0.1 m in height of the propagated orbit (checked at interval midpoints). The format has no spacecraft platform: `aircraft` only labels the scenario. A simulator must support orbital dynamics; check before running."
+evidence = "MODELLED"
+modelled_on = ["Arksa spaceborne interference exposure study, SWARM A, pass from 2026-11-15T18:57:00Z (MODELLED: assumed interferer EIRP, link-margin model; not an observation)"]
+tags = ["spacecraft", "gnss-interference-exposure", "jamming", "outage"]
+
+[scene]
+start_utc = "2026-11-15T18:55:00Z"
+duration_s = 1140.0
+
+[[signal]]
+constellation = "gps"
+signals = ["L1CA"]
+
+[trajectory]
+platform = "aircraft"
+lat_deg = 34.796343
+lon_deg = 23.154024
+height_m = 414624.3
+
+[[trajectory.sample]]
+t_s = 0.0
+lat_deg = 34.796343
+lon_deg = 23.154024
+height_m = 414624.3
+
+[[trajectory.sample]]
+t_s = 5.0
+lat_deg = 35.120177
+lon_deg = 23.155453
+height_m = 414677.3
+
+[[trajectory.sample]]
+t_s = 10.0
+lat_deg = 35.443989
+lon_deg = 23.157058
+height_m = 414730.8
+
+[[trajectory.sample]]
+t_s = 15.0
+lat_deg = 35.767779
+lon_deg = 23.158844
+height_m = 414784.9
+
+[[trajectory.sample]]
+t_s = 20.0
+lat_deg = 36.091545
+lon_deg = 23.160814
+height_m = 414839.6
+
+[[trajectory.sample]]
+t_s = 25.0
+lat_deg = 36.415288
+lon_deg = 23.162973
+height_m = 414894.7
+
+[[trajectory.sample]]
+t_s = 30.0
+lat_deg = 36.739008
+lon_deg = 23.165323
+height_m = 414950.4
+
+[[trajectory.sample]]
+t_s = 35.0
+lat_deg = 37.062705
+lon_deg = 23.167868
+height_m = 415006.7
+
+[[trajectory.sample]]
+t_s = 40.0
+lat_deg = 37.386378
+lon_deg = 23.170614
+height_m = 415063.4
+
+[[trajectory.sample]]
+t_s = 45.0
+lat_deg = 37.710027
+lon_deg = 23.173563
+height_m = 415120.6
+
+[[trajectory.sample]]
+t_s = 50.0
+lat_deg = 38.033652
+lon_deg = 23.17672
+height_m = 415178.3
+
+[[trajectory.sample]]
+t_s = 55.0
+lat_deg = 38.357252
+lon_deg = 23.180089
+height_m = 415236.4
+
+[[trajectory.sample]]
+t_s = 60.0
+lat_deg = 38.680829
+lon_deg = 23.183675
+height_m = 415295.1
+
+[[trajectory.sample]]
+t_s = 65.0
+lat_deg = 39.004381
+lon_deg = 23.187481
+height_m = 415354.1
+
+[[trajectory.sample]]
+t_s = 70.0
+lat_deg = 39.327908
+lon_deg = 23.191514
+height_m = 415413.6
+
+[[trajectory.sample]]
+t_s = 75.0
+lat_deg = 39.65141
+lon_deg = 23.195777
+height_m = 415473.6
+
+[[trajectory.sample]]
+t_s = 80.0
+lat_deg = 39.974887
+lon_deg = 23.200274
+height_m = 415533.9
+
+[[trajectory.sample]]
+t_s = 85.0
+lat_deg = 40.298338
+lon_deg = 23.205013
+height_m = 415594.6
+
+[[trajectory.sample]]
+t_s = 90.0
+lat_deg = 40.621765
+lon_deg = 23.209996
+height_m = 415655.8
+
+[[trajectory.sample]]
+t_s = 95.0
+lat_deg = 40.945165
+lon_deg = 23.215229
+height_m = 415717.3
+
+[[trajectory.sample]]
+t_s = 100.0
+lat_deg = 41.26854
+lon_deg = 23.220719
+height_m = 415779.1
+
+[[trajectory.sample]]
+t_s = 105.0
+lat_deg = 41.591889
+lon_deg = 23.226469
+height_m = 415841.4
+
+[[trajectory.sample]]
+t_s = 110.0
+lat_deg = 41.915211
+lon_deg = 23.232486
+height_m = 415903.9
+
+[[trajectory.sample]]
+t_s = 115.0
+lat_deg = 42.238507
+lon_deg = 23.238776
+height_m = 415966.8
+
+[[trajectory.sample]]
+t_s = 120.0
+lat_deg = 42.561777
+lon_deg = 23.245344
+height_m = 416030.0
+
+[[trajectory.sample]]
+t_s = 125.0
+lat_deg = 42.88502
+lon_deg = 23.252197
+height_m = 416093.6
+
+[[trajectory.sample]]
+t_s = 130.0
+lat_deg = 43.208236
+lon_deg = 23.259341
+height_m = 416157.4
+
+[[trajectory.sample]]
+t_s = 135.0
+lat_deg = 43.531425
+lon_deg = 23.266781
+height_m = 416221.5
+
+[[trajectory.sample]]
+t_s = 140.0
+lat_deg = 43.854586
+lon_deg = 23.274526
+height_m = 416285.8
+
+[[trajectory.sample]]
+t_s = 145.0
+lat_deg = 44.17772
+lon_deg = 23.28258
+height_m = 416350.5
+
+[[trajectory.sample]]
+t_s = 150.0
+lat_deg = 44.500827
+lon_deg = 23.290953
+height_m = 416415.3
+
+[[trajectory.sample]]
+t_s = 155.0
+lat_deg = 44.823905
+lon_deg = 23.299649
+height_m = 416480.4
+
+[[trajectory.sample]]
+t_s = 160.0
+lat_deg = 45.146956
+lon_deg = 23.308678
+height_m = 416545.8
+
+[[trajectory.sample]]
+t_s = 165.0
+lat_deg = 45.469978
+lon_deg = 23.318046
+height_m = 416611.3
+
+[[trajectory.sample]]
+t_s = 170.0
+lat_deg = 45.792972
+lon_deg = 23.327761
+height_m = 416677.1
+
+[[trajectory.sample]]
+t_s = 175.0
+lat_deg = 46.115937
+lon_deg = 23.337831
+height_m = 416743.0
+
+[[trajectory.sample]]
+t_s = 180.0
+lat_deg = 46.438873
+lon_deg = 23.348264
+height_m = 416809.1
+
+[[trajectory.sample]]
+t_s = 185.0
+lat_deg = 46.761781
+lon_deg = 23.35907
+height_m = 416875.4
+
+[[trajectory.sample]]
+t_s = 190.0
+lat_deg = 47.084659
+lon_deg = 23.370255
+height_m = 416941.8
+
+[[trajectory.sample]]
+t_s = 195.0
+lat_deg = 47.407507
+lon_deg = 23.38183
+height_m = 417008.4
+
+[[trajectory.sample]]
+t_s = 200.0
+lat_deg = 47.730326
+lon_deg = 23.393804
+height_m = 417075.1
+
+[[trajectory.sample]]
+t_s = 205.0
+lat_deg = 48.053115
+lon_deg = 23.406186
+height_m = 417141.9
+
+[[trajectory.sample]]
+t_s = 210.0
+lat_deg = 48.375874
+lon_deg = 23.418986
+height_m = 417208.8
+
+[[trajectory.sample]]
+t_s = 215.0
+lat_deg = 48.698603
+lon_deg = 23.432213
+height_m = 417275.8
+
+[[trajectory.sample]]
+t_s = 220.0
+lat_deg = 49.021301
+lon_deg = 23.445879
+height_m = 417342.9
+
+[[trajectory.sample]]
+t_s = 225.0
+lat_deg = 49.343968
+lon_deg = 23.459995
+height_m = 417410.1
+
+[[trajectory.sample]]
+t_s = 230.0
+lat_deg = 49.666604
+lon_deg = 23.47457
+height_m = 417477.3
+
+[[trajectory.sample]]
+t_s = 235.0
+lat_deg = 49.989209
+lon_deg = 23.489617
+height_m = 417544.5
+
+[[trajectory.sample]]
+t_s = 240.0
+lat_deg = 50.311783
+lon_deg = 23.505147
+height_m = 417611.8
+
+[[trajectory.sample]]
+t_s = 245.0
+lat_deg = 50.634324
+lon_deg = 23.521173
+height_m = 417679.1
+
+[[trajectory.sample]]
+t_s = 250.0
+lat_deg = 50.956834
+lon_deg = 23.537707
+height_m = 417746.5
+
+[[trajectory.sample]]
+t_s = 255.0
+lat_deg = 51.279311
+lon_deg = 23.554762
+height_m = 417813.8
+
+[[trajectory.sample]]
+t_s = 260.0
+lat_deg = 51.601756
+lon_deg = 23.572351
+height_m = 417881.1
+
+[[trajectory.sample]]
+t_s = 265.0
+lat_deg = 51.924168
+lon_deg = 23.590488
+height_m = 417948.4
+
+[[trajectory.sample]]
+t_s = 270.0
+lat_deg = 52.246547
+lon_deg = 23.609188
+height_m = 418015.7
+
+[[trajectory.sample]]
+t_s = 275.0
+lat_deg = 52.568893
+lon_deg = 23.628466
+height_m = 418082.9
+
+[[trajectory.sample]]
+t_s = 280.0
+lat_deg = 52.891204
+lon_deg = 23.648336
+height_m = 418150.0
+
+[[trajectory.sample]]
+t_s = 285.0
+lat_deg = 53.213482
+lon_deg = 23.668814
+height_m = 418217.1
+
+[[trajectory.sample]]
+t_s = 290.0
+lat_deg = 53.535725
+lon_deg = 23.689918
+height_m = 418284.1
+
+[[trajectory.sample]]
+t_s = 295.0
+lat_deg = 53.857933
+lon_deg = 23.711663
+height_m = 418351.0
+
+[[trajectory.sample]]
+t_s = 300.0
+lat_deg = 54.180107
+lon_deg = 23.734067
+height_m = 418417.8
+
+[[trajectory.sample]]
+t_s = 305.0
+lat_deg = 54.502245
+lon_deg = 23.757149
+height_m = 418484.4
+
+[[trajectory.sample]]
+t_s = 310.0
+lat_deg = 54.824347
+lon_deg = 23.780927
+height_m = 418551.0
+
+[[trajectory.sample]]
+t_s = 315.0
+lat_deg = 55.146413
+lon_deg = 23.805421
+height_m = 418617.4
+
+[[trajectory.sample]]
+t_s = 320.0
+lat_deg = 55.468442
+lon_deg = 23.830652
+height_m = 418683.7
+
+[[trajectory.sample]]
+t_s = 325.0
+lat_deg = 55.790435
+lon_deg = 23.856639
+height_m = 418749.8
+
+[[trajectory.sample]]
+t_s = 330.0
+lat_deg = 56.11239
+lon_deg = 23.883406
+height_m = 418815.7
+
+[[trajectory.sample]]
+t_s = 335.0
+lat_deg = 56.434307
+lon_deg = 23.910973
+height_m = 418881.4
+
+[[trajectory.sample]]
+t_s = 340.0
+lat_deg = 56.756186
+lon_deg = 23.939367
+height_m = 418947.0
+
+[[trajectory.sample]]
+t_s = 345.0
+lat_deg = 57.078025
+lon_deg = 23.968609
+height_m = 419012.3
+
+[[trajectory.sample]]
+t_s = 350.0
+lat_deg = 57.399826
+lon_deg = 23.998726
+height_m = 419077.4
+
+[[trajectory.sample]]
+t_s = 355.0
+lat_deg = 57.721587
+lon_deg = 24.029745
+height_m = 419142.3
+
+[[trajectory.sample]]
+t_s = 360.0
+lat_deg = 58.043307
+lon_deg = 24.061692
+height_m = 419206.9
+
+[[trajectory.sample]]
+t_s = 365.0
+lat_deg = 58.364986
+lon_deg = 24.094596
+height_m = 419271.3
+
+[[trajectory.sample]]
+t_s = 370.0
+lat_deg = 58.686624
+lon_deg = 24.128486
+height_m = 419335.5
+
+[[trajectory.sample]]
+t_s = 375.0
+lat_deg = 59.008219
+lon_deg = 24.163395
+height_m = 419399.4
+
+[[trajectory.sample]]
+t_s = 380.0
+lat_deg = 59.329772
+lon_deg = 24.199353
+height_m = 419462.9
+
+[[trajectory.sample]]
+t_s = 385.0
+lat_deg = 59.651281
+lon_deg = 24.236394
+height_m = 419526.2
+
+[[trajectory.sample]]
+t_s = 390.0
+lat_deg = 59.972746
+lon_deg = 24.274553
+height_m = 419589.2
+
+[[trajectory.sample]]
+t_s = 395.0
+lat_deg = 60.294166
+lon_deg = 24.313868
+height_m = 419651.9
+
+[[trajectory.sample]]
+t_s = 400.0
+lat_deg = 60.615541
+lon_deg = 24.354374
+height_m = 419714.3
+
+[[trajectory.sample]]
+t_s = 405.0
+lat_deg = 60.936868
+lon_deg = 24.396113
+height_m = 419776.3
+
+[[trajectory.sample]]
+t_s = 410.0
+lat_deg = 61.258149
+lon_deg = 24.439126
+height_m = 419838.0
+
+[[trajectory.sample]]
+t_s = 415.0
+lat_deg = 61.579381
+lon_deg = 24.483456
+height_m = 419899.3
+
+[[trajectory.sample]]
+t_s = 420.0
+lat_deg = 61.900564
+lon_deg = 24.529148
+height_m = 419960.2
+
+[[trajectory.sample]]
+t_s = 425.0
+lat_deg = 62.221696
+lon_deg = 24.57625
+height_m = 420020.8
+
+[[trajectory.sample]]
+t_s = 430.0
+lat_deg = 62.542778
+lon_deg = 24.624811
+height_m = 420081.0
+
+[[trajectory.sample]]
+t_s = 435.0
+lat_deg = 62.863807
+lon_deg = 24.674882
+height_m = 420140.8
+
+[[trajectory.sample]]
+t_s = 437.5
+lat_deg = 63.024302
+lon_deg = 24.700502
+height_m = 420170.6
+
+[[trajectory.sample]]
+t_s = 440.0
+lat_deg = 63.184783
+lon_deg = 24.726519
+height_m = 420200.2
+
+[[trajectory.sample]]
+t_s = 442.5
+lat_deg = 63.34525
+lon_deg = 24.752942
+height_m = 420229.7
+
+[[trajectory.sample]]
+t_s = 445.0
+lat_deg = 63.505704
+lon_deg = 24.779778
+height_m = 420259.2
+
+[[trajectory.sample]]
+t_s = 447.5
+lat_deg = 63.666143
+lon_deg = 24.807035
+height_m = 420288.5
+
+[[trajectory.sample]]
+t_s = 450.0
+lat_deg = 63.826569
+lon_deg = 24.834719
+height_m = 420317.7
+
+[[trajectory.sample]]
+t_s = 452.5
+lat_deg = 63.98698
+lon_deg = 24.86284
+height_m = 420346.9
+
+[[trajectory.sample]]
+t_s = 455.0
+lat_deg = 64.147377
+lon_deg = 24.891405
+height_m = 420375.9
+
+[[trajectory.sample]]
+t_s = 457.5
+lat_deg = 64.307759
+lon_deg = 24.920422
+height_m = 420404.8
+
+[[trajectory.sample]]
+t_s = 460.0
+lat_deg = 64.468127
+lon_deg = 24.9499
+height_m = 420433.5
+
+[[trajectory.sample]]
+t_s = 462.5
+lat_deg = 64.628479
+lon_deg = 24.979848
+height_m = 420462.2
+
+[[trajectory.sample]]
+t_s = 465.0
+lat_deg = 64.788816
+lon_deg = 25.010274
+height_m = 420490.8
+
+[[trajectory.sample]]
+t_s = 467.5
+lat_deg = 64.949138
+lon_deg = 25.041189
+height_m = 420519.2
+
+[[trajectory.sample]]
+t_s = 470.0
+lat_deg = 65.109444
+lon_deg = 25.0726
+height_m = 420547.5
+
+[[trajectory.sample]]
+t_s = 472.5
+lat_deg = 65.269734
+lon_deg = 25.104519
+height_m = 420575.8
+
+[[trajectory.sample]]
+t_s = 475.0
+lat_deg = 65.430008
+lon_deg = 25.136954
+height_m = 420603.8
+
+[[trajectory.sample]]
+t_s = 477.5
+lat_deg = 65.590266
+lon_deg = 25.169917
+height_m = 420631.8
+
+[[trajectory.sample]]
+t_s = 480.0
+lat_deg = 65.750508
+lon_deg = 25.203416
+height_m = 420659.7
+
+[[trajectory.sample]]
+t_s = 482.5
+lat_deg = 65.910733
+lon_deg = 25.237464
+height_m = 420687.4
+
+[[trajectory.sample]]
+t_s = 485.0
+lat_deg = 66.070941
+lon_deg = 25.272071
+height_m = 420715.0
+
+[[trajectory.sample]]
+t_s = 487.5
+lat_deg = 66.231131
+lon_deg = 25.307249
+height_m = 420742.5
+
+[[trajectory.sample]]
+t_s = 490.0
+lat_deg = 66.391305
+lon_deg = 25.343008
+height_m = 420769.8
+
+[[trajectory.sample]]
+t_s = 492.5
+lat_deg = 66.55146
+lon_deg = 25.379361
+height_m = 420797.1
+
+[[trajectory.sample]]
+t_s = 495.0
+lat_deg = 66.711598
+lon_deg = 25.41632
+height_m = 420824.2
+
+[[trajectory.sample]]
+t_s = 497.5
+lat_deg = 66.871718
+lon_deg = 25.453898
+height_m = 420851.1
+
+[[trajectory.sample]]
+t_s = 500.0
+lat_deg = 67.031818
+lon_deg = 25.492108
+height_m = 420878.0
+
+[[trajectory.sample]]
+t_s = 502.5
+lat_deg = 67.191901
+lon_deg = 25.530962
+height_m = 420904.7
+
+[[trajectory.sample]]
+t_s = 505.0
+lat_deg = 67.351964
+lon_deg = 25.570474
+height_m = 420931.2
+
+[[trajectory.sample]]
+t_s = 507.5
+lat_deg = 67.512007
+lon_deg = 25.610659
+height_m = 420957.7
+
+[[trajectory.sample]]
+t_s = 510.0
+lat_deg = 67.672031
+lon_deg = 25.651531
+height_m = 420984.0
+
+[[trajectory.sample]]
+t_s = 512.5
+lat_deg = 67.832035
+lon_deg = 25.693105
+height_m = 421010.2
+
+[[trajectory.sample]]
+t_s = 515.0
+lat_deg = 67.992019
+lon_deg = 25.735395
+height_m = 421036.2
+
+[[trajectory.sample]]
+t_s = 517.5
+lat_deg = 68.151981
+lon_deg = 25.778418
+height_m = 421062.1
+
+[[trajectory.sample]]
+t_s = 520.0
+lat_deg = 68.311923
+lon_deg = 25.822189
+height_m = 421087.9
+
+[[trajectory.sample]]
+t_s = 522.5
+lat_deg = 68.471843
+lon_deg = 25.866726
+height_m = 421113.5
+
+[[trajectory.sample]]
+t_s = 525.0
+lat_deg = 68.631741
+lon_deg = 25.912046
+height_m = 421139.0
+
+[[trajectory.sample]]
+t_s = 527.5
+lat_deg = 68.791618
+lon_deg = 25.958165
+height_m = 421164.3
+
+[[trajectory.sample]]
+t_s = 530.0
+lat_deg = 68.951471
+lon_deg = 26.005103
+height_m = 421189.5
+
+[[trajectory.sample]]
+t_s = 532.5
+lat_deg = 69.111302
+lon_deg = 26.052878
+height_m = 421214.6
+
+[[trajectory.sample]]
+t_s = 535.0
+lat_deg = 69.271109
+lon_deg = 26.101509
+height_m = 421239.5
+
+[[trajectory.sample]]
+t_s = 537.5
+lat_deg = 69.430892
+lon_deg = 26.151016
+height_m = 421264.2
+
+[[trajectory.sample]]
+t_s = 540.0
+lat_deg = 69.59065
+lon_deg = 26.201419
+height_m = 421288.9
+
+[[trajectory.sample]]
+t_s = 542.5
+lat_deg = 69.750384
+lon_deg = 26.25274
+height_m = 421313.3
+
+[[trajectory.sample]]
+t_s = 545.0
+lat_deg = 69.910092
+lon_deg = 26.305001
+height_m = 421337.7
+
+[[trajectory.sample]]
+t_s = 547.5
+lat_deg = 70.069775
+lon_deg = 26.358223
+height_m = 421361.8
+
+[[trajectory.sample]]
+t_s = 550.0
+lat_deg = 70.229431
+lon_deg = 26.41243
+height_m = 421385.8
+
+[[trajectory.sample]]
+t_s = 552.5
+lat_deg = 70.389061
+lon_deg = 26.467647
+height_m = 421409.7
+
+[[trajectory.sample]]
+t_s = 555.0
+lat_deg = 70.548662
+lon_deg = 26.523897
+height_m = 421433.4
+
+[[trajectory.sample]]
+t_s = 557.5
+lat_deg = 70.708236
+lon_deg = 26.581206
+height_m = 421457.0
+
+[[trajectory.sample]]
+t_s = 560.0
+lat_deg = 70.867781
+lon_deg = 26.639601
+height_m = 421480.4
+
+[[trajectory.sample]]
+t_s = 562.5
+lat_deg = 71.027297
+lon_deg = 26.699108
+height_m = 421503.7
+
+[[trajectory.sample]]
+t_s = 565.0
+lat_deg = 71.186783
+lon_deg = 26.759756
+height_m = 421526.8
+
+[[trajectory.sample]]
+t_s = 567.5
+lat_deg = 71.346239
+lon_deg = 26.821575
+height_m = 421549.7
+
+[[trajectory.sample]]
+t_s = 570.0
+lat_deg = 71.505663
+lon_deg = 26.884593
+height_m = 421572.5
+
+[[trajectory.sample]]
+t_s = 572.5
+lat_deg = 71.665055
+lon_deg = 26.948842
+height_m = 421595.1
+
+[[trajectory.sample]]
+t_s = 575.0
+lat_deg = 71.824415
+lon_deg = 27.014355
+height_m = 421617.6
+
+[[trajectory.sample]]
+t_s = 577.5
+lat_deg = 71.983741
+lon_deg = 27.081164
+height_m = 421639.9
+
+[[trajectory.sample]]
+t_s = 580.0
+lat_deg = 72.143033
+lon_deg = 27.149304
+height_m = 421662.0
+
+[[trajectory.sample]]
+t_s = 582.5
+lat_deg = 72.30229
+lon_deg = 27.218811
+height_m = 421684.0
+
+[[trajectory.sample]]
+t_s = 585.0
+lat_deg = 72.46151
+lon_deg = 27.289721
+height_m = 421705.8
+
+[[trajectory.sample]]
+t_s = 587.5
+lat_deg = 72.620695
+lon_deg = 27.362073
+height_m = 421727.5
+
+[[trajectory.sample]]
+t_s = 590.0
+lat_deg = 72.779841
+lon_deg = 27.435907
+height_m = 421749.0
+
+[[trajectory.sample]]
+t_s = 592.5
+lat_deg = 72.938949
+lon_deg = 27.511263
+height_m = 421770.3
+
+[[trajectory.sample]]
+t_s = 595.0
+lat_deg = 73.098017
+lon_deg = 27.588185
+height_m = 421791.4
+
+[[trajectory.sample]]
+t_s = 597.5
+lat_deg = 73.257045
+lon_deg = 27.666717
+height_m = 421812.4
+
+[[trajectory.sample]]
+t_s = 600.0
+lat_deg = 73.41603
+lon_deg = 27.746903
+height_m = 421833.3
+
+[[trajectory.sample]]
+t_s = 602.5
+lat_deg = 73.574974
+lon_deg = 27.828793
+height_m = 421853.9
+
+[[trajectory.sample]]
+t_s = 605.0
+lat_deg = 73.733873
+lon_deg = 27.912436
+height_m = 421874.4
+
+[[trajectory.sample]]
+t_s = 607.5
+lat_deg = 73.892727
+lon_deg = 27.997883
+height_m = 421894.7
+
+[[trajectory.sample]]
+t_s = 610.0
+lat_deg = 74.051534
+lon_deg = 28.085187
+height_m = 421914.8
+
+[[trajectory.sample]]
+t_s = 612.5
+lat_deg = 74.210294
+lon_deg = 28.174404
+height_m = 421934.8
+
+[[trajectory.sample]]
+t_s = 615.0
+lat_deg = 74.369005
+lon_deg = 28.265591
+height_m = 421954.6
+
+[[trajectory.sample]]
+t_s = 617.5
+lat_deg = 74.527665
+lon_deg = 28.358809
+height_m = 421974.2
+
+[[trajectory.sample]]
+t_s = 620.0
+lat_deg = 74.686274
+lon_deg = 28.454121
+height_m = 421993.7
+
+[[trajectory.sample]]
+t_s = 622.5
+lat_deg = 74.844829
+lon_deg = 28.55159
+height_m = 422012.9
+
+[[trajectory.sample]]
+t_s = 625.0
+lat_deg = 75.00333
+lon_deg = 28.651286
+height_m = 422032.0
+
+[[trajectory.sample]]
+t_s = 627.5
+lat_deg = 75.161773
+lon_deg = 28.753278
+height_m = 422050.9
+
+[[trajectory.sample]]
+t_s = 630.0
+lat_deg = 75.320159
+lon_deg = 28.85764
+height_m = 422069.7
+
+[[trajectory.sample]]
+t_s = 632.5
+lat_deg = 75.478484
+lon_deg = 28.964449
+height_m = 422088.2
+
+[[trajectory.sample]]
+t_s = 635.0
+lat_deg = 75.636747
+lon_deg = 29.073784
+height_m = 422106.6
+
+[[trajectory.sample]]
+t_s = 637.5
+lat_deg = 75.794946
+lon_deg = 29.185729
+height_m = 422124.8
+
+[[trajectory.sample]]
+t_s = 640.0
+lat_deg = 75.953079
+lon_deg = 29.300372
+height_m = 422142.8
+
+[[trajectory.sample]]
+t_s = 642.5
+lat_deg = 76.111144
+lon_deg = 29.417802
+height_m = 422160.7
+
+[[trajectory.sample]]
+t_s = 645.0
+lat_deg = 76.269139
+lon_deg = 29.538116
+height_m = 422178.3
+
+[[trajectory.sample]]
+t_s = 646.25
+lat_deg = 76.348109
+lon_deg = 29.599385
+height_m = 422187.1
+
+[[trajectory.sample]]
+t_s = 647.5
+lat_deg = 76.427061
+lon_deg = 29.661413
+height_m = 422195.8
+
+[[trajectory.sample]]
+t_s = 648.75
+lat_deg = 76.505993
+lon_deg = 29.724211
+height_m = 422204.5
+
+[[trajectory.sample]]
+t_s = 650.0
+lat_deg = 76.584907
+lon_deg = 29.787795
+height_m = 422213.1
+
+[[trajectory.sample]]
+t_s = 651.25
+lat_deg = 76.663801
+lon_deg = 29.852178
+height_m = 422221.7
+
+[[trajectory.sample]]
+t_s = 652.5
+lat_deg = 76.742676
+lon_deg = 29.917374
+height_m = 422230.2
+
+[[trajectory.sample]]
+t_s = 653.75
+lat_deg = 76.82153
+lon_deg = 29.983396
+height_m = 422238.7
+
+[[trajectory.sample]]
+t_s = 655.0
+lat_deg = 76.900364
+lon_deg = 30.050261
+height_m = 422247.1
+
+[[trajectory.sample]]
+t_s = 656.25
+lat_deg = 76.979177
+lon_deg = 30.117982
+height_m = 422255.5
+
+[[trajectory.sample]]
+t_s = 657.5
+lat_deg = 77.057969
+lon_deg = 30.186576
+height_m = 422263.9
+
+[[trajectory.sample]]
+t_s = 658.75
+lat_deg = 77.136739
+lon_deg = 30.256058
+height_m = 422272.2
+
+[[trajectory.sample]]
+t_s = 660.0
+lat_deg = 77.215488
+lon_deg = 30.326445
+height_m = 422280.4
+
+[[trajectory.sample]]
+t_s = 661.25
+lat_deg = 77.294214
+lon_deg = 30.397752
+height_m = 422288.6
+
+[[trajectory.sample]]
+t_s = 662.5
+lat_deg = 77.372917
+lon_deg = 30.469997
+height_m = 422296.8
+
+[[trajectory.sample]]
+t_s = 663.75
+lat_deg = 77.451597
+lon_deg = 30.543198
+height_m = 422304.9
+
+[[trajectory.sample]]
+t_s = 665.0
+lat_deg = 77.530254
+lon_deg = 30.617371
+height_m = 422313.0
+
+[[trajectory.sample]]
+t_s = 666.25
+lat_deg = 77.608886
+lon_deg = 30.692536
+height_m = 422321.0
+
+[[trajectory.sample]]
+t_s = 667.5
+lat_deg = 77.687494
+lon_deg = 30.768711
+height_m = 422329.0
+
+[[trajectory.sample]]
+t_s = 668.75
+lat_deg = 77.766077
+lon_deg = 30.845915
+height_m = 422336.9
+
+[[trajectory.sample]]
+t_s = 670.0
+lat_deg = 77.844635
+lon_deg = 30.924167
+height_m = 422344.8
+
+[[trajectory.sample]]
+t_s = 671.25
+lat_deg = 77.923167
+lon_deg = 31.003489
+height_m = 422352.6
+
+[[trajectory.sample]]
+t_s = 672.5
+lat_deg = 78.001672
+lon_deg = 31.0839
+height_m = 422360.4
+
+[[trajectory.sample]]
+t_s = 673.75
+lat_deg = 78.080151
+lon_deg = 31.165422
+height_m = 422368.1
+
+[[trajectory.sample]]
+t_s = 675.0
+lat_deg = 78.158602
+lon_deg = 31.248076
+height_m = 422375.8
+
+[[trajectory.sample]]
+t_s = 676.25
+lat_deg = 78.237025
+lon_deg = 31.331884
+height_m = 422383.4
+
+[[trajectory.sample]]
+t_s = 677.5
+lat_deg = 78.31542
+lon_deg = 31.41687
+height_m = 422391.0
+
+[[trajectory.sample]]
+t_s = 678.75
+lat_deg = 78.393785
+lon_deg = 31.503057
+height_m = 422398.6
+
+[[trajectory.sample]]
+t_s = 680.0
+lat_deg = 78.472121
+lon_deg = 31.590469
+height_m = 422406.1
+
+[[trajectory.sample]]
+t_s = 681.25
+lat_deg = 78.550427
+lon_deg = 31.67913
+height_m = 422413.5
+
+[[trajectory.sample]]
+t_s = 682.5
+lat_deg = 78.628702
+lon_deg = 31.769066
+height_m = 422420.9
+
+[[trajectory.sample]]
+t_s = 683.75
+lat_deg = 78.706945
+lon_deg = 31.860303
+height_m = 422428.3
+
+[[trajectory.sample]]
+t_s = 685.0
+lat_deg = 78.785157
+lon_deg = 31.952868
+height_m = 422435.6
+
+[[trajectory.sample]]
+t_s = 686.25
+lat_deg = 78.863335
+lon_deg = 32.046788
+height_m = 422442.8
+
+[[trajectory.sample]]
+t_s = 687.5
+lat_deg = 78.941481
+lon_deg = 32.14209
+height_m = 422450.0
+
+[[trajectory.sample]]
+t_s = 688.75
+lat_deg = 79.019592
+lon_deg = 32.238805
+height_m = 422457.2
+
+[[trajectory.sample]]
+t_s = 690.0
+lat_deg = 79.097668
+lon_deg = 32.336961
+height_m = 422464.3
+
+[[trajectory.sample]]
+t_s = 691.25
+lat_deg = 79.175708
+lon_deg = 32.43659
+height_m = 422471.4
+
+[[trajectory.sample]]
+t_s = 692.5
+lat_deg = 79.253713
+lon_deg = 32.537723
+height_m = 422478.4
+
+[[trajectory.sample]]
+t_s = 693.75
+lat_deg = 79.33168
+lon_deg = 32.640391
+height_m = 422485.3
+
+[[trajectory.sample]]
+t_s = 695.0
+lat_deg = 79.409609
+lon_deg = 32.744629
+height_m = 422492.3
+
+[[trajectory.sample]]
+t_s = 696.25
+lat_deg = 79.487499
+lon_deg = 32.850469
+height_m = 422499.1
+
+[[trajectory.sample]]
+t_s = 697.5
+lat_deg = 79.56535
+lon_deg = 32.957948
+height_m = 422505.9
+
+[[trajectory.sample]]
+t_s = 698.75
+lat_deg = 79.64316
+lon_deg = 33.067102
+height_m = 422512.7
+
+[[trajectory.sample]]
+t_s = 700.0
+lat_deg = 79.720928
+lon_deg = 33.177967
+height_m = 422519.4
+
+[[trajectory.sample]]
+t_s = 701.25
+lat_deg = 79.798655
+lon_deg = 33.290582
+height_m = 422526.1
+
+[[trajectory.sample]]
+t_s = 702.5
+lat_deg = 79.876338
+lon_deg = 33.404985
+height_m = 422532.7
+
+[[trajectory.sample]]
+t_s = 703.75
+lat_deg = 79.953976
+lon_deg = 33.521219
+height_m = 422539.3
+
+[[trajectory.sample]]
+t_s = 705.0
+lat_deg = 80.03157
+lon_deg = 33.639323
+height_m = 422545.8
+
+[[trajectory.sample]]
+t_s = 706.25
+lat_deg = 80.109117
+lon_deg = 33.759342
+height_m = 422552.3
+
+[[trajectory.sample]]
+t_s = 707.5
+lat_deg = 80.186616
+lon_deg = 33.881318
+height_m = 422558.7
+
+[[trajectory.sample]]
+t_s = 708.75
+lat_deg = 80.264067
+lon_deg = 34.005299
+height_m = 422565.1
+
+[[trajectory.sample]]
+t_s = 710.0
+lat_deg = 80.341468
+lon_deg = 34.13133
+height_m = 422571.4
+
+[[trajectory.sample]]
+t_s = 711.25
+lat_deg = 80.418818
+lon_deg = 34.259461
+height_m = 422577.7
+
+[[trajectory.sample]]
+t_s = 712.5
+lat_deg = 80.496116
+lon_deg = 34.38974
+height_m = 422583.9
+
+[[trajectory.sample]]
+t_s = 713.75
+lat_deg = 80.573361
+lon_deg = 34.52222
+height_m = 422590.1
+
+[[trajectory.sample]]
+t_s = 715.0
+lat_deg = 80.650551
+lon_deg = 34.656953
+height_m = 422596.2
+
+[[trajectory.sample]]
+t_s = 716.25
+lat_deg = 80.727684
+lon_deg = 34.793993
+height_m = 422602.3
+
+[[trajectory.sample]]
+t_s = 717.5
+lat_deg = 80.804761
+lon_deg = 34.933398
+height_m = 422608.4
+
+[[trajectory.sample]]
+t_s = 718.75
+lat_deg = 80.881778
+lon_deg = 35.075225
+height_m = 422614.3
+
+[[trajectory.sample]]
+t_s = 720.0
+lat_deg = 80.958735
+lon_deg = 35.219534
+height_m = 422620.3
+
+[[trajectory.sample]]
+t_s = 721.25
+lat_deg = 81.035629
+lon_deg = 35.366388
+height_m = 422626.1
+
+[[trajectory.sample]]
+t_s = 722.5
+lat_deg = 81.112461
+lon_deg = 35.515849
+height_m = 422632.0
+
+[[trajectory.sample]]
+t_s = 723.75
+lat_deg = 81.189227
+lon_deg = 35.667985
+height_m = 422637.8
+
+[[trajectory.sample]]
+t_s = 725.0
+lat_deg = 81.265926
+lon_deg = 35.822863
+height_m = 422643.5
+
+[[trajectory.sample]]
+t_s = 726.25
+lat_deg = 81.342556
+lon_deg = 35.980554
+height_m = 422649.2
+
+[[trajectory.sample]]
+t_s = 727.5
+lat_deg = 81.419116
+lon_deg = 36.141129
+height_m = 422654.8
+
+[[trajectory.sample]]
+t_s = 728.75
+lat_deg = 81.495604
+lon_deg = 36.304666
+height_m = 422660.4
+
+[[trajectory.sample]]
+t_s = 730.0
+lat_deg = 81.572017
+lon_deg = 36.47124
+height_m = 422665.9
+
+[[trajectory.sample]]
+t_s = 731.25
+lat_deg = 81.648353
+lon_deg = 36.640934
+height_m = 422671.4
+
+[[trajectory.sample]]
+t_s = 732.5
+lat_deg = 81.724612
+lon_deg = 36.813828
+height_m = 422676.8
+
+[[trajectory.sample]]
+t_s = 733.75
+lat_deg = 81.800789
+lon_deg = 36.990011
+height_m = 422682.2
+
+[[trajectory.sample]]
+t_s = 735.0
+lat_deg = 81.876884
+lon_deg = 37.169569
+height_m = 422687.5
+
+[[trajectory.sample]]
+t_s = 736.25
+lat_deg = 81.952893
+lon_deg = 37.352596
+height_m = 422692.8
+
+[[trajectory.sample]]
+t_s = 737.5
+lat_deg = 82.028815
+lon_deg = 37.539186
+height_m = 422698.0
+
+[[trajectory.sample]]
+t_s = 738.75
+lat_deg = 82.104646
+lon_deg = 37.729439
+height_m = 422703.2
+
+[[trajectory.sample]]
+t_s = 740.0
+lat_deg = 82.180385
+lon_deg = 37.923455
+height_m = 422708.3
+
+[[trajectory.sample]]
+t_s = 741.25
+lat_deg = 82.256028
+lon_deg = 38.121341
+height_m = 422713.4
+
+[[trajectory.sample]]
+t_s = 742.5
+lat_deg = 82.331573
+lon_deg = 38.323206
+height_m = 422718.4
+
+[[trajectory.sample]]
+t_s = 743.75
+lat_deg = 82.407016
+lon_deg = 38.529163
+height_m = 422723.4
+
+[[trajectory.sample]]
+t_s = 745.0
+lat_deg = 82.482355
+lon_deg = 38.73933
+height_m = 422728.3
+
+[[trajectory.sample]]
+t_s = 746.25
+lat_deg = 82.557587
+lon_deg = 38.953829
+height_m = 422733.2
+
+[[trajectory.sample]]
+t_s = 747.5
+lat_deg = 82.632708
+lon_deg = 39.172785
+height_m = 422738.0
+
+[[trajectory.sample]]
+t_s = 748.75
+lat_deg = 82.707715
+lon_deg = 39.396331
+height_m = 422742.8
+
+[[trajectory.sample]]
+t_s = 750.0
+lat_deg = 82.782604
+lon_deg = 39.6246
+height_m = 422747.5
+
+[[trajectory.sample]]
+t_s = 751.25
+lat_deg = 82.857372
+lon_deg = 39.857735
+height_m = 422752.1
+
+[[trajectory.sample]]
+t_s = 752.5
+lat_deg = 82.932015
+lon_deg = 40.095882
+height_m = 422756.8
+
+[[trajectory.sample]]
+t_s = 753.75
+lat_deg = 83.006528
+lon_deg = 40.339192
+height_m = 422761.3
+
+[[trajectory.sample]]
+t_s = 755.0
+lat_deg = 83.080908
+lon_deg = 40.587822
+height_m = 422765.8
+
+[[trajectory.sample]]
+t_s = 756.25
+lat_deg = 83.155151
+lon_deg = 40.841936
+height_m = 422770.3
+
+[[trajectory.sample]]
+t_s = 757.5
+lat_deg = 83.229251
+lon_deg = 41.101704
+height_m = 422774.7
+
+[[trajectory.sample]]
+t_s = 758.75
+lat_deg = 83.303204
+lon_deg = 41.367302
+height_m = 422779.1
+
+[[trajectory.sample]]
+t_s = 759.375
+lat_deg = 83.340124
+lon_deg = 41.502344
+height_m = 422781.2
+
+[[trajectory.sample]]
+t_s = 760.0
+lat_deg = 83.377005
+lon_deg = 41.638913
+height_m = 422783.4
+
+[[trajectory.sample]]
+t_s = 760.625
+lat_deg = 83.413848
+lon_deg = 41.777032
+height_m = 422785.5
+
+[[trajectory.sample]]
+t_s = 761.25
+lat_deg = 83.45065
+lon_deg = 41.916727
+height_m = 422787.6
+
+[[trajectory.sample]]
+t_s = 761.875
+lat_deg = 83.487412
+lon_deg = 42.058022
+height_m = 422789.7
+
+[[trajectory.sample]]
+t_s = 762.5
+lat_deg = 83.524132
+lon_deg = 42.200943
+height_m = 422791.8
+
+[[trajectory.sample]]
+t_s = 763.125
+lat_deg = 83.560811
+lon_deg = 42.345515
+height_m = 422793.9
+
+[[trajectory.sample]]
+t_s = 763.75
+lat_deg = 83.597447
+lon_deg = 42.491765
+height_m = 422796.0
+
+[[trajectory.sample]]
+t_s = 764.375
+lat_deg = 83.634039
+lon_deg = 42.639721
+height_m = 422798.0
+
+[[trajectory.sample]]
+t_s = 765.0
+lat_deg = 83.670587
+lon_deg = 42.789408
+height_m = 422800.1
+
+[[trajectory.sample]]
+t_s = 765.625
+lat_deg = 83.70709
+lon_deg = 42.940857
+height_m = 422802.1
+
+[[trajectory.sample]]
+t_s = 766.25
+lat_deg = 83.743548
+lon_deg = 43.094094
+height_m = 422804.1
+
+[[trajectory.sample]]
+t_s = 766.875
+lat_deg = 83.779959
+lon_deg = 43.249149
+height_m = 422806.1
+
+[[trajectory.sample]]
+t_s = 767.5
+lat_deg = 83.816323
+lon_deg = 43.406053
+height_m = 422808.1
+
+[[trajectory.sample]]
+t_s = 768.125
+lat_deg = 83.852638
+lon_deg = 43.564835
+height_m = 422810.1
+
+[[trajectory.sample]]
+t_s = 768.75
+lat_deg = 83.888905
+lon_deg = 43.725526
+height_m = 422812.1
+
+[[trajectory.sample]]
+t_s = 769.375
+lat_deg = 83.925122
+lon_deg = 43.888158
+height_m = 422814.0
+
+[[trajectory.sample]]
+t_s = 770.0
+lat_deg = 83.961287
+lon_deg = 44.052763
+height_m = 422816.0
+
+[[trajectory.sample]]
+t_s = 770.625
+lat_deg = 83.997401
+lon_deg = 44.219373
+height_m = 422817.9
+
+[[trajectory.sample]]
+t_s = 771.25
+lat_deg = 84.033463
+lon_deg = 44.388023
+height_m = 422819.8
+
+[[trajectory.sample]]
+t_s = 771.875
+lat_deg = 84.069471
+lon_deg = 44.558746
+height_m = 422821.7
+
+[[trajectory.sample]]
+t_s = 772.5
+lat_deg = 84.105424
+lon_deg = 44.731578
+height_m = 422823.6
+
+[[trajectory.sample]]
+t_s = 773.125
+lat_deg = 84.141321
+lon_deg = 44.906553
+height_m = 422825.5
+
+[[trajectory.sample]]
+t_s = 773.75
+lat_deg = 84.177162
+lon_deg = 45.083709
+height_m = 422827.3
+
+[[trajectory.sample]]
+t_s = 774.375
+lat_deg = 84.212946
+lon_deg = 45.263081
+height_m = 422829.2
+
+[[trajectory.sample]]
+t_s = 775.0
+lat_deg = 84.24867
+lon_deg = 45.444708
+height_m = 422831.0
+
+[[trajectory.sample]]
+t_s = 775.625
+lat_deg = 84.284335
+lon_deg = 45.628628
+height_m = 422832.8
+
+[[trajectory.sample]]
+t_s = 776.25
+lat_deg = 84.319938
+lon_deg = 45.81488
+height_m = 422834.6
+
+[[trajectory.sample]]
+t_s = 776.875
+lat_deg = 84.35548
+lon_deg = 46.003505
+height_m = 422836.4
+
+[[trajectory.sample]]
+t_s = 777.5
+lat_deg = 84.390958
+lon_deg = 46.194543
+height_m = 422838.2
+
+[[trajectory.sample]]
+t_s = 778.125
+lat_deg = 84.426372
+lon_deg = 46.388036
+height_m = 422840.0
+
+[[trajectory.sample]]
+t_s = 778.75
+lat_deg = 84.46172
+lon_deg = 46.584026
+height_m = 422841.8
+
+[[trajectory.sample]]
+t_s = 779.375
+lat_deg = 84.497001
+lon_deg = 46.782557
+height_m = 422843.5
+
+[[trajectory.sample]]
+t_s = 780.0
+lat_deg = 84.532213
+lon_deg = 46.983673
+height_m = 422845.2
+
+[[trajectory.sample]]
+t_s = 780.625
+lat_deg = 84.567356
+lon_deg = 47.187419
+height_m = 422847.0
+
+[[trajectory.sample]]
+t_s = 781.25
+lat_deg = 84.602428
+lon_deg = 47.393841
+height_m = 422848.7
+
+[[trajectory.sample]]
+t_s = 781.875
+lat_deg = 84.637427
+lon_deg = 47.602986
+height_m = 422850.4
+
+[[trajectory.sample]]
+t_s = 782.5
+lat_deg = 84.672353
+lon_deg = 47.814902
+height_m = 422852.0
+
+[[trajectory.sample]]
+t_s = 783.125
+lat_deg = 84.707203
+lon_deg = 48.029638
+height_m = 422853.7
+
+[[trajectory.sample]]
+t_s = 783.75
+lat_deg = 84.741977
+lon_deg = 48.247243
+height_m = 422855.4
+
+[[trajectory.sample]]
+t_s = 784.375
+lat_deg = 84.776672
+lon_deg = 48.467769
+height_m = 422857.0
+
+[[trajectory.sample]]
+t_s = 785.0
+lat_deg = 84.811288
+lon_deg = 48.691266
+height_m = 422858.6
+
+[[trajectory.sample]]
+t_s = 785.625
+lat_deg = 84.845822
+lon_deg = 48.917789
+height_m = 422860.2
+
+[[trajectory.sample]]
+t_s = 786.25
+lat_deg = 84.880272
+lon_deg = 49.14739
+height_m = 422861.8
+
+[[trajectory.sample]]
+t_s = 786.875
+lat_deg = 84.914638
+lon_deg = 49.380125
+height_m = 422863.4
+
+[[trajectory.sample]]
+t_s = 787.5
+lat_deg = 84.948918
+lon_deg = 49.61605
+height_m = 422865.0
+
+[[trajectory.sample]]
+t_s = 788.125
+lat_deg = 84.983109
+lon_deg = 49.855221
+height_m = 422866.6
+
+[[trajectory.sample]]
+t_s = 788.75
+lat_deg = 85.01721
+lon_deg = 50.097698
+height_m = 422868.1
+
+[[trajectory.sample]]
+t_s = 789.375
+lat_deg = 85.051219
+lon_deg = 50.343538
+height_m = 422869.7
+
+[[trajectory.sample]]
+t_s = 790.0
+lat_deg = 85.085134
+lon_deg = 50.592804
+height_m = 422871.2
+
+[[trajectory.sample]]
+t_s = 790.625
+lat_deg = 85.118953
+lon_deg = 50.845556
+height_m = 422872.7
+
+[[trajectory.sample]]
+t_s = 791.25
+lat_deg = 85.152674
+lon_deg = 51.101857
+height_m = 422874.2
+
+[[trajectory.sample]]
+t_s = 791.875
+lat_deg = 85.186296
+lon_deg = 51.361771
+height_m = 422875.7
+
+[[trajectory.sample]]
+t_s = 792.5
+lat_deg = 85.219815
+lon_deg = 51.625364
+height_m = 422877.1
+
+[[trajectory.sample]]
+t_s = 793.125
+lat_deg = 85.25323
+lon_deg = 51.892701
+height_m = 422878.6
+
+[[trajectory.sample]]
+t_s = 793.75
+lat_deg = 85.286539
+lon_deg = 52.163851
+height_m = 422880.0
+
+[[trajectory.sample]]
+t_s = 794.375
+lat_deg = 85.319739
+lon_deg = 52.438882
+height_m = 422881.5
+
+[[trajectory.sample]]
+t_s = 795.0
+lat_deg = 85.352828
+lon_deg = 52.717864
+height_m = 422882.9
+
+[[trajectory.sample]]
+t_s = 795.625
+lat_deg = 85.385803
+lon_deg = 53.000869
+height_m = 422884.3
+
+[[trajectory.sample]]
+t_s = 796.25
+lat_deg = 85.418663
+lon_deg = 53.287969
+height_m = 422885.7
+
+[[trajectory.sample]]
+t_s = 796.875
+lat_deg = 85.451405
+lon_deg = 53.579238
+height_m = 422887.1
+
+[[trajectory.sample]]
+t_s = 797.5
+lat_deg = 85.484025
+lon_deg = 53.874751
+height_m = 422888.4
+
+[[trajectory.sample]]
+t_s = 798.125
+lat_deg = 85.516522
+lon_deg = 54.174585
+height_m = 422889.8
+
+[[trajectory.sample]]
+t_s = 798.75
+lat_deg = 85.548893
+lon_deg = 54.478817
+height_m = 422891.1
+
+[[trajectory.sample]]
+t_s = 799.375
+lat_deg = 85.581134
+lon_deg = 54.787526
+height_m = 422892.5
+
+[[trajectory.sample]]
+t_s = 800.0
+lat_deg = 85.613244
+lon_deg = 55.100793
+height_m = 422893.8
+
+[[trajectory.sample]]
+t_s = 800.625
+lat_deg = 85.645219
+lon_deg = 55.418699
+height_m = 422895.1
+
+[[trajectory.sample]]
+t_s = 801.25
+lat_deg = 85.677056
+lon_deg = 55.741327
+height_m = 422896.4
+
+[[trajectory.sample]]
+t_s = 801.875
+lat_deg = 85.708752
+lon_deg = 56.068761
+height_m = 422897.6
+
+[[trajectory.sample]]
+t_s = 802.5
+lat_deg = 85.740305
+lon_deg = 56.401086
+height_m = 422898.9
+
+[[trajectory.sample]]
+t_s = 803.125
+lat_deg = 85.77171
+lon_deg = 56.738388
+height_m = 422900.1
+
+[[trajectory.sample]]
+t_s = 803.75
+lat_deg = 85.802964
+lon_deg = 57.080756
+height_m = 422901.4
+
+[[trajectory.sample]]
+t_s = 804.375
+lat_deg = 85.834065
+lon_deg = 57.428277
+height_m = 422902.6
+
+[[trajectory.sample]]
+t_s = 805.0
+lat_deg = 85.865008
+lon_deg = 57.781043
+height_m = 422903.8
+
+[[trajectory.sample]]
+t_s = 805.625
+lat_deg = 85.89579
+lon_deg = 58.139144
+height_m = 422905.0
+
+[[trajectory.sample]]
+t_s = 806.25
+lat_deg = 85.926408
+lon_deg = 58.502672
+height_m = 422906.2
+
+[[trajectory.sample]]
+t_s = 806.875
+lat_deg = 85.956858
+lon_deg = 58.87172
+height_m = 422907.4
+
+[[trajectory.sample]]
+t_s = 807.5
+lat_deg = 85.987135
+lon_deg = 59.246383
+height_m = 422908.5
+
+[[trajectory.sample]]
+t_s = 808.125
+lat_deg = 86.017236
+lon_deg = 59.626756
+height_m = 422909.7
+
+[[trajectory.sample]]
+t_s = 808.75
+lat_deg = 86.047157
+lon_deg = 60.012935
+height_m = 422910.8
+
+[[trajectory.sample]]
+t_s = 809.375
+lat_deg = 86.076894
+lon_deg = 60.405017
+height_m = 422911.9
+
+[[trajectory.sample]]
+t_s = 810.0
+lat_deg = 86.106442
+lon_deg = 60.803098
+height_m = 422913.0
+
+[[trajectory.sample]]
+t_s = 810.625
+lat_deg = 86.135798
+lon_deg = 61.207278
+height_m = 422914.1
+
+[[trajectory.sample]]
+t_s = 811.25
+lat_deg = 86.164956
+lon_deg = 61.617655
+height_m = 422915.2
+
+[[trajectory.sample]]
+t_s = 811.875
+lat_deg = 86.193913
+lon_deg = 62.034328
+height_m = 422916.2
+
+[[trajectory.sample]]
+t_s = 812.5
+lat_deg = 86.222664
+lon_deg = 62.457397
+height_m = 422917.3
+
+[[trajectory.sample]]
+t_s = 813.125
+lat_deg = 86.251203
+lon_deg = 62.886962
+height_m = 422918.3
+
+[[trajectory.sample]]
+t_s = 813.75
+lat_deg = 86.279526
+lon_deg = 63.323122
+height_m = 422919.4
+
+[[trajectory.sample]]
+t_s = 814.375
+lat_deg = 86.307629
+lon_deg = 63.765977
+height_m = 422920.4
+
+[[trajectory.sample]]
+t_s = 815.0
+lat_deg = 86.335505
+lon_deg = 64.215628
+height_m = 422921.4
+
+[[trajectory.sample]]
+t_s = 815.625
+lat_deg = 86.36315
+lon_deg = 64.672174
+height_m = 422922.3
+
+[[trajectory.sample]]
+t_s = 816.25
+lat_deg = 86.390559
+lon_deg = 65.135713
+height_m = 422923.3
+
+[[trajectory.sample]]
+t_s = 816.875
+lat_deg = 86.417726
+lon_deg = 65.606345
+height_m = 422924.3
+
+[[trajectory.sample]]
+t_s = 817.5
+lat_deg = 86.444645
+lon_deg = 66.084166
+height_m = 422925.2
+
+[[trajectory.sample]]
+t_s = 818.125
+lat_deg = 86.471311
+lon_deg = 66.569273
+height_m = 422926.2
+
+[[trajectory.sample]]
+t_s = 818.75
+lat_deg = 86.497718
+lon_deg = 67.061761
+height_m = 422927.1
+
+[[trajectory.sample]]
+t_s = 819.375
+lat_deg = 86.523861
+lon_deg = 67.561725
+height_m = 422928.0
+
+[[trajectory.sample]]
+t_s = 820.0
+lat_deg = 86.549732
+lon_deg = 68.069256
+height_m = 422928.9
+
+[[trajectory.sample]]
+t_s = 820.625
+lat_deg = 86.575327
+lon_deg = 68.584443
+height_m = 422929.7
+
+[[trajectory.sample]]
+t_s = 821.25
+lat_deg = 86.600638
+lon_deg = 69.107375
+height_m = 422930.6
+
+[[trajectory.sample]]
+t_s = 821.875
+lat_deg = 86.62566
+lon_deg = 69.638137
+height_m = 422931.5
+
+[[trajectory.sample]]
+t_s = 822.5
+lat_deg = 86.650385
+lon_deg = 70.176812
+height_m = 422932.3
+
+[[trajectory.sample]]
+t_s = 823.125
+lat_deg = 86.674808
+lon_deg = 70.723477
+height_m = 422933.1
+
+[[trajectory.sample]]
+t_s = 823.75
+lat_deg = 86.698921
+lon_deg = 71.278209
+height_m = 422933.9
+
+[[trajectory.sample]]
+t_s = 824.375
+lat_deg = 86.722719
+lon_deg = 71.841081
+height_m = 422934.7
+
+[[trajectory.sample]]
+t_s = 825.0
+lat_deg = 86.746193
+lon_deg = 72.412158
+height_m = 422935.5
+
+[[trajectory.sample]]
+t_s = 825.625
+lat_deg = 86.769336
+lon_deg = 72.991504
+height_m = 422936.3
+
+[[trajectory.sample]]
+t_s = 826.25
+lat_deg = 86.792143
+lon_deg = 73.579178
+height_m = 422937.1
+
+[[trajectory.sample]]
+t_s = 826.875
+lat_deg = 86.814605
+lon_deg = 74.175232
+height_m = 422937.8
+
+[[trajectory.sample]]
+t_s = 827.5
+lat_deg = 86.836714
+lon_deg = 74.779712
+height_m = 422938.5
+
+[[trajectory.sample]]
+t_s = 828.125
+lat_deg = 86.858465
+lon_deg = 75.392659
+height_m = 422939.3
+
+[[trajectory.sample]]
+t_s = 828.75
+lat_deg = 86.879848
+lon_deg = 76.014108
+height_m = 422940.0
+
+[[trajectory.sample]]
+t_s = 829.375
+lat_deg = 86.900857
+lon_deg = 76.644084
+height_m = 422940.7
+
+[[trajectory.sample]]
+t_s = 830.0
+lat_deg = 86.921484
+lon_deg = 77.282608
+height_m = 422941.3
+
+[[trajectory.sample]]
+t_s = 830.625
+lat_deg = 86.941721
+lon_deg = 77.92969
+height_m = 422942.0
+
+[[trajectory.sample]]
+t_s = 831.25
+lat_deg = 86.96156
+lon_deg = 78.585333
+height_m = 422942.7
+
+[[trajectory.sample]]
+t_s = 831.875
+lat_deg = 86.980994
+lon_deg = 79.249531
+height_m = 422943.3
+
+[[trajectory.sample]]
+t_s = 832.5
+lat_deg = 87.000014
+lon_deg = 79.922269
+height_m = 422943.9
+
+[[trajectory.sample]]
+t_s = 833.125
+lat_deg = 87.018613
+lon_deg = 80.60352
+height_m = 422944.6
+
+[[trajectory.sample]]
+t_s = 833.75
+lat_deg = 87.036783
+lon_deg = 81.29325
+height_m = 422945.2
+
+[[trajectory.sample]]
+t_s = 834.375
+lat_deg = 87.054515
+lon_deg = 81.991411
+height_m = 422945.7
+
+[[trajectory.sample]]
+t_s = 835.0
+lat_deg = 87.071803
+lon_deg = 82.697945
+height_m = 422946.3
+
+[[trajectory.sample]]
+t_s = 835.625
+lat_deg = 87.088637
+lon_deg = 83.412784
+height_m = 422946.9
+
+[[trajectory.sample]]
+t_s = 836.25
+lat_deg = 87.10501
+lon_deg = 84.135845
+height_m = 422947.4
+
+[[trajectory.sample]]
+t_s = 836.875
+lat_deg = 87.120915
+lon_deg = 84.867036
+height_m = 422948.0
+
+[[trajectory.sample]]
+t_s = 837.5
+lat_deg = 87.136343
+lon_deg = 85.606248
+height_m = 422948.5
+
+[[trajectory.sample]]
+t_s = 838.125
+lat_deg = 87.151286
+lon_deg = 86.353363
+height_m = 422949.0
+
+[[trajectory.sample]]
+t_s = 838.75
+lat_deg = 87.165738
+lon_deg = 87.108248
+height_m = 422949.5
+
+[[trajectory.sample]]
+t_s = 839.375
+lat_deg = 87.179689
+lon_deg = 87.870755
+height_m = 422950.0
+
+[[trajectory.sample]]
+t_s = 840.0
+lat_deg = 87.193134
+lon_deg = 88.640724
+height_m = 422950.4
+
+[[trajectory.sample]]
+t_s = 840.625
+lat_deg = 87.206064
+lon_deg = 89.417981
+height_m = 422950.9
+
+[[trajectory.sample]]
+t_s = 841.25
+lat_deg = 87.218473
+lon_deg = 90.202336
+height_m = 422951.3
+
+[[trajectory.sample]]
+t_s = 841.875
+lat_deg = 87.230354
+lon_deg = 90.993588
+height_m = 422951.8
+
+[[trajectory.sample]]
+t_s = 842.5
+lat_deg = 87.241698
+lon_deg = 91.79152
+height_m = 422952.2
+
+[[trajectory.sample]]
+t_s = 843.125
+lat_deg = 87.252501
+lon_deg = 92.5959
+height_m = 422952.6
+
+[[trajectory.sample]]
+t_s = 843.75
+lat_deg = 87.262756
+lon_deg = 93.406483
+height_m = 422953.0
+
+[[trajectory.sample]]
+t_s = 844.375
+lat_deg = 87.272455
+lon_deg = 94.223011
+height_m = 422953.3
+
+[[trajectory.sample]]
+t_s = 845.0
+lat_deg = 87.281594
+lon_deg = 95.045212
+height_m = 422953.7
+
+[[trajectory.sample]]
+t_s = 845.625
+lat_deg = 87.290167
+lon_deg = 95.8728
+height_m = 422954.1
+
+[[trajectory.sample]]
+t_s = 846.25
+lat_deg = 87.298169
+lon_deg = 96.705478
+height_m = 422954.4
+
+[[trajectory.sample]]
+t_s = 846.875
+lat_deg = 87.305593
+lon_deg = 97.542934
+height_m = 422954.7
+
+[[trajectory.sample]]
+t_s = 847.5
+lat_deg = 87.312436
+lon_deg = 98.384847
+height_m = 422955.0
+
+[[trajectory.sample]]
+t_s = 848.125
+lat_deg = 87.318694
+lon_deg = 99.230883
+height_m = 422955.3
+
+[[trajectory.sample]]
+t_s = 848.75
+lat_deg = 87.324361
+lon_deg = 100.080699
+height_m = 422955.6
+
+[[trajectory.sample]]
+t_s = 849.375
+lat_deg = 87.329434
+lon_deg = 100.93394
+height_m = 422955.9
+
+[[trajectory.sample]]
+t_s = 850.0
+lat_deg = 87.33391
+lon_deg = 101.790245
+height_m = 422956.1
+
+[[trajectory.sample]]
+t_s = 850.625
+lat_deg = 87.337786
+lon_deg = 102.649243
+height_m = 422956.4
+
+[[trajectory.sample]]
+t_s = 851.25
+lat_deg = 87.341059
+lon_deg = 103.510556
+height_m = 422956.6
+
+[[trajectory.sample]]
+t_s = 851.875
+lat_deg = 87.343727
+lon_deg = 104.373799
+height_m = 422956.8
+
+[[trajectory.sample]]
+t_s = 852.5
+lat_deg = 87.345788
+lon_deg = 105.238584
+height_m = 422957.0
+
+[[trajectory.sample]]
+t_s = 853.125
+lat_deg = 87.347241
+lon_deg = 106.104518
+height_m = 422957.2
+
+[[trajectory.sample]]
+t_s = 853.75
+lat_deg = 87.348084
+lon_deg = 106.971203
+height_m = 422957.4
+
+[[trajectory.sample]]
+t_s = 854.375
+lat_deg = 87.348318
+lon_deg = 107.83824
+height_m = 422957.6
+
+[[trajectory.sample]]
+t_s = 855.0
+lat_deg = 87.347941
+lon_deg = 108.705231
+height_m = 422957.7
+
+[[trajectory.sample]]
+t_s = 855.625
+lat_deg = 87.346955
+lon_deg = 109.571775
+height_m = 422957.9
+
+[[trajectory.sample]]
+t_s = 856.25
+lat_deg = 87.34536
+lon_deg = 110.437475
+height_m = 422958.0
+
+[[trajectory.sample]]
+t_s = 856.875
+lat_deg = 87.343156
+lon_deg = 111.301934
+height_m = 422958.1
+
+[[trajectory.sample]]
+t_s = 857.5
+lat_deg = 87.340346
+lon_deg = 112.16476
+height_m = 422958.2
+
+[[trajectory.sample]]
+t_s = 858.125
+lat_deg = 87.336932
+lon_deg = 113.025564
+height_m = 422958.3
+
+[[trajectory.sample]]
+t_s = 858.75
+lat_deg = 87.332915
+lon_deg = 113.883964
+height_m = 422958.3
+
+[[trajectory.sample]]
+t_s = 859.375
+lat_deg = 87.328299
+lon_deg = 114.739583
+height_m = 422958.4
+
+[[trajectory.sample]]
+t_s = 860.0
+lat_deg = 87.323086
+lon_deg = 115.592054
+height_m = 422958.4
+
+[[trajectory.sample]]
+t_s = 860.625
+lat_deg = 87.317281
+lon_deg = 116.441015
+height_m = 422958.5
+
+[[trajectory.sample]]
+t_s = 861.25
+lat_deg = 87.310886
+lon_deg = 117.286114
+height_m = 422958.5
+
+[[trajectory.sample]]
+t_s = 861.875
+lat_deg = 87.303906
+lon_deg = 118.127012
+height_m = 422958.5
+
+[[trajectory.sample]]
+t_s = 862.5
+lat_deg = 87.296346
+lon_deg = 118.963376
+height_m = 422958.5
+
+[[trajectory.sample]]
+t_s = 863.125
+lat_deg = 87.28821
+lon_deg = 119.794888
+height_m = 422958.5
+
+[[trajectory.sample]]
+t_s = 863.75
+lat_deg = 87.279504
+lon_deg = 120.621239
+height_m = 422958.4
+
+[[trajectory.sample]]
+t_s = 864.375
+lat_deg = 87.270233
+lon_deg = 121.442135
+height_m = 422958.4
+
+[[trajectory.sample]]
+t_s = 864.688
+lat_deg = 87.26538
+lon_deg = 121.8511
+height_m = 422958.4
+
+[[trajectory.sample]]
+t_s = 865.0
+lat_deg = 87.260403
+lon_deg = 122.257293
+height_m = 422958.3
+
+[[trajectory.sample]]
+t_s = 865.313
+lat_deg = 87.255272
+lon_deg = 122.663283
+height_m = 422958.3
+
+[[trajectory.sample]]
+t_s = 865.625
+lat_deg = 87.25002
+lon_deg = 123.066445
+height_m = 422958.2
+
+[[trajectory.sample]]
+t_s = 865.938
+lat_deg = 87.244614
+lon_deg = 123.46933
+height_m = 422958.2
+
+[[trajectory.sample]]
+t_s = 866.25
+lat_deg = 87.239089
+lon_deg = 123.869334
+height_m = 422958.2
+
+[[trajectory.sample]]
+t_s = 866.563
+lat_deg = 87.233412
+lon_deg = 124.268991
+height_m = 422958.1
+
+[[trajectory.sample]]
+t_s = 866.875
+lat_deg = 87.227618
+lon_deg = 124.66572
+height_m = 422958.1
+
+[[trajectory.sample]]
+t_s = 867.188
+lat_deg = 87.221673
+lon_deg = 125.062033
+height_m = 422958.0
+
+[[trajectory.sample]]
+t_s = 867.5
+lat_deg = 87.215614
+lon_deg = 125.455374
+height_m = 422957.9
+
+[[trajectory.sample]]
+t_s = 867.813
+lat_deg = 87.209403
+lon_deg = 125.848235
+height_m = 422957.9
+
+[[trajectory.sample]]
+t_s = 868.125
+lat_deg = 87.203082
+lon_deg = 126.238083
+height_m = 422957.8
+
+[[trajectory.sample]]
+t_s = 868.438
+lat_deg = 87.19661
+lon_deg = 126.62739
+height_m = 422957.7
+
+[[trajectory.sample]]
+t_s = 868.75
+lat_deg = 87.190031
+lon_deg = 127.013647
+height_m = 422957.7
+
+[[trajectory.sample]]
+t_s = 869.063
+lat_deg = 87.183301
+lon_deg = 127.399306
+height_m = 422957.6
+
+[[trajectory.sample]]
+t_s = 869.375
+lat_deg = 87.176466
+lon_deg = 127.781882
+height_m = 422957.5
+
+[[trajectory.sample]]
+t_s = 869.688
+lat_deg = 87.169483
+lon_deg = 128.163805
+height_m = 422957.4
+
+[[trajectory.sample]]
+t_s = 870.0
+lat_deg = 87.162397
+lon_deg = 128.542615
+height_m = 422957.4
+
+[[trajectory.sample]]
+t_s = 870.313
+lat_deg = 87.155163
+lon_deg = 128.920722
+height_m = 422957.3
+
+[[trajectory.sample]]
+t_s = 870.625
+lat_deg = 87.14783
+lon_deg = 129.295691
+height_m = 422957.2
+
+[[trajectory.sample]]
+t_s = 870.938
+lat_deg = 87.14035
+lon_deg = 129.669907
+height_m = 422957.1
+
+[[trajectory.sample]]
+t_s = 871.25
+lat_deg = 87.132772
+lon_deg = 130.040964
+height_m = 422957.0
+
+[[trajectory.sample]]
+t_s = 871.563
+lat_deg = 87.125049
+lon_deg = 130.411224
+height_m = 422956.9
+
+[[trajectory.sample]]
+t_s = 871.875
+lat_deg = 87.117232
+lon_deg = 130.778306
+height_m = 422956.8
+
+[[trajectory.sample]]
+t_s = 872.188
+lat_deg = 87.109271
+lon_deg = 131.144549
+height_m = 422956.7
+
+[[trajectory.sample]]
+t_s = 872.5
+lat_deg = 87.101217
+lon_deg = 131.507599
+height_m = 422956.5
+
+[[trajectory.sample]]
+t_s = 872.813
+lat_deg = 87.093021
+lon_deg = 131.869772
+height_m = 422956.4
+
+[[trajectory.sample]]
+t_s = 873.125
+lat_deg = 87.084735
+lon_deg = 132.228741
+height_m = 422956.3
+
+[[trajectory.sample]]
+t_s = 873.438
+lat_deg = 87.076308
+lon_deg = 132.586796
+height_m = 422956.2
+
+[[trajectory.sample]]
+t_s = 873.75
+lat_deg = 87.067794
+lon_deg = 132.941639
+height_m = 422956.1
+
+[[trajectory.sample]]
+t_s = 874.063
+lat_deg = 87.05914
+lon_deg = 133.295536
+height_m = 422955.9
+
+[[trajectory.sample]]
+t_s = 874.375
+lat_deg = 87.050402
+lon_deg = 133.646216
+height_m = 422955.8
+
+[[trajectory.sample]]
+t_s = 874.688
+lat_deg = 87.041525
+lon_deg = 133.99592
+height_m = 422955.7
+
+[[trajectory.sample]]
+t_s = 875.0
+lat_deg = 87.032566
+lon_deg = 134.342405
+height_m = 422955.5
+
+[[trajectory.sample]]
+t_s = 875.313
+lat_deg = 87.02347
+lon_deg = 134.687886
+height_m = 422955.4
+
+[[trajectory.sample]]
+t_s = 875.625
+lat_deg = 87.014295
+lon_deg = 135.03015
+height_m = 422955.2
+
+[[trajectory.sample]]
+t_s = 875.938
+lat_deg = 87.004984
+lon_deg = 135.371386
+height_m = 422955.1
+
+[[trajectory.sample]]
+t_s = 876.25
+lat_deg = 86.995597
+lon_deg = 135.709408
+height_m = 422954.9
+
+[[trajectory.sample]]
+t_s = 876.563
+lat_deg = 86.986075
+lon_deg = 136.04638
+height_m = 422954.8
+
+[[trajectory.sample]]
+t_s = 876.875
+lat_deg = 86.976479
+lon_deg = 136.380145
+height_m = 422954.6
+
+[[trajectory.sample]]
+t_s = 877.188
+lat_deg = 86.96675
+lon_deg = 136.712841
+height_m = 422954.5
+
+[[trajectory.sample]]
+t_s = 877.5
+lat_deg = 86.95695
+lon_deg = 137.042339
+height_m = 422954.3
+
+[[trajectory.sample]]
+t_s = 877.813
+lat_deg = 86.947017
+lon_deg = 137.37075
+height_m = 422954.1
+
+[[trajectory.sample]]
+t_s = 878.125
+lat_deg = 86.937017
+lon_deg = 137.695975
+height_m = 422954.0
+
+[[trajectory.sample]]
+t_s = 878.438
+lat_deg = 86.926885
+lon_deg = 138.020098
+height_m = 422953.8
+
+[[trajectory.sample]]
+t_s = 878.75
+lat_deg = 86.916688
+lon_deg = 138.34105
+height_m = 422953.6
+
+[[trajectory.sample]]
+t_s = 879.063
+lat_deg = 86.906361
+lon_deg = 138.660887
+height_m = 422953.4
+
+[[trajectory.sample]]
+t_s = 879.375
+lat_deg = 86.895971
+lon_deg = 138.977568
+height_m = 422953.2
+
+[[trajectory.sample]]
+t_s = 879.688
+lat_deg = 86.885453
+lon_deg = 139.293124
+height_m = 422953.1
+
+[[trajectory.sample]]
+t_s = 880.0
+lat_deg = 86.874874
+lon_deg = 139.605543
+height_m = 422952.9
+
+[[trajectory.sample]]
+t_s = 880.313
+lat_deg = 86.864168
+lon_deg = 139.916828
+height_m = 422952.7
+
+[[trajectory.sample]]
+t_s = 880.625
+lat_deg = 86.853404
+lon_deg = 140.224995
+height_m = 422952.5
+
+[[trajectory.sample]]
+t_s = 881.25
+lat_deg = 86.831569
+lon_deg = 140.835954
+height_m = 422952.1
+
+[[trajectory.sample]]
+t_s = 881.875
+lat_deg = 86.809376
+lon_deg = 141.438455
+height_m = 422951.6
+
+[[trajectory.sample]]
+t_s = 882.5
+lat_deg = 86.786833
+lon_deg = 142.032539
+height_m = 422951.2
+
+[[trajectory.sample]]
+t_s = 883.125
+lat_deg = 86.763947
+lon_deg = 142.618255
+height_m = 422950.8
+
+[[trajectory.sample]]
+t_s = 883.75
+lat_deg = 86.740725
+lon_deg = 143.195658
+height_m = 422950.3
+
+[[trajectory.sample]]
+t_s = 884.375
+lat_deg = 86.717175
+lon_deg = 143.764805
+height_m = 422949.8
+
+[[trajectory.sample]]
+t_s = 885.0
+lat_deg = 86.693303
+lon_deg = 144.325762
+height_m = 422949.4
+
+[[trajectory.sample]]
+t_s = 885.625
+lat_deg = 86.669117
+lon_deg = 144.878596
+height_m = 422948.9
+
+[[trajectory.sample]]
+t_s = 886.25
+lat_deg = 86.644623
+lon_deg = 145.423381
+height_m = 422948.3
+
+[[trajectory.sample]]
+t_s = 886.875
+lat_deg = 86.619827
+lon_deg = 145.960193
+height_m = 422947.8
+
+[[trajectory.sample]]
+t_s = 887.5
+lat_deg = 86.594737
+lon_deg = 146.489111
+height_m = 422947.3
+
+[[trajectory.sample]]
+t_s = 888.125
+lat_deg = 86.569359
+lon_deg = 147.01022
+height_m = 422946.7
+
+[[trajectory.sample]]
+t_s = 888.75
+lat_deg = 86.543699
+lon_deg = 147.523604
+height_m = 422946.2
+
+[[trajectory.sample]]
+t_s = 889.375
+lat_deg = 86.517764
+lon_deg = 148.029352
+height_m = 422945.6
+
+[[trajectory.sample]]
+t_s = 890.0
+lat_deg = 86.491559
+lon_deg = 148.527555
+height_m = 422945.0
+
+[[trajectory.sample]]
+t_s = 890.625
+lat_deg = 86.465091
+lon_deg = 149.018304
+height_m = 422944.4
+
+[[trajectory.sample]]
+t_s = 891.25
+lat_deg = 86.438365
+lon_deg = 149.501694
+height_m = 422943.8
+
+[[trajectory.sample]]
+t_s = 891.875
+lat_deg = 86.411388
+lon_deg = 149.977821
+height_m = 422943.1
+
+[[trajectory.sample]]
+t_s = 892.5
+lat_deg = 86.384164
+lon_deg = 150.446781
+height_m = 422942.5
+
+[[trajectory.sample]]
+t_s = 893.125
+lat_deg = 86.3567
+lon_deg = 150.908671
+height_m = 422941.8
+
+[[trajectory.sample]]
+t_s = 893.75
+lat_deg = 86.329
+lon_deg = 151.363591
+height_m = 422941.2
+
+[[trajectory.sample]]
+t_s = 894.375
+lat_deg = 86.301071
+lon_deg = 151.81164
+height_m = 422940.5
+
+[[trajectory.sample]]
+t_s = 895.0
+lat_deg = 86.272916
+lon_deg = 152.252917
+height_m = 422939.8
+
+[[trajectory.sample]]
+t_s = 895.625
+lat_deg = 86.244542
+lon_deg = 152.687521
+height_m = 422939.1
+
+[[trajectory.sample]]
+t_s = 896.25
+lat_deg = 86.215953
+lon_deg = 153.115554
+height_m = 422938.4
+
+[[trajectory.sample]]
+t_s = 896.875
+lat_deg = 86.187154
+lon_deg = 153.537114
+height_m = 422937.6
+
+[[trajectory.sample]]
+t_s = 897.5
+lat_deg = 86.15815
+lon_deg = 153.952302
+height_m = 422936.9
+
+[[trajectory.sample]]
+t_s = 898.125
+lat_deg = 86.128945
+lon_deg = 154.361217
+height_m = 422936.1
+
+[[trajectory.sample]]
+t_s = 898.75
+lat_deg = 86.099544
+lon_deg = 154.763958
+height_m = 422935.3
+
+[[trajectory.sample]]
+t_s = 899.375
+lat_deg = 86.069951
+lon_deg = 155.160624
+height_m = 422934.5
+
+[[trajectory.sample]]
+t_s = 900.0
+lat_deg = 86.040171
+lon_deg = 155.551313
+height_m = 422933.7
+
+[[trajectory.sample]]
+t_s = 900.625
+lat_deg = 86.010208
+lon_deg = 155.936122
+height_m = 422932.9
+
+[[trajectory.sample]]
+t_s = 901.25
+lat_deg = 85.980065
+lon_deg = 156.315147
+height_m = 422932.1
+
+[[trajectory.sample]]
+t_s = 901.875
+lat_deg = 85.949748
+lon_deg = 156.688486
+height_m = 422931.3
+
+[[trajectory.sample]]
+t_s = 902.5
+lat_deg = 85.919259
+lon_deg = 157.056231
+height_m = 422930.4
+
+[[trajectory.sample]]
+t_s = 903.125
+lat_deg = 85.888602
+lon_deg = 157.418479
+height_m = 422929.5
+
+[[trajectory.sample]]
+t_s = 903.75
+lat_deg = 85.857782
+lon_deg = 157.77532
+height_m = 422928.7
+
+[[trajectory.sample]]
+t_s = 904.375
+lat_deg = 85.826802
+lon_deg = 158.126848
+height_m = 422927.8
+
+[[trajectory.sample]]
+t_s = 905.0
+lat_deg = 85.795666
+lon_deg = 158.473153
+height_m = 422926.8
+
+[[trajectory.sample]]
+t_s = 905.625
+lat_deg = 85.764376
+lon_deg = 158.814325
+height_m = 422925.9
+
+[[trajectory.sample]]
+t_s = 906.25
+lat_deg = 85.732936
+lon_deg = 159.150452
+height_m = 422925.0
+
+[[trajectory.sample]]
+t_s = 906.875
+lat_deg = 85.70135
+lon_deg = 159.481623
+height_m = 422924.0
+
+[[trajectory.sample]]
+t_s = 907.5
+lat_deg = 85.669621
+lon_deg = 159.807922
+height_m = 422923.1
+
+[[trajectory.sample]]
+t_s = 908.125
+lat_deg = 85.637751
+lon_deg = 160.129435
+height_m = 422922.1
+
+[[trajectory.sample]]
+t_s = 908.75
+lat_deg = 85.605745
+lon_deg = 160.446246
+height_m = 422921.1
+
+[[trajectory.sample]]
+t_s = 909.375
+lat_deg = 85.573604
+lon_deg = 160.758437
+height_m = 422920.1
+
+[[trajectory.sample]]
+t_s = 910.0
+lat_deg = 85.541333
+lon_deg = 161.06609
+height_m = 422919.1
+
+[[trajectory.sample]]
+t_s = 910.625
+lat_deg = 85.508932
+lon_deg = 161.369284
+height_m = 422918.1
+
+[[trajectory.sample]]
+t_s = 911.25
+lat_deg = 85.476407
+lon_deg = 161.668098
+height_m = 422917.0
+
+[[trajectory.sample]]
+t_s = 911.875
+lat_deg = 85.443758
+lon_deg = 161.962609
+height_m = 422916.0
+
+[[trajectory.sample]]
+t_s = 912.5
+lat_deg = 85.410989
+lon_deg = 162.252894
+height_m = 422914.9
+
+[[trajectory.sample]]
+t_s = 913.125
+lat_deg = 85.378102
+lon_deg = 162.539027
+height_m = 422913.9
+
+[[trajectory.sample]]
+t_s = 913.75
+lat_deg = 85.3451
+lon_deg = 162.821082
+height_m = 422912.8
+
+[[trajectory.sample]]
+t_s = 914.375
+lat_deg = 85.311985
+lon_deg = 163.099131
+height_m = 422911.7
+
+[[trajectory.sample]]
+t_s = 915.0
+lat_deg = 85.27876
+lon_deg = 163.373246
+height_m = 422910.5
+
+[[trajectory.sample]]
+t_s = 915.625
+lat_deg = 85.245426
+lon_deg = 163.643495
+height_m = 422909.4
+
+[[trajectory.sample]]
+t_s = 916.25
+lat_deg = 85.211987
+lon_deg = 163.909949
+height_m = 422908.3
+
+[[trajectory.sample]]
+t_s = 916.875
+lat_deg = 85.178444
+lon_deg = 164.172673
+height_m = 422907.1
+
+[[trajectory.sample]]
+t_s = 917.5
+lat_deg = 85.144799
+lon_deg = 164.431734
+height_m = 422905.9
+
+[[trajectory.sample]]
+t_s = 918.125
+lat_deg = 85.111055
+lon_deg = 164.687197
+height_m = 422904.8
+
+[[trajectory.sample]]
+t_s = 918.75
+lat_deg = 85.077214
+lon_deg = 164.939126
+height_m = 422903.6
+
+[[trajectory.sample]]
+t_s = 919.375
+lat_deg = 85.043277
+lon_deg = 165.187583
+height_m = 422902.3
+
+[[trajectory.sample]]
+t_s = 920.0
+lat_deg = 85.009247
+lon_deg = 165.43263
+height_m = 422901.1
+
+[[trajectory.sample]]
+t_s = 920.625
+lat_deg = 84.975125
+lon_deg = 165.674326
+height_m = 422899.9
+
+[[trajectory.sample]]
+t_s = 921.25
+lat_deg = 84.940913
+lon_deg = 165.912731
+height_m = 422898.6
+
+[[trajectory.sample]]
+t_s = 921.875
+lat_deg = 84.906614
+lon_deg = 166.147903
+height_m = 422897.4
+
+[[trajectory.sample]]
+t_s = 922.5
+lat_deg = 84.872228
+lon_deg = 166.379898
+height_m = 422896.1
+
+[[trajectory.sample]]
+t_s = 923.125
+lat_deg = 84.837758
+lon_deg = 166.608772
+height_m = 422894.8
+
+[[trajectory.sample]]
+t_s = 923.75
+lat_deg = 84.803206
+lon_deg = 166.834581
+height_m = 422893.5
+
+[[trajectory.sample]]
+t_s = 924.375
+lat_deg = 84.768572
+lon_deg = 167.057377
+height_m = 422892.2
+
+[[trajectory.sample]]
+t_s = 925.0
+lat_deg = 84.733858
+lon_deg = 167.277213
+height_m = 422890.9
+
+[[trajectory.sample]]
+t_s = 925.625
+lat_deg = 84.699067
+lon_deg = 167.494141
+height_m = 422889.5
+
+[[trajectory.sample]]
+t_s = 926.25
+lat_deg = 84.664199
+lon_deg = 167.708211
+height_m = 422888.2
+
+[[trajectory.sample]]
+t_s = 926.875
+lat_deg = 84.629257
+lon_deg = 167.919473
+height_m = 422886.8
+
+[[trajectory.sample]]
+t_s = 927.5
+lat_deg = 84.59424
+lon_deg = 168.127975
+height_m = 422885.4
+
+[[trajectory.sample]]
+t_s = 928.125
+lat_deg = 84.559152
+lon_deg = 168.333766
+height_m = 422884.0
+
+[[trajectory.sample]]
+t_s = 928.75
+lat_deg = 84.523993
+lon_deg = 168.536891
+height_m = 422882.6
+
+[[trajectory.sample]]
+t_s = 929.375
+lat_deg = 84.488765
+lon_deg = 168.737397
+height_m = 422881.2
+
+[[trajectory.sample]]
+t_s = 930.0
+lat_deg = 84.453469
+lon_deg = 168.935328
+height_m = 422879.8
+
+[[trajectory.sample]]
+t_s = 930.625
+lat_deg = 84.418106
+lon_deg = 169.130729
+height_m = 422878.3
+
+[[trajectory.sample]]
+t_s = 931.25
+lat_deg = 84.382677
+lon_deg = 169.323643
+height_m = 422876.9
+
+[[trajectory.sample]]
+t_s = 931.875
+lat_deg = 84.347185
+lon_deg = 169.514111
+height_m = 422875.4
+
+[[trajectory.sample]]
+t_s = 932.5
+lat_deg = 84.311629
+lon_deg = 169.702176
+height_m = 422873.9
+
+[[trajectory.sample]]
+t_s = 933.125
+lat_deg = 84.276011
+lon_deg = 169.887878
+height_m = 422872.4
+
+[[trajectory.sample]]
+t_s = 933.75
+lat_deg = 84.240333
+lon_deg = 170.071257
+height_m = 422870.9
+
+[[trajectory.sample]]
+t_s = 934.375
+lat_deg = 84.204595
+lon_deg = 170.252352
+height_m = 422869.4
+
+[[trajectory.sample]]
+t_s = 935.0
+lat_deg = 84.168799
+lon_deg = 170.431201
+height_m = 422867.9
+
+[[trajectory.sample]]
+t_s = 935.625
+lat_deg = 84.132945
+lon_deg = 170.607841
+height_m = 422866.3
+
+[[trajectory.sample]]
+t_s = 936.25
+lat_deg = 84.097035
+lon_deg = 170.782311
+height_m = 422864.7
+
+[[trajectory.sample]]
+t_s = 936.875
+lat_deg = 84.061069
+lon_deg = 170.954645
+height_m = 422863.2
+
+[[trajectory.sample]]
+t_s = 937.5
+lat_deg = 84.025049
+lon_deg = 171.124879
+height_m = 422861.6
+
+[[trajectory.sample]]
+t_s = 938.125
+lat_deg = 83.988976
+lon_deg = 171.293048
+height_m = 422860.0
+
+[[trajectory.sample]]
+t_s = 938.75
+lat_deg = 83.95285
+lon_deg = 171.459185
+height_m = 422858.4
+
+[[trajectory.sample]]
+t_s = 939.375
+lat_deg = 83.916673
+lon_deg = 171.623324
+height_m = 422856.7
+
+[[trajectory.sample]]
+t_s = 940.0
+lat_deg = 83.880445
+lon_deg = 171.785498
+height_m = 422855.1
+
+[[trajectory.sample]]
+t_s = 940.625
+lat_deg = 83.844167
+lon_deg = 171.945739
+height_m = 422853.4
+
+[[trajectory.sample]]
+t_s = 941.25
+lat_deg = 83.807841
+lon_deg = 172.104078
+height_m = 422851.8
+
+[[trajectory.sample]]
+t_s = 941.875
+lat_deg = 83.771467
+lon_deg = 172.260545
+height_m = 422850.1
+
+[[trajectory.sample]]
+t_s = 942.5
+lat_deg = 83.735045
+lon_deg = 172.415172
+height_m = 422848.4
+
+[[trajectory.sample]]
+t_s = 943.125
+lat_deg = 83.698577
+lon_deg = 172.567987
+height_m = 422846.7
+
+[[trajectory.sample]]
+t_s = 943.75
+lat_deg = 83.662064
+lon_deg = 172.71902
+height_m = 422845.0
+
+[[trajectory.sample]]
+t_s = 944.375
+lat_deg = 83.625506
+lon_deg = 172.868299
+height_m = 422843.3
+
+[[trajectory.sample]]
+t_s = 945.0
+lat_deg = 83.588904
+lon_deg = 173.015852
+height_m = 422841.5
+
+[[trajectory.sample]]
+t_s = 945.625
+lat_deg = 83.552258
+lon_deg = 173.161706
+height_m = 422839.8
+
+[[trajectory.sample]]
+t_s = 946.25
+lat_deg = 83.51557
+lon_deg = 173.305889
+height_m = 422838.0
+
+[[trajectory.sample]]
+t_s = 946.875
+lat_deg = 83.478841
+lon_deg = 173.448426
+height_m = 422836.2
+
+[[trajectory.sample]]
+t_s = 947.5
+lat_deg = 83.44207
+lon_deg = 173.589344
+height_m = 422834.4
+
+[[trajectory.sample]]
+t_s = 948.125
+lat_deg = 83.405259
+lon_deg = 173.728667
+height_m = 422832.6
+
+[[trajectory.sample]]
+t_s = 948.75
+lat_deg = 83.368408
+lon_deg = 173.866421
+height_m = 422830.8
+
+[[trajectory.sample]]
+t_s = 949.375
+lat_deg = 83.331518
+lon_deg = 174.002629
+height_m = 422829.0
+
+[[trajectory.sample]]
+t_s = 950.0
+lat_deg = 83.29459
+lon_deg = 174.137317
+height_m = 422827.1
+
+[[trajectory.sample]]
+t_s = 951.25
+lat_deg = 83.22062
+lon_deg = 174.402222
+height_m = 422823.4
+
+[[trajectory.sample]]
+t_s = 952.5
+lat_deg = 83.146504
+lon_deg = 174.661318
+height_m = 422819.6
+
+[[trajectory.sample]]
+t_s = 953.75
+lat_deg = 83.072247
+lon_deg = 174.914781
+height_m = 422815.8
+
+[[trajectory.sample]]
+t_s = 955.0
+lat_deg = 82.997852
+lon_deg = 175.162779
+height_m = 422811.9
+
+[[trajectory.sample]]
+t_s = 956.25
+lat_deg = 82.923324
+lon_deg = 175.405475
+height_m = 422807.9
+
+[[trajectory.sample]]
+t_s = 957.5
+lat_deg = 82.848668
+lon_deg = 175.643026
+height_m = 422803.9
+
+[[trajectory.sample]]
+t_s = 958.75
+lat_deg = 82.773887
+lon_deg = 175.875584
+height_m = 422799.9
+
+[[trajectory.sample]]
+t_s = 960.0
+lat_deg = 82.698985
+lon_deg = 176.103292
+height_m = 422795.8
+
+[[trajectory.sample]]
+t_s = 961.25
+lat_deg = 82.623966
+lon_deg = 176.326293
+height_m = 422791.7
+
+[[trajectory.sample]]
+t_s = 962.5
+lat_deg = 82.548833
+lon_deg = 176.54472
+height_m = 422787.5
+
+[[trajectory.sample]]
+t_s = 963.75
+lat_deg = 82.47359
+lon_deg = 176.758704
+height_m = 422783.2
+
+[[trajectory.sample]]
+t_s = 965.0
+lat_deg = 82.39824
+lon_deg = 176.968372
+height_m = 422778.9
+
+[[trajectory.sample]]
+t_s = 966.25
+lat_deg = 82.322785
+lon_deg = 177.173843
+height_m = 422774.6
+
+[[trajectory.sample]]
+t_s = 967.5
+lat_deg = 82.24723
+lon_deg = 177.375236
+height_m = 422770.2
+
+[[trajectory.sample]]
+t_s = 968.75
+lat_deg = 82.171577
+lon_deg = 177.572662
+height_m = 422765.7
+
+[[trajectory.sample]]
+t_s = 970.0
+lat_deg = 82.095829
+lon_deg = 177.766232
+height_m = 422761.2
+
+[[trajectory.sample]]
+t_s = 971.25
+lat_deg = 82.019988
+lon_deg = 177.95605
+height_m = 422756.7
+
+[[trajectory.sample]]
+t_s = 972.5
+lat_deg = 81.944058
+lon_deg = 178.142217
+height_m = 422752.1
+
+[[trajectory.sample]]
+t_s = 973.75
+lat_deg = 81.86804
+lon_deg = 178.324833
+height_m = 422747.4
+
+[[trajectory.sample]]
+t_s = 975.0
+lat_deg = 81.791937
+lon_deg = 178.503991
+height_m = 422742.7
+
+[[trajectory.sample]]
+t_s = 976.25
+lat_deg = 81.715751
+lon_deg = 178.679783
+height_m = 422738.0
+
+[[trajectory.sample]]
+t_s = 977.5
+lat_deg = 81.639485
+lon_deg = 178.852298
+height_m = 422733.2
+
+[[trajectory.sample]]
+t_s = 978.75
+lat_deg = 81.563141
+lon_deg = 179.021621
+height_m = 422728.3
+
+[[trajectory.sample]]
+t_s = 980.0
+lat_deg = 81.48672
+lon_deg = 179.187835
+height_m = 422723.4
+
+[[trajectory.sample]]
+t_s = 981.25
+lat_deg = 81.410226
+lon_deg = 179.351021
+height_m = 422718.5
+
+[[trajectory.sample]]
+t_s = 982.5
+lat_deg = 81.333659
+lon_deg = 179.511255
+height_m = 422713.4
+
+[[trajectory.sample]]
+t_s = 983.75
+lat_deg = 81.257022
+lon_deg = 179.668612
+height_m = 422708.4
+
+[[trajectory.sample]]
+t_s = 985.0
+lat_deg = 81.180316
+lon_deg = 179.823164
+height_m = 422703.3
+
+[[trajectory.sample]]
+t_s = 986.25
+lat_deg = 81.103544
+lon_deg = 179.974983
+height_m = 422698.1
+
+[[trajectory.sample]]
+t_s = 986.46
+lat_deg = 81.090656
+lon_deg = 180.0
+height_m = 422697.2
+
+[[trajectory.sample]]
+t_s = 986.461
+lat_deg = 81.090656
+lon_deg = -180.0
+height_m = 422697.2
+
+[[trajectory.sample]]
+t_s = 987.5
+lat_deg = 81.026707
+lon_deg = -179.875865
+height_m = 422692.9
+
+[[trajectory.sample]]
+t_s = 988.75
+lat_deg = 80.949806
+lon_deg = -179.729313
+height_m = 422687.7
+
+[[trajectory.sample]]
+t_s = 990.0
+lat_deg = 80.872844
+lon_deg = -179.585297
+height_m = 422682.4
+
+[[trajectory.sample]]
+t_s = 991.25
+lat_deg = 80.795821
+lon_deg = -179.443757
+height_m = 422677.0
+
+[[trajectory.sample]]
+t_s = 992.5
+lat_deg = 80.71874
+lon_deg = -179.304633
+height_m = 422671.6
+
+[[trajectory.sample]]
+t_s = 993.75
+lat_deg = 80.641601
+lon_deg = -179.167866
+height_m = 422666.1
+
+[[trajectory.sample]]
+t_s = 995.0
+lat_deg = 80.564407
+lon_deg = -179.0334
+height_m = 422660.6
+
+[[trajectory.sample]]
+t_s = 996.25
+lat_deg = 80.487157
+lon_deg = -178.901181
+height_m = 422655.1
+
+[[trajectory.sample]]
+t_s = 997.5
+lat_deg = 80.409855
+lon_deg = -178.771156
+height_m = 422649.5
+
+[[trajectory.sample]]
+t_s = 998.75
+lat_deg = 80.3325
+lon_deg = -178.643274
+height_m = 422643.8
+
+[[trajectory.sample]]
+t_s = 1000.0
+lat_deg = 80.255095
+lon_deg = -178.517486
+height_m = 422638.1
+
+[[trajectory.sample]]
+t_s = 1001.25
+lat_deg = 80.17764
+lon_deg = -178.393743
+height_m = 422632.3
+
+[[trajectory.sample]]
+t_s = 1002.5
+lat_deg = 80.100137
+lon_deg = -178.271998
+height_m = 422626.5
+
+[[trajectory.sample]]
+t_s = 1003.75
+lat_deg = 80.022586
+lon_deg = -178.152206
+height_m = 422620.7
+
+[[trajectory.sample]]
+t_s = 1005.0
+lat_deg = 79.944989
+lon_deg = -178.034323
+height_m = 422614.8
+
+[[trajectory.sample]]
+t_s = 1006.25
+lat_deg = 79.867347
+lon_deg = -177.918306
+height_m = 422608.8
+
+[[trajectory.sample]]
+t_s = 1007.5
+lat_deg = 79.789661
+lon_deg = -177.804115
+height_m = 422602.8
+
+[[trajectory.sample]]
+t_s = 1008.75
+lat_deg = 79.711932
+lon_deg = -177.691707
+height_m = 422596.8
+
+[[trajectory.sample]]
+t_s = 1010.0
+lat_deg = 79.63416
+lon_deg = -177.581045
+height_m = 422590.7
+
+[[trajectory.sample]]
+t_s = 1011.25
+lat_deg = 79.556347
+lon_deg = -177.472089
+height_m = 422584.5
+
+[[trajectory.sample]]
+t_s = 1012.5
+lat_deg = 79.478493
+lon_deg = -177.364804
+height_m = 422578.3
+
+[[trajectory.sample]]
+t_s = 1013.75
+lat_deg = 79.4006
+lon_deg = -177.259153
+height_m = 422572.1
+
+[[trajectory.sample]]
+t_s = 1015.0
+lat_deg = 79.322669
+lon_deg = -177.155101
+height_m = 422565.8
+
+[[trajectory.sample]]
+t_s = 1016.25
+lat_deg = 79.244699
+lon_deg = -177.052615
+height_m = 422559.4
+
+[[trajectory.sample]]
+t_s = 1017.5
+lat_deg = 79.166693
+lon_deg = -176.95166
+height_m = 422553.0
+
+[[trajectory.sample]]
+t_s = 1018.75
+lat_deg = 79.08865
+lon_deg = -176.852206
+height_m = 422546.6
+
+[[trajectory.sample]]
+t_s = 1020.0
+lat_deg = 79.010572
+lon_deg = -176.75422
+height_m = 422540.1
+
+[[trajectory.sample]]
+t_s = 1021.25
+lat_deg = 78.932458
+lon_deg = -176.657672
+height_m = 422533.6
+
+[[trajectory.sample]]
+t_s = 1022.5
+lat_deg = 78.854311
+lon_deg = -176.562533
+height_m = 422527.0
+
+[[trajectory.sample]]
+t_s = 1023.75
+lat_deg = 78.776131
+lon_deg = -176.468774
+height_m = 422520.3
+
+[[trajectory.sample]]
+t_s = 1025.0
+lat_deg = 78.697918
+lon_deg = -176.376367
+height_m = 422513.6
+
+[[trajectory.sample]]
+t_s = 1026.25
+lat_deg = 78.619673
+lon_deg = -176.285283
+height_m = 422506.9
+
+[[trajectory.sample]]
+t_s = 1027.5
+lat_deg = 78.541396
+lon_deg = -176.195498
+height_m = 422500.1
+
+[[trajectory.sample]]
+t_s = 1028.75
+lat_deg = 78.463089
+lon_deg = -176.106985
+height_m = 422493.3
+
+[[trajectory.sample]]
+t_s = 1030.0
+lat_deg = 78.384751
+lon_deg = -176.019718
+height_m = 422486.4
+
+[[trajectory.sample]]
+t_s = 1031.25
+lat_deg = 78.306384
+lon_deg = -175.933673
+height_m = 422479.5
+
+[[trajectory.sample]]
+t_s = 1032.5
+lat_deg = 78.227988
+lon_deg = -175.848826
+height_m = 422472.5
+
+[[trajectory.sample]]
+t_s = 1033.75
+lat_deg = 78.149564
+lon_deg = -175.765154
+height_m = 422465.5
+
+[[trajectory.sample]]
+t_s = 1035.0
+lat_deg = 78.071112
+lon_deg = -175.682634
+height_m = 422458.4
+
+[[trajectory.sample]]
+t_s = 1036.25
+lat_deg = 77.992632
+lon_deg = -175.601244
+height_m = 422451.3
+
+[[trajectory.sample]]
+t_s = 1037.5
+lat_deg = 77.914126
+lon_deg = -175.520961
+height_m = 422444.1
+
+[[trajectory.sample]]
+t_s = 1038.75
+lat_deg = 77.835593
+lon_deg = -175.441766
+height_m = 422436.9
+
+[[trajectory.sample]]
+t_s = 1040.0
+lat_deg = 77.757035
+lon_deg = -175.363638
+height_m = 422429.7
+
+[[trajectory.sample]]
+t_s = 1041.25
+lat_deg = 77.678451
+lon_deg = -175.286555
+height_m = 422422.4
+
+[[trajectory.sample]]
+t_s = 1042.5
+lat_deg = 77.599842
+lon_deg = -175.2105
+height_m = 422415.0
+
+[[trajectory.sample]]
+t_s = 1043.75
+lat_deg = 77.521209
+lon_deg = -175.135452
+height_m = 422407.6
+
+[[trajectory.sample]]
+t_s = 1045.0
+lat_deg = 77.442552
+lon_deg = -175.061394
+height_m = 422400.2
+
+[[trajectory.sample]]
+t_s = 1046.25
+lat_deg = 77.363872
+lon_deg = -174.988306
+height_m = 422392.7
+
+[[trajectory.sample]]
+t_s = 1047.5
+lat_deg = 77.285168
+lon_deg = -174.916172
+height_m = 422385.1
+
+[[trajectory.sample]]
+t_s = 1048.75
+lat_deg = 77.206442
+lon_deg = -174.844973
+height_m = 422377.5
+
+[[trajectory.sample]]
+t_s = 1050.0
+lat_deg = 77.127693
+lon_deg = -174.774694
+height_m = 422369.9
+
+[[trajectory.sample]]
+t_s = 1051.25
+lat_deg = 77.048923
+lon_deg = -174.705317
+height_m = 422362.2
+
+[[trajectory.sample]]
+t_s = 1052.5
+lat_deg = 76.970131
+lon_deg = -174.636826
+height_m = 422354.5
+
+[[trajectory.sample]]
+t_s = 1053.75
+lat_deg = 76.891317
+lon_deg = -174.569206
+height_m = 422346.7
+
+[[trajectory.sample]]
+t_s = 1055.0
+lat_deg = 76.812483
+lon_deg = -174.502441
+height_m = 422338.9
+
+[[trajectory.sample]]
+t_s = 1056.25
+lat_deg = 76.733629
+lon_deg = -174.436516
+height_m = 422331.0
+
+[[trajectory.sample]]
+t_s = 1057.5
+lat_deg = 76.654755
+lon_deg = -174.371417
+height_m = 422323.1
+
+[[trajectory.sample]]
+t_s = 1058.75
+lat_deg = 76.575861
+lon_deg = -174.307128
+height_m = 422315.1
+
+[[trajectory.sample]]
+t_s = 1060.0
+lat_deg = 76.496947
+lon_deg = -174.243637
+height_m = 422307.1
+
+[[trajectory.sample]]
+t_s = 1061.25
+lat_deg = 76.418014
+lon_deg = -174.180929
+height_m = 422299.1
+
+[[trajectory.sample]]
+t_s = 1062.5
+lat_deg = 76.339063
+lon_deg = -174.118992
+height_m = 422291.0
+
+[[trajectory.sample]]
+t_s = 1065.0
+lat_deg = 76.181105
+lon_deg = -173.997374
+height_m = 422274.6
+
+[[trajectory.sample]]
+t_s = 1067.5
+lat_deg = 76.023076
+lon_deg = -173.878683
+height_m = 422258.1
+
+[[trajectory.sample]]
+t_s = 1070.0
+lat_deg = 75.864978
+lon_deg = -173.762821
+height_m = 422241.4
+
+[[trajectory.sample]]
+t_s = 1072.5
+lat_deg = 75.706813
+lon_deg = -173.649696
+height_m = 422224.5
+
+[[trajectory.sample]]
+t_s = 1075.0
+lat_deg = 75.548583
+lon_deg = -173.539219
+height_m = 422207.4
+
+[[trajectory.sample]]
+t_s = 1077.5
+lat_deg = 75.39029
+lon_deg = -173.431306
+height_m = 422190.2
+
+[[trajectory.sample]]
+t_s = 1080.0
+lat_deg = 75.231936
+lon_deg = -173.325874
+height_m = 422172.7
+
+[[trajectory.sample]]
+t_s = 1082.5
+lat_deg = 75.073524
+lon_deg = -173.222845
+height_m = 422155.1
+
+[[trajectory.sample]]
+t_s = 1085.0
+lat_deg = 74.915054
+lon_deg = -173.122145
+height_m = 422137.4
+
+[[trajectory.sample]]
+t_s = 1087.5
+lat_deg = 74.756528
+lon_deg = -173.023701
+height_m = 422119.4
+
+[[trajectory.sample]]
+t_s = 1090.0
+lat_deg = 74.597948
+lon_deg = -172.927445
+height_m = 422101.2
+
+[[trajectory.sample]]
+t_s = 1092.5
+lat_deg = 74.439316
+lon_deg = -172.833311
+height_m = 422082.9
+
+[[trajectory.sample]]
+t_s = 1095.0
+lat_deg = 74.280633
+lon_deg = -172.741235
+height_m = 422064.4
+
+[[trajectory.sample]]
+t_s = 1097.5
+lat_deg = 74.1219
+lon_deg = -172.651156
+height_m = 422045.8
+
+[[trajectory.sample]]
+t_s = 1100.0
+lat_deg = 73.96312
+lon_deg = -172.563014
+height_m = 422026.9
+
+[[trajectory.sample]]
+t_s = 1102.5
+lat_deg = 73.804292
+lon_deg = -172.476755
+height_m = 422007.9
+
+[[trajectory.sample]]
+t_s = 1105.0
+lat_deg = 73.645418
+lon_deg = -172.392322
+height_m = 421988.7
+
+[[trajectory.sample]]
+t_s = 1107.5
+lat_deg = 73.486501
+lon_deg = -172.309665
+height_m = 421969.4
+
+[[trajectory.sample]]
+t_s = 1110.0
+lat_deg = 73.327539
+lon_deg = -172.228732
+height_m = 421949.9
+
+[[trajectory.sample]]
+t_s = 1112.5
+lat_deg = 73.168536
+lon_deg = -172.149476
+height_m = 421930.2
+
+[[trajectory.sample]]
+t_s = 1115.0
+lat_deg = 73.009492
+lon_deg = -172.07185
+height_m = 421910.3
+
+[[trajectory.sample]]
+t_s = 1117.5
+lat_deg = 72.850408
+lon_deg = -171.995808
+height_m = 421890.3
+
+[[trajectory.sample]]
+t_s = 1120.0
+lat_deg = 72.691285
+lon_deg = -171.921307
+height_m = 421870.1
+
+[[trajectory.sample]]
+t_s = 1122.5
+lat_deg = 72.532123
+lon_deg = -171.848306
+height_m = 421849.7
+
+[[trajectory.sample]]
+t_s = 1125.0
+lat_deg = 72.372925
+lon_deg = -171.776764
+height_m = 421829.2
+
+[[trajectory.sample]]
+t_s = 1127.5
+lat_deg = 72.21369
+lon_deg = -171.706642
+height_m = 421808.5
+
+[[trajectory.sample]]
+t_s = 1130.0
+lat_deg = 72.05442
+lon_deg = -171.637904
+height_m = 421787.6
+
+[[trajectory.sample]]
+t_s = 1132.5
+lat_deg = 71.895116
+lon_deg = -171.570512
+height_m = 421766.6
+
+[[trajectory.sample]]
+t_s = 1135.0
+lat_deg = 71.735777
+lon_deg = -171.504431
+height_m = 421745.4
+
+[[trajectory.sample]]
+t_s = 1137.5
+lat_deg = 71.576406
+lon_deg = -171.439628
+height_m = 421724.0
+
+[[trajectory.sample]]
+t_s = 1140.0
+lat_deg = 71.417003
+lon_deg = -171.376071
+height_m = 421702.5
+
+[environment]
+ionosphere = "nominal"
+troposphere = "nominal"
+multipath = "none"
+
+[[threat]]
+id = "jam-01"
+type = "jamming"
+start_s = 120.0
+duration_s = 30.0
+ramp_s = 0.0
+waveform = "wideband"
+center_hz = 1575420000.0
+bandwidth_hz = 2046000.0
+js_db = 33.0
+
+[[threat]]
+id = "jam-02"
+type = "jamming"
+start_s = 150.0
+duration_s = 90.0
+ramp_s = 0.0
+waveform = "wideband"
+center_hz = 1575420000.0
+bandwidth_hz = 2046000.0
+js_db = 36.0
+
+[[threat]]
+id = "jam-03"
+type = "jamming"
+start_s = 240.0
+duration_s = 90.0
+ramp_s = 0.0
+waveform = "wideband"
+center_hz = 1575420000.0
+bandwidth_hz = 2046000.0
+js_db = 39.0
+
+[[threat]]
+id = "jam-04"
+type = "jamming"
+start_s = 330.0
+duration_s = 240.0
+ramp_s = 0.0
+waveform = "wideband"
+center_hz = 1575420000.0
+bandwidth_hz = 2046000.0
+js_db = 42.0
+
+[[threat]]
+id = "jam-05"
+type = "jamming"
+start_s = 570.0
+duration_s = 120.0
+ramp_s = 0.0
+waveform = "wideband"
+center_hz = 1575420000.0
+bandwidth_hz = 2046000.0
+js_db = 39.0
+
+[[threat]]
+id = "jam-06"
+type = "jamming"
+start_s = 690.0
+duration_s = 60.0
+ramp_s = 0.0
+waveform = "wideband"
+center_hz = 1575420000.0
+bandwidth_hz = 2046000.0
+js_db = 36.0
+
+[[threat]]
+id = "jam-07"
+type = "jamming"
+start_s = 750.0
+duration_s = 90.0
+ramp_s = 0.0
+waveform = "wideband"
+center_hz = 1575420000.0
+bandwidth_hz = 2046000.0
+js_db = 30.0
+
+[expected]
+behaviour = "The model predicts a loss of tracking (450 s under the threshold, worst margin -3.7 dB). The receiver withdraws or flags its fix within 10 s of the loss, gives no misleading fix, and recovers within 120 s after the interference ends."
+withdraw_counts_as_detection = true
+misleading_h_error_m = 100.0
+misleading_time_error_ns = 1000.0
+recover_h_error_m = 50.0
+recover_time_error_ns = 100.0
+recover_dwell_s = 10.0
+
+[[criterion]]
+id = "detect"
+metric = "detection_latency_s"
+threat = "jam-03"
+op = "<="
+value = 10.0
+required = true
+note = "the receiver withdraws its fix or flags interference once the modelled loss of tracking starts"
+
+[[criterion]]
+id = "no-misleading"
+metric = "misleading_epochs"
+op = "<="
+value = 0.0
+required = true
+
+[[criterion]]
+id = "recover"
+metric = "recovery_s"
+op = "<="
+value = 120.0
+required = true
